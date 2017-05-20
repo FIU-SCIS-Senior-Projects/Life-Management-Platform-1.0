@@ -12,7 +12,7 @@ namespace LifeManagement.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles="Owners")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

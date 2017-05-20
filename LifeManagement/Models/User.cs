@@ -20,6 +20,9 @@ namespace LifeManagement.Models
         public string Email { get; set; }
         public System.DateTime DOB { get; set; }
         public int RoleId { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public System.DateTime DateCreated { get; set; }
     
         public virtual Role Role { get; set; }
     }
