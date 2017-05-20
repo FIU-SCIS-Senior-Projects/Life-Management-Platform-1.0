@@ -149,6 +149,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LifeMgmEM.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>LifeMgmEM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>LifeMgmEM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +169,7 @@
       <DependentUpon>LifeMgmEM.edmx</DependentUpon>
       <LastGenOutput>LifeMgmEM.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\LifeMgmEM.edmx.sql" />
     <Content Include="Models\LifeMgmEM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LifeMgmEM.edmx</DependentUpon>

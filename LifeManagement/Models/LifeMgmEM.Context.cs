@@ -25,5 +25,7 @@ namespace LifeManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
