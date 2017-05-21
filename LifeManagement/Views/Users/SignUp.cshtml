@@ -1,12 +1,11 @@
 ﻿@model LifeManagement.Models.UserViewModel
 
-<h2>Dont have an account?</h2>
 <h3 class="text-danger">@ViewBag.ErrorMsg</h3>
 
 
 
 
-    <div class="form-horizontal">
+    <div class="form-horizontal col-md-12">
        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -69,9 +68,11 @@
        
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button onclick="signup()"  class="btn btn-default">Sign up</button>
+            <div class="col-md-offset-8 col-md-4">
+                <button  class="btn btn-info form-control" onclick="signup()">Sign up</button>
+
             </div>
+            
         </div>
     </div>
 
@@ -101,8 +102,8 @@
             url: '@Url.Action("SignUp","Users")',
             data: { user: userdata },
             type: 'POST',
-            success: function(res) { $("#singupdiv").html(res) },
-            error: function(msg) { $("#singupdiv").html("Error") }
+            success: function (res) { $("#signupdiv").html(res) },
+            error: function (msg) { $("#signupdiv").html("Error") }
         });
     }
 </script>

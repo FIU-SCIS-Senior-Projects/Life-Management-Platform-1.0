@@ -62,15 +62,21 @@ namespace LifeManagement.Controllers
         }
 
         // GET: Users/Create
-        public ActionResult CreateAccount()
+        public PartialViewResult CreateAccount()
         {
            
-            return View();
+            return PartialView();
         }
 
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public PartialViewResult SignUp()
+        {
+           
+            return PartialView();
+        }
+
         [HttpPost]
        public PartialViewResult SignUp( UserViewModel user)
         {
