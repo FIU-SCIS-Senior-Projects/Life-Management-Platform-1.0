@@ -40,5 +40,32 @@ namespace LifeManagement.Models
             }
         }
 
+        private bool saveImageBytes(ImageInterface s, HttpPostedFileBase image)
+        {
+
+            if (image != null)
+            {
+                s.ImageMimeType = image.ContentType;
+                s.Bytes = new byte[image.ContentLength];
+                image.InputStream.Read(s.Bytes, 0, image.ContentLength);
+                return true;
+            }
+            return false;
+        }
+        private bool saveImageBytes(ImageInterface s, string image)
+        {
+
+            if (!String.IsNullOrEmpty(image))
+            {
+                byte[] data = Convert.FromBase64String(image);
+
+                s.ImageMimeType = "PNG";
+                s.Bytes = data;
+
+                return true;
+            }
+            return false;
+        }
+
     }
 }
