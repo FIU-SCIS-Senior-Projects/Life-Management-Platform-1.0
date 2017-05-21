@@ -32,6 +32,13 @@ namespace LifeManagement.Controllers
             }
             return View();
         }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Users
         public ActionResult Index()
         {
@@ -55,9 +62,9 @@ namespace LifeManagement.Controllers
         }
 
         // GET: Users/Create
-        public ActionResult Create()
+        public ActionResult CreateAccount()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name");
+           
             return View();
         }
 
@@ -65,18 +72,63 @@ namespace LifeManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,DOB,RoleId,username,password,DateCreated")] User user)
+       public PartialViewResult SignUp( UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+               var role = db.Roles.Where(a => a.Name == Constants.ROLES.GUEST).FirstOrDefault();
+                if (role != null)
+                {
+                    string result = CreateUser(user, role);
+                  
+                 if (result==Constants.MSGS.SUCCESS)
+                        return PartialView("Success","User successfully created");
+                 else
+                 {
+                     ViewBag.ErrorMsg = result;
+                        return PartialView(user);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = Constants.MSGS.ROLENOTEXIST;
+                    return PartialView(user);
+                }
+             
             }
 
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", user.RoleId);
-            return View(user);
+           
+            return PartialView(user);
+        }
+
+        public string CreateUser(UserViewModel fromuser, Role role)
+        {
+            if (db.Users.Where(a => a.username.ToLower() == fromuser.username).Count() > 0)
+            {
+                return Constants.MSGS.DUPLICATEUSERNAME;
+            }
+            if (fromuser.password != fromuser.passwordconfirmation)
+            {
+                return Constants.MSGS.PASSWORDMISMATCH;
+            }
+
+
+            var newuser = new User();
+            newuser.RoleId = role.Id;
+            newuser.FirstName = fromuser.FirstName;
+            newuser.LastName = fromuser.LastName;
+            newuser.DOB = fromuser.DOB;
+            newuser.Email = fromuser.Email;
+            newuser.username = fromuser.username;
+            newuser.password = fromuser.password;
+            newuser.DateCreated = DateTime.Now;
+            db.Users.Add(newuser);
+            db.SaveChanges();
+            return Constants.MSGS.SUCCESS;
+            ;
+
+
+
         }
 
         // GET: Users/Edit/5

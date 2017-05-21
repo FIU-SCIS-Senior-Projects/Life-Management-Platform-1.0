@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var common = new LifeManagement.Models.Common();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +9,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/Site.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,6 +28,18 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                <span class="nav navbar-text navbar-right">
+                    @if (common.IsAuthenticated)
+                    {
+                        <text> Hello, @User.Identity.Name</text>
+                        @Html.ActionLink("Logout", "LogOut", "Users", null, null);
+
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login","Login","Users",null,null);
+                    }
+                </span>
             </div>
         </div>
     </div>

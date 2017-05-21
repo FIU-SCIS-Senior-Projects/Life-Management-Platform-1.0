@@ -49,7 +49,7 @@ namespace LifeManagement.Models
 
         public override string[] GetRolesForUser(string username)
         {
-            string[] roles = {"guest"};
+            string[] roles = {Constants.ROLES.GUEST};
               SeniorDBEntities db = new SeniorDBEntities();
             var user = db.Users.Where(a => a.username.ToLower() == username.ToLower()).FirstOrDefault();
             if (user != null)
