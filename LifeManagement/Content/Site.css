@@ -31,14 +31,14 @@ textarea {
  }
 
 .rotator-image {
-    height: 400px;
+    height: 500px;
     width: 100%;
 }
 
 /*body with*/
 .container-full {
   margin: 0 auto;
-  width: 100%;
+  width: 85%;
     padding: 0;
      
     
@@ -64,6 +64,7 @@ textarea {
      background-color: slategrey !important;
      color: coral;
      margin-bottom: 0;
+   
  }
  .logo {
      height: 40px;
