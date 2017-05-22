@@ -38,7 +38,7 @@ textarea {
 /*body with*/
 .container-full {
   margin: 0 auto;
-  width: 85%;
+  width: 80%;
     padding: 0;
      
     
@@ -52,7 +52,7 @@ textarea {
      background: white;
  }
  .navbar-inverse {
-      background-color: white !important;
+      background-color: whitesmoke !important;
       border: transparent !important;
      border-bottom:1px solid black !important;
      border-radius: 0px;
