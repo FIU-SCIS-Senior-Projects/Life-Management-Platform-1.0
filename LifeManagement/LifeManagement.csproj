@@ -231,9 +231,12 @@
     <Content Include="Views\Shared\ErrorPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Users\CreateAccount.cshtml" />
+    <Content Include="Views\Users\ForgotPassword.cshtml" />
+    <Content Include="Views\Users\ResetPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Mailer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

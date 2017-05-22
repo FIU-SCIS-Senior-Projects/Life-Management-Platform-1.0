@@ -46,6 +46,20 @@ namespace LifeManagement.Controllers
             return View(users.ToList());
         }
 
+
+        //Beatriz' code starts here++++++++++
+        // GET: 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public PartialViewResult ResetPass()
+        {
+            return PartialView();
+        }
+
+
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
