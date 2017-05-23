@@ -21,7 +21,7 @@
         <AssociationConnector Association="SeniorDBModel.SprintSprintActivities" />
         <AssociationConnector Association="SeniorDBModel.ActivitySprintActivities" />
         <AssociationConnector Association="SeniorDBModel.SprintActivitiesProgress" />
-        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="5.5" PointY="6.25" />
+        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="3" PointY="5.875" />
         <AssociationConnector Association="SeniorDBModel.CoachUser" />
         <EntityTypeShape EntityType="SeniorDBModel.CoachReview" Width="1.5" PointX="11.125" PointY="2.625" />
         <AssociationConnector Association="SeniorDBModel.CoachCoachReview" />

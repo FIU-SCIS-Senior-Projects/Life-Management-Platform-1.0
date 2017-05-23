@@ -105,6 +105,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Img" Type="tinyint" Nullable="false" />
+    <Property Name="ImgMime" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <EntityType Name="Sprints">
     <Key>
@@ -422,6 +424,8 @@
           <NavigationProperty Name="Category" Relationship="SeniorDBModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.ActivitySprintActivities" FromRole="Activity" ToRole="SprintActivities" />
+          <Property Name="Img" Type="Byte" Nullable="false" />
+          <Property Name="ImgMime" Type="String" Nullable="false" MaxLength="20" />
         </EntityType>
         <Association Name="CategoryActivity">
           <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
@@ -631,6 +635,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="ImgMime" ColumnName="ImgMime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
