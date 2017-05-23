@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mail;
 
 namespace LifeManagement.Models
 {
     public class Constants
     {
+ 
           public struct ROLES
         {
             public static string GUEST = "Guest";
@@ -28,7 +30,10 @@ namespace LifeManagement.Models
     }
     public class Common
     {
-      
+        private const string SMTPSERVER = "smtp.gmail.com";
+        private const string SMTPPORT = "25";
+        private const bool SMTPSSL = true;
+
         public bool IsAuthenticated
         {
          
@@ -66,6 +71,48 @@ namespace LifeManagement.Models
             }
             return false;
         }
+        public static void sendEmail(string strTo, string strSubject, string message)
+        {
+            try
+            {
+                sendEmail("Travels@miami-airport.com", strTo, "", "", strSubject, message);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+        public static bool sendEmail(string strFrom, string strTo, string strCC, string strBCC, string strSubject, string strBody)
+        {
+
+
+            //Create your message body. 
+            MailMessage mailMsg = new MailMessage();
+            mailMsg.From = strFrom;
+            mailMsg.To = strTo;
+            mailMsg.Cc = strCC;
+            mailMsg.Bcc = strBCC;
+            mailMsg.Subject = strSubject;
+            mailMsg.Body = strBody;
+            mailMsg.BodyFormat = MailFormat.Html;
+
+            // SMTP SERVER
+            if (HttpContext.Current.Request.ServerVariables["SERVER_NAME"] != "localhost")
+            {
+                SmtpMail.SmtpServer = SMTPSERVER;
+            }
+
+            // Send the email 
+            SmtpMail.Send(mailMsg);
+            // Normal Completion 
+
+
+            return true;
+
+        }
+
 
     }
+
+
 }
