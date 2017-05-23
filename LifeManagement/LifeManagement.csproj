@@ -260,6 +260,7 @@
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ResetPass.cshtml" />
     <Content Include="Views\Users\Questionaire.cshtml" />
+    <Content Include="Views\Users\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
