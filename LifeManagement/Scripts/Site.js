@@ -1,5 +1,5 @@
 ﻿function validateForm() {
-    ;
+   
     var requiredFields = "";
     $('input').each(function () {
         if ($(this).attr("data-val-required")) {

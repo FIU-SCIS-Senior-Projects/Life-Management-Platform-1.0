@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="SeniorDBModel.Role" Width="1.5" PointX="7" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SeniorDBModel.User" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="SeniorDBModel.FK_RoleUser" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SeniorDBModel.Goal" Width="1.5" PointX="2.25" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
