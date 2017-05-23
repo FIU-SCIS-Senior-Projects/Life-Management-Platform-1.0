@@ -1,9 +1,126 @@
 ﻿
 
 
-<h2 class="text-center">Create Account</h2>
 
 
-<div id="signupdiv">
-    @{Html.RenderPartial("SignUp");}
+@model LifeManagement.Models.UserViewModel
+@section bgdiv{
+    <div class="bgdiv" style="background-image: url('/Imgs/meditation.jpg');opacity:0.5"></div>
+}
+ 
+
+<div class="clearfix"  >
+    <h2 class="text-center col-md-12 whitetext">Begin Journey to Self Accomplishment</h2>
+   
+    <div class="col-md-offset-7 col-md-5">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+
+            <div class="form-horizontal">
+                <h3 class="text-danger">@ViewBag.ErrorMsg</h3>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FirstName, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LastName, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.LastName, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DOB, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DOB, new {htmlAttributes = new {@class = "form-control", type = "date"}})
+                        @Html.ValidationMessageFor(model => model.DOB, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.username, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.username, new {htmlAttributes = new {@class = "form-control", id = "username1"}})
+                        @Html.ValidationMessageFor(model => model.username, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.password, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.password, new {htmlAttributes = new {@class = "form-control", type = "password", id = "password1"}})
+                        @Html.ValidationMessageFor(model => model.password, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.passwordconfirmation, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.passwordconfirmation, new {htmlAttributes = new {@class = "form-control", type = "password"}})
+                        @Html.ValidationMessageFor(model => model.passwordconfirmation, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-8 col-md-4">
+                        <input class="btn btn-info form-control" type="submit" value="Sign up"/>
+
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    function signup() {
+        if (validateForm()==false) {
+            return;
+        }
+        var userdata= {
+            FirstName: $("#FirstName").val(),
+            LastName: $("#LastName").val(),
+            DOB: $("#DOB").val(),
+            Email: $("#Email").val(),
+            username: $("#username1").val(),
+            password: $("#password1").val(),
+            passwordconfirmation: $("#passwordconfirmation").val()
+
+        }
+        $.ajax({
+            url: '@Url.Action("SignUp","Users")',
+            data: { user: userdata },
+            type: 'POST',
+            success: function (res) { $("#signupdiv").html(res) },
+            error: function (msg) { $("#signupdiv").html("Error") }
+        });
+    }
+</script>

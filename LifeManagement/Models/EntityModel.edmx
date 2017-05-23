@@ -4,50 +4,286 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SeniorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DOB" Type="datetime" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_RoleUser">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SeniorDBModelStoreContainer">
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_RoleUser" Association="Self.FK_RoleUser">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="SeniorDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SeniorDBModelStoreContainer">
+    <EntitySet Name="Roles" EntityType="SeniorDBModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SeniorDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="SeniorDBModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Goals" EntityType="SeniorDBModel.Store.Goals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Activities" EntityType="SeniorDBModel.Store.Activities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sprints" EntityType="SeniorDBModel.Store.Sprints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Progresses" EntityType="SeniorDBModel.Store.Progresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SprintActivities" EntityType="SeniorDBModel.Store.SprintActivities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Coaches" EntityType="SeniorDBModel.Store.Coaches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoachReviews" EntityType="SeniorDBModel.Store.CoachReviews" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_RoleUser" Association="SeniorDBModel.Store.FK_RoleUser">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="CategoryGoal" Association="SeniorDBModel.Store.CategoryGoal">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Goal" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="CategoryActivity" Association="SeniorDBModel.Store.CategoryActivity">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="SprintGoal" Association="SeniorDBModel.Store.SprintGoal">
+      <End Role="Sprint" EntitySet="Sprints" />
+      <End Role="Goal" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="UserSprint" Association="SeniorDBModel.Store.UserSprint">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Sprint" EntitySet="Sprints" />
+    </AssociationSet>
+    <AssociationSet Name="SprintSprintActivities" Association="SeniorDBModel.Store.SprintSprintActivities">
+      <End Role="Sprint" EntitySet="Sprints" />
+      <End Role="SprintActivities" EntitySet="SprintActivities" />
+    </AssociationSet>
+    <AssociationSet Name="ActivitySprintActivities" Association="SeniorDBModel.Store.ActivitySprintActivities">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="SprintActivities" EntitySet="SprintActivities" />
+    </AssociationSet>
+    <AssociationSet Name="SprintActivitiesProgress" Association="SeniorDBModel.Store.SprintActivitiesProgress">
+      <End Role="SprintActivities" EntitySet="SprintActivities" />
+      <End Role="Progress" EntitySet="Progresses" />
+    </AssociationSet>
+    <AssociationSet Name="CoachUser" Association="SeniorDBModel.Store.CoachUser">
+      <End Role="Coach" EntitySet="Coaches" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="CoachCoachReview" Association="SeniorDBModel.Store.CoachCoachReview">
+      <End Role="Coach" EntitySet="Coaches" />
+      <End Role="CoachReview" EntitySet="CoachReviews" />
+    </AssociationSet>
+    <AssociationSet Name="UserCoachReview" Association="SeniorDBModel.Store.UserCoachReview">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CoachReview" EntitySet="CoachReviews" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="SprintId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sprints">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SprintGoal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateFrom" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Progresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SprintActivitiesId" Type="int" Nullable="false" />
+    <Property Name="DatePerformed" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SprintActivities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Specifics" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SprintId" Type="int" Nullable="false" />
+    <Property Name="ActivityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coaches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewScore" Type="int" Nullable="false" />
+    <Property Name="Biography" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Skills" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoachReviews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoachId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_RoleUser">
+    <End Role="Role" Type="SeniorDBModel.Store.Roles" Multiplicity="1" />
+    <End Role="Users" Type="SeniorDBModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoryGoal">
+    <End Role="Category" Type="SeniorDBModel.Store.Categories" Multiplicity="1" />
+    <End Role="Goal" Type="SeniorDBModel.Store.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goal">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoryActivity">
+    <End Role="Category" Type="SeniorDBModel.Store.Categories" Multiplicity="1" />
+    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SprintGoal">
+    <End Role="Sprint" Type="SeniorDBModel.Store.Sprints" Multiplicity="1" />
+    <End Role="Goal" Type="SeniorDBModel.Store.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sprint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goal">
+        <PropertyRef Name="SprintId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserSprint">
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Sprint" Type="SeniorDBModel.Store.Sprints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sprint">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SprintSprintActivities">
+    <End Role="Sprint" Type="SeniorDBModel.Store.Sprints" Multiplicity="1" />
+    <End Role="SprintActivities" Type="SeniorDBModel.Store.SprintActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sprint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SprintActivities">
+        <PropertyRef Name="SprintId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ActivitySprintActivities">
+    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="1" />
+    <End Role="SprintActivities" Type="SeniorDBModel.Store.SprintActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SprintActivities">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SprintActivitiesProgress">
+    <End Role="SprintActivities" Type="SeniorDBModel.Store.SprintActivities" Multiplicity="1" />
+    <End Role="Progress" Type="SeniorDBModel.Store.Progresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SprintActivities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Progress">
+        <PropertyRef Name="SprintActivitiesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoachUser">
+    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="*" />
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coach">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoachCoachReview">
+    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="1" />
+    <End Role="CoachReview" Type="SeniorDBModel.Store.CoachReviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoachReview">
+        <PropertyRef Name="CoachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCoachReview">
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <End Role="CoachReview" Type="SeniorDBModel.Store.CoachReviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoachReview">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SeniorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -73,6 +309,9 @@
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Role" Relationship="Self.FK_RoleUser" FromRole="Users" ToRole="Role" />
+          <NavigationProperty Name="Sprints" Relationship="SeniorDBModel.UserSprint" FromRole="User" ToRole="Sprint" />
+          <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachUser" FromRole="User" ToRole="Coach" />
+          <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.UserCoachReview" FromRole="User" ToRole="CoachReview" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -93,39 +332,367 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Categories" EntityType="SeniorDBModel.Category" />
+          <EntitySet Name="Goals" EntityType="SeniorDBModel.Goal" />
+          <AssociationSet Name="CategoryGoal" Association="SeniorDBModel.CategoryGoal">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <EntitySet Name="Activities" EntityType="SeniorDBModel.Activity" />
+          <AssociationSet Name="CategoryActivity" Association="SeniorDBModel.CategoryActivity">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <EntitySet Name="Sprints" EntityType="SeniorDBModel.Sprint" />
+          <AssociationSet Name="SprintGoal" Association="SeniorDBModel.SprintGoal">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="UserSprint" Association="SeniorDBModel.UserSprint">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Sprint" EntitySet="Sprints" />
+          </AssociationSet>
+          <EntitySet Name="Progresses" EntityType="SeniorDBModel.Progress" />
+          <EntitySet Name="SprintActivities" EntityType="SeniorDBModel.SprintActivities" />
+          <AssociationSet Name="SprintSprintActivities" Association="SeniorDBModel.SprintSprintActivities">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="SprintActivities" EntitySet="SprintActivities" />
+          </AssociationSet>
+          <AssociationSet Name="ActivitySprintActivities" Association="SeniorDBModel.ActivitySprintActivities">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="SprintActivities" EntitySet="SprintActivities" />
+          </AssociationSet>
+          <AssociationSet Name="SprintActivitiesProgress" Association="SeniorDBModel.SprintActivitiesProgress">
+            <End Role="SprintActivities" EntitySet="SprintActivities" />
+            <End Role="Progress" EntitySet="Progresses" />
+          </AssociationSet>
+          <EntitySet Name="Coaches" EntityType="SeniorDBModel.Coach" />
+          <AssociationSet Name="CoachUser" Association="SeniorDBModel.CoachUser">
+            <End Role="Coach" EntitySet="Coaches" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="CoachReviews" EntityType="SeniorDBModel.CoachReview" />
+          <AssociationSet Name="CoachCoachReview" Association="SeniorDBModel.CoachCoachReview">
+            <End Role="Coach" EntitySet="Coaches" />
+            <End Role="CoachReview" EntitySet="CoachReviews" />
+          </AssociationSet>
+          <AssociationSet Name="UserCoachReview" Association="SeniorDBModel.UserCoachReview">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CoachReview" EntitySet="CoachReviews" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Goals" Relationship="SeniorDBModel.CategoryGoal" FromRole="Category" ToRole="Goal" />
+          <NavigationProperty Name="Activities" Relationship="SeniorDBModel.CategoryActivity" FromRole="Category" ToRole="Activity" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="Category" Relationship="SeniorDBModel.CategoryGoal" FromRole="Goal" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sprint" Relationship="SeniorDBModel.SprintGoal" FromRole="Goal" ToRole="Sprint" />
+          <Property Name="SprintId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CategoryGoal">
+          <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <NavigationProperty Name="Category" Relationship="SeniorDBModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.ActivitySprintActivities" FromRole="Activity" ToRole="SprintActivities" />
+        </EntityType>
+        <Association Name="CategoryActivity">
+          <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SprintGoal" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Goals" Relationship="SeniorDBModel.SprintGoal" FromRole="Sprint" ToRole="Goal" />
+          <NavigationProperty Name="User" Relationship="SeniorDBModel.UserSprint" FromRole="Sprint" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.SprintSprintActivities" FromRole="Sprint" ToRole="SprintActivities" />
+        </EntityType>
+        <Association Name="SprintGoal">
+          <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="1" />
+          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSprint">
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sprint">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Progress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SprintActivity" Relationship="SeniorDBModel.SprintActivitiesProgress" FromRole="Progress" ToRole="SprintActivities" />
+          <Property Name="SprintActivitiesId" Type="Int32" Nullable="false" />
+          <Property Name="DatePerformed" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SprintActivities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Specifics" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="Sprint" Relationship="SeniorDBModel.SprintSprintActivities" FromRole="SprintActivities" ToRole="Sprint" />
+          <Property Name="SprintId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="SeniorDBModel.ActivitySprintActivities" FromRole="SprintActivities" ToRole="Activity" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Progresses" Relationship="SeniorDBModel.SprintActivitiesProgress" FromRole="SprintActivities" ToRole="Progress" />
+        </EntityType>
+        <Association Name="SprintSprintActivities">
+          <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="1" />
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintActivities">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActivitySprintActivities">
+          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintActivities">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SprintActivitiesProgress">
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="1" />
+          <End Type="SeniorDBModel.Progress" Role="Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SprintActivities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Progress">
+              <PropertyRef Name="SprintActivitiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Coach">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="SeniorDBModel.CoachUser" FromRole="Coach" ToRole="User" />
+          <Property Name="ReviewScore" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.CoachCoachReview" FromRole="Coach" ToRole="CoachReview" />
+          <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Skills" Type="String" Nullable="false" MaxLength="Max" />
+        </EntityType>
+        <Association Name="CoachUser">
+          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="0..1" />
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+        </Association>
+        <EntityType Name="CoachReview">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachCoachReview" FromRole="CoachReview" ToRole="Coach" />
+          <Property Name="CoachId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="SeniorDBModel.UserCoachReview" FromRole="CoachReview" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" />
+        </EntityType>
+        <Association Name="CoachCoachReview">
+          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="1" />
+          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoachReview">
+              <PropertyRef Name="CoachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCoachReview">
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoachReview">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SeniorDBModelStoreContainer" CdmEntityContainer="SeniorDBEntities">
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="SeniorDBModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="SeniorDBModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SeniorDBModelStoreContainer" CdmEntityContainer="SeniorDBEntities">
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Goal)">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sprints">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Sprint)">
+        <MappingFragment StoreEntitySet="Sprints">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SprintGoal" ColumnName="SprintGoal" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Progresses">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Progress)">
+        <MappingFragment StoreEntitySet="Progresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SprintActivitiesId" ColumnName="SprintActivitiesId" />
+          <ScalarProperty Name="DatePerformed" ColumnName="DatePerformed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SprintActivities">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.SprintActivities)">
+        <MappingFragment StoreEntitySet="SprintActivities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Specifics" ColumnName="Specifics" />
+          <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coaches">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Coach)">
+        <MappingFragment StoreEntitySet="Coaches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewScore" ColumnName="ReviewScore" />
+          <ScalarProperty Name="Biography" ColumnName="Biography" />
+          <ScalarProperty Name="Skills" ColumnName="Skills" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoachReviews">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.CoachReview)">
+        <MappingFragment StoreEntitySet="CoachReviews">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CoachId" ColumnName="CoachId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CoachUser" TypeName="SeniorDBModel.CoachUser" StoreEntitySet="Coaches">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Coach">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -139,7 +706,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

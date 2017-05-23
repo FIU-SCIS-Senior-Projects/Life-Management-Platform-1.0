@@ -76,23 +76,16 @@ namespace LifeManagement.Controllers
         }
 
         // GET: Users/Create
-        public PartialViewResult CreateAccount()
+        public ActionResult CreateAccount()
         {
            
-            return PartialView();
+            return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        public PartialViewResult SignUp()
-        {
-           
-            return PartialView();
-        }
-
+      
         [HttpPost]
-       public PartialViewResult SignUp( UserViewModel user)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAccount( UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -102,23 +95,23 @@ namespace LifeManagement.Controllers
                     string result = CreateUser(user, role);
                   
                  if (result==Constants.MSGS.SUCCESS)
-                        return PartialView("Success","User successfully created");
+                        return RedirectToAction("Questionaire");
                  else
                  {
                      ViewBag.ErrorMsg = result;
-                        return PartialView(user);
+                        return View(user);
                     }
                 }
                 else
                 {
                     ViewBag.ErrorMsg = Constants.MSGS.ROLENOTEXIST;
-                    return PartialView(user);
+                    return View(user);
                 }
              
             }
 
            
-            return PartialView(user);
+            return View(user);
         }
 
         public string CreateUser(UserViewModel fromuser, Role role)
@@ -151,6 +144,10 @@ namespace LifeManagement.Controllers
 
         }
 
+        public ActionResult Questionaire()
+        {
+            return View();
+        }
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
