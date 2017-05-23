@@ -12,14 +12,14 @@ namespace LifeManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Goal
+    public partial class CoachReview
     {
         public int Id { get; set; }
-        public string Description { get; set; }
-        public int CategoryId { get; set; }
-        public int SprintId { get; set; }
+        public int CoachId { get; set; }
+        public int UserId { get; set; }
+        public string Review { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Sprint Sprint { get; set; }
+        public virtual Coach Coach { get; set; }
+        public virtual User User { get; set; }
     }
 }

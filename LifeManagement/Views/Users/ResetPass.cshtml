@@ -1,7 +1,25 @@
 ﻿<h2 class="text-center">Reset Password</h2>
 
 
-<div id="resetPass">
-    @{Html.RenderPartial("ForgotPassword");}
+
+<div class="form-horizontal col-md-12">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Email address: </label>
+        <div class="col-md-10">
+            <input class="form-control" type="email" name="email" id="email" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-8 col-md-4">
+            <button class="btn btn-success form-control" onclick="ressetpass()">Re-set</button>
+        </div>
+    </div>
+
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
 

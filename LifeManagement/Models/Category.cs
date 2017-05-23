@@ -12,30 +12,21 @@ namespace LifeManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Category()
         {
-            this.Sprints = new HashSet<Sprint>();
-            this.CoachReviews = new HashSet<CoachReview>();
+            this.Goals = new HashSet<Goal>();
+            this.Activities = new HashSet<Activity>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public System.DateTime DOB { get; set; }
-        public int RoleId { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public System.DateTime DateCreated { get; set; }
+        public string Name { get; set; }
     
-        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sprint> Sprints { get; set; }
-        public virtual Coach Coach { get; set; }
+        public virtual ICollection<Goal> Goals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoachReview> CoachReviews { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
     }
 }

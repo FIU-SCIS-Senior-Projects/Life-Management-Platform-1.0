@@ -12,14 +12,12 @@ namespace LifeManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Goal
+    public partial class Progress
     {
         public int Id { get; set; }
-        public string Description { get; set; }
-        public int CategoryId { get; set; }
-        public int SprintId { get; set; }
+        public int SprintActivitiesId { get; set; }
+        public System.DateTime DatePerformed { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Sprint Sprint { get; set; }
+        public virtual SprintActivities SprintActivity { get; set; }
     }
 }

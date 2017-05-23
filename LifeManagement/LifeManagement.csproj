@@ -135,7 +135,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Activity.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Authorization.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Coach.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CoachReview.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -152,9 +164,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Goal.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ImageInterface.cs" />
     <Compile Include="Models\LMRoleProvider.cs" />
+    <Compile Include="Models\Progress.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sprint.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SprintActivities.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -170,13 +194,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imgs\beginjourney.jpg" />
     <Content Include="Imgs\logo.png" />
+    <Content Include="Imgs\meditation.jpg" />
     <Content Include="Imgs\users.jpg" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\EntityModel.edmx.sql" />
     <Content Include="Models\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
@@ -222,7 +249,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Users\SignUp.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
@@ -233,6 +259,7 @@
     <Content Include="Views\Users\CreateAccount.cshtml" />
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ResetPass.cshtml" />
+    <Content Include="Views\Users\Questionaire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
