@@ -36,7 +36,7 @@
                     </div>
                 </form>
             </div>
-            <a href="#" class="lmmodal col-md-12" url="@Url.Action("CreateAccount","Users")" modal-width="600px">No account? Sign up</a>
+           @Html.ActionLink("Create new account","CreateAccount",null,new {@class=""})
             <a href="#" class="lmmodal col-md-12" htmlmodal="true" htmlmodalid="#resetdiv" modal-width="600px"> Forgot password? Hit here</a>
 
         </div>
@@ -75,7 +75,7 @@
             url: '@Url.Action("ResetEmail", "Users")',
             type: 'POST',
             success: function(res) {
-                $("#serverresponse").html(res);
+                $("#serverresponse").html(res)};
                 $("#mainreset").html("");
             },
             error: function (msg) { $("#serverresponse").html("Error el tipo no tespondio") }
