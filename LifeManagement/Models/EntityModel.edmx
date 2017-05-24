@@ -10,12 +10,12 @@
     <EntitySet Name="Users" EntityType="SeniorDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Categories" EntityType="SeniorDBModel.Store.Categories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Goals" EntityType="SeniorDBModel.Store.Goals" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Activities" EntityType="SeniorDBModel.Store.Activities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Sprints" EntityType="SeniorDBModel.Store.Sprints" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Progresses" EntityType="SeniorDBModel.Store.Progresses" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SprintActivities" EntityType="SeniorDBModel.Store.SprintActivities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Coaches" EntityType="SeniorDBModel.Store.Coaches" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoachReviews" EntityType="SeniorDBModel.Store.CoachReviews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Activities" EntityType="SeniorDBModel.Store.Activities" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_RoleUser" Association="SeniorDBModel.Store.FK_RoleUser">
       <End Role="Role" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
@@ -23,10 +23,6 @@
     <AssociationSet Name="CategoryGoal" Association="SeniorDBModel.Store.CategoryGoal">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Goal" EntitySet="Goals" />
-    </AssociationSet>
-    <AssociationSet Name="CategoryActivity" Association="SeniorDBModel.Store.CategoryActivity">
-      <End Role="Category" EntitySet="Categories" />
-      <End Role="Activity" EntitySet="Activities" />
     </AssociationSet>
     <AssociationSet Name="SprintGoal" Association="SeniorDBModel.Store.SprintGoal">
       <End Role="Sprint" EntitySet="Sprints" />
@@ -38,10 +34,6 @@
     </AssociationSet>
     <AssociationSet Name="SprintSprintActivities" Association="SeniorDBModel.Store.SprintSprintActivities">
       <End Role="Sprint" EntitySet="Sprints" />
-      <End Role="SprintActivities" EntitySet="SprintActivities" />
-    </AssociationSet>
-    <AssociationSet Name="ActivitySprintActivities" Association="SeniorDBModel.Store.ActivitySprintActivities">
-      <End Role="Activity" EntitySet="Activities" />
       <End Role="SprintActivities" EntitySet="SprintActivities" />
     </AssociationSet>
     <AssociationSet Name="SprintActivitiesProgress" Association="SeniorDBModel.Store.SprintActivitiesProgress">
@@ -59,6 +51,14 @@
     <AssociationSet Name="UserCoachReview" Association="SeniorDBModel.Store.UserCoachReview">
       <End Role="User" EntitySet="Users" />
       <End Role="CoachReview" EntitySet="CoachReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivitySprintActivities" Association="SeniorDBModel.Store.FK_ActivitySprintActivities">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="SprintActivities" EntitySet="SprintActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryActivity" Association="SeniorDBModel.Store.FK_CategoryActivity">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Activity" EntitySet="Activities" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
@@ -98,16 +98,6 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="SprintId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Activities">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
-    <Property Name="Img" Type="tinyint" Nullable="false" />
-    <Property Name="ImgMime" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <EntityType Name="Sprints">
     <Key>
@@ -154,6 +144,16 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Img" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ImgMime" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
   <Association Name="FK_RoleUser">
     <End Role="Role" Type="SeniorDBModel.Store.Roles" Multiplicity="1" />
     <End Role="Users" Type="SeniorDBModel.Store.Users" Multiplicity="*" />
@@ -174,18 +174,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Goal">
-        <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CategoryActivity">
-    <End Role="Category" Type="SeniorDBModel.Store.Categories" Multiplicity="1" />
-    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Activity">
         <PropertyRef Name="CategoryId" />
       </Dependent>
     </ReferentialConstraint>
@@ -223,18 +211,6 @@
       </Principal>
       <Dependent Role="SprintActivities">
         <PropertyRef Name="SprintId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ActivitySprintActivities">
-    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="1" />
-    <End Role="SprintActivities" Type="SeniorDBModel.Store.SprintActivities" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Activity">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SprintActivities">
-        <PropertyRef Name="ActivityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -286,6 +262,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ActivitySprintActivities">
+    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="1" />
+    <End Role="SprintActivities" Type="SeniorDBModel.Store.SprintActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SprintActivities">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryActivity">
+    <End Role="Category" Type="SeniorDBModel.Store.Categories" Multiplicity="1" />
+    <End Role="Activity" Type="SeniorDBModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -315,7 +315,7 @@
           <NavigationProperty Name="Sprints" Relationship="SeniorDBModel.UserSprint" FromRole="User" ToRole="Sprint" />
           <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachUser" FromRole="User" ToRole="Coach" />
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.UserCoachReview" FromRole="User" ToRole="CoachReview" />
-          <Property Name="Vision" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Vision" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -342,11 +342,6 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Goal" EntitySet="Goals" />
           </AssociationSet>
-          <EntitySet Name="Activities" EntityType="SeniorDBModel.Activity" />
-          <AssociationSet Name="CategoryActivity" Association="SeniorDBModel.CategoryActivity">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Activity" EntitySet="Activities" />
-          </AssociationSet>
           <EntitySet Name="Sprints" EntityType="SeniorDBModel.Sprint" />
           <AssociationSet Name="SprintGoal" Association="SeniorDBModel.SprintGoal">
             <End Role="Sprint" EntitySet="Sprints" />
@@ -360,10 +355,6 @@
           <EntitySet Name="SprintActivities" EntityType="SeniorDBModel.SprintActivities" />
           <AssociationSet Name="SprintSprintActivities" Association="SeniorDBModel.SprintSprintActivities">
             <End Role="Sprint" EntitySet="Sprints" />
-            <End Role="SprintActivities" EntitySet="SprintActivities" />
-          </AssociationSet>
-          <AssociationSet Name="ActivitySprintActivities" Association="SeniorDBModel.ActivitySprintActivities">
-            <End Role="Activity" EntitySet="Activities" />
             <End Role="SprintActivities" EntitySet="SprintActivities" />
           </AssociationSet>
           <AssociationSet Name="SprintActivitiesProgress" Association="SeniorDBModel.SprintActivitiesProgress">
@@ -384,22 +375,31 @@
             <End Role="User" EntitySet="Users" />
             <End Role="CoachReview" EntitySet="CoachReviews" />
           </AssociationSet>
+          <EntitySet Name="Activities" EntityType="SeniorDBModel.Activity" />
+          <AssociationSet Name="FK_ActivitySprintActivities" Association="SeniorDBModel.FK_ActivitySprintActivities">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="SprintActivities" EntitySet="SprintActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryActivity" Association="SeniorDBModel.FK_CategoryActivity">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Goals" Relationship="SeniorDBModel.CategoryGoal" FromRole="Category" ToRole="Goal" />
-          <NavigationProperty Name="Activities" Relationship="SeniorDBModel.CategoryActivity" FromRole="Category" ToRole="Activity" />
+          <NavigationProperty Name="Activities" Relationship="SeniorDBModel.FK_CategoryActivity" FromRole="Category" ToRole="Activity" />
         </EntityType>
         <EntityType Name="Goal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Category" Relationship="SeniorDBModel.CategoryGoal" FromRole="Goal" ToRole="Category" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sprint" Relationship="SeniorDBModel.SprintGoal" FromRole="Goal" ToRole="Sprint" />
@@ -417,37 +417,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Activity">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
-          <NavigationProperty Name="Category" Relationship="SeniorDBModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.ActivitySprintActivities" FromRole="Activity" ToRole="SprintActivities" />
-          <Property Name="Img" Type="Byte" Nullable="false" />
-          <Property Name="ImgMime" Type="String" Nullable="false" MaxLength="20" />
-        </EntityType>
-        <Association Name="CategoryActivity">
-          <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Activity">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Sprint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SprintGoal" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="DateFrom" Type="DateTime" Nullable="false" />
+          <Property Name="SprintGoal" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Goals" Relationship="SeniorDBModel.SprintGoal" FromRole="Sprint" ToRole="Goal" />
           <NavigationProperty Name="User" Relationship="SeniorDBModel.UserSprint" FromRole="Sprint" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
@@ -484,19 +460,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="SprintActivity" Relationship="SeniorDBModel.SprintActivitiesProgress" FromRole="Progress" ToRole="SprintActivities" />
           <Property Name="SprintActivitiesId" Type="Int32" Nullable="false" />
-          <Property Name="DatePerformed" Type="DateTime" Nullable="false" />
+          <Property Name="DatePerformed" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="SprintActivities">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Specifics" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Specifics" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Sprint" Relationship="SeniorDBModel.SprintSprintActivities" FromRole="SprintActivities" ToRole="Sprint" />
           <Property Name="SprintId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Activity" Relationship="SeniorDBModel.ActivitySprintActivities" FromRole="SprintActivities" ToRole="Activity" />
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Progresses" Relationship="SeniorDBModel.SprintActivitiesProgress" FromRole="SprintActivities" ToRole="Progress" />
+          <NavigationProperty Name="Activity" Relationship="SeniorDBModel.FK_ActivitySprintActivities" FromRole="SprintActivities" ToRole="Activity" />
         </EntityType>
         <Association Name="SprintSprintActivities">
           <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="1" />
@@ -507,18 +483,6 @@
             </Principal>
             <Dependent Role="SprintActivities">
               <PropertyRef Name="SprintId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ActivitySprintActivities">
-          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="1" />
-          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activity">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SprintActivities">
-              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -542,8 +506,8 @@
           <NavigationProperty Name="User" Relationship="SeniorDBModel.CoachUser" FromRole="Coach" ToRole="User" />
           <Property Name="ReviewScore" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.CoachCoachReview" FromRole="Coach" ToRole="CoachReview" />
-          <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="Skills" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Skills" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="CoachUser">
           <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="0..1" />
@@ -558,7 +522,7 @@
           <Property Name="CoachId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="SeniorDBModel.UserCoachReview" FromRole="CoachReview" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <Association Name="CoachCoachReview">
           <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="1" />
@@ -581,6 +545,42 @@
             </Principal>
             <Dependent Role="CoachReview">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Img" Type="Binary" Nullable="false" />
+          <Property Name="ImgMime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.FK_ActivitySprintActivities" FromRole="Activity" ToRole="SprintActivities" />
+          <NavigationProperty Name="Category" Relationship="SeniorDBModel.FK_CategoryActivity" FromRole="Activity" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_ActivitySprintActivities">
+          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SprintActivities">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryActivity">
+          <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -632,17 +632,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Activities">
-      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Activity)">
-        <MappingFragment StoreEntitySet="Activities">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="Img" ColumnName="Img" />
-          <ScalarProperty Name="ImgMime" ColumnName="ImgMime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Sprints">
       <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Sprint)">
         <MappingFragment StoreEntitySet="Sprints">
@@ -689,6 +678,17 @@
           <ScalarProperty Name="CoachId" ColumnName="CoachId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="ImgMime" ColumnName="ImgMime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

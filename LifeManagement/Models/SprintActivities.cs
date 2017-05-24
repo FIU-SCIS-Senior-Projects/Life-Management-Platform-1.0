@@ -26,8 +26,8 @@ namespace LifeManagement.Models
         public int ActivityId { get; set; }
     
         public virtual Sprint Sprint { get; set; }
-        public virtual Activity Activity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progresses { get; set; }
+        public virtual Activity Activity { get; set; }
     }
 }

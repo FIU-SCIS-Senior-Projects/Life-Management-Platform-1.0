@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/24/2017 11:27:19
+-- Date Created: 05/24/2017 15:07:34
 -- Generated from EDMX file: C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\LifeManagement\Models\EntityModel.edmx
 -- --------------------------------------------------
 
@@ -17,73 +17,73 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_RoleUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_RoleUser];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryGoal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_CategoryGoal];
+IF OBJECT_ID(N'[dbo].[FK_ActivitySprintActivities]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_ActivitySprintActivities];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CategoryActivity]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Activities] DROP CONSTRAINT [FK_CategoryActivity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SprintGoal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_SprintGoal];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserSprint]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sprints] DROP CONSTRAINT [FK_UserSprint];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SprintSprintActivities]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_SprintSprintActivities];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ActivitySprintActivities]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_ActivitySprintActivities];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SprintActivitiesProgress]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Progresses] DROP CONSTRAINT [FK_SprintActivitiesProgress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CoachUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Coaches] DROP CONSTRAINT [FK_CoachUser];
+IF OBJECT_ID(N'[dbo].[FK_CategoryGoal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_CategoryGoal];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CoachCoachReview]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CoachReviews] DROP CONSTRAINT [FK_CoachCoachReview];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CoachUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Coaches] DROP CONSTRAINT [FK_CoachUser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RoleUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_RoleUser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintActivitiesProgress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Progresses] DROP CONSTRAINT [FK_SprintActivitiesProgress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintGoal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_SprintGoal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintSprintActivities]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_SprintSprintActivities];
+GO
 IF OBJECT_ID(N'[dbo].[FK_UserCoachReview]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CoachReviews] DROP CONSTRAINT [FK_UserCoachReview];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserSprint]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sprints] DROP CONSTRAINT [FK_UserSprint];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Roles];
-GO
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
-GO
-IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categories];
-GO
-IF OBJECT_ID(N'[dbo].[Goals]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Goals];
-GO
 IF OBJECT_ID(N'[dbo].[Activities]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Activities];
 GO
-IF OBJECT_ID(N'[dbo].[Sprints]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Sprints];
-GO
-IF OBJECT_ID(N'[dbo].[Progresses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Progresses];
-GO
-IF OBJECT_ID(N'[dbo].[SprintActivities]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SprintActivities];
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
 GO
 IF OBJECT_ID(N'[dbo].[Coaches]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Coaches];
 GO
 IF OBJECT_ID(N'[dbo].[CoachReviews]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CoachReviews];
+GO
+IF OBJECT_ID(N'[dbo].[Goals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Goals];
+GO
+IF OBJECT_ID(N'[dbo].[Progresses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Progresses];
+GO
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
+GO
+IF OBJECT_ID(N'[dbo].[SprintActivities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SprintActivities];
+GO
+IF OBJECT_ID(N'[dbo].[Sprints]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sprints];
+GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
 GO
 
 -- --------------------------------------------------
@@ -125,16 +125,6 @@ CREATE TABLE [dbo].[Goals] (
     [Description] nvarchar(max)  NOT NULL,
     [CategoryId] int  NOT NULL,
     [SprintId] int  NOT NULL
-);
-GO
-
--- Creating table 'Activities'
-CREATE TABLE [dbo].[Activities] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(100)  NOT NULL,
-    [CategoryId] int  NOT NULL,
-    [Img] tinyint  NOT NULL,
-    [ImgMime] nvarchar(20)  NOT NULL
 );
 GO
 
@@ -183,6 +173,16 @@ CREATE TABLE [dbo].[CoachReviews] (
 );
 GO
 
+-- Creating table 'Activities'
+CREATE TABLE [dbo].[Activities] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [CategoryId] int  NOT NULL,
+    [Img] varbinary(max)  NOT NULL,
+    [ImgMime] nvarchar(20)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -208,12 +208,6 @@ GO
 -- Creating primary key on [Id] in table 'Goals'
 ALTER TABLE [dbo].[Goals]
 ADD CONSTRAINT [PK_Goals]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'Activities'
-ALTER TABLE [dbo].[Activities]
-ADD CONSTRAINT [PK_Activities]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -244,6 +238,12 @@ GO
 -- Creating primary key on [Id] in table 'CoachReviews'
 ALTER TABLE [dbo].[CoachReviews]
 ADD CONSTRAINT [PK_CoachReviews]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Activities'
+ALTER TABLE [dbo].[Activities]
+ADD CONSTRAINT [PK_Activities]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -278,21 +278,6 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_CategoryGoal'
 CREATE INDEX [IX_FK_CategoryGoal]
 ON [dbo].[Goals]
-    ([CategoryId]);
-GO
-
--- Creating foreign key on [CategoryId] in table 'Activities'
-ALTER TABLE [dbo].[Activities]
-ADD CONSTRAINT [FK_CategoryActivity]
-    FOREIGN KEY ([CategoryId])
-    REFERENCES [dbo].[Categories]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CategoryActivity'
-CREATE INDEX [IX_FK_CategoryActivity]
-ON [dbo].[Activities]
     ([CategoryId]);
 GO
 
@@ -339,21 +324,6 @@ GO
 CREATE INDEX [IX_FK_SprintSprintActivities]
 ON [dbo].[SprintActivities]
     ([SprintId]);
-GO
-
--- Creating foreign key on [ActivityId] in table 'SprintActivities'
-ALTER TABLE [dbo].[SprintActivities]
-ADD CONSTRAINT [FK_ActivitySprintActivities]
-    FOREIGN KEY ([ActivityId])
-    REFERENCES [dbo].[Activities]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ActivitySprintActivities'
-CREATE INDEX [IX_FK_ActivitySprintActivities]
-ON [dbo].[SprintActivities]
-    ([ActivityId]);
 GO
 
 -- Creating foreign key on [SprintActivitiesId] in table 'Progresses'
@@ -415,11 +385,40 @@ CREATE INDEX [IX_FK_UserCoachReview]
 ON [dbo].[CoachReviews]
     ([UserId]);
 GO
+
+-- Creating foreign key on [ActivityId] in table 'SprintActivities'
+ALTER TABLE [dbo].[SprintActivities]
+ADD CONSTRAINT [FK_ActivitySprintActivities]
+    FOREIGN KEY ([ActivityId])
+    REFERENCES [dbo].[Activities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ActivitySprintActivities'
+CREATE INDEX [IX_FK_ActivitySprintActivities]
+ON [dbo].[SprintActivities]
+    ([ActivityId]);
+GO
+
+-- Creating foreign key on [CategoryId] in table 'Activities'
+ALTER TABLE [dbo].[Activities]
+ADD CONSTRAINT [FK_CategoryActivity]
+    FOREIGN KEY ([CategoryId])
+    REFERENCES [dbo].[Categories]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CategoryActivity'
+CREATE INDEX [IX_FK_CategoryActivity]
+ON [dbo].[Activities]
+    ([CategoryId]);
+GO
 INSERT INTO [dbo].[Roles]
            ([Name])
      VALUES
            ('Guest'),('User'),('Admin')
-
 -- --------------------------------------------------
 -- Script has ended
 -- --------------------------------------------------

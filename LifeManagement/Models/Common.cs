@@ -46,7 +46,7 @@ namespace LifeManagement.Models
                        HttpContext.Current.User.Identity.IsAuthenticated;
             }
         }
-
+        /***********************images processing******************************************/
         private bool saveImageBytes(ImageInterface s, HttpPostedFileBase image)
         {
 
@@ -73,6 +73,21 @@ namespace LifeManagement.Models
             }
             return false;
         }
+
+        public  string SignatureImageStr64(Byte[] bytes, string mimetype)
+        {
+            string imageSrc = "/Imgs/noimage.jpg";
+
+            if (bytes != null)
+            {
+                string imageBase64 = "";
+                imageBase64 = Convert.ToBase64String(bytes);
+                imageSrc = string.Format("data:{0};base64,{1}", mimetype, imageBase64);
+
+            }
+            return imageSrc;
+        }
+        /*************************************emails processing*******************************/
         public static void sendEmail(string strTo, string strSubject, string message)
         {
             try
@@ -100,11 +115,13 @@ namespace LifeManagement.Models
             client.Host = SMTPSERVER;
             mailMsg.Subject = strSubject;
             mailMsg.Body = strBody;
-          /*  MailAddress copy = new MailAddress(strCC);
-            mailMsg.CC.Add(copy);
-            MailAddress Bcopy = new MailAddress(strBCC);
-            mailMsg.Bcc.Add(Bcopy);
-            */
+            mailMsg.IsBodyHtml = true;
+
+            /*  MailAddress copy = new MailAddress(strCC);      //To implement cc and bcc, they can't be empty, we don't need this rigth now
+              mailMsg.CC.Add(copy);
+              MailAddress Bcopy = new MailAddress(strBCC);
+              mailMsg.Bcc.Add(Bcopy);
+              */
 
 
             client.Send(mailMsg);
