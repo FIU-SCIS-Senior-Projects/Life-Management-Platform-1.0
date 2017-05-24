@@ -199,6 +199,7 @@
     <Content Include="Imgs\beginjourney.jpg" />
     <Content Include="Imgs\logo.png" />
     <Content Include="Imgs\meditation.jpg" />
+    <Content Include="Imgs\noimage.jpg" />
     <Content Include="Imgs\users.jpg" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

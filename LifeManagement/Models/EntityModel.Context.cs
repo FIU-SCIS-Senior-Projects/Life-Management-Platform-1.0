@@ -29,11 +29,11 @@ namespace LifeManagement.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Goal> Goals { get; set; }
-        public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<Sprint> Sprints { get; set; }
         public virtual DbSet<Progress> Progresses { get; set; }
         public virtual DbSet<SprintActivities> SprintActivities { get; set; }
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<CoachReview> CoachReviews { get; set; }
+        public virtual DbSet<Activity> Activities { get; set; }
     }
 }
