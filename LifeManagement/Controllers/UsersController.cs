@@ -172,6 +172,7 @@ namespace LifeManagement.Controllers
             newuser.Email = fromuser.Email;
             newuser.username = fromuser.username;
             newuser.password = fromuser.password;
+            newuser.Vision = "";
             newuser.DateCreated = DateTime.Now;
             db.Users.Add(newuser);
             db.SaveChanges();
