@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Dashboard","Users");
             }
             return View();
         }
@@ -39,6 +39,11 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Dashboard()
+        {
+            
+            return View();
+        }
         // GET: Users
         public ActionResult Index()
         {
@@ -167,6 +172,7 @@ namespace LifeManagement.Controllers
             newuser.Email = fromuser.Email;
             newuser.username = fromuser.username;
             newuser.password = fromuser.password;
+            newuser.Vision = "";
             newuser.DateCreated = DateTime.Now;
             db.Users.Add(newuser);
             db.SaveChanges();

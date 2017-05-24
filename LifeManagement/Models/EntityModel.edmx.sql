@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/22/2017 23:10:19
+-- Date Created: 05/24/2017 11:27:19
 -- Generated from EDMX file: C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\LifeManagement\Models\EntityModel.edmx
 -- --------------------------------------------------
 
@@ -20,16 +20,70 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RoleUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_RoleUser];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryGoal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_CategoryGoal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryActivity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Activities] DROP CONSTRAINT [FK_CategoryActivity];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintGoal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_SprintGoal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserSprint]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sprints] DROP CONSTRAINT [FK_UserSprint];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintSprintActivities]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_SprintSprintActivities];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ActivitySprintActivities]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SprintActivities] DROP CONSTRAINT [FK_ActivitySprintActivities];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SprintActivitiesProgress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Progresses] DROP CONSTRAINT [FK_SprintActivitiesProgress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CoachUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Coaches] DROP CONSTRAINT [FK_CoachUser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CoachCoachReview]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CoachReviews] DROP CONSTRAINT [FK_CoachCoachReview];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserCoachReview]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CoachReviews] DROP CONSTRAINT [FK_UserCoachReview];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Role]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Role];
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
+GO
+IF OBJECT_ID(N'[dbo].[Goals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Goals];
+GO
+IF OBJECT_ID(N'[dbo].[Activities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Activities];
+GO
+IF OBJECT_ID(N'[dbo].[Sprints]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sprints];
+GO
+IF OBJECT_ID(N'[dbo].[Progresses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Progresses];
+GO
+IF OBJECT_ID(N'[dbo].[SprintActivities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SprintActivities];
+GO
+IF OBJECT_ID(N'[dbo].[Coaches]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Coaches];
+GO
+IF OBJECT_ID(N'[dbo].[CoachReviews]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CoachReviews];
 GO
 
 -- --------------------------------------------------
@@ -53,7 +107,8 @@ CREATE TABLE [dbo].[Users] (
     [RoleId] int  NOT NULL,
     [username] nvarchar(50)  NOT NULL,
     [password] nvarchar(20)  NOT NULL,
-    [DateCreated] datetime  NOT NULL
+    [DateCreated] datetime  NOT NULL,
+    [Vision] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -77,7 +132,9 @@ GO
 CREATE TABLE [dbo].[Activities] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(100)  NOT NULL,
-    [CategoryId] int  NOT NULL
+    [CategoryId] int  NOT NULL,
+    [Img] tinyint  NOT NULL,
+    [ImgMime] nvarchar(20)  NOT NULL
 );
 GO
 
@@ -362,7 +419,6 @@ INSERT INTO [dbo].[Roles]
            ([Name])
      VALUES
            ('Guest'),('User'),('Admin')
-GO
 
 -- --------------------------------------------------
 -- Script has ended
