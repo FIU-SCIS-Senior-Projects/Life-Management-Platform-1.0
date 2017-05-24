@@ -1,0 +1,30 @@
+﻿@using LifeManagement.Models
+@model List<LifeManagement.Models.Activity>
+    
+@foreach (var a in Model)
+{
+    <div class="col-md-12">
+        <div class="cat-tiles">
+            <div class="cat-tiles-body">
+
+                <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
+            </div>
+            <div class="cat-tiles-footer">
+                <input class="cat-tiles-chk" type="checkbox" />
+                <label class="cat-tiles-lbl">@a.Name</label>
+            </div>
+        </div>
+    </div>
+}
+<div class="col-md-12">
+    <div class="cat-tiles">
+        <div class="cat-tiles-body">
+
+            <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
+               </div>
+        <div class="cat-tiles-footer">
+            <input class="cat-tiles-chk" type="checkbox"/>
+            <label class="cat-tiles-lbl">Activity 1</label>
+        </div>
+    </div>
+</div>

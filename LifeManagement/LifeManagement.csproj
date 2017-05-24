@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SprintActivitiesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CatTiles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -260,6 +262,13 @@
     <Content Include="Views\Users\ResetPass.cshtml" />
     <Content Include="Views\Users\Questionaire.cshtml" />
     <Content Include="Views\Users\PasswordRecovery.cshtml" />
+    <Content Include="Views\SprintActivities\Create.cshtml" />
+    <Content Include="Views\SprintActivities\Delete.cshtml" />
+    <Content Include="Views\SprintActivities\Details.cshtml" />
+    <Content Include="Views\SprintActivities\Edit.cshtml" />
+    <Content Include="Views\SprintActivities\Index.cshtml" />
+    <Content Include="Views\SprintActivities\Joy.cshtml" />
+    <Content Include="Views\SprintActivities\UserSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

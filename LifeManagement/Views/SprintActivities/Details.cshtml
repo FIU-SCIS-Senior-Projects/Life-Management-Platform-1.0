@@ -1,0 +1,42 @@
+﻿@model LifeManagement.Models.SprintActivities
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SprintActivities</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Specifics)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specifics)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sprint.SprintGoal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sprint.SprintGoal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activity.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activity.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
