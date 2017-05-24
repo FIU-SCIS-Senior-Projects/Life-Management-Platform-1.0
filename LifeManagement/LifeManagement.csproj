@@ -257,10 +257,9 @@
     <Content Include="Views\Shared\ErrorPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Users\CreateAccount.cshtml" />
-    <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ResetPass.cshtml" />
     <Content Include="Views\Users\Questionaire.cshtml" />
-    <Content Include="Views\Users\Dashboard.cshtml" />
+    <Content Include="Views\Users\PasswordRecovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

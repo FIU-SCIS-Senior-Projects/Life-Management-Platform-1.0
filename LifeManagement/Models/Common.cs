@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mail;
+//using System.Web.Mail;
+using System.Net.Mail;
 
 namespace LifeManagement.Models
 {
@@ -31,8 +32,9 @@ namespace LifeManagement.Models
     public class Common
     {
         private const string SMTPSERVER = "smtp.gmail.com";
-        private const string SMTPPORT = "25";
-        private const bool SMTPSSL = true;
+        private const int SMTPPORT = 587;
+        private const string EmailAddress = "manage.life.team@gmail.com";
+        private const string Pass = "052017befer";
 
         public bool IsAuthenticated
         {
@@ -75,11 +77,12 @@ namespace LifeManagement.Models
         {
             try
             {
-                sendEmail("Travels@miami-airport.com", strTo, "", "", strSubject, message);
+                sendEmail(EmailAddress, strTo, "", "", strSubject, message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Error in sendEmail!!! Exception",
+                            ex.ToString());
             }
         }
         public static bool sendEmail(string strFrom, string strTo, string strCC, string strBCC, string strSubject, string strBody)
@@ -87,24 +90,26 @@ namespace LifeManagement.Models
 
 
             //Create your message body. 
-            MailMessage mailMsg = new MailMessage();
-            mailMsg.From = strFrom;
-            mailMsg.To = strTo;
-            mailMsg.Cc = strCC;
-            mailMsg.Bcc = strBCC;
+            MailMessage mailMsg = new MailMessage(strFrom, strTo);
+            SmtpClient client = new SmtpClient();
+            client.Port = SMTPPORT;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = true;
+            client.Credentials = new System.Net.NetworkCredential(strFrom, Pass);
+            client.Host = SMTPSERVER;
             mailMsg.Subject = strSubject;
             mailMsg.Body = strBody;
-            mailMsg.BodyFormat = MailFormat.Html;
+          /*  MailAddress copy = new MailAddress(strCC);
+            mailMsg.CC.Add(copy);
+            MailAddress Bcopy = new MailAddress(strBCC);
+            mailMsg.Bcc.Add(Bcopy);
+            */
 
-            // SMTP SERVER
-            if (HttpContext.Current.Request.ServerVariables["SERVER_NAME"] != "localhost")
-            {
-                SmtpMail.SmtpServer = SMTPSERVER;
-            }
 
-            // Send the email 
-            SmtpMail.Send(mailMsg);
-            // Normal Completion 
+            client.Send(mailMsg);
+
+           
 
 
             return true;
