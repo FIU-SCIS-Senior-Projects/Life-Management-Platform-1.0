@@ -58,9 +58,9 @@ namespace LifeManagement.Controllers
             if(user != null)
             {
                 string subject = "Password reset requested";
-                string message = "Dear" + user.FirstName + ": \n" + "You are receiving this email because you forgot your password for the Life Management system \n" 
-                    + " to reset your password please follow this link and enter corresponding fields\n" +
-                    "Sincerely, \n The Life Management Team";
+                string message = "Dear " + user.FirstName + ": <br/>" + "<p> You are receiving this email because you forgot your password for the Life Management system " 
+                    + "to reset your password please follow <a href= \"https://localhost:44313/Users/PasswordRecovery/"+user.Id+">this link </a> and fill out the corresponding fields </p> <br/>"
+                    + "<p> Sincerely, </p> <br/><p> The Life Management Team </p>";
 
                 Common.sendEmail(user.Email, subject, message);
             }
@@ -69,12 +69,31 @@ namespace LifeManagement.Controllers
             }
             
 
+            return PartialView();
+        }
+
+        public ActionResult PasswordRecovery(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(user);
+        }
+
+        public ActionResult ChangePass(string pass)
+        {
             return View();
         }
 
-
-        // GET: Users/Details/5
-        public ActionResult Details(int? id)
+            // GET: Users/Details/5
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -87,6 +106,7 @@ namespace LifeManagement.Controllers
             }
             return View(user);
         }
+
 
         // GET: Users/Create
         public ActionResult CreateAccount()
