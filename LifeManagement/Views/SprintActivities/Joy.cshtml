@@ -3,10 +3,11 @@
     @{
         var common = new LifeManagement.Models.Common();
     }
-@foreach (var a in Model)
-{
-    <div class="col-md-12">
-        <div class="cat-tiles">
+<div class="clearfix">
+    @foreach (var a in Model)
+    {
+
+        <div class="cat-tiles col-md-3">
             <div class="cat-tiles-body">
 
                 <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img,a.ImgMime)" />
@@ -16,17 +17,20 @@
                 <label class="cat-tiles-lbl">@a.Name</label>
             </div>
         </div>
-    </div>
-}
-<div class="col-md-12">
-    <div class="cat-tiles">
+
+    }
+
+
+
+    <div class="cat-tiles col-md-3">
         <div class="cat-tiles-body">
 
             <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
-               </div>
+        </div>
         <div class="cat-tiles-footer">
             <input class="cat-tiles-chk" type="checkbox"/>
             <label class="cat-tiles-lbl">Activity 1</label>
         </div>
     </div>
 </div>
+

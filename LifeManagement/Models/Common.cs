@@ -78,7 +78,7 @@ namespace LifeManagement.Models
         {
             string imageSrc = "/Imgs/noimage.jpg";
 
-            if (bytes != null)
+            if (bytes != null && !String.IsNullOrEmpty(mimetype))
             {
                 string imageBase64 = "";
                 imageBase64 = Convert.ToBase64String(bytes);

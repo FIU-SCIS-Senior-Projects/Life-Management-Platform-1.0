@@ -2,27 +2,34 @@
 
 .cat-tiles {
     border: 3px solid burlywood;
-    
+      padding: 0px;
     height: 300px;
-    width:25%;
+    margin: 3px;
     min-width: 300px;
+    border-radius: 25px;
+    
     }
 
 .cat-tiles-body {
     height: 264px;
-     width:100%;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  
 }
 .cat-tiles-img {
       width:100%;
     height: 100%;
-   
+    border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
   
 }
 .cat-tiles-footer {
       height: 30px;
        width:100%;
     text-align: center;
-    background-color:beige
+    background-color: beige;
+       border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 .cat-tiles-chk {
   -webkit-appearance:none;
