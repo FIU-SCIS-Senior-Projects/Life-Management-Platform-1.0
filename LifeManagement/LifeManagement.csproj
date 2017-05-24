@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44313</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -131,24 +131,60 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\LifeMgmEM.Context.cs">
+    <Compile Include="Models\Activity.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Authorization.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Coach.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CoachReview.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LifeMgmEM.Context.tt</DependentUpon>
+      <DependentUpon>EntityModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LifeMgmEM.cs">
+    <Compile Include="Models\EntityModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LifeMgmEM.tt</DependentUpon>
+      <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LifeMgmEM.Designer.cs">
+    <Compile Include="Models\EntityModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LifeMgmEM.edmx</DependentUpon>
+      <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Goal.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImageInterface.cs" />
+    <Compile Include="Models\LMRoleProvider.cs" />
+    <Compile Include="Models\Progress.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sprint.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SprintActivities.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,36 +194,46 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\LifeMgmEM.Context.tt">
+    <Content Include="Imgs\beginjourney.jpg" />
+    <Content Include="Imgs\logo.png" />
+    <Content Include="Imgs\meditation.jpg" />
+    <Content Include="Imgs\users.jpg" />
+    <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LifeMgmEM.edmx</DependentUpon>
-      <LastGenOutput>LifeMgmEM.Context.cs</LastGenOutput>
+      <DependentUpon>EntityModel.edmx</DependentUpon>
+      <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LifeMgmEM.tt">
+    <Content Include="Models\EntityModel.edmx.sql" />
+    <Content Include="Models\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LifeMgmEM.edmx</DependentUpon>
-      <LastGenOutput>LifeMgmEM.cs</LastGenOutput>
+      <DependentUpon>EntityModel.edmx</DependentUpon>
+      <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\LifeMgmEM.edmx">
+    <EntityDeploy Include="Models\EntityModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LifeMgmEM.Designer.cs</LastGenOutput>
+      <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\LifeMgmEM.edmx.diagram">
-      <DependentUpon>LifeMgmEM.edmx</DependentUpon>
+    <Content Include="Models\EntityModel.edmx.diagram">
+      <DependentUpon>EntityModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\fiusp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\fiusp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.cycle2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lmpopup.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -203,9 +249,22 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Shared\ErrorPartial.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
+    <Content Include="Views\Users\CreateAccount.cshtml" />
+    <Content Include="Views\Users\ForgotPassword.cshtml" />
+    <Content Include="Views\Users\ResetPass.cshtml" />
+    <Content Include="Views\Users\Questionaire.cshtml" />
+    <Content Include="Views\Users\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Mailer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -236,7 +295,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50698</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50698/</IISUrl>
+          <IISUrl>https://localhost:44313/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

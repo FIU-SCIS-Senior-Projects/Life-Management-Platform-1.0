@@ -1,12 +1,14 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+   width: 100%;
+    height: 100%;
+      background-color: white !important;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+   
+    width: 100%;
+    
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -20,5 +22,74 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+   
 }
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+.rotator-image {
+    height: 500px;
+    width: 100%;
+}
+
+/*body with*/
+.container-full {
+  margin: 0 auto;
+  width: 80%;
+    padding: 0;
+     
+    
+}
+/*navigation bar color*/
+.navbar {
+       height: 20px !important;
+ }
+ .topbar {
+     height: 50px;
+     background: white;
+ }
+ .navbar-inverse {
+      background-color: white !important;
+      border: transparent !important;
+     border-bottom:1px solid black !important;
+     border-radius: 0px;
+     margin-bottom: 0;
+
+}
+ /*jumbotron*/
+ .jumbotron {
+     background-color: slategrey !important;
+     color: coral;
+     margin-bottom: 0;
+   
+ }
+ .logo {
+     height: 40px;
+ }
+ /*div background image*/
+ .imagediv {
+     background-size:100% auto;
+     color: white;
+ }
+ .bgdiv
+{
+    background-color:red;
+      position:absolute;
+        width:100%;
+        height:1000px;
+        z-index:-1000;
+        background: url("/Imgs/beginjourney.jpg") no-repeat center center fixed; 
+        opacity:0.3;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      
+}
+ .whitetext {
+     color: white;
+     text-shadow: 1px 1px black;
+ }
