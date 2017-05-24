@@ -115,11 +115,13 @@ namespace LifeManagement.Models
             client.Host = SMTPSERVER;
             mailMsg.Subject = strSubject;
             mailMsg.Body = strBody;
-          /*  MailAddress copy = new MailAddress(strCC);
-            mailMsg.CC.Add(copy);
-            MailAddress Bcopy = new MailAddress(strBCC);
-            mailMsg.Bcc.Add(Bcopy);
-            */
+            mailMsg.IsBodyHtml = true;
+
+            /*  MailAddress copy = new MailAddress(strCC);      //To implement cc and bcc, they can't be empty, we don't need this rigth now
+              mailMsg.CC.Add(copy);
+              MailAddress Bcopy = new MailAddress(strBCC);
+              mailMsg.Bcc.Add(Bcopy);
+              */
 
 
             client.Send(mailMsg);
