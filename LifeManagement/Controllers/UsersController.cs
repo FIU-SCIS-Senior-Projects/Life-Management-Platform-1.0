@@ -54,14 +54,27 @@ namespace LifeManagement.Controllers
 
         //Beatriz' code starts here++++++++++
         // GET: 
-        public ActionResult ForgotPassword()
+        [HttpPost]
+        public ActionResult ResetPass(string email)
         {
-            return View();
-        }
+            Console.Out.WriteLine("This is email value: " + email);
+            var user = db.Users.Where(e=>e.Email.ToLower() == email.ToLower()).FirstOrDefault();
 
-        public PartialViewResult ResetPass()
-        {
-            return PartialView();
+            if(user != null)
+            {
+                string subject = "Password reset requested";
+                string message = "Dear" + user.FirstName + ": \n" + "You are receiving this email because you forgot your password for the Life Management system \n" 
+                    + " to reset your password please follow this link and enter corresponding fields\n" +
+                    "Sincerely, \n The Life Management Team";
+
+                Common.sendEmail(user.Email, subject, message);
+            }
+             else { 
+                return new HttpStatusCodeResult(400, "");
+            }
+            
+
+            return View();
         }
 
 

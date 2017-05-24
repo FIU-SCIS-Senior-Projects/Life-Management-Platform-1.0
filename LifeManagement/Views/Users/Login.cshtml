@@ -42,21 +42,30 @@
         </div>
     </div>
 </div>
+
+
+
 <div id="resetdiv" style="display: none">
-    <div id="serverresponse">
+    
+    <div id="response_ok">
+
     </div>
+
     <div id="mainreset">
     <h2 class="text-center">Reset Password</h2>
 
+        <div class="text-center" id="response_bad" style="color: red">
+        </div>
 
-
+        <br />
         <div class="form-horizontal col-md-12">
             <div class="form-group">
-                <label class="col-md-2 control-label">Email address: </label>
-                <div class="col-md-10">
-                    <input class="form-control" type="email" name="email" id="email" />
+                <label class="col-md-3 control-label">Email address:</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="text" name="email" id="email" />
                 </div>
             </div>
+            <br />
             <div class="form-group">
                 <div class="col-md-offset-8 col-md-4">
                     <button class="btn btn-success form-control" onclick="ressetpass()">Re-set</button>
@@ -72,13 +81,15 @@
 <script>
     function ressetpass() {
         $.ajax({
-            url: '@Url.Action("ResetEmail", "Users")',
+            url: '@Url.Action("ResetPass", "Users")',
+            data: { email: $("#email").val()},
             type: 'POST',
-            success: function(res) {
-                $("#serverresponse").html(res)};
-                $("#mainreset").html("");
+            success: function (res) {
+                $("#response_ok").html(res);
+                $("#mainreset").html("")
             },
-            error: function (msg) { $("#serverresponse").html("Error el tipo no tespondio") }
+
+            error: function(msg) { $("#response_bad").html(" Error! This email address is not registered on the system, try another.") }
         });
     }
 </script>
