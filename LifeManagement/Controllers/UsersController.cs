@@ -64,7 +64,7 @@ namespace LifeManagement.Controllers
             {
                 string subject = "Password reset requested";
                 string message = "Dear " + user.FirstName + ": <br/>" + "<p> You are receiving this email because you forgot your password for the Life Management system," 
-                    + " to reset your password please follow <a href= \"https://localhost:44313/Users/PasswordRecovery/" + user.Id + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
+                    + " to reset your password please follow <a href= \"" + @Url.Action("PasswordRecovery", "Users", null, Request.Url.Scheme) + "/" + user.Id + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
                     + "<p> Sincerely, <br/> The Life Management Team. </p>";
 
                 Common.sendEmail(user.Email, subject, message);
@@ -95,7 +95,8 @@ namespace LifeManagement.Controllers
         [HttpPost]
         public ActionResult ChangePass(string newpass, string newpass_conf, int id)
         {
-            
+    
+     
             if (newpass != newpass_conf)
             {
                 return new HttpStatusCodeResult(400, "");
