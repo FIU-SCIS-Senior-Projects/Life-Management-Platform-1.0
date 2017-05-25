@@ -4,21 +4,24 @@
         var common = new LifeManagement.Models.Common();
     }
 <div class="clearfix">
-    @foreach (var a in Model)
+    @if (Model != null)
     {
+        foreach (var a in Model)
+        {
 
-        <div class="cat-tiles col-md-3">
-            <div class="cat-tiles-body">
+            <div class="cat-tiles col-sm-4 col-md-3">
+                <div class="cat-tiles-body">
 
-                <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img,a.ImgMime)" />
+                    <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img,a.ImgMime)" />
+                </div>
+                <div class="cat-tiles-footer">
+                    <input class="cat-tiles-chk" type="checkbox" />
+                    <label class="cat-tiles-lbl">@a.Name</label>
+                </div>
             </div>
-            <div class="cat-tiles-footer">
-                <input class="cat-tiles-chk" type="checkbox" />
-                <label class="cat-tiles-lbl">@a.Name</label>
-            </div>
-        </div>
 
-    }
+        }
+    } 
 
 
 

@@ -21,8 +21,17 @@ namespace LifeManagement.Controllers
         }
         public PartialViewResult Joy()
         {
-            var activities = db.Activities.ToList();
-            return PartialView(activities);
+            try
+            {
+                var activities = db.Activities.ToList();
+                return PartialView(activities);
+            }
+            catch (Exception e)
+            {
+               
+                return PartialView(null);
+            }
+          
         }
         /************************************system generated*************************************/
         // GET: SprintActivities
