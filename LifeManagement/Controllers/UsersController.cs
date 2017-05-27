@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("Dashboard","Users");
+                return RedirectToAction("Index","Dashboard");
             }
             return View();
         }
@@ -39,11 +39,6 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Dashboard()
-        {
-            
-            return View();
-        }
         // GET: Users
         public ActionResult Index()
         {
@@ -154,7 +149,7 @@ namespace LifeManagement.Controllers
                     string result = CreateUser(user, role);
                   
                  if (result==Constants.MSGS.SUCCESS)
-                        return RedirectToAction("Questionaire");
+                        return RedirectToAction("Questionaire", user);
                  else
                  {
                      ViewBag.ErrorMsg = result;
@@ -204,10 +199,14 @@ namespace LifeManagement.Controllers
 
         }
 
-        public ActionResult Questionaire()
+        //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
+        public ActionResult Questionaire(UserViewModel user)
         {
-            return View();
+            return View(user);
         }
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++
+
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
