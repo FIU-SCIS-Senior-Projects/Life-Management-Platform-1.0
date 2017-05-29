@@ -1,9 +1,50 @@
-﻿
+﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
 @{
     ViewBag.Title = "UserSetup";
 }
 
 <h2>User Setup</h2>
+<div class="col-md-12">
+    @{Html.RenderAction("Joy");}
+</div>
+<script>
+    var joyselections = 0;
 
-@{Html.RenderAction("Joy");}
+    function validateCats(id) {
+        debugger;
+        var isInsert = this.checked;
+        alert($(this).attr('id'))
+        if (isInsert == 'checked') {
+            if (joyselections > 2) {
+                $(this).attr('checked', 'false');
+                alert('Only three selections are allowed');
+                return;
+            } else {
+                joyselections++;
+                $("#" + id).attr('display', 'block');
+            }
+        } else {
+            joyselections--;
+            $("#" + id).attr('display', 'none');
+        }
+    }
+    function updateSprintActivity(actid, sprintId) {
+        
+        var data = {
+            activityId: actid,
+            sprintId: sprintId,
+            isInsert: isInsert == 'checked'
+    }
+        $.ajax({
+            url: '@Url.Action("UpdateSprint","SprintActivities")',
+            type: 'POST',
+            data: data,
+            error:function() {
+                alert('Could not update selections');
+            }
+        })
+
+    }
+
+</script>

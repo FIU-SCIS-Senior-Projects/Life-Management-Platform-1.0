@@ -154,9 +154,13 @@ namespace LifeManagement.Controllers
 
         public string CreateUser(UserViewModel fromuser, Role role)
         {
-            if (db.Users.Where(a => a.username.ToLower() == fromuser.username).Count() > 0)
+            if (db.Users.Where(a => a.username.ToLower() == fromuser.username.ToLower()).Count() > 0)
             {
                 return Constants.MSGS.DUPLICATEUSERNAME;
+            }
+            if (db.Users.Where(a => a.Email.ToLower() == fromuser.Email.ToLower()).Count() > 0)
+            {
+                return Constants.MSGS.DUPLICATEEMAIL;
             }
             if (fromuser.password != fromuser.passwordconfirmation)
             {
