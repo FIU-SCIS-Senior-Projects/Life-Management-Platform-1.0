@@ -10,14 +10,18 @@
         {
 
             <div class="cat-tiles col-sm-4 col-md-3">
-                <div class="cat-tiles-body">
+                <label id="lbl">
+                    <div class="cat-tiles-body">
 
-                    <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img,a.ImgMime)" />
-                </div>
-                <div class="cat-tiles-footer">
-                    <input class="cat-tiles-chk" type="checkbox" />
-                    <label class="cat-tiles-lbl">@a.Name</label>
-                </div>
+                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
+                    </div>
+                    <div class="cat-tiles-footer">
+                        <input class="cat-tiles-chk" type="checkbox" id="chk"  onchange="validateCats(@a.Id)" />
+                        <label class="cat-tiles-lbl">@a.Name</label>
+                    </div>
+                    <div class="cat-tiles-specifics" id="@a.Id">
+                        <textarea  rows="3"></textarea>
+                    </div>                </label>
             </div>
 
         }
@@ -26,14 +30,19 @@
 
 
     <div class="cat-tiles col-md-3">
-        <div class="cat-tiles-body">
+        <label class="cat-tile-label">
+            <div class="cat-tiles-body">
 
-            <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
-        </div>
-        <div class="cat-tiles-footer">
-            <input class="cat-tiles-chk" type="checkbox"/>
-            <label class="cat-tiles-lbl">Activity 1</label>
-        </div>
-    </div>
+                <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
+            </div>
+            <div class="cat-tiles-footer">
+                <input class="cat-tiles-chk" type="checkbox" />
+                <label class="cat-tiles-lbl">Activity 1</label>
+            </div>
+            <div class="cat-tiles-specifics">
+                <textarea  rows="3"></textarea>
+            </div>
+        </label>
+</div>
 </div>
 

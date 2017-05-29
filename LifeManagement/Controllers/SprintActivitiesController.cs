@@ -33,6 +33,19 @@ namespace LifeManagement.Controllers
             }
           
         }
+
+        public bool UpdateSprint(int activityId, int sprintId,bool isInsert)
+        {
+            var activity = db.Activities.Find(activityId);
+            var sprint = db.SprintActivities.Find(sprintId);
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if(user==null || activity ==null || sprint==null)
+            return false;
+            return true;
+
+
+
+        }
         /************************************system generated*************************************/
         // GET: SprintActivities
         public ActionResult Index()

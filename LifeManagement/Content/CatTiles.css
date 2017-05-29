@@ -3,17 +3,18 @@
     opacity: 0.9;
 }
 .cat-tiles {
-    border: 3px solid burlywood;
+    
       padding: 0px;
-    height: 300px;
+  
     margin: 3px;
     min-width: 150px;
+    max-width: 300px;
     border-radius: 25px;
     
     }
 
 .cat-tiles-body {
-    height: 264px;
+    height: 250px;
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   
@@ -50,4 +51,12 @@
     vertical-align: middle;
     height: 30px;
     color:darkorange
+}
+
+.cat-tiles-specifics {
+     width:100%;
+    display: none;
+}
+.cat-tile-label {
+    
 }

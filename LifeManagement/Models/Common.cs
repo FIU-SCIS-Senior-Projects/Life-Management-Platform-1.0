@@ -25,8 +25,7 @@ namespace LifeManagement.Models
             public static string PASSWORDMISMATCH = "Passwords do not match";
             public static string INVALIDPASSWORD = "Password does not comply with requirements";
             public static string ROLENOTEXIST = "Role does not exist";
-
-
+            public static string DUPLICATEEMAIL = "There exists an account with that email";
         }
     }
     public class Common
