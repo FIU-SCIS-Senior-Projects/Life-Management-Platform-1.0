@@ -20,9 +20,14 @@ namespace LifeManagement.Controllers
         [HttpPost]
         public bool collect_questionnarie(QuestionarieViewModel data)
         {
-            
-            
+
+
             return true;
+        }
+
+        public ActionResult CollectPassion()
+        {
+            return View();
         }
     }
 }
