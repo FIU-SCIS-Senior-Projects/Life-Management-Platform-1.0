@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionnarieController.cs" />
@@ -228,7 +229,7 @@
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EntityModel.edmx.sql" />
+    <Content Include="Models\somedata.edmx.sql" />
     <Content Include="Models\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
@@ -278,9 +279,17 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Views\Dashboard\Index.cshtml" />
-    <None Include="Views\Dashboard\widgets_index.cshtml" />
-    <None Include="Views\Dashboard\icons.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\GivingBack.cshtml" />
+    <Content Include="Views\Activities\Joy.cshtml" />
+    <Content Include="Views\Activities\Passion.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\widgets_index.cshtml" />
+    <Content Include="Views\Dashboard\icons.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -316,6 +325,8 @@
     <Content Include="Views\Shared\_layout_for_questionarie.cshtml" />
     <Content Include="Views\Shared\_layout_to_test.cshtml" />
     <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
+    <Content Include="Views\SprintActivities\Passion.cshtml" />
+    <Content Include="Views\SprintActivities\GivingBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

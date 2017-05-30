@@ -1,9 +1,86 @@
-﻿
+﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
+<script src="~/Scripts/lmpopup.js"></script>
 @{
     ViewBag.Title = "UserSetup";
 }
 
 <h2>User Setup</h2>
+<div class="col-md-12" style="background: whitesmoke">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("Joy","Activities")' id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-color="DarkOliveGreen" modal-width="100%" url='@Url.Action("Passion","Activities")' id="passiontab"  onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-color="LightCoral" modal-width="100%" url='@Url.Action("GivingBack","Activities")' id="gbtab" onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <div id="cardblock" class="card-block col-md-12" style="height: 300px">
+           
+        </div>
+    </div>
 
-@{Html.RenderAction("Joy");}
+</div>
+
+
+<script>
+   
+
+    function submitAll(sprintid) {
+        $('.cat-tiles-chk:checkbox:checked').each(function() {
+            var id = $(this).attr('id');
+            updateSprintActivity(id, sprintid, $('#spec-' + id).val());
+        });
+    }
+    function updateSprintActivity(actid, sprintId,spec) {
+        var data = {
+            activityId: actid,
+            sprintId: sprintId,
+            spec: spec
+    }
+        $.ajax({
+            url: '@Url.Action("UpdateSprint","SprintActivities")',
+            type: 'POST',
+            data: data,
+            error:function() {
+                alert('Could not update selections');
+            }
+        })
+
+    }
+
+    function renderCardBlock(url, tabid) {
+        var sprintid = 1;
+        $('.nav-link').css('background-color', 'transparent');
+        $(tabid).css('background-color', '#eeeeee');
+        submitAll(sprintid);
+        var data = { id: sprintid };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'GET',
+            success:function(res) {
+                $('#cardblock').html(res);
+            },
+            error: function (msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
+    }
+
+
+
+ 
+    
+  
+</script>

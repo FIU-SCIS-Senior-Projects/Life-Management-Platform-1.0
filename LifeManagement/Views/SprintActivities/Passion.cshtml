@@ -1,0 +1,42 @@
+﻿@using LifeManagement.Models
+@model List<LifeManagement.Models.SprintActivities>
+    @{
+        var common = new LifeManagement.Models.Common();
+    }
+
+
+
+
+
+
+
+
+<div class="clearfix">
+    @if (Model != null)
+    {
+        foreach (var a in Model)
+        {
+
+            <div class="cat-tiles col-sm-4 col-md-3">
+                <label id="lbl" for="@a.Id">
+                    <div class="cat-tiles-body">
+
+                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
+                    </div>
+                </label>
+                    <div  style="display: block"  class="cat-tiles-specifics" id="spec-@a.Id">
+                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1">@a.Specifics</textarea>
+                    </div> 
+                    <div class="cat-tiles-footer">
+                        <label class="cat-tiles-lbl">@a.Activity.Name</label>
+                    </div>
+                                  
+              
+            </div>
+
+        }
+    } 
+
+
+
+</div>
