@@ -10,18 +10,21 @@
         {
 
             <div class="cat-tiles col-sm-4 col-md-3">
-                <label id="lbl">
+                <label id="lbl" for="chk-@a.Id">
                     <div class="cat-tiles-body">
 
                         <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
                     </div>
+                </label>
+                    <div class="cat-tiles-specifics" id="spec-@a.Id">
+                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
+                    </div> 
                     <div class="cat-tiles-footer">
-                        <input class="cat-tiles-chk" type="checkbox" id="chk"  onchange="validateCats(@a.Id)" />
+                        <input class="cat-tiles-chk" type="checkbox" id="chk-@a.Id"  onchange="validateCats('@a.Id')" />
                         <label class="cat-tiles-lbl">@a.Name</label>
                     </div>
-                    <div class="cat-tiles-specifics" id="@a.Id">
-                        <textarea  rows="3"></textarea>
-                    </div>                </label>
+                                  
+              
             </div>
 
         }
