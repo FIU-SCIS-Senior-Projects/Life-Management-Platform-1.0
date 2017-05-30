@@ -12,50 +12,39 @@
 
 
 <div class="clearfix">
-    @if (Model != null)
-    {
-        foreach (var a in Model)
+    <h4 class="col-md-12 text-center" style="color:white">Select two activities you are passionate about</h4>
+    <div class="col-md-12 text-center">
+        @if (Model != null)
         {
+            foreach (var a in Model)
+            {
 
-            <div class="cat-tiles col-sm-4 col-md-3">
-                <label id="lbl" for="@a.Id">
-                    <div class="cat-tiles-body">
+                <div class="cat-tiles col-sm-4 col-md-3">
+                    <label id="lbl" for="@a.Id">
+                        <div class="cat-tiles-body">
 
-                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
-                    </div>
-                </label>
+                            <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
+                        </div>
+                    </label>
                     <div class="cat-tiles-specifics" id="spec-@a.Id">
                         <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
-                    </div> 
+                    </div>
                     <div class="cat-tiles-footer">
-                        <input class="cat-tiles-chk chk-passion" type="checkbox" id="@a.Id"  />
+                        <input class="cat-tiles-chk chk-passion" type="checkbox" id="@a.Id" />
                         <label class="cat-tiles-lbl">@a.Name</label>
                     </div>
-                                  
-              
-            </div>
 
+
+                </div>
+
+            }
         }
-    } 
 
+    </div>
 
-
-    <div class="cat-tiles col-md-3">
-        <label class="cat-tile-label">
-            <div class="cat-tiles-body">
-
-                <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
-            </div>
-            <div class="cat-tiles-footer">
-                <input class="cat-tiles-chk" type="checkbox" />
-                <label class="cat-tiles-lbl">Activity 1</label>
-            </div>
-            <div class="cat-tiles-specifics">
-                <textarea  rows="3"></textarea>
-            </div>
-        </label>
-</div>
-</div>
+        
+    </div>
+<div class="col-md-12 text-right"><button data-dismiss="modal" class="btn btn-success" onclick="renderCardBlock('@Url.Action("Passion","SprintActivities")','#passiontab')">Save</button></div>
 
 <script>
     var passionlimit = 2;

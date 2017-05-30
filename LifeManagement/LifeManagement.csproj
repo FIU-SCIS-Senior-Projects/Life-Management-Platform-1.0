@@ -287,9 +287,9 @@
     <Content Include="Views\Activities\GivingBack.cshtml" />
     <Content Include="Views\Activities\Joy.cshtml" />
     <Content Include="Views\Activities\Passion.cshtml" />
-    <None Include="Views\Dashboard\Index.cshtml" />
-    <None Include="Views\Dashboard\widgets_index.cshtml" />
-    <None Include="Views\Dashboard\icons.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\widgets_index.cshtml" />
+    <Content Include="Views\Dashboard\icons.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
