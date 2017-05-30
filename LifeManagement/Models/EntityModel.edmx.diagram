@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0222c593244c4ed3b9c3c72d20575710" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="0222c593244c4ed3b9c3c72d20575710" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="SeniorDBModel.Role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SeniorDBModel.User" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="SeniorDBModel.FK_RoleUser" ManuallyRouted="false" />
