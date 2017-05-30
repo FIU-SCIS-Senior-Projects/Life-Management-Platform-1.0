@@ -6,7 +6,9 @@ function setpopups() {
 
     $('.lmmodal').click(function () { //click event of the link
         var modalwidth = $(this).attr('modal-width');
-        modalwidth == null ? "500px" : modalwidth;
+        modalwidth = modalwidth == null ? "500px" : modalwidth;
+        var modalcolor = $(this).attr('modal-color');
+        modalcolor= modalcolor == null ? "white" : modalcolor;
 
         var htmlmodal = $(this).attr('htmlmodal');
         htmlmodal == null ? false : htmlmodal;
@@ -20,7 +22,8 @@ function setpopups() {
                 cache: false,
                 success: function (data) {
                     $('#myDialogContainer').html(data); //write the dialog content into the diaog container
-                    $(".modal-dialog").css("width", modalwidth)
+                    $(".modal-dialog").css("width", modalwidth);
+                    $(".modal-content").css("background-color", modalcolor);
                     $("#basicModal").modal("show"); //open it!
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

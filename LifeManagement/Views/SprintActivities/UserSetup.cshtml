@@ -11,20 +11,20 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Joy","Activities")'  onclick="renderCardBlock('@Url.Action("Joy")')" href="#">Joy</a>
+                    <a class="nav-link active lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("Joy","Activities")' id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Passion","Activities")'   onclick="renderCardBlock('@Url.Action("Passion")')" href="#">Passion</a>
+                    <a class="nav-link active lmmodal" modal-color="DarkOliveGreen" modal-width="100%" url='@Url.Action("Passion","Activities")' id="passiontab"  onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("GivingBack","Activities")'  onclick="renderCardBlock('@Url.Action("GivingBack")')" href="#">Giving Back</a>
+                    <a class="nav-link active lmmodal" modal-color="LightCoral" modal-width="100%" url='@Url.Action("GivingBack","Activities")' id="gbtab" onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
                 </li>
             </ul>
         </div>
-        <div id="cardblock" class="card-block">
+        <div id="cardblock" class="card-block col-md-12" style="height: 300px">
             @{Html.RenderAction("Joy");}
         </div>
     </div>
@@ -33,7 +33,7 @@
 
 
 <script>
-    
+   
 
     function submitAll() {
         $('.cat-tiles-chk:checkbox:checked').each(function() {
@@ -42,7 +42,6 @@
         });
     }
     function updateSprintActivity(actid, sprintId,spec) {
-        
         var data = {
             activityId: actid,
             sprintId: sprintId,
@@ -59,7 +58,9 @@
 
     }
 
-    function renderCardBlock(url) {
+    function renderCardBlock(url, tabid) {
+        $('.nav-link').css('background-color', 'transparent');
+        $(tabid).css('background-color', '#eeeeee');
         submitAll();
         var data = { id: 1 };
 

@@ -19,11 +19,11 @@ namespace LifeManagement.Controllers
         {
             return View();
         }
-        public PartialViewResult Joy()
+        public PartialViewResult Joy(int id)
         {
             try
             {
-                var activities = db.SprintActivities.Where(a=>a.Activity.Category.Name=="Joy").ToList();
+                var activities = db.SprintActivities.Where(a=>a.Activity.Category.Name=="Joy" && a.Sprint.Id==id).ToList();
                 return PartialView(activities);
             }
             catch (Exception e)
@@ -33,11 +33,11 @@ namespace LifeManagement.Controllers
             }
           
         }
-        public PartialViewResult Passion()
+        public PartialViewResult Passion(int id)
         {
             try
             {
-                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion").ToList();
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion" && a.Sprint.Id == id).ToList();
                 return PartialView(activities);
             }
             catch (Exception e)
@@ -47,11 +47,11 @@ namespace LifeManagement.Controllers
             }
 
         }
-        public PartialViewResult GivingBack()
+        public PartialViewResult GivingBack(int id)
         {
             try
             {
-                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back").ToList();
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back" && a.Sprint.Id == id).ToList();
                 return PartialView(activities);
             }
             catch (Exception e)
