@@ -135,6 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionnarieController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
+    <Compile Include="Controllers\SprintsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -328,10 +329,12 @@
     <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
     <Content Include="Views\SprintActivities\Passion.cshtml" />
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
+    <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Mailer\" />
+    <Folder Include="Views\Sprints\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

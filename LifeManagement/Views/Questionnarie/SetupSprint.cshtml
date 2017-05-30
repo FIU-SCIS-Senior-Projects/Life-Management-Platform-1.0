@@ -1,0 +1,54 @@
+﻿
+@model LifeManagement.Models.QuestionarieViewModel
+
+@{
+    ViewBag.Title = "SetupSprint";
+}
+
+
+@section bgdiv{
+    <div class="bgdiv" style="background-image: url('/Imgs/butterfly.jpg');opacity:0.4"></div>
+}
+
+<h2>Productivity setup</h2>
+
+
+
+    <h3 style=" color: #00b359; font-weight: bold"> Just few more steps to configure your Productity chart and your done </h3>
+
+
+    <div class="form-horizontal col-md-12 center-block" style="width: 800px ; height: 1000px; position: relative; top: 100px ">
+
+        <p> This are your goals and vision: </p>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Your vision: </label>
+            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.vision </label>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Your goals: </label>
+            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_1 </label>
+            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_2 </label>
+            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_3 </label>
+
+        </div>
+
+
+    
+        <div class="form-group row">
+            <div class="col-md-offset-8 col-md-4">
+                <button class="btn btn-success form-control" onclick="collectJoy()">
+                    Continue
+                </button>
+            </div>
+
+        </div>
+        
+    </div>
+<script>
+    function collectJoy() {
+  
+            window.location = '@Url.Action("Index", "SprintActivities", null, Request.Url.Scheme)';
+       
+    }
+</script>
