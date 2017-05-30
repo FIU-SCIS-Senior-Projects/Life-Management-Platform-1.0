@@ -1,5 +1,6 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
+<script src="~/Scripts/lmpopup.js"></script>
 @{
     ViewBag.Title = "UserSetup";
 }
@@ -10,13 +11,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("Joy")')" href="#">Joy</a>
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Joy","Activities")'  onclick="renderCardBlock('@Url.Action("Joy")')" href="#">Joy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("Passion")')" href="#">Passion</a>
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Passion","Activities")'   onclick="renderCardBlock('@Url.Action("Passion")')" href="#">Passion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("GivingBack")')" href="#">Giving Back</a>
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("GivingBack","Activities")'  onclick="renderCardBlock('@Url.Action("GivingBack")')" href="#">Giving Back</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>

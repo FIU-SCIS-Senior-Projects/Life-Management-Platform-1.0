@@ -23,7 +23,7 @@ namespace LifeManagement.Controllers
         {
             try
             {
-                var activities = db.Activities.Where(a=>a.Category.Name=="Joy").ToList();
+                var activities = db.SprintActivities.Where(a=>a.Activity.Category.Name=="Joy").ToList();
                 return PartialView(activities);
             }
             catch (Exception e)
@@ -37,7 +37,7 @@ namespace LifeManagement.Controllers
         {
             try
             {
-                var activities = db.Activities.Where(a => a.Category.Name == "Passion").ToList();
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion").ToList();
                 return PartialView(activities);
             }
             catch (Exception e)
@@ -51,7 +51,7 @@ namespace LifeManagement.Controllers
         {
             try
             {
-                var activities = db.Activities.Where(a => a.Category.Name == "Giving Back").ToList();
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back").ToList();
                 return PartialView(activities);
             }
             catch (Exception e)

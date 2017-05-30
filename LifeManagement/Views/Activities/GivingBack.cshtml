@@ -1,5 +1,5 @@
 ﻿@using LifeManagement.Models
-@model List<LifeManagement.Models.SprintActivities>
+@model List<LifeManagement.Models.Activity>
     @{
         var common = new LifeManagement.Models.Common();
     }
@@ -21,14 +21,15 @@
                 <label id="lbl" for="@a.Id">
                     <div class="cat-tiles-body">
 
-                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
+                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
                     </div>
                 </label>
-                    <div style="display: block" class="cat-tiles-specifics" id="spec-@a.Id">
-                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1">@a.Specifics</textarea>
+                    <div class="cat-tiles-specifics" id="spec-@a.Id">
+                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
                     </div> 
                     <div class="cat-tiles-footer">
-                        <label class="cat-tiles-lbl">@a.Activity.Name</label>
+                        <input class="cat-tiles-chk chk-gb" type="checkbox" id="@a.Id"  />
+                        <label class="cat-tiles-lbl">@a.Name</label>
                     </div>
                                   
               
@@ -55,3 +56,31 @@
         </label>
 </div>
 </div>
+
+<script>
+    var gblimit = 2;
+
+
+    $('.chk-gb').on('change', function (evt) {
+        var isInsert = this.checked;
+        debugger;
+        if (isInsert) {
+            var l = $('.chk-gb:checkbox:checked').length;
+
+            if (l >= gblimit + 1) {
+                this.checked = false;
+                return;
+            } else {
+
+                $("#spec-" + this.id).css('display', 'block');
+            }
+        } else {
+
+            $("#spec-" + this.id).css('display', 'none');
+        }
+
+
+
+
+    });
+</script>
