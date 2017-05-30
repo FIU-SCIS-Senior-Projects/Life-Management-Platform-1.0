@@ -25,8 +25,7 @@ namespace LifeManagement.Models
             public static string PASSWORDMISMATCH = "Passwords do not match";
             public static string INVALIDPASSWORD = "Password does not comply with requirements";
             public static string ROLENOTEXIST = "Role does not exist";
-
-
+            public static string DUPLICATEEMAIL = "There exists an account with that email";
         }
     }
     public class Common
@@ -78,7 +77,7 @@ namespace LifeManagement.Models
         {
             string imageSrc = "/Imgs/noimage.jpg";
 
-            if (bytes != null)
+            if (bytes != null && !String.IsNullOrEmpty(mimetype))
             {
                 string imageBase64 = "";
                 imageBase64 = Convert.ToBase64String(bytes);

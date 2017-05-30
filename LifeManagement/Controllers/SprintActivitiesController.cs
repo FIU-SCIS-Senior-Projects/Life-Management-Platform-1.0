@@ -21,7 +21,58 @@ namespace LifeManagement.Controllers
         }
         public PartialViewResult Joy()
         {
-            return PartialView();
+            try
+            {
+                var activities = db.SprintActivities.Where(a=>a.Activity.Category.Name=="Joy").ToList();
+                return PartialView(activities);
+            }
+            catch (Exception e)
+            {
+               
+                return PartialView(null);
+            }
+          
+        }
+        public PartialViewResult Passion()
+        {
+            try
+            {
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion").ToList();
+                return PartialView(activities);
+            }
+            catch (Exception e)
+            {
+
+                return PartialView(null);
+            }
+
+        }
+        public PartialViewResult GivingBack()
+        {
+            try
+            {
+                var activities = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back").ToList();
+                return PartialView(activities);
+            }
+            catch (Exception e)
+            {
+
+                return PartialView(null);
+            }
+
+        }
+
+        public bool UpdateSprint(int activityId, int sprintId,string spec)
+        {
+            var activity = db.Activities.Find(activityId);
+            var sprint = db.SprintActivities.Find(sprintId);
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if(user==null || activity ==null || sprint==null)
+            return false;
+            return true;
+
+
+
         }
         /************************************system generated*************************************/
         // GET: SprintActivities

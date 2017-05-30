@@ -1,9 +1,84 @@
-﻿
+﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
+<script src="~/Scripts/lmpopup.js"></script>
 @{
     ViewBag.Title = "UserSetup";
 }
 
 <h2>User Setup</h2>
+<div class="col-md-12" style="background: whitesmoke">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Joy","Activities")'  onclick="renderCardBlock('@Url.Action("Joy")')" href="#">Joy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("Passion","Activities")'   onclick="renderCardBlock('@Url.Action("Passion")')" href="#">Passion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active lmmodal" modal-width="1000px" url='@Url.Action("GivingBack","Activities")'  onclick="renderCardBlock('@Url.Action("GivingBack")')" href="#">Giving Back</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <div id="cardblock" class="card-block">
+            @{Html.RenderAction("Joy");}
+        </div>
+    </div>
 
-@{Html.RenderAction("Joy");}
+</div>
+
+
+<script>
+    
+
+    function submitAll() {
+        $('.cat-tiles-chk:checkbox:checked').each(function() {
+            var id = $(this).attr('id');
+            updateSprintActivity(id, 1, $('#spec-' + id).val());
+        });
+    }
+    function updateSprintActivity(actid, sprintId,spec) {
+        
+        var data = {
+            activityId: actid,
+            sprintId: sprintId,
+            spec: spec
+    }
+        $.ajax({
+            url: '@Url.Action("UpdateSprint","SprintActivities")',
+            type: 'POST',
+            data: data,
+            error:function() {
+                alert('Could not update selections');
+            }
+        })
+
+    }
+
+    function renderCardBlock(url) {
+        submitAll();
+        var data = { id: 1 };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'GET',
+            success:function(res) {
+                $('#cardblock').html(res);
+            },
+            error: function (msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
+    }
+
+
+
+ 
+    
+  
+</script>

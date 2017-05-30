@@ -130,7 +130,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionnarieController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,6 +176,7 @@
     <Compile Include="Models\Progress.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionarieViewModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -189,18 +193,37 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bety_css\component.css" />
+    <Content Include="Content\bety_css\cs-select.css" />
+    <Content Include="Content\bety_css\cs-skin-boxes.css" />
+    <Content Include="Content\bety_css\demo.css" />
+    <Content Include="Content\bety_css\normalize.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CatTiles.css" />
+    <Content Include="Content\dashboard_css\bootstrap-table.css" />
+    <Content Include="Content\dashboard_css\bootstrap-theme.css" />
+    <Content Include="Content\dashboard_css\bootstrap-theme.min.css" />
+    <Content Include="Content\dashboard_css\bootstrap.css" />
+    <Content Include="Content\dashboard_css\bootstrap.min.css" />
+    <Content Include="Content\dashboard_css\datepicker.css" />
+    <Content Include="Content\dashboard_css\datepicker3.css" />
+    <Content Include="Content\dashboard_css\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imgs\beginjourney.jpg" />
+    <Content Include="Imgs\bety_new_img\smart_ok.png" />
+    <Content Include="Imgs\bety_new_img\smart_smaller.png" />
+    <Content Include="Imgs\butterfly.jpg" />
     <Content Include="Imgs\logo.png" />
     <Content Include="Imgs\meditation.jpg" />
     <Content Include="Imgs\noimage.jpg" />
+    <Content Include="Imgs\plant.jpg" />
     <Content Include="Imgs\users.jpg" />
+    <Content Include="Imgs\user_avatar.png" />
+    <Content Include="Imgs\vision.jpg" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
@@ -212,6 +235,10 @@
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bety_scripts\classie.js" />
+    <Content Include="Scripts\bety_scripts\fullscreenForm.js" />
+    <Content Include="Scripts\bety_scripts\modernizr.custom.js" />
+    <Content Include="Scripts\bety_scripts\selectFx.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\EntityModel.edmx">
@@ -221,9 +248,23 @@
     <Content Include="Models\EntityModel.edmx.diagram">
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\dashboard_css\bootstrap-theme.css.map" />
+    <Content Include="Content\dashboard_css\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\fiusp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fiusp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dashboard_js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\dashboard_js\bootstrap-table.js" />
+    <Content Include="Scripts\dashboard_js\bootstrap.js" />
+    <Content Include="Scripts\dashboard_js\bootstrap.min.js" />
+    <Content Include="Scripts\dashboard_js\chart-data.js" />
+    <Content Include="Scripts\dashboard_js\chart.min.js" />
+    <Content Include="Scripts\dashboard_js\easypiechart-data.js" />
+    <Content Include="Scripts\dashboard_js\easypiechart.js" />
+    <Content Include="Scripts\dashboard_js\html5shiv.min.js" />
+    <Content Include="Scripts\dashboard_js\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\dashboard_js\lumino.glyphs.js" />
+    <Content Include="Scripts\dashboard_js\respond.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -238,6 +279,17 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\GivingBack.cshtml" />
+    <Content Include="Views\Activities\Joy.cshtml" />
+    <Content Include="Views\Activities\Passion.cshtml" />
+    <None Include="Views\Dashboard\Index.cshtml" />
+    <None Include="Views\Dashboard\widgets_index.cshtml" />
+    <None Include="Views\Dashboard\icons.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -270,6 +322,11 @@
     <Content Include="Views\SprintActivities\Index.cshtml" />
     <Content Include="Views\SprintActivities\Joy.cshtml" />
     <Content Include="Views\SprintActivities\UserSetup.cshtml" />
+    <Content Include="Views\Shared\_layout_for_questionarie.cshtml" />
+    <Content Include="Views\Shared\_layout_to_test.cshtml" />
+    <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
+    <Content Include="Views\SprintActivities\Passion.cshtml" />
+    <Content Include="Views\SprintActivities\GivingBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("Dashboard","Users");
+                return RedirectToAction("Index","Dashboard");
             }
             return View();
         }
@@ -39,11 +39,6 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Dashboard()
-        {
-            
-            return View();
-        }
         // GET: Users
         public ActionResult Index()
         {
@@ -63,9 +58,9 @@ namespace LifeManagement.Controllers
             if(user != null)
             {
                 string subject = "Password reset requested";
-                string message = "Dear " + user.FirstName + ": <br/>" + "<p> You are receiving this email because you forgot your password for the Life Management system " 
-                    + "to reset your password please follow <a href= \"https://localhost:44313/Users/PasswordRecovery/"+user.Id+">this link </a> and fill out the corresponding fields </p> <br/>"
-                    + "<p> Sincerely, </p> <br/><p> The Life Management Team </p>";
+                string message = "Dear " + user.FirstName + ": <br/>" + "<p> You are receiving this email because you forgot your password for the Life Management system," 
+                    + " to reset your password please follow <a href= \"" + @Url.Action("PasswordRecovery", "Users", null, Request.Url.Scheme) + "/" + user.Id + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
+                    + "<p> Sincerely, <br/> The Life Management Team. </p>";
 
                 Common.sendEmail(user.Email, subject, message);
             }
@@ -89,12 +84,33 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView(user);
+            return View(user);
         }
 
-        public ActionResult ChangePass(string pass)
+        [HttpPost]
+        public ActionResult ChangePass(string newpass, string newpass_conf, int id)
         {
-            return View();
+    
+     
+            if (newpass != newpass_conf)
+            {
+                return new HttpStatusCodeResult(400, "");
+            }
+
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (user != null)
+            {
+                user.password = newpass;
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            
+            return RedirectToAction("Login"); ;
         }
 
             // GET: Users/Details/5
@@ -131,9 +147,14 @@ namespace LifeManagement.Controllers
                 if (role != null)
                 {
                     string result = CreateUser(user, role);
-                  
-                 if (result==Constants.MSGS.SUCCESS)
-                        return RedirectToAction("Questionaire");
+
+                    if (result == Constants.MSGS.SUCCESS)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.username, false);
+                        return RedirectToAction("Questionaire", user);
+
+                    }
+                        
                  else
                  {
                      ViewBag.ErrorMsg = result;
@@ -154,9 +175,13 @@ namespace LifeManagement.Controllers
 
         public string CreateUser(UserViewModel fromuser, Role role)
         {
-            if (db.Users.Where(a => a.username.ToLower() == fromuser.username).Count() > 0)
+            if (db.Users.Where(a => a.username.ToLower() == fromuser.username.ToLower()).Count() > 0)
             {
                 return Constants.MSGS.DUPLICATEUSERNAME;
+            }
+            if (db.Users.Where(a => a.Email.ToLower() == fromuser.Email.ToLower()).Count() > 0)
+            {
+                return Constants.MSGS.DUPLICATEEMAIL;
             }
             if (fromuser.password != fromuser.passwordconfirmation)
             {
@@ -183,10 +208,14 @@ namespace LifeManagement.Controllers
 
         }
 
-        public ActionResult Questionaire()
+        //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
+        public ActionResult Questionaire(UserViewModel user)
         {
-            return View();
+            return View(user);
         }
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++
+
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
