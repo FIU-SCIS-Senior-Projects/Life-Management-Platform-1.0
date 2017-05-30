@@ -82,6 +82,7 @@
     <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="Vision" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LifeSuccess" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -316,6 +317,7 @@
           <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachUser" FromRole="User" ToRole="Coach" />
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.UserCoachReview" FromRole="User" ToRole="CoachReview" />
           <Property Name="Vision" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LifeSuccess" Type="String" Nullable="true" MaxLength="Max" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -611,6 +613,7 @@
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="Vision" ColumnName="Vision" />
+          <ScalarProperty Name="LifeSuccess" ColumnName="LifeSuccess" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
