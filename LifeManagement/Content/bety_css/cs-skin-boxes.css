@@ -17,6 +17,7 @@ div.cs-skin-boxes {
 	div.cs-skin-boxes { font-size: 1em; }
 }
 
+/* First box to select***************/
 .cs-skin-boxes > span {
 	border: 3px solid #292c30;
 	border-radius: 5px;
@@ -24,7 +25,7 @@ div.cs-skin-boxes {
 	height: 140px;
 	font-size: 0.5em;
 	padding: 0 0 0 10px;
-	background: #555b64;
+	background: transparent;
 }
 
 div.cs-skin-boxes:focus > span {
@@ -46,11 +47,13 @@ div.cs-skin-boxes:focus > span {
 	transform: none;
 }
 
+
+/* The window were all pictures are displayed*/
 .cs-skin-boxes .cs-options {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	top: 0;
+	top: 50px;
 	left: 0;
 	overflow: auto;
 	background: #3b3f45;
@@ -73,9 +76,10 @@ div.cs-skin-boxes:focus > span {
 	padding: 10px;
 }
 
+/* boxes with pictures and  */
 .cs-skin-boxes .cs-options li {
 	width: 20%;
-	height: 25%;
+	height: 40%;
 	float: left;
 	position: relative;
 	cursor: pointer;
@@ -297,6 +301,10 @@ div.cs-skin-boxes:focus > span {
 
 .cs-skin-boxes .cs-options li.color-f1c1bd {
 	background-color: #f1c1bd;
+}
+
+.cs-skin-boxes .cs-options li.my_option {
+    background-image: url('/Imgs/users.jpg');
 }
 
 .cs-skin-boxes .cs-options span {
