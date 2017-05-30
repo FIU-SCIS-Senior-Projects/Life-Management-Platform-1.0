@@ -5,28 +5,51 @@
 }
 
 <h2>User Setup</h2>
-<div class="col-md-12">
-    @{Html.RenderAction("Joy");}
+<div class="col-md-12" style="background: whitesmoke">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("Joy")')" href="#">Joy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("Passion")')" href="#">Passion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("GivingBack")')" href="#">Giving Back</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <div id="cardblock" class="card-block">
+            @{Html.RenderAction("Joy");}
+        </div>
+    </div>
+
 </div>
+
+
 <script>
     var joyselections = 0;
 
     function validateCats(id) {
         debugger;
-        var isInsert = this.checked;
-        alert($(this).attr('id'))
-        if (isInsert == 'checked') {
+        var isInsert = $("#chk-" + id).prop('checked');
+       
+        if (isInsert ) {
             if (joyselections > 2) {
-                $(this).attr('checked', 'false');
-                alert('Only three selections are allowed');
+                $(this).attr('checked', false);
+              
                 return;
             } else {
                 joyselections++;
-                $("#" + id).attr('display', 'block');
+                $("#spec-" + id).css('display', 'block');
             }
         } else {
             joyselections--;
-            $("#" + id).attr('display', 'none');
+            $("#spec-" + id).css('display', 'none');
         }
     }
     function updateSprintActivity(actid, sprintId) {
@@ -45,6 +68,22 @@
             }
         })
 
+    }
+
+    function renderCardBlock(url) {
+        var data = { id: 1 };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'GET',
+            success:function(res) {
+                $('#cardblock').html(res);
+            },
+            error: function (msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
     }
 
 </script>
