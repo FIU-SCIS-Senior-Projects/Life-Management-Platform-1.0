@@ -24,13 +24,13 @@
                         <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
                     </div>
                 </label>
-                <div class="cat-tiles-specifics" id="spec-@a.Id">
-                    <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
-                </div> 
-                <div class="cat-tiles-footer">
-                    <input class="cat-tiles-chk chk-joy" type="checkbox" id="@a.Id"  />
-                    <label class="cat-tiles-lbl">@a.Name</label>
-                </div>
+                    <div class="cat-tiles-specifics" id="spec-@a.Id">
+                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
+                    </div> 
+                    <div class="cat-tiles-footer">
+                        <input class="cat-tiles-chk chk-passion" type="checkbox" id="@a.Id"  />
+                        <label class="cat-tiles-lbl">@a.Name</label>
+                    </div>
                                   
               
             </div>
@@ -54,17 +54,18 @@
                 <textarea  rows="3"></textarea>
             </div>
         </label>
-    </div>
 </div>
+</div>
+
 <script>
-    var joylimit = 3;
-    $('.chk-joy').on('change', function (evt) {
+    var passionlimit = 2;
+    $('.chk-passion').on('change', function (evt) {
         var isInsert = this.checked;
         debugger;
         if (isInsert) {
-            var l = $('.chk-joy:checkbox:checked').length;
+            var l = $('.chk-passion:checkbox:checked').length;
 
-            if (l >= joylimit + 1) {
+            if (l >= passionlimit + 1) {
                 this.checked = false;
                 return;
             } else {
@@ -81,4 +82,3 @@
 
     });
 </script>
-

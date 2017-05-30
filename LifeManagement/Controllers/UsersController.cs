@@ -147,9 +147,14 @@ namespace LifeManagement.Controllers
                 if (role != null)
                 {
                     string result = CreateUser(user, role);
-                  
-                 if (result==Constants.MSGS.SUCCESS)
+
+                    if (result == Constants.MSGS.SUCCESS)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.username, false);
                         return RedirectToAction("Questionaire", user);
+
+                    }
+                        
                  else
                  {
                      ViewBag.ErrorMsg = result;

@@ -316,6 +316,8 @@
     <Content Include="Views\Shared\_layout_for_questionarie.cshtml" />
     <Content Include="Views\Shared\_layout_to_test.cshtml" />
     <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
+    <Content Include="Views\SprintActivities\Passion.cshtml" />
+    <Content Include="Views\SprintActivities\GivingBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
