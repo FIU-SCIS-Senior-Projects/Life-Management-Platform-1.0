@@ -19,13 +19,13 @@ div.cs-skin-boxes {
 
 /* First box to select***************/
 .cs-skin-boxes > span {
-	border: 3px solid #292c30;
-	border-radius: 5px;
-	width: 150px;
-	height: 140px;
-	font-size: 0.5em;
-	padding: 0 0 0 10px;
-	background: transparent;
+    border: 3px solid #292c30;
+    border-radius: 5px;
+    width: 150px;
+    height: 140px;
+    font-size: 0.5em;
+    padding: 0 0 0 10px;
+    background: #B3CEE3;
 }
 
 div.cs-skin-boxes:focus > span {
@@ -76,7 +76,7 @@ div.cs-skin-boxes:focus > span {
 	padding: 10px;
 }
 
-/* boxes with pictures and  */
+/* boxes with pictures and  labels*/
 .cs-skin-boxes .cs-options li {
 	width: 20%;
 	height: 40%;
