@@ -1,6 +1,7 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
 <script src="~/Scripts/lmpopup.js"></script>
+@model LifeManagement.Models.Sprint
 @{
     ViewBag.Title = "UserSetup";
 }
@@ -38,7 +39,7 @@
     function submitAll(sprintid) {
         $('.cat-tiles-chk:checkbox:checked').each(function() {
             var id = $(this).attr('id');
-            updateSprintActivity(id, sprintid, $('#spec-' + id).val());
+            updateSprintActivity(id, sprintid, $('#spec-' + id+' :input').val());
         });
     }
     function updateSprintActivity(actid, sprintId,spec) {
@@ -59,7 +60,7 @@
     }
 
     function renderCardBlock(url, tabid) {
-        var sprintid = 1;
+        var sprintid = @Model.Id;
         $('.nav-link').css('background-color', 'transparent');
         $(tabid).css('background-color', '#eeeeee');
         submitAll(sprintid);

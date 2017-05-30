@@ -14,10 +14,18 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         /****************************setup joy passion giving back*********************************************************/
-
+        [Authorize]
         public ActionResult UserSetup()
         {
-            return View();
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+           
+            var sprint = db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a=>a.DateFrom).FirstOrDefault();
+            if(sprint!=null)
+                return View(sprint);
+            ViewBag.ErrorMsg = "This user does not have an sprint set up";
+            return View("Error");
+
         }
         public PartialViewResult Joy(int id)
         {
@@ -78,7 +86,7 @@ namespace LifeManagement.Controllers
             newSprintAct.SprintId = sprintId;
             newSprintAct.ActivityId = activityId;
             newSprintAct.Specifics = spec;
-
+            db.SprintActivities.Add(newSprintAct);
             db.SaveChanges();
             return true;
 
