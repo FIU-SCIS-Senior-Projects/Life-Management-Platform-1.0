@@ -25,7 +25,7 @@
             </ul>
         </div>
         <div id="cardblock" class="card-block col-md-12" style="height: 300px">
-            @{Html.RenderAction("Joy");}
+           
         </div>
     </div>
 
@@ -35,10 +35,10 @@
 <script>
    
 
-    function submitAll() {
+    function submitAll(sprintid) {
         $('.cat-tiles-chk:checkbox:checked').each(function() {
             var id = $(this).attr('id');
-            updateSprintActivity(id, 1, $('#spec-' + id).val());
+            updateSprintActivity(id, sprintid, $('#spec-' + id).val());
         });
     }
     function updateSprintActivity(actid, sprintId,spec) {
@@ -59,10 +59,11 @@
     }
 
     function renderCardBlock(url, tabid) {
+        var sprintid = 1;
         $('.nav-link').css('background-color', 'transparent');
         $(tabid).css('background-color', '#eeeeee');
-        submitAll();
-        var data = { id: 1 };
+        submitAll(sprintid);
+        var data = { id: sprintid };
 
         $.ajax({
             url: url,

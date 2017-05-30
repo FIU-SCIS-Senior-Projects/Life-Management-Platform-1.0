@@ -65,10 +65,21 @@ namespace LifeManagement.Controllers
         public bool UpdateSprint(int activityId, int sprintId,string spec)
         {
             var activity = db.Activities.Find(activityId);
-            var sprint = db.SprintActivities.Find(sprintId);
+            var sprint = db.Sprints.Find(sprintId);
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-            if(user==null || activity ==null || sprint==null)
+            var currentsprintact = db.SprintActivities.Where(a => a.SprintId == sprintId && a.ActivityId == activityId);
+
+            if (user==null || activity ==null || sprint==null)
             return false;
+            if (currentsprintact.Any())
+                db.SprintActivities.RemoveRange(currentsprintact);
+
+            var newSprintAct = new SprintActivities();
+            newSprintAct.SprintId = sprintId;
+            newSprintAct.ActivityId = activityId;
+            newSprintAct.Specifics = spec;
+
+            db.SaveChanges();
             return true;
 
 
