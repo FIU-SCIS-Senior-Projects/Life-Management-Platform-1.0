@@ -198,6 +198,7 @@ namespace LifeManagement.Controllers
             newuser.username = fromuser.username;
             newuser.password = fromuser.password;
             newuser.Vision = "";
+            newuser.LifeSuccess = "";
             newuser.DateCreated = DateTime.Now;
             db.Users.Add(newuser);
             db.SaveChanges();
@@ -209,6 +210,7 @@ namespace LifeManagement.Controllers
         }
 
         //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
+      
         public ActionResult Questionaire(UserViewModel user)
         {
             return View(user);
