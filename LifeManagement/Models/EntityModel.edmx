@@ -83,6 +83,9 @@
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="Vision" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LifeSuccess" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Statement1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Statement2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Statement3" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -318,6 +321,9 @@
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.UserCoachReview" FromRole="User" ToRole="CoachReview" />
           <Property Name="Vision" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="LifeSuccess" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Statement1" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Statement2" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Statement3" Type="String" Nullable="true" MaxLength="Max" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -614,6 +620,9 @@
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="Vision" ColumnName="Vision" />
           <ScalarProperty Name="LifeSuccess" ColumnName="LifeSuccess" />
+          <ScalarProperty Name="Statement1" ColumnName="Statement1" />
+          <ScalarProperty Name="Statement2" ColumnName="Statement2" />
+          <ScalarProperty Name="Statement3" ColumnName="Statement3" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
