@@ -21,11 +21,12 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult collect_questionnarie(QuestionarieViewModel data)
+        public QuestionarieViewModel collect_questionnarie(QuestionarieViewModel data)
         {
 
             string name = User.Identity.Name;
-            var user = db.Users.Where(atr => atr.username == name).FirstOrDefault();
+            /*
+            var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
 
             if (user != null)
             {
@@ -47,17 +48,20 @@ namespace LifeManagement.Controllers
                 g1.Description = data.goal_1;
                 g1.CategoryId = 1;
                 db.Goals.Add(g1);
+                db.SaveChanges();
 
 
                 g2.SprintId = sprint0.Id;
                 g2.Description = data.goal_2;
                 g2.CategoryId = 2;
                 db.Goals.Add(g2);
+                db.SaveChanges();
 
                 g3.SprintId = sprint0.Id;
                 g3.Description = data.goal_3;
                 g3.CategoryId = 3;
                 db.Goals.Add(g3);
+                db.SaveChanges();
 
                 user.Vision = data.vision;
                 user.Statement1 = data.activity_1;
@@ -65,14 +69,16 @@ namespace LifeManagement.Controllers
                 user.Statement3 = data.activity_3;
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
+                
 
-                return RedirectToAction("SetupSprint", data);
+                return new HttpStatusCodeResult(200, "Todo cool"); 
 
-            }
-            return RedirectToAction("Index", "Dashboard");
+            } */
+            return data; 
         }
 
-       public ActionResult SetupSprint(QuestionarieViewModel data)
+        [HttpPost]
+        public ActionResult SetupSprint(QuestionarieViewModel data)
         {
             return View(data);
         }
