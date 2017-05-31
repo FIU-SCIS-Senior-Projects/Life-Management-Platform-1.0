@@ -330,6 +330,7 @@
     <Content Include="Views\SprintActivities\Passion.cshtml" />
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
     <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
+    <Content Include="Views\Questionnarie\collect_questionnarie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
