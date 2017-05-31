@@ -72,20 +72,20 @@ namespace LifeManagement.Controllers
 
       
         [HttpPost]
-        public bool UpdateSprint(Act[] activities)
+        public PartialViewResult UpdateSprint(Act[] activities,string cat)
         { var newacts = new List<SprintActivities>();
 
            if (activities == null || !activities.Any())
-                return false;
+                return PartialView("ErrorPartial");
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
             var sprint = db.Sprints.Find(activities[0].sprintId);
             var activity = db.Activities.Find(activities[0].activityId);
             if (sprint == null || activity == null || user==null)
-                return false;
+                return PartialView("ErrorPartial");
 
-          
-                  db.SprintActivities.RemoveRange(db.SprintActivities.Where(a => a.SprintId == activities[0].sprintId && a.Activity.Category.Id == activity.Category.Id));
+
+            db.SprintActivities.RemoveRange(db.SprintActivities.Where(a => a.SprintId ==sprint.Id && a.Activity.Category.Id == activity.Category.Id).AsEnumerable().ToList());
           
                 db.SaveChanges();
             foreach (var act in activities)
@@ -106,8 +106,19 @@ namespace LifeManagement.Controllers
                 db.SprintActivities.AddRange(newacts);
                 db.SaveChanges();
             }
-            return true;
+            var res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back" && a.Sprint.Id == sprint.Id).Include(a => a.Activity);
 
+            if (cat == "joy")
+            {
+                 res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Joy" && a.Sprint.Id == sprint.Id).Include(a => a.Activity);
+                return PartialView("Joy", res.ToList());
+            }
+            if (cat == "passion")
+            {
+                 res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion" && a.Sprint.Id == sprint.Id).Include(a=>a.Activity);
+                return PartialView("Passion", res.ToList());
+            }
+            return PartialView("GivingBack", res.ToList());
 
         }
         /************************************system generated*************************************/

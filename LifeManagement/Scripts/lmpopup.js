@@ -9,7 +9,8 @@ function setpopups() {
         modalwidth = modalwidth == null ? "500px" : modalwidth;
         var modalcolor = $(this).attr('modal-color');
         modalcolor= modalcolor == null ? "white" : modalcolor;
-
+      
+           
         var htmlmodal = $(this).attr('htmlmodal');
         htmlmodal == null ? false : htmlmodal;
 
@@ -24,6 +25,9 @@ function setpopups() {
                     $('#myDialogContainer').html(data); //write the dialog content into the diaog container
                     $(".modal-dialog").css("width", modalwidth);
                     $(".modal-content").css("background-color", modalcolor);
+                    $("#basicModal").on("hidden.bs.modal", function () {
+                        
+                    });
                     $("#basicModal").modal("show"); //open it!
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
