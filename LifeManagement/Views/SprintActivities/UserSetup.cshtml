@@ -1,6 +1,6 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
-<script src="~/Scripts/lmpopup.js"></script>
+
 @model LifeManagement.Models.Sprint
 @{
     ViewBag.Title = "UserSetup";
@@ -12,13 +12,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="cadetblue"  modal-width="100%" url='@Url.Action("Joy","Activities")' id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
+                    <a class="nav-link active" id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="DarkOliveGreen" modal-width="100%" url='@Url.Action("Passion","Activities")' id="passiontab"  onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
+                    <a class="nav-link active" id="passiontab"   onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="LightCoral" modal-width="100%" url='@Url.Action("GivingBack","Activities")' id="gbtab" onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
+                    <a class="nav-link active " id="gbtab" modal-color="LightCoral"  onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
