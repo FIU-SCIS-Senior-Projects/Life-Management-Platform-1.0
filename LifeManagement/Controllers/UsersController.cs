@@ -199,6 +199,9 @@ namespace LifeManagement.Controllers
             newuser.password = fromuser.password;
             newuser.Vision = "";
             newuser.LifeSuccess = "";
+            newuser.Statement1 = "";
+            newuser.Statement2 = "";
+            newuser.Statement3 = "";
             newuser.DateCreated = DateTime.Now;
             db.Users.Add(newuser);
             db.SaveChanges();
