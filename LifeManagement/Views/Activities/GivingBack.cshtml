@@ -80,8 +80,8 @@
             $("#gberror").show(200);
             return;
         } else {
-            submitAll();
-            renderCardBlock('@Url.Action("GivingBack","SprintActivities")', '#gbtab');
+            submitAll('gb');
+          
             $("#basicModal").modal("hide");
         }
 

@@ -4,14 +4,11 @@
         var common = new LifeManagement.Models.Common();
     }
 
-
-
-
-
-
-
-
+<script src="~/Scripts/lmpopup.js"></script>
 <div class="clearfix">
+    <div class="col-md-12 text-right">
+        <a class="btn btn-success lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("GivingBack","Activities")'  href="#">+</a>
+    </div>
     @if (Model != null)
     {
         foreach (var a in Model)
@@ -24,34 +21,18 @@
                         <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
                     </div>
                 </label>
-                    <div style="display: block" class="cat-tiles-specifics" id="spec-@a.Id">
-                        <label>@a.Specifics </label>
-                    </div> 
-                    <div class="cat-tiles-footer">
-                        <label class="cat-tiles-lbl">@a.Activity.Name</label>
-                    </div>
-                                  
-              
+                <div style="display: block" class="cat-tiles-specifics" id="spec-@a.Id">
+                    <label>@a.Specifics </label>
+                </div>
+                <div class="cat-tiles-footer">
+                    <label class="cat-tiles-lbl">@a.Activity.Name</label>
+                </div>
+
+
             </div>
 
         }
-    } 
+    }
 
-
-
-    <div class="cat-tiles col-md-3">
-        <label class="cat-tile-label">
-            <div class="cat-tiles-body">
-
-                <img class="cat-tiles-img" src="~/Imgs/users.jpg" />
-            </div>
-            <div class="cat-tiles-footer">
-                <input class="cat-tiles-chk" type="checkbox" />
-                <label class="cat-tiles-lbl">Activity 1</label>
-            </div>
-            <div class="cat-tiles-specifics">
-                <textarea  rows="3"></textarea>
-            </div>
-        </label>
-</div>
+    
 </div>

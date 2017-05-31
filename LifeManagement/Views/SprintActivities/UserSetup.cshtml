@@ -1,6 +1,6 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
-<script src="~/Scripts/lmpopup.js"></script>
+
 @model LifeManagement.Models.Sprint
 @{
     ViewBag.Title = "UserSetup";
@@ -12,13 +12,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("Joy","Activities")' id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
+                    <a class="nav-link active" id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="DarkOliveGreen" modal-width="100%" url='@Url.Action("Passion","Activities")' id="passiontab"  onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
+                    <a class="nav-link active" id="passiontab"   onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active lmmodal" modal-color="LightCoral" modal-width="100%" url='@Url.Action("GivingBack","Activities")' id="gbtab" onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
+                    <a class="nav-link active " id="gbtab" modal-color="LightCoral"  onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div id="cardblock" class="card-block col-md-12" style="height: 300px;overflow: auto">
-           
+            
         </div>
     </div>
 
@@ -34,10 +34,10 @@
 
 
 <script>
-  
 
-    function submitAll() {
-       
+
+    function submitAll(cat) {
+
        var activities=[];debugger;
         $('.cat-tiles-chk:checkbox:checked').each(function() {
             var id = $(this).attr('id');
@@ -48,35 +48,47 @@
                 sprintId: parseInt(@Model.Id),
                 spec:s
             }
-           
+
             activities.push(act);
-            
+
         });
-       
-        updateSprintActivity(activities);
+
+        updateSprintActivity(activities,cat);
+      
+
     }
-   function updateSprintActivity(activities) {
+   function updateSprintActivity(activities,cat) {
        debugger;
-    
-    
+
+
         $.ajax({
             url: '@Url.Action("UpdateSprint","SprintActivities")',
             type: 'POST',
-           
-            data:{ 'activities': activities } ,
-            
-            error:function() {
-                alert('Could not update selections');
+
+            data:{ 'activities': activities,cat:cat } ,
+            success:function(res) {
+                var tabid="#joytab";
+                if (cat == 'passion')
+                    tabid = "#passiontab";
+                if (cat == 'gb')
+                    tabid = "#gbtab";
+                $('.nav-link').css('background-color', 'transparent');
+                $(tabid).css('background-color', '#eeeeee');
+                $('#cardblock').html(res);
+            },
+            error:function(msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
             }
         })
 
     }
 
     function renderCardBlock(url, tabid) {
+        debugger;
         var sprintid = @Model.Id;
         $('.nav-link').css('background-color', 'transparent');
         $(tabid).css('background-color', '#eeeeee');
-       
+
         var data = { id: sprintid };
 
         $.ajax({
@@ -85,6 +97,7 @@
             type: 'GET',
             success:function(res) {
                 $('#cardblock').html(res);
+               
             },
             error: function (msg) {
                 $('#cardblock').html('<h4>Could not get data from server </h4>');
@@ -94,7 +107,7 @@
 
 
 
- 
-    
-  
+
+
+
 </script>

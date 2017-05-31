@@ -77,8 +77,8 @@
             $("#passionerror").show(200);
             return;
         } else {
-            submitAll();
-            renderCardBlock('@Url.Action("Passion","SprintActivities")', '#passiontab');
+            submitAll('passion');
+           
             $("#basicModal").modal("hide");
         }
 
