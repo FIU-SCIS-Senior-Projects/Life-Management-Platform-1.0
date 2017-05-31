@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("Index","Dashboard");
+                return RedirectToAction("UserSetup","SprintActivities");
             }
             return View();
         }
