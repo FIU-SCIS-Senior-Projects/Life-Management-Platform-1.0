@@ -66,7 +66,7 @@ namespace LifeManagement.Controllers
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
 
-                return RedirectToAction("SetupSprint", data);
+                return SetupSprint( data);
 
             }
             return RedirectToAction("Index", "Dashboard");

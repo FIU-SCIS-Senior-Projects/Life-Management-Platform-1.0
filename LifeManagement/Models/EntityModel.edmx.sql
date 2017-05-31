@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2017 16:10:04
+-- Date Created: 05/31/2017 08:54:23
 -- Generated from EDMX file: C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\LifeManagement\Models\EntityModel.edmx
 -- --------------------------------------------------
 
@@ -351,7 +351,7 @@ ADD CONSTRAINT [FK_CoachUser]
     FOREIGN KEY ([User_Id])
     REFERENCES [dbo].[Users]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CoachUser'
