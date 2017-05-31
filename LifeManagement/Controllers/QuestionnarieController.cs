@@ -25,7 +25,7 @@ namespace LifeManagement.Controllers
         {
 
             string name = User.Identity.Name;
-            /*
+            
             var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
 
             if (user != null)
@@ -75,7 +75,7 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(200); 
 
             } 
-            */
+            
 
             TempData["model"] = data;
             TempData.Keep("model");
@@ -94,7 +94,7 @@ namespace LifeManagement.Controllers
                 pulpa = (QuestionarieViewModel) TempData["model"];
                 return View(pulpa);
             }
-            return View();
+            return View(pulpa);
         }
 
 
