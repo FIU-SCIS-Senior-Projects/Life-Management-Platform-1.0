@@ -21,12 +21,11 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult collect_questionnarie(QuestionarieViewModel data)
+        public bool collect_questionnarie(QuestionarieViewModel data)
         {
 
             string name = User.Identity.Name;
-            /*
-            var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
+                        var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
 
             if (user != null)
             {
@@ -72,14 +71,12 @@ namespace LifeManagement.Controllers
 
                 TempData["model"] = data;
                 TempData.Keep("model");
-                return new HttpStatusCodeResult(200); 
+                return true;
 
             } 
-            */
-
             TempData["model"] = data;
             TempData.Keep("model");
-            return new HttpStatusCodeResult(200); 
+            return true;
         }
 
        

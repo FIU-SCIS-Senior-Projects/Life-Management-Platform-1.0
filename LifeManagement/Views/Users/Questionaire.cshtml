@@ -119,14 +119,14 @@
 
                     $.ajax({
                         url: '@Url.Action("collect_questionnarie", "Questionnarie")',
-         data: { data: quest_data },
-         type: 'POST',
-         success: function (res) {  
-             window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';  //aqui me no se como pasarle el model al action
-         },
-         error: function () {
-             alert("fail pk pk pk nooo");
-         }
+                        data: { data: quest_data },
+                        type: 'POST',
+                        success: function (res) {  
+                            window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';  //aqui me no se como pasarle el model al action
+                         },
+                         error: function (msg) {
+                            alert("fail pk pk pk nooo");
+                        }
      });
                 }
 
