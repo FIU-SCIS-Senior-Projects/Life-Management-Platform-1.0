@@ -26,7 +26,8 @@
             </ul>
         </div>
         <div id="cardblock" class="card-block col-md-12" style="height: 300px;overflow: auto">
-            
+            <div class="waitmodal">
+            </div>
         </div>
     </div>
 
@@ -106,7 +107,10 @@
     }
 
 
-
+    $(document).on({
+        ajaxStart: function () { $("#cardblock").addClass("loading"); },
+        ajaxStop: function () { $("#cardblock").removeClass("loading");  }
+    });
 
 
 
