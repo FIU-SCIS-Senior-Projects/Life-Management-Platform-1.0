@@ -21,7 +21,7 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public QuestionarieViewModel collect_questionnarie(QuestionarieViewModel data)
+        public ActionResult collect_questionnarie(QuestionarieViewModel data)
         {
 
             string name = User.Identity.Name;
@@ -69,18 +69,32 @@ namespace LifeManagement.Controllers
                 user.Statement3 = data.activity_3;
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
-                
 
-                return new HttpStatusCodeResult(200, "Todo cool"); 
+                TempData["model"] = data;
+                TempData.Keep("model");
+                return new HttpStatusCodeResult(200); 
 
-            } */
-            return data; 
+            } 
+            */
+
+            TempData["model"] = data;
+            TempData.Keep("model");
+            return new HttpStatusCodeResult(200); 
         }
 
-        [HttpPost]
-        public ActionResult SetupSprint(QuestionarieViewModel data)
+       
+        public ActionResult SetupSprint()
         {
-            return View(data);
+            QuestionarieViewModel pulpa = new QuestionarieViewModel();
+
+            
+            if (TempData["model"] != null)
+            {
+                TempData.Keep("model");
+                pulpa = (QuestionarieViewModel) TempData["model"];
+                return View(pulpa);
+            }
+            return View();
         }
 
 
