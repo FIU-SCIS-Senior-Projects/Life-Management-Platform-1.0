@@ -7,6 +7,12 @@ using System.Net.Mail;
 
 namespace LifeManagement.Models
 {
+    public class  Act
+    {
+        public int activityId { get; set; }
+        public int sprintId { get; set; }
+        public string spec { get; set; }
+    }
     public class Constants
     {
  
