@@ -9,6 +9,7 @@
 
 
 
+<div id="gberror" class="text-danger" style="display: none"><h4>Need to select two activities</h4></div>
 
 
 <div class="clearfix">
@@ -44,7 +45,7 @@
 
         
     </div>
-<div class="col-md-12 text-right"><button data-dismiss="modal" class="btn btn-success" onclick="renderCardBlock('@Url.Action("GivingBack","SprintActivities")','#gbtab')">Save</button></div>
+<div class="col-md-12 text-right"><button  class="btn btn-success" onclick="saveGb()">Save</button></div>
 
 <script>
     var gblimit = 2;
@@ -52,7 +53,7 @@
 
     $('.chk-gb').on('change', function (evt) {
         var isInsert = this.checked;
-        debugger;
+
         if (isInsert) {
             var l = $('.chk-gb:checkbox:checked').length;
 
@@ -72,4 +73,17 @@
 
 
     });
+    function saveGb() {
+
+        var l = $('.chk-gb:checkbox:checked').length;
+        if (l != gblimit) {
+            $("#gberror").show(200);
+            return;
+        } else {
+            submitAll();
+            renderCardBlock('@Url.Action("GivingBack","SprintActivities")', '#gbtab');
+            $("#basicModal").modal("hide");
+        }
+
+    }
 </script>

@@ -122,6 +122,7 @@
          data: { data: quest_data },
          type: 'POST',
          success: function (res) {
+           
              window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';  //aqui me no se como pasarle el model al action
          },
          error: function () {

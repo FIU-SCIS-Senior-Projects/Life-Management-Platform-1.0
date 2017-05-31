@@ -1,6 +1,7 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
 <script src="~/Scripts/lmpopup.js"></script>
+@model LifeManagement.Models.Sprint
 @{
     ViewBag.Title = "UserSetup";
 }
@@ -24,7 +25,7 @@
                 </li>
             </ul>
         </div>
-        <div id="cardblock" class="card-block col-md-12" style="height: 300px">
+        <div id="cardblock" class="card-block col-md-12" style="height: 300px;overflow: auto">
            
         </div>
     </div>
@@ -33,24 +34,37 @@
 
 
 <script>
-   
+  
 
-    function submitAll(sprintid) {
+    function submitAll() {
+       
+       var activities=[];debugger;
         $('.cat-tiles-chk:checkbox:checked').each(function() {
             var id = $(this).attr('id');
-            updateSprintActivity(id, sprintid, $('#spec-' + id).val());
+            var s = $('#spec-' + id + ' :input').val();
+            s = (s == null || s=='' ? "Not specified" : s);
+            var act = {
+                activityId: parseInt(id),
+                sprintId: parseInt(@Model.Id),
+                spec:s
+            }
+           
+            activities.push(act);
+            
         });
+       
+        updateSprintActivity(activities);
     }
-    function updateSprintActivity(actid, sprintId,spec) {
-        var data = {
-            activityId: actid,
-            sprintId: sprintId,
-            spec: spec
-    }
+   function updateSprintActivity(activities) {
+       debugger;
+    
+    
         $.ajax({
             url: '@Url.Action("UpdateSprint","SprintActivities")',
             type: 'POST',
-            data: data,
+           
+            data:{ 'activities': activities } ,
+            
             error:function() {
                 alert('Could not update selections');
             }
@@ -59,10 +73,10 @@
     }
 
     function renderCardBlock(url, tabid) {
-        var sprintid = 1;
+        var sprintid = @Model.Id;
         $('.nav-link').css('background-color', 'transparent');
         $(tabid).css('background-color', '#eeeeee');
-        submitAll(sprintid);
+       
         var data = { id: sprintid };
 
         $.ajax({

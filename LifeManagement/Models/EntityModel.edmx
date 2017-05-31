@@ -232,7 +232,9 @@
   </Association>
   <Association Name="CoachUser">
     <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="*" />
-    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />
@@ -327,7 +329,8 @@
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -415,7 +418,8 @@
         </EntityType>
         <Association Name="CategoryGoal">
           <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" />
+          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -439,7 +443,8 @@
         </EntityType>
         <Association Name="SprintGoal">
           <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="1" />
-          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" />
+          <End Type="SeniorDBModel.Goal" Role="Goal" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Sprint">
               <PropertyRef Name="Id" />
@@ -451,7 +456,8 @@
         </Association>
         <Association Name="UserSprint">
           <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="*" />
+          <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -484,7 +490,8 @@
         </EntityType>
         <Association Name="SprintSprintActivities">
           <End Type="SeniorDBModel.Sprint" Role="Sprint" Multiplicity="1" />
-          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Sprint">
               <PropertyRef Name="Id" />
@@ -496,7 +503,8 @@
         </Association>
         <Association Name="SprintActivitiesProgress">
           <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="1" />
-          <End Type="SeniorDBModel.Progress" Role="Progress" Multiplicity="*" />
+          <End Type="SeniorDBModel.Progress" Role="Progress" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="SprintActivities">
               <PropertyRef Name="Id" />
@@ -519,7 +527,9 @@
         </EntityType>
         <Association Name="CoachUser">
           <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="0..1" />
-          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
         </Association>
         <EntityType Name="CoachReview">
           <Key>
@@ -534,7 +544,8 @@
         </EntityType>
         <Association Name="CoachCoachReview">
           <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="1" />
-          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" />
+          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Coach">
               <PropertyRef Name="Id" />
@@ -546,7 +557,8 @@
         </Association>
         <Association Name="UserCoachReview">
           <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" />
+          <End Type="SeniorDBModel.CoachReview" Role="CoachReview" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -570,7 +582,8 @@
         </EntityType>
         <Association Name="FK_ActivitySprintActivities">
           <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="1" />
-          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" />
+          <End Type="SeniorDBModel.SprintActivities" Role="SprintActivities" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Activity">
               <PropertyRef Name="Id" />
@@ -582,7 +595,8 @@
         </Association>
         <Association Name="FK_CategoryActivity">
           <End Type="SeniorDBModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="*" />
+          <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />

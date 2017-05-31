@@ -14,10 +14,18 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         /****************************setup joy passion giving back*********************************************************/
-
+        [Authorize]
         public ActionResult UserSetup()
         {
-            return View();
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+           
+            var sprint = db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a=>a.DateFrom).FirstOrDefault();
+            if(sprint!=null)
+                return View(sprint);
+            ViewBag.ErrorMsg = "This user does not have an sprint set up";
+            return View("Error");
+
         }
         public PartialViewResult Joy(int id)
         {
@@ -62,26 +70,43 @@ namespace LifeManagement.Controllers
 
         }
 
-        public bool UpdateSprint(int activityId, int sprintId,string spec)
-        {
-            var activity = db.Activities.Find(activityId);
-            var sprint = db.Sprints.Find(sprintId);
+      
+        [HttpPost]
+        public bool UpdateSprint(Act[] activities)
+        { var newacts = new List<SprintActivities>();
+
+           if (activities == null || !activities.Any())
+                return false;
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-            var currentsprintact = db.SprintActivities.Where(a => a.SprintId == sprintId && a.ActivityId == activityId);
 
-            if (user==null || activity ==null || sprint==null)
-            return false;
-            if (currentsprintact.Any())
-                db.SprintActivities.RemoveRange(currentsprintact);
+            var sprint = db.Sprints.Find(activities[0].sprintId);
+            var activity = db.Activities.Find(activities[0].activityId);
+            if (sprint == null || activity == null || user==null)
+                return false;
 
-            var newSprintAct = new SprintActivities();
-            newSprintAct.SprintId = sprintId;
-            newSprintAct.ActivityId = activityId;
-            newSprintAct.Specifics = spec;
+          
+                  db.SprintActivities.RemoveRange(db.SprintActivities.Where(a => a.SprintId == activities[0].sprintId && a.Activity.Category.Id == activity.Category.Id));
+          
+                db.SaveChanges();
+            foreach (var act in activities)
+            {
+              
 
-            db.SaveChanges();
+                var newSprintAct = new SprintActivities();
+                newSprintAct.SprintId = act.sprintId;
+                newSprintAct.ActivityId = act.activityId;
+                newSprintAct.Specifics = act.spec;
+                db.SprintActivities.Add(newSprintAct);
+                newacts.Add(newSprintAct);
+              
+              
+            }
+            if (newacts.Any())
+            {
+                db.SprintActivities.AddRange(newacts);
+                db.SaveChanges();
+            }
             return true;
-
 
 
         }

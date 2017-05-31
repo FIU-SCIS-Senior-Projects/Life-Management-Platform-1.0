@@ -8,7 +8,7 @@
 
 
 
-
+<div id="joyerror" class="text-danger" style="display: none"><h4>Need to select three activities</h4></div>
 
 
 <div class="clearfix" >
@@ -45,13 +45,14 @@
   
 
 </div>
-<div class="col-md-12 text-right"><button data-dismiss="modal" class="btn btn-success" onclick="renderCardBlock('@Url.Action("Joy","SprintActivities")','#joytab')">Save</button></div>
+<div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveJoy()">Save</button></div>
 
 <script>
     var joylimit = 3;
+   
     $('.chk-joy').on('change', function (evt) {
         var isInsert = this.checked;
-        debugger;
+       
         if (isInsert) {
             var l = $('.chk-joy:checkbox:checked').length;
 
@@ -71,5 +72,19 @@
 
 
     });
+
+    function saveJoy() {
+       
+        var l = $('.chk-joy:checkbox:checked').length;
+        if (l != joylimit) {
+            $("#joyerror").show(200);
+            return;
+        } else {
+            submitAll();
+            renderCardBlock('@Url.Action("Joy","SprintActivities")', '#joytab');
+            $("#basicModal").modal("hide");
+        }
+       
+    }
 </script>
 
