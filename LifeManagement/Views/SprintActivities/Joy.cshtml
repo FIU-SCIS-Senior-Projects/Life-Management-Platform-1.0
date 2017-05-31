@@ -3,7 +3,7 @@
     @{
         var common = new LifeManagement.Models.Common();
     }
-
+<script src="~/Scripts/lmpopup.js"></script>
 
 
 
@@ -12,7 +12,9 @@
 
 
 <div class="clearfix">
-   
+    <div class="col-md-12 text-right">
+        <a class="btn btn-success lmmodal" modal-color="cadetblue"  modal-width="100%" url='@Url.Action("Joy","Activities")'  href="#" >+</a>
+    </div>
     @if (Model != null)
     {
         foreach (var a in Model)
