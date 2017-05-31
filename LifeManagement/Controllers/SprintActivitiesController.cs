@@ -84,13 +84,9 @@ namespace LifeManagement.Controllers
             if (sprint == null || activity == null || user==null)
                 return false;
 
-            var currentsprintact = db.SprintActivities.Where(a => a.SprintId == activities[0].sprintId && a.Activity.Category.Id == activity.Category.Id);
-
-            foreach (var a in currentsprintact.ToList())
-            {
-                  db.SprintActivities.Remove(a);
-            }
-              
+          
+                  db.SprintActivities.RemoveRange(db.SprintActivities.Where(a => a.SprintId == activities[0].sprintId && a.Activity.Category.Id == activity.Category.Id));
+          
                 db.SaveChanges();
             foreach (var act in activities)
             {
