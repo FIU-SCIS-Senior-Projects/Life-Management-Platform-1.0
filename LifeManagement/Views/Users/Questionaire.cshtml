@@ -18,66 +18,70 @@
     <div class="bgdiv" style="background-image: url('/Imgs/vision.jpg');opacity:0.5" ></div>
 }
 
-    <div class="modal-body" style="width: 1250px ; height: 750px; position: absolute; top: 30px ; margin:0 auto ; ">
-        <div class="container">
-            <div class="fs-form-wrap" id="fs-form-wrap">
-                <div class="fs-title">
-                    <h1 style="font-weight: bold "> <strong>Welcome abord: <i style=" color: #195BA4"> @Model.FirstName  @Model.LastName</i></strong></h1>
-                    <br />
-                    <h1 > Before you begin to use our portal, please take a few minutes to complete this short questionnaire </h1>
-                    <br />
-                    <div style=" width: 1100px ; height: 50px; font-size: 14px ; position: absolute; left: 50px">
-                        <p style=" color: #195BA4; font-weight: bold">Note: <br />-   If you are unsure about the answers to these questions, the activity selection steps in the next set of pages can possibly help you complete this questionnaire. So, feel free to update these answers as often as you like.</p>
-                    </div>
+    <div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; margin:0 auto ; ">
+    <div class="container">
+        <div class="fs-form-wrap" id="fs-form-wrap">
+            <div class="fs-title">
+                <h1 style="font-weight: bold "> <strong>Welcome abord: <i style=" color: #195BA4"> @Model.FirstName  @Model.LastName</i></strong></h1>
+                <br />
+                <h1> Before you begin to use our portal, please take a few minutes to complete this short questionnaire </h1>
+                <br />
+                <div style=" width: 1100px ; height: 50px; font-size: 14px ; position: absolute; left: 50px">
+                    <p style=" color: #195BA4; font-weight: bold">Note: <br />-   If you are unsure about the answers to these questions, the activity selection steps in the next set of pages can possibly help you complete this questionnaire. So, feel free to update these answers as often as you like.</p>
                 </div>
-            
-
-                <form id="myform" class="fs-form fs-form-full" autocomplete="off" action="/Questionnarie/collect_questionnarie" method="post">
-                    <ol class="fs-fields">
-                        <li>
-                            <label class="fs-field-label fs-anim-upper" for="vision" style="color: black" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
-                            <textarea class="fs-anim-lower" id="vision" name="vision" placeholder="E.g. My goal is to have a fullfilled and meaningful life centered about things that really matter to me and my community of family and friends." required ></textarea>
-                        </li>
-                        <li>
-                            <label class="fs-field-label fs-anim-upper" for="goal_1" style="color: black" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
-                            <textarea class="fs-anim-lower" id="goal_1" name="goal_1" placeholder="Enter goal 1" ></textarea>
-                            <br />
-                            <br />
-                            <textarea class="fs-anim-lower" id="goal_2" name="goal_2" placeholder="Enter goal 2" ></textarea>
-                            <br />
-                            <br />
-                            <textarea class="fs-anim-lower" id="goal_3" name="goal_3" placeholder="Enter goal 3" ></textarea> 
-                        </li>
-                        <li>
-                            <label class="fs-field-label fs-anim-upper" for="determine_success" style="color: black" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
-                            <textarea class="fs-anim-lower" style=" font:14px " id="determine_success" name="determine_success" placeholder="Hint - This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
-                            <br />
-                            <br />
-
-                            <div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
-                                <img src="~/Imgs/bety_new_img/smart_ok.png" width="600" height="200" />
-                            </div>
+            </div>
 
 
-                        </li>
-                        <li>
-                            <label class="fs-field-label fs-anim-upper" for="activity_1" style="color: black" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
-                            <textarea class="fs-anim-lower" id="activity_1" name="activity_1" placeholder="Enter statement 1" ></textarea>
-                            <br />
-                            <br />
-                            <textarea class="fs-anim-lower" id="activity_2" name="activity_2" placeholder="Enter statement 2" ></textarea>
-                            <br />
-                            <br />
-                            <textarea class="fs-anim-lower" id="activity_3" name="activity_3" placeholder="Enter statment 3" ></textarea>
-                        </li>
+            <form id="myform" class="fs-form fs-form-full" autocomplete="off" action="/Questionnarie/collect_questionnarie" method="post">
+                <ol class="fs-fields">
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="vision" style="color: black ; font-weight: 800" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
+                        <br />
+                        <textarea class="fs-anim-lower" id="vision" name="vision" placeholder="E.g. My goal is to have a fullfilled and meaningful life centered about things that really matter to me and my community of family and friends." required></textarea>
+                    </li>
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="goal_1" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
+                        <textarea class="fs-anim-lower" id="goal_1" name="goal_1" placeholder="Enter goal 1" required></textarea>
+                        <br />
+                        <br />
+                        <textarea class="fs-anim-lower" id="goal_2" name="goal_2" placeholder="Enter goal 2" required></textarea>
+                        <br />
+                        <br />
+                        <textarea class="fs-anim-lower" id="goal_3" name="goal_3" placeholder="Enter goal 3" required></textarea>
+                    </li>
+                    <li>
+                        <br />
+                        <label class="fs-field-label fs-anim-upper" for="determine_success" style="color: black ; font-weight: 800" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
+                        <textarea class="fs-anim-lower" style=" font:14px " id="determine_success" name="determine_success" placeholder="Hint - This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
+                        <br />
+                        <br />
 
-                    </ol><!-- /fs-fields -->
-                  
-                    <button class="fs-submit"  type="submit">Send answers</button>
-                </form><!-- /fs-form -->
-            </div><!-- /fs-form-wrap -->
-            <!-- Related demos -->
-           </div> <!-- /container -->
+                        <div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
+                            <img src="~/Imgs/bety_new_img/smart_ok.png" width="600" height="200" />
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="activity_1" style="color: black ; font-weight: 800" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
+                        <textarea class="fs-anim-lower" id="activity_1" name="activity_1" placeholder="Enter statement 1" required></textarea>
+                        <br />
+                        <br />
+                        <textarea class="fs-anim-lower" id="activity_2" name="activity_2" placeholder="Enter statement 2" required></textarea>
+                        <br />
+                        <br />
+                        <textarea class="fs-anim-lower" id="activity_3" name="activity_3" placeholder="Enter statment 3" required></textarea>
+                    </li>
+
+                </ol><!-- /fs-fields -->
+
+                <button class="fs-submit" type="submit">Send answers</button>
+            </form><!-- /fs-form -->
+        </div><!-- /fs-form-wrap -->
+        <!-- Related demos -->
+    </div> <!-- /container -->
+</div>
+
             <script src="~/Scripts/bety_scripts/classie.js"></script>
             <!--     <script src="~/Scripts/bety_scripts/selectFx.js"></script>   -->
             <script src="~/Scripts/bety_scripts/fullscreenForm.js"></script>
@@ -102,38 +106,9 @@
                 })();
             </script>
 
- <script>
-     function questionarie() {
-
-         var quest_data = {
-             vision: $("#q1").val(),
-             goal_1: $("#q2").val(),
-             goal_2: $("#q3").val(),
-             goal_3: $("#q4").val(),
-             determine_success: $("#q5").val(),
-             activity_1: $("#q6").val(),
-             activity_2: $("#q7").val(),
-             activity_3: $("#q8").val(),
-         }
 
 
-         $.ajax({
-             url: '@Url.Action("collect_questionnarie", "Questionnarie")',
-             data: { data: quest_data },
-             type: 'POST',
-             success: function(res) {
-                 window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';
-                //aqui me no se como pasarle el model al action
-             },
-             error: function(msg) {
-                 alert("fail pk pk pk nooo");
-             }
-         });
-     }
 
- </script>
-
-</div>
 
 
 
