@@ -49,34 +49,44 @@ namespace LifeManagement.Controllers
                 db.Goals.Add(g1);
                 db.SaveChanges();
 
-
+                if(data.goal_2 != null)
+                { 
                 g2.SprintId = sprint0.Id;
                 g2.Description = data.goal_2;
                 g2.CategoryId = 2;
                 db.Goals.Add(g2);
                 db.SaveChanges();
+                }
 
-                g3.SprintId = sprint0.Id;
-                g3.Description = data.goal_3;
-                g3.CategoryId = 3;
-                db.Goals.Add(g3);
-                db.SaveChanges();
+                if (data.goal_3 != null)
+                {
+                    g3.SprintId = sprint0.Id;
+                    g3.Description = data.goal_3;
+                    g3.CategoryId = 3;
+                    db.Goals.Add(g3);
+                    db.SaveChanges();
+                }
 
                 user.Vision = data.vision;
                 user.Statement1 = data.activity_1;
+
+                if(data.activity_2 != null)
                 user.Statement2 = data.activity_2;
+
+                if (data.activity_3 != null)
                 user.Statement3 = data.activity_3;
+
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
 
                 TempData["model"] = data;
                 TempData.Keep("model");
-                return View("../Questionnarie/collect_questionnarie", data);
+                return RedirectToAction("SetupSprint");
 
             } 
             TempData["model"] = data;
             TempData.Keep("model");
-            return View("../Questionnarie/collect_questionnarie", data);
+            return RedirectToAction("SetupSprint");
         }
 
        
