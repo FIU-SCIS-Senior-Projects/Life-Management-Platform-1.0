@@ -14,10 +14,39 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         /****************************setup joy passion giving back*********************************************************/
-
-        public ActionResult UserSetup()
+        [Authorize]
+        public ActionResult UserSetup22(Sprint sprint)
         {
-            return View();
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if(sprint!=null && sprint.Id>0)
+                return View(sprint);
+            if (lastsprint != null && lastsprint.Id>0)
+                return View(lastsprint);
+
+            ViewBag.ErrorMsg = "This user does not have an sprint set up";
+            return View("Error");
+
+        }
+        [Authorize]
+        public ActionResult UserSetup(Sprint sprint)
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if (sprint != null && sprint.Id > 0)
+                return View(sprint);
+            if (lastsprint != null && lastsprint.Id > 0)
+                return View(lastsprint);
+
+            ViewBag.ErrorMsg = "This user does not have an sprint set up";
+            return View("Error");
+
         }
         public PartialViewResult Joy(int id)
         {
@@ -62,27 +91,55 @@ namespace LifeManagement.Controllers
 
         }
 
-        public bool UpdateSprint(int activityId, int sprintId,string spec)
-        {
-            var activity = db.Activities.Find(activityId);
-            var sprint = db.Sprints.Find(sprintId);
+      
+        [HttpPost]
+        public PartialViewResult UpdateSprint(Act[] activities,string cat)
+        { var newacts = new List<SprintActivities>();
+
+           if (activities == null || !activities.Any())
+                return PartialView("ErrorPartial");
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-            var currentsprintact = db.SprintActivities.Where(a => a.SprintId == sprintId && a.ActivityId == activityId);
 
-            if (user==null || activity ==null || sprint==null)
-            return false;
-            if (currentsprintact.Any())
-                db.SprintActivities.RemoveRange(currentsprintact);
-
-            var newSprintAct = new SprintActivities();
-            newSprintAct.SprintId = sprintId;
-            newSprintAct.ActivityId = activityId;
-            newSprintAct.Specifics = spec;
-
-            db.SaveChanges();
-            return true;
+            var sprint = db.Sprints.Find(activities[0].sprintId);
+            var activity = db.Activities.Find(activities[0].activityId);
+            if (sprint == null || activity == null || user==null)
+                return PartialView("ErrorPartial");
 
 
+            db.SprintActivities.RemoveRange(db.SprintActivities.Where(a => a.SprintId ==sprint.Id && a.Activity.Category.Id == activity.Category.Id).AsEnumerable().ToList());
+          
+                db.SaveChanges();
+            foreach (var act in activities)
+            {
+              
+
+                var newSprintAct = new SprintActivities();
+                newSprintAct.SprintId = act.sprintId;
+                newSprintAct.ActivityId = act.activityId;
+                newSprintAct.Specifics = act.spec;
+                db.SprintActivities.Add(newSprintAct);
+                newacts.Add(newSprintAct);
+              
+              
+            }
+            if (newacts.Any())
+            {
+                db.SprintActivities.AddRange(newacts);
+                db.SaveChanges();
+            }
+            var res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back" && a.Sprint.Id == sprint.Id).Include(a => a.Activity);
+
+            if (cat == "joy")
+            {
+                 res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Joy" && a.Sprint.Id == sprint.Id).Include(a => a.Activity);
+                return PartialView("Joy", res.ToList());
+            }
+            if (cat == "passion")
+            {
+                 res = db.SprintActivities.Where(a => a.Activity.Category.Name == "Passion" && a.Sprint.Id == sprint.Id).Include(a=>a.Activity);
+                return PartialView("Passion", res.ToList());
+            }
+            return PartialView("GivingBack", res.ToList());
 
         }
         /************************************system generated*************************************/

@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("Index","Dashboard");
+                return RedirectToAction("UserSetup","SprintActivities");
             }
             return View();
         }
@@ -198,6 +198,10 @@ namespace LifeManagement.Controllers
             newuser.username = fromuser.username;
             newuser.password = fromuser.password;
             newuser.Vision = "";
+            newuser.LifeSuccess = "";
+            newuser.Statement1 = "";
+            newuser.Statement2 = "";
+            newuser.Statement3 = "";
             newuser.DateCreated = DateTime.Now;
             db.Users.Add(newuser);
             db.SaveChanges();
@@ -209,9 +213,95 @@ namespace LifeManagement.Controllers
         }
 
         //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
+        [Authorize]
         public ActionResult Questionaire(UserViewModel user)
         {
             return View(user);
+        }
+
+
+        [HttpPost]
+        public ActionResult collect_questionnarie(QuestionarieViewModel data)
+        {
+
+            string name = User.Identity.Name;
+            var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
+
+            if (user != null)
+            {
+                int id = user.Id;
+
+                var sprint0 = new Sprint();
+                var g1 = new Goal();
+                var g2 = new Goal();
+                var g3 = new Goal();
+
+
+                sprint0.DateFrom = DateTime.Now;
+                sprint0.SprintGoal = data.vision;
+                sprint0.UserId = id;
+                db.Sprints.Add(sprint0);
+                db.SaveChanges();
+
+                g1.SprintId = sprint0.Id;
+                g1.Description = data.goal_1;
+                g1.CategoryId = 1;
+                db.Goals.Add(g1);
+                db.SaveChanges();
+
+                if (data.goal_2 != null)
+                {
+                    g2.SprintId = sprint0.Id;
+                    g2.Description = data.goal_2;
+                    g2.CategoryId = 2;
+                    db.Goals.Add(g2);
+                    db.SaveChanges();
+                }
+
+                if (data.goal_3 != null)
+                {
+                    g3.SprintId = sprint0.Id;
+                    g3.Description = data.goal_3;
+                    g3.CategoryId = 3;
+                    db.Goals.Add(g3);
+                    db.SaveChanges();
+                }
+
+                user.Vision = data.vision;
+                user.Statement1 = data.activity_1;
+
+                if (data.activity_2 != null)
+                    user.Statement2 = data.activity_2;
+
+                if (data.activity_3 != null)
+                    user.Statement3 = data.activity_3;
+
+                user.LifeSuccess = data.determine_success;
+                db.SaveChanges();
+
+                TempData["model"] = data;
+                TempData.Keep("model");
+                return RedirectToAction("UserSetup", "SprintActivities", new { sprint = sprint0 });
+
+            }
+            TempData["model"] = data;
+            TempData.Keep("model");
+            return RedirectToAction("SetupSprint");
+        }
+
+
+        public ActionResult SetupSprint()
+        {
+            QuestionarieViewModel pulpa = new QuestionarieViewModel();
+
+
+            if (TempData["model"] != null)
+            {
+                TempData.Keep("model");
+                pulpa = (QuestionarieViewModel)TempData["model"];
+                return View(pulpa);
+            }
+            return View(pulpa);
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++

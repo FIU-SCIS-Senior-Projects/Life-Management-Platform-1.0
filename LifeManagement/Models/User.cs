@@ -32,6 +32,9 @@ namespace LifeManagement.Models
         public System.DateTime DateCreated { get; set; }
         public string Vision { get; set; }
         public string LifeSuccess { get; set; }
+        public string Statement1 { get; set; }
+        public string Statement2 { get; set; }
+        public string Statement3 { get; set; }
     
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -8,7 +8,7 @@
 
 
 
-
+<div id="passionerror" class="text-danger" style="display: none"><h4>Need to select two activities</h4></div>
 
 
 <div class="clearfix">
@@ -44,13 +44,13 @@
 
         
     </div>
-<div class="col-md-12 text-right"><button data-dismiss="modal" class="btn btn-success" onclick="renderCardBlock('@Url.Action("Passion","SprintActivities")','#passiontab')">Save</button></div>
+<div class="col-md-12 text-right"><button  class="btn btn-success" onclick="savePassion()">Save</button></div>
 
 <script>
     var passionlimit = 2;
     $('.chk-passion').on('change', function (evt) {
         var isInsert = this.checked;
-        debugger;
+
         if (isInsert) {
             var l = $('.chk-passion:checkbox:checked').length;
 
@@ -70,4 +70,17 @@
 
 
     });
+    function savePassion() {
+
+        var l = $('.chk-passion:checkbox:checked').length;
+        if (l != passionlimit) {
+            $("#passionerror").show(200);
+            return;
+        } else {
+            submitAll('passion');
+           
+            $("#basicModal").modal("hide");
+        }
+
+    }
 </script>
