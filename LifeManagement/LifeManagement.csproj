@@ -331,6 +331,7 @@
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
     <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
     <Content Include="Views\Questionnarie\collect_questionnarie.cshtml" />
+    <Content Include="Views\SprintActivities\UserSetup2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
