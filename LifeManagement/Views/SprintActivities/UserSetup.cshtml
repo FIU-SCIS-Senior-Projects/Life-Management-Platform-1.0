@@ -22,57 +22,59 @@
 }
 
 @section bgdiv{
-    <div class="bgdiv" style="background-image: url('/Imgs/vision.jpg');opacity:0.5"></div>
+    <div class="bgdiv" style="background-image: url('/Imgs/butterfly.jpg');opacity:0.5"></div>
 }
 
-<div class="modal-body" style="width: 1200px ; height: 500px; position: absolute; top: 30px ; margin:0 auto ; ">
+<div class="modal-body" style="width: 1200px ; height: 700px; position: absolute; top: 30px ; margin:0 auto ; ">
+    
     <div class="container">
         <div class="fs-form-wrap" id="fs-form-wrap">
-            
+            <div class="fs-title">
+                <h3 style=" color: #00b359; font-weight: bold"> Just few more steps to configure your Productity chart and you are done! </h3>
+            </div>
 
-            <form id="myform" class="fs-form fs-form-full"  autocomplete="off" >
-                <ol class="fs-fields">
-                   
-                    <li >
-                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
-                            <h3 class="fs-anim-lower fs-anim-upper">What gives you joy?</h3>
-                            <div class="fs-anim-lower fs-anim-upper" id="joytab">
-                                @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
+                <form id="myform" class="fs-form fs-form-full" autocomplete="off">
+                    <ol class="fs-fields">
+
+                        <li>
+                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                                <h3 class="fs-anim-lower fs-anim-upper">What gives you joy?</h3>
+                                <div class="fs-anim-lower fs-anim-upper" id="joytab">
+                                    @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
+                                </div>
                             </div>
-                        </div>
 
-                        
 
-</li>
-                    <li >
-                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: aquamarine">
-                            <h3 class="fs-anim-lower fs-anim-upper">What are you passionate about?</h3>
-                            <div class="fs-anim-lower fs-anim-upper" id="passiontab">
-                                @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
+
+                        </li>
+                        <li>
+                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: aquamarine">
+                                <h3 class="fs-anim-lower fs-anim-upper">What are you passionate about?</h3>
+                                <div class="fs-anim-lower fs-anim-upper" id="passiontab">
+                                    @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
+                                </div>
                             </div>
-                        </div>
-                       
-
-                    </li>
-                    <li >
-                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: coral">
 
 
-                            <h3 class="fs-anim-lower fs-anim-upper">How would you give back to society?</h3>
-                            <div class="fs-anim-lower fs-anim-upper" id="gbtab">
-                                @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
+                        </li>
+                        <li>
+                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: coral">
+
+
+                                <h3 class="fs-anim-lower fs-anim-upper">How would you give back to society?</h3>
+                                <div class="fs-anim-lower fs-anim-upper" id="gbtab">
+                                    @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                  
+                        </li>
 
-                </ol><!-- /fs-fields -->
-            @Html.ActionLink("Save Activities","Index", "DashBoard", null, new {@class= "fs-submit btn btn-success" })
-            </form><!-- /fs-form -->
-        </div><!-- /fs-form-wrap -->
-        <!-- Related demos -->
-    </div> <!-- /container -->
-</div>
+
+                    </ol><!-- /fs-fields -->
+                    @Html.ActionLink("Save Activities", "Index", "DashBoard", null, new { @class = "fs-submit btn btn-success" })
+                </form><!-- /fs-form -->
+            </div><!-- /fs-form-wrap -->
+     </div>  <!-- /container -->
+ </div>
 
 <script src="~/Scripts/bety_scripts/classie.js"></script>
 <!--     <script src="~/Scripts/bety_scripts/selectFx.js"></script>   -->
