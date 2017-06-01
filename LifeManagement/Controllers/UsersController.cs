@@ -213,7 +213,7 @@ namespace LifeManagement.Controllers
         }
 
         //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
-      
+        [Authorize]
         public ActionResult Questionaire(UserViewModel user)
         {
             return View(user);

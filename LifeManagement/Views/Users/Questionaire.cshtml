@@ -35,22 +35,26 @@
                 <form id="myform" class="fs-form fs-form-full" autocomplete="off">
                     <ol class="fs-fields">
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q1" style="color: black" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
+                            <label class="fs-field-label fs-anim-upper" for="q1" style="color: black; font-weight: 800" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
+                            
+                            <br />
                             <textarea class="fs-anim-lower" id="q1" name="q1" placeholder="E.g. My goal is to have a fullfilled and meaningful life centered about things that really matter to me and my community of family and friends." required ></textarea>
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q2" style="color: black" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
-                            <textarea class="fs-anim-lower" id="q2" name="q2" placeholder="Enter goal 1" ></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="q2" style="color: black; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
+                            <textarea class="fs-anim-lower" id="q2" name="q2" placeholder="Enter goal 1" required></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q3" name="q3" placeholder="Enter goal 2" ></textarea>
+                            <textarea class="fs-anim-lower" id="q3" name="q3" placeholder="Enter goal 2" required></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q4" name="q4" placeholder="Enter goal 3" ></textarea> 
+                            <textarea class="fs-anim-lower" id="q4" name="q4" placeholder="Enter goal 3" required></textarea> 
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q5" style="color: black" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
-                            <textarea class="fs-anim-lower" style=" font:14px " id="q5" name="q5" placeholder="Hint - This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
+                            <br />
+                            <label class="fs-field-label fs-anim-upper" for="q5" style="color: black; font-weight: 800" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
+                            <br />
+                            <textarea class="fs-anim-lower" style=" font:14px " id="q5" name="q5" placeholder=" This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
                             <br />
                             <br />
 
@@ -61,14 +65,14 @@
 
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q6" style="color: black" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
-                            <textarea class="fs-anim-lower" id="q6" name="q6" placeholder="Enter statement 1" ></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="q6" style="color: black; font-weight: 800" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
+                            <textarea class="fs-anim-lower" id="q6" name="q6" placeholder="Enter statement 1" required></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q7" name="q7" placeholder="Enter statement 2" ></textarea>
+                            <textarea class="fs-anim-lower" id="q7" name="q7" placeholder="Enter statement 2" required></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q8" name="q8" placeholder="Enter statment 3" ></textarea>
+                            <textarea class="fs-anim-lower" id="q8" name="q8" placeholder="Enter statment 3" required></textarea>
                         </li>
 
                     </ol><!-- /fs-fields -->
@@ -122,10 +126,10 @@
                         data: { data: quest_data },
                         type: 'POST',
                         success: function (res) {  
-                            window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';  //aqui me no se como pasarle el model al action
+                            window.location.href = '@Url.Action("SetupSprint", "Questionnarie")'; 
                          },
                          error: function (msg) {
-                            alert("fail pk pk pk nooo");
+                             alert("An error occured while conecting with the server, please try again later ");
                         }
      });
                 }
