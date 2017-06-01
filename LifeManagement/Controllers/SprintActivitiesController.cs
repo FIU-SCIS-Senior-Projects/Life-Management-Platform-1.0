@@ -17,9 +17,16 @@ namespace LifeManagement.Controllers
         [Authorize]
         public ActionResult UserSetup(Sprint sprint)
         {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
 
             if(sprint!=null)
                 return View(sprint);
+            if (lastsprint != null)
+                return View(lastsprint);
+
             ViewBag.ErrorMsg = "This user does not have an sprint set up";
             return View("Error");
 
