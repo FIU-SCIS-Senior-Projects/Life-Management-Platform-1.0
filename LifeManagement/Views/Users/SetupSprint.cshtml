@@ -1,6 +1,4 @@
 ﻿
-@model LifeManagement.Models.QuestionarieViewModel
-
 @{
     ViewBag.Title = "SetupSprint";
 }
@@ -22,14 +20,14 @@
         <h3><strong> This are your goals and vision: </strong></h3>
         <div class="form-group">
             <label class="col-md-2 control-label">Your vision: </label>
-            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.vision </label>
+            <label class="col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @ViewBag.questData.vision </label>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Your goals: </label>
-            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_1 </label>
-            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_2 </label>
-            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @Model.goal_3 </label>
+            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @ViewBag.questData.goal_1 </label>
+            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @ViewBag.questData.goal_2 </label>
+            <label class="col-md-offset-2 col-md-10 control-label" style="color: #00cc66; font-weight: bold"> @ViewBag.questData.goal_3 </label>
 
         </div>
 
@@ -48,7 +46,7 @@
 
 <script>
     function collectJoy() {
-  
-            window.location = '@Url.Action("UserSetup", "SprintActivities", null, Request.Url.Scheme)'; 
+            var visionObj = @ViewBag.Sprint0;
+            window.location = '@Url.Action("UserSetup", "SprintActivities")'; 
     }
 </script>
