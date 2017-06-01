@@ -281,7 +281,7 @@ namespace LifeManagement.Controllers
 
                 TempData["model"] = data;
                 TempData.Keep("model");
-                return RedirectToAction("SetupSprint");
+                return RedirectToAction("UserSetup", "SprintActivities", new { sprint = sprint0 });
 
             }
             TempData["model"] = data;

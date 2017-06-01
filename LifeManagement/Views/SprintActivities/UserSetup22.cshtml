@@ -1,0 +1,117 @@
+﻿<script src="~/Scripts/CatTiles.js"></script>
+<link href="~/Content/CatTiles.css" rel="stylesheet" />
+
+@model LifeManagement.Models.Sprint
+@{
+    ViewBag.Title = "UserSetup";
+}
+
+<h2>User Setup</h2>
+<div class="col-md-12" style="background: whitesmoke">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="passiontab"   onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " id="gbtab" modal-color="LightCoral"  onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <div id="cardblock" class="card-block col-md-12" style="height: 300px;overflow: auto">
+            <div class="waitmodal">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+
+    function submitAll(cat) {
+
+       var activities=[];debugger;
+        $('.cat-tiles-chk:checkbox:checked').each(function() {
+            var id = $(this).attr('id');
+            var s = $('#spec-' + id + ' :input').val();
+            s = (s == null || s=='' ? "Not specified" : s);
+            var act = {
+                activityId: parseInt(id),
+                sprintId: parseInt(@Model.Id),
+                spec:s
+            }
+
+            activities.push(act);
+
+        });
+
+        updateSprintActivity(activities,cat);
+      
+
+    }
+   function updateSprintActivity(activities,cat) {
+       debugger;
+
+
+        $.ajax({
+            url: '@Url.Action("UpdateSprint","SprintActivities")',
+            type: 'POST',
+
+            data:{ 'activities': activities,cat:cat } ,
+            success:function(res) {
+                var tabid="#joytab";
+                if (cat == 'passion')
+                    tabid = "#passiontab";
+                if (cat == 'gb')
+                    tabid = "#gbtab";
+                $('.nav-link').css('background-color', 'transparent');
+                $(tabid).css('background-color', '#eeeeee');
+                $('#cardblock').html(res);
+            },
+            error:function(msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
+
+    }
+
+    function renderCardBlock(url, tabid) {
+        debugger;
+        var sprintid = @Model.Id;
+        $('.nav-link').css('background-color', 'transparent');
+        $(tabid).css('background-color', '#eeeeee');
+
+        var data = { id: sprintid };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'GET',
+            success:function(res) {
+                $('#cardblock').html(res);
+               
+            },
+            error: function (msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
+    }
+
+
+    $(document).on({
+        ajaxStart: function () { $("#cardblock").addClass("loading"); },
+        ajaxStop: function () { $("#cardblock").removeClass("loading");  }
+    });
+
+
+
+</script>
