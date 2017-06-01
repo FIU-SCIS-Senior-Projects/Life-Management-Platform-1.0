@@ -32,25 +32,25 @@
                 </div>
             
 
-                <form id="myform" class="fs-form fs-form-full" autocomplete="off">
+                <form id="myform" class="fs-form fs-form-full" autocomplete="off" action="/Questionnarie/collect_questionnarie" method="post">
                     <ol class="fs-fields">
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q1" style="color: black" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
-                            <textarea class="fs-anim-lower" id="q1" name="q1" placeholder="E.g. My goal is to have a fullfilled and meaningful life centered about things that really matter to me and my community of family and friends." required ></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="vision" style="color: black" data-info="This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future."> Why: In a nutshell, what is the purpose and vision of your life? </label>
+                            <textarea class="fs-anim-lower" id="vision" name="vision" placeholder="E.g. My goal is to have a fullfilled and meaningful life centered about things that really matter to me and my community of family and friends." required ></textarea>
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q2" style="color: black" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
-                            <textarea class="fs-anim-lower" id="q2" name="q2" placeholder="Enter goal 1" ></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="goal_1" style="color: black" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> What are the top 3 goals for your life as it relates to your purpose ?</label>
+                            <textarea class="fs-anim-lower" id="goal_1" name="goal_1" placeholder="Enter goal 1" ></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q3" name="q3" placeholder="Enter goal 2" ></textarea>
+                            <textarea class="fs-anim-lower" id="goal_2" name="goal_2" placeholder="Enter goal 2" ></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q4" name="q4" placeholder="Enter goal 3" ></textarea> 
+                            <textarea class="fs-anim-lower" id="goal_3" name="goal_3" placeholder="Enter goal 3" ></textarea> 
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q5" style="color: black" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
-                            <textarea class="fs-anim-lower" style=" font:14px " id="q5" name="q5" placeholder="Hint - This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="determine_success" style="color: black" data-info="List your objectives. If you met your objectives, you will feel like you have achieved success. Objectives - are a time sensitive statement to achieve your goals and defined in measurable terms. They should be SMART"> How will you determine if your life is a success? </label>
+                            <textarea class="fs-anim-lower" style=" font:14px " id="determine_success" name="determine_success" placeholder="Hint - This is a big picture idea of what you want to achieve in the Future. It should inspire you bring excitement to put your energy and time to achieve this future" required></textarea>
                             <br />
                             <br />
 
@@ -61,18 +61,19 @@
 
                         </li>
                         <li>
-                            <label class="fs-field-label fs-anim-upper" for="q6" style="color: black" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
-                            <textarea class="fs-anim-lower" id="q6" name="q6" placeholder="Enter statement 1" ></textarea>
+                            <label class="fs-field-label fs-anim-upper" for="activity_1" style="color: black" data-info="What do you do to achieve your vision? This should provide a clear direction and focus around what you should do."> Can you provide no more than 3 short statements on how your activities connect to our vision? </label>
+                            <textarea class="fs-anim-lower" id="activity_1" name="activity_1" placeholder="Enter statement 1" ></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q7" name="q7" placeholder="Enter statement 2" ></textarea>
+                            <textarea class="fs-anim-lower" id="activity_2" name="activity_2" placeholder="Enter statement 2" ></textarea>
                             <br />
                             <br />
-                            <textarea class="fs-anim-lower" id="q8" name="q8" placeholder="Enter statment 3" ></textarea>
+                            <textarea class="fs-anim-lower" id="activity_3" name="activity_3" placeholder="Enter statment 3" ></textarea>
                         </li>
 
                     </ol><!-- /fs-fields -->
-                    <button class="fs-submit" type="submit" onclick="questionarie()">Send answers</button>
+                  
+                    <button class="fs-submit"  type="submit">Send answers</button>
                 </form><!-- /fs-form -->
             </div><!-- /fs-form-wrap -->
             <!-- Related demos -->
@@ -102,33 +103,33 @@
             </script>
 
  <script>
-                function questionarie() {
+     function questionarie() {
 
-                    var quest_data = {
-                        vision: $("#q1").val(),
-                        goal_1: $("#q2").val(),
-                        goal_2: $("#q3").val(),
-                        goal_3: $("#q4").val(),
-                        determine_success: $("#q5").val(),
-                        activity_1: $("#q6").val(),
-                        activity_2: $("#q7").val(),
-                        activity_3: $("#q8").val(),
-                    }
+         var quest_data = {
+             vision: $("#q1").val(),
+             goal_1: $("#q2").val(),
+             goal_2: $("#q3").val(),
+             goal_3: $("#q4").val(),
+             determine_success: $("#q5").val(),
+             activity_1: $("#q6").val(),
+             activity_2: $("#q7").val(),
+             activity_3: $("#q8").val(),
+         }
 
 
-
-                    $.ajax({
-                        url: '@Url.Action("collect_questionnarie", "Questionnarie")',
-                        data: { data: quest_data },
-                        type: 'POST',
-                        success: function (res) {  
-                            window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';  //aqui me no se como pasarle el model al action
-                         },
-                         error: function (msg) {
-                            alert("fail pk pk pk nooo");
-                        }
-     });
-                }
+         $.ajax({
+             url: '@Url.Action("collect_questionnarie", "Questionnarie")',
+             data: { data: quest_data },
+             type: 'POST',
+             success: function(res) {
+                 window.location.href = '@Url.Action("SetupSprint", "Questionnarie")';
+                //aqui me no se como pasarle el model al action
+             },
+             error: function(msg) {
+                 alert("fail pk pk pk nooo");
+             }
+         });
+     }
 
  </script>
 

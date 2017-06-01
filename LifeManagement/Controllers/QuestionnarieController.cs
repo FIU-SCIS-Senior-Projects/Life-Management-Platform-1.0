@@ -21,7 +21,7 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public bool collect_questionnarie(QuestionarieViewModel data)
+        public ActionResult collect_questionnarie(QuestionarieViewModel data)
         {
 
             string name = User.Identity.Name;
@@ -71,12 +71,12 @@ namespace LifeManagement.Controllers
 
                 TempData["model"] = data;
                 TempData.Keep("model");
-                return true;
+                return View("../Questionnarie/collect_questionnarie", data);
 
             } 
             TempData["model"] = data;
             TempData.Keep("model");
-            return true;
+            return View("../Questionnarie/collect_questionnarie", data);
         }
 
        
