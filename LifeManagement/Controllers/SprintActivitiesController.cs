@@ -31,6 +31,23 @@ namespace LifeManagement.Controllers
             return View("Error");
 
         }
+        [Authorize]
+        public ActionResult UserSetup2(Sprint sprint)
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if (sprint != null && sprint.Id > 0)
+                return View(sprint);
+            if (lastsprint != null && lastsprint.Id > 0)
+                return View(lastsprint);
+
+            ViewBag.ErrorMsg = "This user does not have an sprint set up";
+            return View("Error");
+
+        }
         public PartialViewResult Joy(int id)
         {
             try

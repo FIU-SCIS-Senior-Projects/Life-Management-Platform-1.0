@@ -133,6 +133,7 @@
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionnarieController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
     <Compile Include="Controllers\SprintsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -325,10 +326,12 @@
     <Content Include="Views\SprintActivities\UserSetup.cshtml" />
     <Content Include="Views\Shared\_layout_for_questionarie.cshtml" />
     <Content Include="Views\Shared\_layout_to_test.cshtml" />
+    <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
     <Content Include="Views\SprintActivities\Passion.cshtml" />
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
-    <Content Include="Views\Users\SetupSprint.cshtml" />
-    <Content Include="Views\Users\collect_questionnarie.cshtml" />
+    <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
+    <Content Include="Views\Questionnarie\collect_questionnarie.cshtml" />
+    <Content Include="Views\SprintActivities\UserSetup2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

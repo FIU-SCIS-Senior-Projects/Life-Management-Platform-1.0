@@ -113,3 +113,12 @@ textarea {
      color: white;
      text-shadow: 1px 1px black;
  }
+
+
+ .cycle-tab {
+     text-align: center;
+     height:300px;
+     
+     border-radius: 25px;
+     opacity: 0.9;
+ }

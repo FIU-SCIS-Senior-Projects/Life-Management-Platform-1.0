@@ -7,33 +7,37 @@
 <script src="~/Scripts/lmpopup.js"></script>
 <div class="clearfix">
     <div class="col-md-12 text-right">
-        <a class="btn btn-success lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("Passion","Activities")'  href="#">+</a>
+        <a class="btn btn-success lmmodal" modal-color="cadetblue" modal-width="100%" url='@Url.Action("Passion","Activities")' href="#">+</a>
     </div>
-    @if (Model != null)
-    {
-        foreach (var a in Model)
-        {
-
-            <div class="cat-tiles col-sm-4 col-md-3">
-                <label id="lbl" for="@a.Id">
-                    <div class="cat-tiles-body">
-
-                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)"/>
-                    </div>
-                </label>
-                <div style="display: block" class="cat-tiles-specifics">
-                    <label>@a.Specifics </label>
-                </div>
-                <div class="cat-tiles-footer">
-                    <label class="cat-tiles-lbl">@a.Activity.Name</label>
-                </div>
-
-
-            </div>
-
-        }
-    }
-
-
-
 </div>
+    <div class="clearfix">
+
+        <div class="col-md-3"></div>
+        @if (Model != null)
+        {
+            foreach (var a in Model)
+            {
+
+                <div class="cat-tiles col-sm-4 col-md-3">
+                    <label id="lbl" for="@a.Id">
+                        <div class="cat-tiles-body">
+
+                            <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
+                        </div>
+                    </label>
+                    <div style="display: block" class="cat-tiles-specifics">
+                        <label class="spec-lbl">@a.Specifics </label>
+                    </div>
+                    <div class="cat-tiles-footer">
+                        <label class="cat-tiles-lbl">@a.Activity.Name</label>
+                    </div>
+
+
+                </div>
+
+            }
+        }
+
+
+
+    </div>
