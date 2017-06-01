@@ -15,7 +15,7 @@ namespace LifeManagement.Controllers
         private SeniorDBEntities db = new SeniorDBEntities();
         /****************************setup joy passion giving back*********************************************************/
         [Authorize]
-        public ActionResult UserSetup(Sprint sprint)
+        public ActionResult UserSetup22(Sprint sprint)
         {
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
@@ -32,7 +32,7 @@ namespace LifeManagement.Controllers
 
         }
         [Authorize]
-        public ActionResult UserSetup2(Sprint sprint)
+        public ActionResult UserSetup(Sprint sprint)
         {
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
