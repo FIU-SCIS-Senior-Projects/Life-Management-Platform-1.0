@@ -279,29 +279,24 @@ namespace LifeManagement.Controllers
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
 
-                TempData["model"] = data;
-                TempData.Keep("model");
-                return RedirectToAction("SetupSprint");
+
+                ViewBag.Sprint0 = sprint0;
+                ViewBag.questData = data;
+                return View("SetupSprint");
 
             }
-            TempData["model"] = data;
-            TempData.Keep("model");
-            return RedirectToAction("SetupSprint");
+
+            ViewBag.ErrorMsg = "An unexpected error occurred, please try again later";
+            return View("Error");
+            
         }
 
-
+        [Authorize]
         public ActionResult SetupSprint()
         {
-            QuestionarieViewModel pulpa = new QuestionarieViewModel();
 
-
-            if (TempData["model"] != null)
-            {
-                TempData.Keep("model");
-                pulpa = (QuestionarieViewModel)TempData["model"];
-                return View(pulpa);
-            }
-            return View(pulpa);
+            return View();
+           
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++
