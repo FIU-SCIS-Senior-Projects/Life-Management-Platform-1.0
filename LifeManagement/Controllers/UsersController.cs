@@ -279,10 +279,8 @@ namespace LifeManagement.Controllers
                 user.LifeSuccess = data.determine_success;
                 db.SaveChanges();
 
-
-                ViewBag.Sprint0 = sprint0;
                 ViewBag.questData = data;
-                return View("SetupSprint");
+                return RedirectToAction("UserSetup", "SprintActivities", new { sprint = sprint0 });
 
             }
 
