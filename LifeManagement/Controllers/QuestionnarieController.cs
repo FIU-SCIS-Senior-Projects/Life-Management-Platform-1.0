@@ -21,11 +21,12 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public bool collect_questionnarie(QuestionarieViewModel data)
         {
 
             string name = User.Identity.Name;
-                        var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
+            var user = db.Users.Where(atr => atr.username.ToLower() == name.ToLower()).FirstOrDefault();
 
             if (user != null)
             {
@@ -74,9 +75,8 @@ namespace LifeManagement.Controllers
                 return true;
 
             } 
-            TempData["model"] = data;
-            TempData.Keep("model");
-            return true;
+           
+            return false;
         }
 
        
@@ -91,7 +91,7 @@ namespace LifeManagement.Controllers
                 pulpa = (QuestionarieViewModel) TempData["model"];
                 return View(pulpa);
             }
-            return View();
+            return View(pulpa);
         }
 
 
