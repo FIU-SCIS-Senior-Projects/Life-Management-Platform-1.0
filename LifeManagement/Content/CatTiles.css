@@ -5,7 +5,7 @@
     opacity: 0.9;
 }
 .cat-tiles {
-    
+    font-size: 12px;
       padding: 0px;
     margin: 3px;
     min-width: 50px;
@@ -66,6 +66,9 @@
    
     border:1px solid aliceblue
 }
-.cat-tile-label {
-    
+.spec-lbl {
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    color:cadetblue ;
 }

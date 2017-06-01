@@ -6,32 +6,106 @@
     ViewBag.Title = "UserSetup";
 }
 
-<h2>User Setup</h2>
-<div class="col-md-12" style="background: whitesmoke">
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" id="joytab" onclick="renderCardBlock('@Url.Action("Joy")','#joytab')" href="#">Joy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" id="passiontab"   onclick="renderCardBlock('@Url.Action("Passion")','#passiontab')" href="#">Passion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active " id="gbtab" modal-color="LightCoral"  onclick="renderCardBlock('@Url.Action("GivingBack")','#gbtab')" href="#">Giving Back</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" onclick="renderCardBlock('@Url.Action("DashBoard")')" href="#">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-        <div id="cardblock" class="card-block col-md-12" style="height: 300px;overflow: auto">
-            <div class="waitmodal">
-            </div>
-        </div>
-    </div>
 
+
+@{
+    Layout = "~/Views/Shared/_layout_for_questionarie.cshtml";
+}
+
+@section AddToHead{
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/component.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-skin-boxes.css" />
+    <script src="~/Scripts/bety_scripts/modernizr.custom.js"></script>
+}
+
+@section bgdiv{
+    <div class="bgdiv" style="background-image: url('/Imgs/vision.jpg');opacity:0.5"></div>
+}
+
+<div class="modal-body" style="width: 1200px ; height: 500px; position: absolute; top: 30px ; margin:0 auto ; ">
+    <div class="container">
+        <div class="fs-form-wrap" id="fs-form-wrap">
+            
+
+            <form id="myform" class="fs-form fs-form-full"  autocomplete="off" >
+                <ol class="fs-fields">
+                   
+                    <li >
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <h3 class="fs-anim-lower fs-anim-upper">What gives you joy?</h3>
+                            <div class="fs-anim-lower fs-anim-upper" id="joytab">
+                                @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+
+                        
+
+</li>
+                    <li >
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: aquamarine">
+                            <h3 class="fs-anim-lower fs-anim-upper">What are you passionate about?</h3>
+                            <div class="fs-anim-lower fs-anim-upper" id="passiontab">
+                                @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+                       
+
+                    </li>
+                    <li >
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: coral">
+
+
+                            <h3 class="fs-anim-lower fs-anim-upper">How would you give back to society?</h3>
+                            <div class="fs-anim-lower fs-anim-upper" id="gbtab">
+                                @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+                    </li>
+                  
+
+                </ol><!-- /fs-fields -->
+            @Html.ActionLink("Save Activities","Index", "DashBoard", null, new {@class= "fs-submit btn btn-success" })
+            </form><!-- /fs-form -->
+        </div><!-- /fs-form-wrap -->
+        <!-- Related demos -->
+    </div> <!-- /container -->
 </div>
+
+<script src="~/Scripts/bety_scripts/classie.js"></script>
+<!--     <script src="~/Scripts/bety_scripts/selectFx.js"></script>   -->
+<script src="~/Scripts/bety_scripts/fullscreenForm.js"></script>
+<script>
+                (function () {
+                    var formWrap = document.getElementById('fs-form-wrap');
+
+                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                        new SelectFx(el, {
+                            stickyPlaceholder: false,
+                            onChange: function (val) {
+                                document.querySelector('span.cs-placeholder').style.backgroundColor = val;
+                            }
+                      });
+                    });
+
+                    new FForm(formWrap, {
+                        onReview: function () {
+                            classie.add(document.body, 'overview'); // for demo purposes only
+                        }
+                    });
+                })();
+</script>
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -61,6 +135,11 @@
    function updateSprintActivity(activities,cat) {
        debugger;
 
+       var tabid="#joytab";
+       if (cat == 'passion')
+           tabid = "#passiontab";
+       if (cat == 'gb')
+           tabid = "#gbtab";
 
         $.ajax({
             url: '@Url.Action("UpdateSprint","SprintActivities")',
@@ -68,17 +147,11 @@
 
             data:{ 'activities': activities,cat:cat } ,
             success:function(res) {
-                var tabid="#joytab";
-                if (cat == 'passion')
-                    tabid = "#passiontab";
-                if (cat == 'gb')
-                    tabid = "#gbtab";
-                $('.nav-link').css('background-color', 'transparent');
-                $(tabid).css('background-color', '#eeeeee');
-                $('#cardblock').html(res);
+               
+               $(tabid).html(res);
             },
             error:function(msg) {
-                $('#cardblock').html('<h4>Could not get data from server </h4>');
+                $(tabid).html('<h4>Could not get data from server </h4>');
             }
         })
 

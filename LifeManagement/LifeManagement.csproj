@@ -322,13 +322,15 @@
     <Content Include="Views\SprintActivities\Edit.cshtml" />
     <Content Include="Views\SprintActivities\Index.cshtml" />
     <Content Include="Views\SprintActivities\Joy.cshtml" />
-    <Content Include="Views\SprintActivities\UserSetup.cshtml" />
+    <Content Include="Views\SprintActivities\UserSetup22.cshtml" />
     <Content Include="Views\Shared\_layout_for_questionarie.cshtml" />
     <Content Include="Views\Shared\_layout_to_test.cshtml" />
+    <Content Include="Views\Questionnarie\CollectPassion.cshtml" />
     <Content Include="Views\SprintActivities\Passion.cshtml" />
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
-    <Content Include="Views\Users\SetupSprint.cshtml" />
-    <Content Include="Views\Users\collect_questionnarie.cshtml" />
+    <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
+    <Content Include="Views\Questionnarie\collect_questionnarie.cshtml" />
+    <Content Include="Views\SprintActivities\UserSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
