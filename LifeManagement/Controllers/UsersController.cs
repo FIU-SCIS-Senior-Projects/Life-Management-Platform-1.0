@@ -175,6 +175,8 @@ namespace LifeManagement.Controllers
 
         public string CreateUser(UserViewModel fromuser, Role role)
         {
+            DateTime low = new DateTime(1900,1,1);
+            DateTime high = DateTime.Now.Subtract(new TimeSpan(6570,0,0,0));
             if (db.Users.Where(a => a.username.ToLower() == fromuser.username.ToLower()).Count() > 0)
             {
                 return Constants.MSGS.DUPLICATEUSERNAME;
@@ -187,7 +189,10 @@ namespace LifeManagement.Controllers
             {
                 return Constants.MSGS.PASSWORDMISMATCH;
             }
-
+            if (fromuser.DOB >high || fromuser.DOB<low)
+            {
+                return Constants.MSGS.INVALIDDOB;
+            }
 
             var newuser = new User();
             newuser.RoleId = role.Id;
