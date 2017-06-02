@@ -11,9 +11,12 @@ using System.Web.Security;
 
 namespace LifeManagement.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private SeniorDBEntities db = new SeniorDBEntities();
+        private Common common = new Common();
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -30,6 +33,7 @@ namespace LifeManagement.Controllers
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("UserSetup","SprintActivities");
             }
+            ViewBag.Error = "Invalid Credentials";
             return View();
         }
         public ActionResult LogOut()
@@ -39,17 +43,12 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Users
-        public ActionResult Index()
-        {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
-        }
-
+    
 
         //Beatriz' code starts here++++++++++
         // GET: 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult ResetPass(string email)
         {
             Console.Out.WriteLine("This is email value: " + email);
@@ -71,7 +70,7 @@ namespace LifeManagement.Controllers
 
             return PartialView();
         }
-
+        [AllowAnonymous]
         public ActionResult PasswordRecovery(int? id)
         {
             if(id == null)
@@ -88,6 +87,7 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult ChangePass(string newpass, string newpass_conf, int id)
         {
     
@@ -113,23 +113,10 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Login"); ;
         }
 
-            // GET: Users/Details/5
-            public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
 
         // GET: Users/Create
+        [AllowAnonymous]
         public ActionResult CreateAccount()
         {
            
@@ -139,6 +126,7 @@ namespace LifeManagement.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult CreateAccount( UserViewModel user)
         {
             if (ModelState.IsValid)
@@ -216,7 +204,32 @@ namespace LifeManagement.Controllers
 
 
         }
+        /**************dashboards*******************************/
+        public ActionResult Dashboard()
+        {
+            return View(common.isAdmin());
+        }
 
+        public PartialViewResult UserDashBoard()
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                ViewBag.ErrorMsg = "There is no user logged in";
+                return PartialView("ErrorPartial");
+            }
+            return PartialView(user);
+        }
+        public PartialViewResult AdminDashBoard()
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                ViewBag.ErrorMsg = "There is no user logged in";
+                return PartialView("ErrorPartial");
+            }
+            return PartialView(user);
+        }
         //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
         [Authorize]
         public ActionResult Questionaire(UserViewModel user)
@@ -302,9 +315,29 @@ namespace LifeManagement.Controllers
            
         }
 
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++
+        /**************system generated*********************************************/
+        // GET: Users
+        public ActionResult Index()
+        {
+            var users = db.Users.Include(u => u.Role);
+            return View(users.ToList());
+        }
 
-        // GET: Users/Edit/5
+        // GET: Users/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
         public ActionResult Edit(int? id)
         {
             if (id == null)

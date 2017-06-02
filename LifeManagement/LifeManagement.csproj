@@ -225,6 +225,7 @@
     <Content Include="Imgs\meditation.jpg" />
     <Content Include="Imgs\noimage.jpg" />
     <Content Include="Imgs\plant.jpg" />
+    <Content Include="Imgs\usericon.jpg" />
     <Content Include="Imgs\users.jpg" />
     <Content Include="Imgs\user_avatar.png" />
     <Content Include="Imgs\vision.jpg" />
@@ -332,6 +333,9 @@
     <Content Include="Views\SprintActivities\Passion.cshtml" />
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
     <Content Include="Views\SprintActivities\UserSetup.cshtml" />
+    <Content Include="Views\Users\Dashboard.cshtml" />
+    <Content Include="Views\Users\UserDashBoard.cshtml" />
+    <Content Include="Views\Users\AdminDashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
