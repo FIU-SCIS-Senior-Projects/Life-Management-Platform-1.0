@@ -198,6 +198,7 @@
     <Content Include="Content\bety_css\cs-skin-boxes.css" />
     <Content Include="Content\bety_css\demo.css" />
     <Content Include="Content\bety_css\normalize.css" />
+    <Content Include="Content\bety_css\dropdown.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CatTiles.css" />
@@ -331,6 +332,7 @@
     <Content Include="Views\Questionnarie\SetupSprint.cshtml" />
     <Content Include="Views\Questionnarie\collect_questionnarie.cshtml" />
     <Content Include="Views\SprintActivities\UserSetup.cshtml" />
+    <Content Include="Views\Activities\create_test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

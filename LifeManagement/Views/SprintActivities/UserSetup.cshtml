@@ -25,12 +25,13 @@
     <div class="bgdiv" style="background-image: url('/Imgs/butterfly.jpg');opacity:0.5"></div>
 }
 
-<div class="modal-body" style="width: 1200px ; height: 700px; position: absolute; top: 30px ; margin:0 auto ; ">
+<div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; margin:0 auto ; ">
     
     <div class="container">
         <div class="fs-form-wrap" id="fs-form-wrap">
             <div class="fs-title">
-                <h3 style=" color: #00b359; font-weight: bold"> Just few more steps to configure your Productity chart and you are done! </h3>
+                <br />
+                <h3 style=" color: #00b359; font-weight: 800 "> Just few more steps to configure your Productity chart and you are done! </h3>
             </div>
 
                 <form id="myform" class="fs-form fs-form-full" autocomplete="off">
@@ -38,8 +39,9 @@
 
                         <li>
                             <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
-                                <h3 class="fs-anim-lower fs-anim-upper">What gives you joy?</h3>
-                                <div class="fs-anim-lower fs-anim-upper" id="joytab">
+                                <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 3 activities that give you joy">What gives you joy?</label>
+                               
+                                <div class="fs-anim-lower fs-anim-upper activities-div" id="joytab">
                                     @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
                                 </div>
                             </div>
@@ -48,9 +50,10 @@
 
                         </li>
                         <li>
-                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: aquamarine">
-                                <h3 class="fs-anim-lower fs-anim-upper">What are you passionate about?</h3>
-                                <div class="fs-anim-lower fs-anim-upper" id="passiontab">
+                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffb3b3">
+                                <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 2 activities that you are really passionate about">What are you passionate about?</label>
+
+                                <div class="fs-anim-lower fs-anim-upper activities-div" id="passiontab">
                                     @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
                                 </div>
                             </div>
@@ -58,11 +61,11 @@
 
                         </li>
                         <li>
-                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: coral">
+                            <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffa366">
 
+                                <label class="fs-field-label fs-anim-upper" for="vision" style=" font-weight: 800" data-info="Select upto 2 activities that give you a sense of fulfilment from giving back or helping others">How would you give back to society?</label>
 
-                                <h3 class="fs-anim-lower fs-anim-upper">How would you give back to society?</h3>
-                                <div class="fs-anim-lower fs-anim-upper" id="gbtab">
+                                <div class="fs-anim-lower fs-anim-upper activities-div" id="gbtab" >
                                     @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
                                 </div>
                             </div>

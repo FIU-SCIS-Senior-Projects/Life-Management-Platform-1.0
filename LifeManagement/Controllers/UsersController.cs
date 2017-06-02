@@ -150,8 +150,12 @@ namespace LifeManagement.Controllers
 
                     if (result == Constants.MSGS.SUCCESS)
                     {
+                        TempData["UserName"] = user.FirstName;
+                        TempData["LastName"] = user.LastName;
+                        TempData.Keep("UserName");
+                        TempData.Keep("LastName");
                         FormsAuthentication.SetAuthCookie(user.username, false);
-                        return RedirectToAction("Questionaire", user);
+                        return RedirectToAction("Questionaire");
 
                     }
                         
@@ -214,9 +218,9 @@ namespace LifeManagement.Controllers
 
         //Im working on this+++++++++++++++++++++++++++++++++++++++++++++++++++
         [Authorize]
-        public ActionResult Questionaire(UserViewModel user)
+        public ActionResult Questionaire()
         {
-            return View(user);
+            return View();
         }
 
 
