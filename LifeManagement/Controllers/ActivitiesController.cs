@@ -58,7 +58,7 @@ namespace LifeManagement.Controllers
         }
 
         /****************Testing Bea******************/
-        public PartialViewResult create_test()
+        public PartialViewResult CreateActivity()
         {
             return PartialView();
         }
