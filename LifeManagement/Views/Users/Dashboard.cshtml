@@ -1,0 +1,17 @@
+﻿@model bool
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+@{
+    if (Model)
+    {
+        Html.RenderAction("AdminDashboard");
+    }
+    else
+    {
+        Html.RenderAction("UserDashboard");
+    }
+}

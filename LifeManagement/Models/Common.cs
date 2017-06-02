@@ -32,15 +32,31 @@ namespace LifeManagement.Models
             public static string INVALIDPASSWORD = "Password does not comply with requirements";
             public static string ROLENOTEXIST = "Role does not exist";
             public static string DUPLICATEEMAIL = "There exists an account with that email";
+            public static string INVALIDDOB = "Invalid date of birth";
         }
     }
     public class Common
     {
+        private SeniorDBEntities db = new SeniorDBEntities();
+
         private const string SMTPSERVER = "smtp.gmail.com";
         private const int SMTPPORT = 587;
         private const string EmailAddress = "manage.life.team@gmail.com";
         private const string Pass = "052017befer";
+        /*********************usr functionalitites**********************/
 
+        public bool isAdmin()
+        {
+            try
+            {
+                var user = db.Users.Where(a => a.username.ToLower() == HttpContext.Current.User.Identity.Name.ToLower()).FirstOrDefault();
+                return user.Role.Name == Constants.ROLES.ADMIN;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public bool IsAuthenticated
         {
          

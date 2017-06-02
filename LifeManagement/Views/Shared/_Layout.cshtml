@@ -78,7 +78,9 @@
                 @if (common.IsAuthenticated)
                 {
                     <text> Hello, @User.Identity.Name</text>
-                    @Html.ActionLink("Logout", "LogOut", "Users", null, null)
+                    <a href="@Url.Action("DashBoard","Users")"><img width="20" height="20" src="~/Imgs/usericon.jpg" /></a>
+                   
+                     @Html.ActionLink("Logout", "LogOut", "Users", null, null)
                     ;
 
                 }
