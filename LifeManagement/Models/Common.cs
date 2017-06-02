@@ -49,7 +49,7 @@ namespace LifeManagement.Models
         {
             try
             {
-                var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+                var user = db.Users.Where(a => a.username.ToLower() == HttpContext.Current.User.Identity.Name.ToLower()).FirstOrDefault();
                 return user.Role.Name == Constants.ROLES.ADMIN;
             }
             catch (Exception e)

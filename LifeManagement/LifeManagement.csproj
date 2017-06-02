@@ -225,6 +225,7 @@
     <Content Include="Imgs\meditation.jpg" />
     <Content Include="Imgs\noimage.jpg" />
     <Content Include="Imgs\plant.jpg" />
+    <Content Include="Imgs\usericon.jpg" />
     <Content Include="Imgs\users.jpg" />
     <Content Include="Imgs\user_avatar.png" />
     <Content Include="Imgs\vision.jpg" />

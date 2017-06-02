@@ -33,6 +33,7 @@ namespace LifeManagement.Controllers
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("UserSetup","SprintActivities");
             }
+            ViewBag.Error = "Invalid Credentials";
             return View();
         }
         public ActionResult LogOut()
