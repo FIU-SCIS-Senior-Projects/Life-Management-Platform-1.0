@@ -116,9 +116,17 @@ textarea {
 
 
  .cycle-tab {
-     text-align: center;
-     height:300px;
      
+     text-align: center;
+     height:340px;
+     padding-top: 10px;
      border-radius: 25px;
      opacity: 0.9;
  }
+
+.activities-div {
+    position: absolute;
+    top: 60px;
+    left: 8%;
+    width: 80%;
+}

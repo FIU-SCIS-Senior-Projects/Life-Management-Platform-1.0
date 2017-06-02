@@ -26,7 +26,27 @@
 
 <body>
 
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="modalcontent">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+
+                </div>
+                <div class="modal-body" id="modalbodydiv">
+                    <div id="myDialogContainer">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
         @RenderBody()
+    </div>
    
 </body>
 </html>

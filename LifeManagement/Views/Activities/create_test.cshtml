@@ -1,0 +1,68 @@
+﻿@model LifeManagement.Models.Activity
+
+<link href="~/Content/bety_css/dropdown.css" rel="stylesheet">
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body" style="width: 500px ; position: center ; margin:0 auto">
+
+        <div class="form-horizontal">
+            <h2 class="text-center"> Create Activity</h2>
+
+            <br />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <div class="control-label col-md-4">
+                    <label> Choose a category</label>
+                    </div>
+                <div class="col-md-8">
+                    <select>
+                        <option value="" disabled selected> </option>
+                        <option value="joy">Joy</option>
+                        <option value="passion">Passion</option>
+                        <option value="give_back">Give back</option>
+                    </select>
+                    </div>
+                </div>
+            
+
+            <br />
+
+            <div class="form-group">
+                <div class="control-label col-md-4">
+                    <label style="text-align:left">Upload Image:</label>
+                    </div>
+                <div class= "col-md-8">
+                    <input type="file" name="file" id="file" style="width: 100%;" />
+                </div>
+                </div>
+          
+
+            <div class="form-group">
+                <div class="col-md-offset-4">
+                    <div class="col-md-4">
+                        <input type="submit" value="Submit" class="btn btn-success" />
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-danger form-control" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            </div>
+            }

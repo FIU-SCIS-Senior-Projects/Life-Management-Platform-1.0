@@ -56,6 +56,16 @@ namespace LifeManagement.Controllers
             }
 
         }
+
+        /****************Testing Bea******************/
+        public PartialViewResult create_test()
+        {
+            return PartialView();
+        }
+
+
+
+
         /*********************system generated**********************/
         // GET: Activities
         public ActionResult Index()
