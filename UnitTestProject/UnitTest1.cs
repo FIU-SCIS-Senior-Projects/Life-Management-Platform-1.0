@@ -12,7 +12,7 @@ namespace UnitTestProject
     [TestClass]
     public class UnitTest1
     {
-        private string SITEURL = "https://localhost:44313/";
+        private string SITEURL = "http://fiusp.azurewebsites.net/";
         [TestMethod]
         public void SignUpTest()
         {
