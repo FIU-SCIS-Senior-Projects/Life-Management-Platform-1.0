@@ -68,19 +68,19 @@ namespace LifeManagement.Models
             }
         }
         /***********************images processing******************************************/
-        private bool saveImageBytes(ImageInterface s, HttpPostedFileBase image)
+        public bool saveImageBytes(Activity s, HttpPostedFileBase image)
         {
 
             if (image != null)
             {
-                s.ImageMimeType = image.ContentType;
-                s.Bytes = new byte[image.ContentLength];
-                image.InputStream.Read(s.Bytes, 0, image.ContentLength);
+                s.ImgMime = image.ContentType;
+                s.Img = new byte[image.ContentLength];
+                image.InputStream.Read(s.Img, 0, image.ContentLength);
                 return true;
             }
             return false;
         }
-        private bool saveImageBytes(ImageInterface s, string image)
+      /*  public bool saveImageBytes(ImageInterface s, string image)
         {
 
             if (!String.IsNullOrEmpty(image))
@@ -94,7 +94,7 @@ namespace LifeManagement.Models
             }
             return false;
         }
-
+        */
         public  string SignatureImageStr64(Byte[] bytes, string mimetype)
         {
             string imageSrc = "/Imgs/noimage.jpg";

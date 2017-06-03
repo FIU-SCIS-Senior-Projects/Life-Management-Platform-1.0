@@ -12,6 +12,7 @@ namespace LifeManagement.Controllers
 {
     public class ActivitiesController : Controller
     {
+        private Common common = new Common();
         private SeniorDBEntities db = new SeniorDBEntities();
         /***************************customs************************/
         public PartialViewResult Joy()
@@ -56,6 +57,36 @@ namespace LifeManagement.Controllers
             }
 
         }
+
+        /****************Testing Bea******************/
+        public PartialViewResult CreateActivity()
+        {
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            return PartialView();
+        }
+        [HttpPost]
+        public PartialViewResult CreateActivity(Activity activity, HttpPostedFileBase file)
+        {
+            if (file.ContentLength <= 0)
+            {
+                ViewBag.ErrorMsg = "No file uploaded";
+                return PartialView(activity);
+            }
+          
+            if (common.saveImageBytes(activity, file))
+            {
+                db.Activities.Add(activity);
+                ViewBag.Msg = "Activity Successfully saved";
+                return PartialView(activity);
+            }
+
+            ViewBag.ErrorMsg = "Error occured";
+                return PartialView("ErrorPartial");
+           
+        }
+
+
+
         /*********************system generated**********************/
         // GET: Activities
         public ActionResult Index()
