@@ -91,7 +91,53 @@ namespace LifeManagement.Controllers
 
         }
 
+        /**************dashboard tabs*******************/
       
+        public ActionResult JoyTab(Sprint sprint)
+        {
+            var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
+            if (joyactivity != null && joyactivity.Count() > 0)
+            {
+                return View(joyactivity.ToList());
+            }
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if (lastsprint != null && lastsprint.Id > 0)
+            {
+                var lastsprintJoyAct =
+                    lastsprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
+                if (lastsprintJoyAct != null && lastsprintJoyAct.Count() > 0)
+                    return View(lastsprintJoyAct.ToList());
+              
+            }
+
+            ViewBag.ErrorMsg = "Could not find joy activity";
+            return View("Error");
+
+        }
+
+        public JsonResult GetJoy(int sprintid)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<SprintActivities> result = new List<SprintActivities>();
+            var sprint = db.Sprints.Find(sprintid);
+            if (sprint != null)
+            {
+                var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
+                if (joyactivity.Count() > 0)
+                {
+                    result = joyactivity.ToList();
+                }
+                
+            }
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public PartialViewResult UpdateSprint(Act[] activities,string cat)
         { var newacts = new List<SprintActivities>();
