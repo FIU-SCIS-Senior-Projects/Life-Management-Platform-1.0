@@ -80,7 +80,7 @@ namespace LifeManagement.Models
             }
             return false;
         }
-        public bool saveImageBytes(ImageInterface s, string image)
+      /*  public bool saveImageBytes(ImageInterface s, string image)
         {
 
             if (!String.IsNullOrEmpty(image))
@@ -94,7 +94,7 @@ namespace LifeManagement.Models
             }
             return false;
         }
-
+        */
         public  string SignatureImageStr64(Byte[] bytes, string mimetype)
         {
             string imageSrc = "/Imgs/noimage.jpg";
