@@ -3,7 +3,7 @@
 <link href="~/Content/bety_css/dropdown.css" rel="stylesheet">
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateActivity", "Activities", FormMethod.Post, new { encType = "multipart/form-data" }))
 {
     <div class="modal-body" style="width: 500px ; position: center ; margin:0 auto">
 
@@ -28,12 +28,9 @@
                     <label> Choose a category</label>
                 </div>
                 <div class="col-md-8">
-                    <select>
-                        <option value="" disabled selected> </option>
-                        <option value="joy">Joy</option>
-                        <option value="passion">Passion</option>
-                        <option value="give_back">Give back</option>
-                    </select>
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+
+
                 </div>
             </div>
 
