@@ -119,7 +119,48 @@ namespace LifeManagement.Controllers
             return View("Error");
 
         }
+        [HttpPost]
+        public JsonResult SaveProgress(int sprintActId,int day)
+        {
+            float percentage = 0;
+            try
+            {
 
+
+                var sprintact = db.SprintActivities.Find(sprintActId);
+                if (sprintact == null)
+                    return Json(new { Percentage = percentage });
+
+                var datePerformed = sprintact.Sprint.DateFrom.AddDays(day).Date;
+
+                var existingProgress =
+                    db.Progresses.Where(a => a.SprintActivitiesId == sprintActId &&
+                    a.DatePerformed.Day == datePerformed.Day && a.DatePerformed.Month==datePerformed.Month &&
+                    a.DatePerformed.Year==datePerformed.Year);
+
+                if (existingProgress.Any())
+                {
+                    db.Progresses.RemoveRange(existingProgress);
+                }
+                else
+                {
+                    var progress = new Progress();
+                    progress.DatePerformed = datePerformed;
+                    progress.SprintActivitiesId = sprintActId;
+
+                    db.Progresses.Add(progress);
+                }
+
+                db.SaveChanges();
+                int p = db.Progresses.Where(a => a.SprintActivitiesId == sprintActId).Count();
+                percentage = p / Constants.ACTTOTAL;
+                return Json(new { Percentage = percentage});
+            }
+            catch (Exception e)
+            {
+                return Json(new { Percentage = percentage });
+            }
+        }
         public JsonResult GetJoy(int sprintid)
         {
             db.Configuration.ProxyCreationEnabled = false;

@@ -1,6 +1,6 @@
 ﻿.caldaydiv {
     border-radius: 50%;
-    background: darkturquoise;
+    background: crimson;
     width: 25px;height: 25px;
     text-align: center;
     clear: none;
@@ -26,3 +26,6 @@
 }.callink:link {
       text-decoration: none;
 }
+ .activeDay {
+     background: chartreuse;
+ }

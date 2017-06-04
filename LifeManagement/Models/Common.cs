@@ -15,7 +15,8 @@ namespace LifeManagement.Models
     }
     public class Constants
     {
- 
+
+        public const float ACTTOTAL = 12;
           public struct ROLES
         {
             public static string GUEST = "Guest";

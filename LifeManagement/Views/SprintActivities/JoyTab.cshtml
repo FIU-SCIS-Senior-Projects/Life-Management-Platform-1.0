@@ -2,8 +2,10 @@
 @{
     ViewBag.Title = "JoyTab";
 }
-
 <link href="~/Content/ActCalendar.css" rel="stylesheet" />
+<script src="~/Scripts/cmGauge.js"></script>
+<link href="~/Content/cmGauge.css" rel="stylesheet" />
+
 <h2>JoyTab</h2>
 <div class="panel">
 
@@ -34,8 +36,10 @@
 
                         for (int i = 0; i < 15; i++)
                         {
-                            <a class="callink" href="#">
-                                <div class="caldaydiv">
+                            <a class="callink" href="#" onclick="saveProgress(@act.Id,@i)">
+                                <div id="@(@act.Id+"-"+i)" class='caldaydiv @(@act.Progresses.Where(a => a.DatePerformed.Day == currentDay.Day &&
+                                                  a.DatePerformed.Month == currentDay.Month &&
+                                                  a.DatePerformed.Year == currentDay.Year).Count()>0 ? "activeDay" : "")'>
                                     @currentDay.Day
                                 </div>
                             </a>
@@ -45,12 +49,58 @@
                 </td>
                 <td>12</td>
                 <td>Actual</td>
-                <td>Activity Score</td>
+                <td>
+                    <div class="gaugeCont">
+                        <div id="gaugeAct-@(@act.Id)" class="gauge gauge-small gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+                    </div>
+                </td>
                 <td>Category Score</td>
                 <td>Cycle Score</td>
                 <td>Goal</td>
             </tr>
                         }
     </table>
+
+   
+
 </div>
 
+<script>
+    var  catScore, cycleScore;
+
+    $('.gauge .gauge-arrow').cmGauge();
+    function updateDials(actiId, actScore) {
+      
+        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore*100);
+    }
+  
+    function saveProgress(actid, day) {
+        var iddiv = "#" + actid + "-" + day;
+
+        data = { sprintActId: actid, Day: day };
+        $.ajax({
+            url:'@Url.Action("SaveProgress","SprintActivities")',
+            type:'POST',
+            data:data,
+            success: function (msg) {
+                if ($(iddiv).hasClass("activeDay"))
+                    $(iddiv).removeClass("activeDay");
+                else {
+                    $(iddiv).addClass("activeDay");
+                }
+                updateDials(actid, msg.Percentage);
+            },
+            error:function(res) {
+                alert('error');
+            }
+        })
+    }
+
+
+</script>
