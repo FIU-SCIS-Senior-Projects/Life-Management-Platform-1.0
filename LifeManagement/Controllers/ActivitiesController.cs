@@ -65,19 +65,20 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
         [HttpPost]
-        public PartialViewResult CreateActivity(Activity activity, HttpPostedFileBase file)
+        public ActionResult CreateActivity(Activity activity, HttpPostedFileBase file)
         {
             if (file.ContentLength <= 0)
             {
                 ViewBag.ErrorMsg = "No file uploaded";
-                return PartialView(activity);
+                return PartialView("ErrorPartial");
             }
           
             if (common.saveImageBytes(activity, file))
             {
                 db.Activities.Add(activity);
+                db.SaveChanges();
                 ViewBag.Msg = "Activity Successfully saved";
-                return PartialView(activity);
+                return RedirectToAction("Index", "Dashboard");
             }
 
             ViewBag.ErrorMsg = "Error occured";
