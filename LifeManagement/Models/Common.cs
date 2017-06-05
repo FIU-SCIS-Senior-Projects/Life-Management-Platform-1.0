@@ -7,6 +7,11 @@ using System.Net.Mail;
 
 namespace LifeManagement.Models
 {
+    public class PercentModel
+    {
+       public int actId { get; set; }
+        public float percentage { get; set; }
+    }
     public class  Act
     {
         public int activityId { get; set; }

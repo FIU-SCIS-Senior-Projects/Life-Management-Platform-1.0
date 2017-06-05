@@ -161,22 +161,60 @@ namespace LifeManagement.Controllers
                 return Json(new { Percentage = percentage });
             }
         }
-        public JsonResult GetJoy(int sprintid)
+        public ActionResult GetPercentages(int sprintId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<SprintActivities> result = new List<SprintActivities>();
-            var sprint = db.Sprints.Find(sprintid);
+           
+            List<PercentModel> Joy = new List<PercentModel>();
+            List<PercentModel> Passion = new List<PercentModel>();
+            List<PercentModel> Gb = new List<PercentModel>();
+
+            var sprint = db.Sprints.Find(sprintId);
             if (sprint != null)
             {
-                var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
-                if (joyactivity.Count() > 0)
+                var joy = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
+                foreach (var j in joy)
                 {
-                    result = joyactivity.ToList();
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = j.Id,
+                        percentage = j.Progresses.Count / Constants.ACTTOTAL
+
+                    };
+                    Joy.Add(obj);
                 }
-                
+                var passion = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Passion");
+                foreach (var p in passion)
+                {
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = p.Id,
+                        percentage = p.Progresses.Count / Constants.ACTTOTAL
+
+                    };
+                    Passion.Add(obj);
+                }
+                var gb = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back");
+                    foreach (var g in gb)
+                {
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = g.Id,
+                        percentage = g.Progresses.Count / Constants.ACTTOTAL
+
+                    };
+                    Gb.Add(obj);
+                }
+
             }
-            
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var Percentages =
+                new
+                {
+                    Joy =Json(Joy),
+                    Passion =Json(Passion),
+                    Gb =Json(Gb)
+                };
+            return Json(new {Percentages = Percentages}, JsonRequestBehavior.AllowGet);
+         
         }
 
         [HttpPost]
