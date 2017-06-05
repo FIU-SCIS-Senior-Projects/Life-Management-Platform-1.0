@@ -1,0 +1,180 @@
+﻿@model List<LifeManagement.Models.SprintActivities>
+@{
+    ViewBag.Title = "JoyTab";
+    var firstact = Model[0];
+}
+<link href="~/Content/ActCalendar.css" rel="stylesheet" />
+<script src="~/Scripts/cmGauge.js"></script>
+<link href="~/Content/cmGauge.css" rel="stylesheet" />
+
+<h2>JoyTab</h2>
+<div class="panel clearfix">
+    <div class="col-md-12">
+
+        <table class="table text-center">
+            <tr>
+                <td colspan="5">
+                    Goals: 
+                    @(firstact.Sprint.Goals.Where(a => a.CategoryId == firstact.Activity.CategoryId).FirstOrDefault().Description)
+                </td>
+            </tr>
+            <tr>
+                <td>Activity</td>
+                <td>Progress</td>
+                <td>Target</td>
+                <td>Actual</td>
+                <td>Activity Score</td>
+
+            </tr>
+            @foreach (var act in Model)
+            {
+
+
+                <tr>
+                    <td>
+                        @act.Activity.Name <br/>
+                        -@act.Specifics
+                    </td>
+                    <td>
+                        @{
+                            var currentDay = act.Sprint.DateFrom;
+
+                            for (int i = 0; i < 15; i++)
+                            {
+                                <a class="callink" href="#" onclick="saveProgress(@act.Id, @i)">
+                                    <div id="@(@act.Id + "-" + i)" actid="@act.Id" cat="@act.Activity.Category.Name" class='caldaydiv @(@act.Progresses.Where(a => a.DatePerformed.Day == currentDay.Day &&
+                                                                                                                                                                   a.DatePerformed.Month == currentDay.Month &&
+                                                                                                                                                                   a.DatePerformed.Year == currentDay.Year).Count() > 0 ? "activeDay" : "")'>
+                                        @currentDay.Day
+                                    </div>
+                                </a>
+                                currentDay = currentDay.AddDays(1);
+                            }
+                        }
+                    </td>
+                    <td>12</td>
+                    <td>Actual</td>
+                    <td>
+                        <div>
+                            <div id="gaugeAct-@(@act.Id)" class="gauge gauge-small gauge-green">
+
+                                <div class="gauge-arrow" data-percentage="40"
+                                     style="transform: rotate(0deg);"></div>
+
+
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+            <tr>
+                <td colspan="3">Category Score</td>
+                <td colspan="2">Cycle Score</td>
+                
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3">
+                    <div>
+                        <div id="gaugeCat-@(@firstact.Activity.Category.Name)" class="gauge gauge-big gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2" rowspan="3">
+                    <div>
+                        <div id="gaugeCycle" class="gauge gauge-big gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+                    </div>
+                </td>
+                <td></td>
+
+            </tr>
+        </table>
+
+
+    </div>
+   
+</div>
+<script>
+    $(document).ready(function() {
+        initDials(@firstact.SprintId);
+
+    });
+
+    $('.gauge .gauge-arrow').cmGauge();
+    function updateCatDial() {
+        var joy=0, passion=0, gb=0;
+        $('.caldaydiv.activeDay').each(function() {
+            var cat = $(this).attr('cat');
+            if (cat == "Joy")
+                joy++;
+            if (cat == "Passion")
+                passion++;
+            if (cat == "Giving Back")
+                gb++;
+            debugger;
+        });
+       
+        $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy/36 * 100);
+    }
+    function updateDials(actiId, actScore) {
+      
+        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore*100);
+    }
+    function initDials(sprintid) {
+        data = { sprintId: sprintid};
+        $.ajax({
+            url: '@Url.Action("GetPercentages", "SprintActivities")',
+            type: 'GET',
+            data: data,
+
+            success: function (msg) {
+                debugger;
+                for (var j in msg.Percentages.Joy.Data) {
+                  
+                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage)
+                  
+                }
+                updateCatDial();
+
+            },
+            error: function(res) {
+                alert('error');
+            }
+        });
+    }
+    function saveProgress(actid, day) {
+        var iddiv = "#" + actid + "-" + day;
+
+        data = { sprintActId: actid, Day: day };
+        $.ajax({
+            url:'@Url.Action("SaveProgress","SprintActivities")',
+            type:'POST',
+            data:data,
+            success: function (msg) {
+                if ($(iddiv).hasClass("activeDay"))
+                    $(iddiv).removeClass("activeDay");
+                else {
+                    $(iddiv).addClass("activeDay");
+                }
+                updateDials(actid, msg.Percentage);
+                updateCatDial();
+            },
+            error:function(res) {
+                alert('error');
+            }
+        })
+    }
+
+
+</script>

@@ -1,0 +1,31 @@
+﻿.caldaydiv {
+    border-radius: 50%;
+    background: crimson;
+    width: 25px;height: 25px;
+    text-align: center;
+    clear: none;
+    float: left;margin: 1px;
+}
+.caldaydiv:hover {
+    background: aqua;
+}
+.callink {
+    text-decoration: none;
+    color: white;
+    
+
+}
+.callink:hover {
+      text-decoration: none;
+}
+.callink:visited {
+      text-decoration: none;
+}
+.callink:active {
+      text-decoration: none;
+}.callink:link {
+      text-decoration: none;
+}
+ .activeDay {
+     background: chartreuse;
+ }
