@@ -197,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ActCalendar.css" />
     <Content Include="Content\bety_css\component.css" />
     <Content Include="Content\bety_css\cs-select.css" />
     <Content Include="Content\bety_css\cs-skin-boxes.css" />
@@ -205,6 +206,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CatTiles.css" />
+    <Content Include="Content\cmGauge.css" />
     <Content Include="Content\dashboard_css\bootstrap-table.css" />
     <Content Include="Content\dashboard_css\bootstrap-theme.css" />
     <Content Include="Content\dashboard_css\bootstrap-theme.min.css" />
@@ -259,6 +261,7 @@
     <None Include="Properties\PublishProfiles\fiusp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fiusp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cmGauge.js" />
     <Content Include="Scripts\dashboard_js\bootstrap-datepicker.js" />
     <Content Include="Scripts\dashboard_js\bootstrap-table.js" />
     <Content Include="Scripts\dashboard_js\bootstrap.js" />
@@ -337,6 +340,7 @@
     <Content Include="Views\Users\UserDashBoard.cshtml" />
     <Content Include="Views\Users\AdminDashBoard.cshtml" />
     <Content Include="Views\Activities\CreateActivity.cshtml" />
+    <Content Include="Views\SprintActivities\JoyTab.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
