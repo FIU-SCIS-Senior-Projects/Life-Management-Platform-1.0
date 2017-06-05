@@ -345,12 +345,9 @@
     <Content Include="Views\Users\UserDashBoard.cshtml" />
     <Content Include="Views\Users\AdminDashBoard.cshtml" />
     <Content Include="Views\Activities\CreateActivity.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Sprints\Create.cshtml" />
     <Content Include="Views\Sprints\SetupSprint.cshtml" />
-=======
     <Content Include="Views\SprintActivities\JoyTab.cshtml" />
->>>>>>> a7b9683fddf5e93df9158ffb6ac7e51297ddf456
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
