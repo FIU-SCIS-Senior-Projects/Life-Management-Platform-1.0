@@ -1,5 +1,15 @@
 ﻿@{
-    Layout = "../Shared/DashboardLayout.cshtml";
+    var common = new LifeManagement.Models.Common();
+    if (common.isAdmin())
+    {
+        Layout = "../Shared/AdminDashBoardLayout.cshtml";
+
+    }
+    else
+    {
+        Layout = "../Shared/DashboardLayout.cshtml";
+        Html.RenderAction("Tabs", "SprintActivities");
+    }
+
 }
 
-@{Html.RenderAction("Tabs", "SprintActivities");}
