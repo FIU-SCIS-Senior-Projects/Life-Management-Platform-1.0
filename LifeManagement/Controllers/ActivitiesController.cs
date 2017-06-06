@@ -136,6 +136,12 @@ namespace LifeManagement.Controllers
             return View(activity);
         }
 
+        public PartialViewResult EditActivity()
+        {
+
+            return PartialView();
+        }
+
         // GET: Activities/Edit/5
         public ActionResult Edit(int? id)
         {
