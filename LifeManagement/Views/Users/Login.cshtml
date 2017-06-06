@@ -51,35 +51,35 @@
 
 
 <div id="resetdiv" style="display: none">
-    
-    <div id="response_ok">
+    <div class="clearfix">
+        <div class="col-md-12" id="response_ok">
 
-    </div>
-
-    <div id="mainreset">
-    <h2 class="text-center">Reset Password</h2>
-
-        <div class="text-center" id="response_bad" style="color: red">
         </div>
 
-        <br />
-        <div class="form-horizontal col-md-12">
-            <div class="form-group">
-                <label class="col-md-3 control-label">Email address:</label>
-                <div class="col-md-9">
-                    <input class="form-control" type="text" name="email" id="email" />
-                </div>
+        <div id="mainreset">
+            <h2 class="text-center col-md-12">Reset Password</h2>
+
+            <div class="text-center col-md-12" id="response_bad" style="color: red">
             </div>
-            <br />
-            <div class="form-group">
-                <div class="col-md-offset-8 col-md-4">
-                    <button class="btn btn-success form-control" onclick="ressetpass()">Re-set</button>
+
+           
+            <div class="form-horizontal col-md-12">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email address:</label>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="email" id="email" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button class="btn btn-success form-control" onclick="ressetpass()">Re-set</button>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-
-
 </div>
 <script src="~/Scripts/lmpopup.js"></script>
 
