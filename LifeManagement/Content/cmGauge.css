@@ -11,11 +11,11 @@
 }
 
 .gauge.gauge-big {
-    font-size: 117px;
+    font-size: 80px;
 }
 
 .gauge.gauge-small {
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .gauge:before {

@@ -21,17 +21,15 @@
     <script src="~/Scripts/bety_scripts/modernizr.custom.js"></script>
 }
 
-@section bgdiv{
-    <div class="bgdiv" style="background-image: url('/Imgs/butterfly.jpg');opacity:0.5"></div>
-}
 
-<div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; margin:0 auto ; ">
+
+<div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; ">
     
-    <div class="container">
+    <div class="container" style="background: url('/Imgs/butterfly.jpg') no-repeat; background-size: 100%;">
         <div class="fs-form-wrap" id="fs-form-wrap">
             <div class="fs-title">
                 <br />
-                <h3 style=" color: #00b359; font-weight: 800 "> Just few more steps to configure your Productity chart and you are done! </h3>
+                <h3 style=" color: #00b359;  "> Just few more steps to configure your Productity chart and you are done! </h3>
             </div>
 
                 <form id="myform" class="fs-form fs-form-full" autocomplete="off">
@@ -39,7 +37,7 @@
 
                         <li>
                             <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
-                                <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 3 activities that give you joy">What gives you joy?</label>
+                                <label class="fs-field-label fs-anim-upper"  data-info="Select upto 3 activities that give you joy">What gives you joy?</label>
                                
                                 <div class="fs-anim-lower fs-anim-upper activities-div" id="joytab">
                                     @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
@@ -51,7 +49,7 @@
                         </li>
                         <li>
                             <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffb3b3">
-                                <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 2 activities that you are really passionate about">What are you passionate about?</label>
+                                <label class="fs-field-label fs-anim-upper"  data-info="Select upto 2 activities that you are really passionate about">What are you passionate about?</label>
 
                                 <div class="fs-anim-lower fs-anim-upper activities-div" id="passiontab">
                                     @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
@@ -63,7 +61,7 @@
                         <li>
                             <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffa366">
 
-                                <label class="fs-field-label fs-anim-upper" for="vision" style=" font-weight: 800" data-info="Select upto 2 activities that give you a sense of fulfilment from giving back or helping others">How would you give back to society?</label>
+                                <label class="fs-field-label fs-anim-upper" for="vision"  data-info="Select upto 2 activities that give you a sense of fulfilment from giving back or helping others">How would you give back to society?</label>
 
                                 <div class="fs-anim-lower fs-anim-upper activities-div" id="gbtab" >
                                     @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
@@ -73,7 +71,7 @@
 
 
                     </ol><!-- /fs-fields -->
-                    @Html.ActionLink("Save Activities", "Index", "DashBoard", null, new { @class = "fs-submit btn btn-success" })
+                    @Html.ActionLink("Save Activities", "Dashboard", "Users", null, new { @class = "fs-submit btn btn-success" })
                 </form><!-- /fs-form -->
             </div><!-- /fs-form-wrap -->
      </div>  <!-- /container -->

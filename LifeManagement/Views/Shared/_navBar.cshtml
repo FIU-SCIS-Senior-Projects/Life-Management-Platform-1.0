@@ -1,0 +1,57 @@
+﻿@{
+    var common = new LifeManagement.Models.Common();
+}
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modalcontent">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+
+            </div>
+            <div class="modal-body" id="modalbodydiv">
+                <div id="myDialogContainer">
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")"><span>Managed</span>Life</a>
+            <ul class="user-menu">
+             @{
+                 if (common.IsAuthenticated)
+                 {
+                    <li class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @User.Identity.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                            <li><a href="@Url.Action("Dashboard","Users")"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Dashboard</a></li>
+                            <li><a href="@Url.Action("LogOut","Users")"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                        </ul>
+                    </li>
+                 }
+                 else
+                 {
+                    <li>
+                        <a href="@Url.Action("Login","Users")">Login</a>
+                    </li>
+                 }
+            }
+
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
