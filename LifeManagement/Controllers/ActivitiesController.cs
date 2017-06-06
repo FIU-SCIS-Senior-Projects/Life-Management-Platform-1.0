@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace LifeManagement.Controllers
 {
@@ -75,10 +77,13 @@ namespace LifeManagement.Controllers
           
             if (common.saveImageBytes(activity, file))
             {
+               
+                activity.Img = common.ResizeImageFile(activity.Img, 200);
+
                 db.Activities.Add(activity);
                 db.SaveChanges();
                 ViewBag.Msg = "Activity Successfully saved";
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Dashboard", "Users");
             }
 
             ViewBag.ErrorMsg = "Error occured";
