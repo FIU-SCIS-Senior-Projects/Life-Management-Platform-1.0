@@ -348,15 +348,12 @@
     <Content Include="Views\Sprints\Create.cshtml" />
     <Content Include="Views\Sprints\SetupSprint.cshtml" />
     <Content Include="Views\SprintActivities\JoyTab.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Activities\EditActivity.cshtml" />
-=======
     <Content Include="Views\SprintActivities\Tab.cshtml" />
     <Content Include="Views\SprintActivities\Tabs.cshtml" />
     <Content Include="Views\Users\icons.cshtml" />
     <Content Include="Views\Users\widgets_index.cshtml" />
     <Content Include="Views\Shared\DashboardLayout.cshtml" />
->>>>>>> ff1016a64bf51805a406790d7efccde2d24fcdf0
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
