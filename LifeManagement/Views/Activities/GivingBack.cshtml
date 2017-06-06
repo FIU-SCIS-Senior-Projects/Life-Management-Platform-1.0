@@ -43,9 +43,9 @@
 
     </div>
 
-        
+    <div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveGb()">Save</button></div>
+
     </div>
-<div class="col-md-12 text-right"><button  class="btn btn-success" onclick="saveGb()">Save</button></div>
 
 <script>
     var gblimit = 2;
@@ -62,11 +62,11 @@
                 return;
             } else {
 
-                $("#spec-" + this.id).css('display', 'block');
+                $("#spec-" + this.id + " .cat-tiles-spec-text").css('background-color', 'aliceblue');
             }
         } else {
 
-            $("#spec-" + this.id).css('display', 'none');
+            $("#spec-" + this.id + " .cat-tiles-spec-text").css('background', 'white');
         }
 
 
