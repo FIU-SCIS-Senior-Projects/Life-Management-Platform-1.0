@@ -92,7 +92,42 @@ namespace LifeManagement.Controllers
         }
 
         /**************dashboard tabs*******************/
-      
+
+        public PartialViewResult Tabs()
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            return PartialView(lastsprint);
+        }
+        public PartialViewResult Tab(Sprint sprint,string cat)
+        {
+            var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == cat);
+            if (joyactivity != null && joyactivity.Count() > 0)
+            {
+                return PartialView(joyactivity.ToList());
+            }
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if (lastsprint != null && lastsprint.Id > 0)
+            {
+                var lastsprintJoyAct =
+                    lastsprint.SprintActivities.Where(a => a.Activity.Category.Name == cat);
+                if (lastsprintJoyAct != null && lastsprintJoyAct.Count() > 0)
+                    return PartialView(lastsprintJoyAct.ToList());
+
+            }
+
+            ViewBag.ErrorMsg = "Could not find joy activity";
+            return PartialView("ErrorPartial");
+
+        }
         public ActionResult JoyTab(Sprint sprint)
         {
             var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");

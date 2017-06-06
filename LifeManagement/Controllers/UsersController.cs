@@ -31,7 +31,7 @@ namespace LifeManagement.Controllers
             if (user!=null && user.password == password)
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
-                return RedirectToAction("UserSetup","SprintActivities");
+                return RedirectToAction("DashBoard");
             }
             ViewBag.Error = "Invalid Credentials";
             return View();

@@ -79,7 +79,7 @@
 }
 
 .gauge-red.gauge:before {
-    border-color: #ff4e00;
+    border-color:  #8ceab9;
 }
 
 .gauge-orange.gauge:before {
@@ -91,9 +91,9 @@
 }
 
 .gauge-green.gauge:before {
-    border-color: #8ceab9;
+    border-color: #ff4e00;
 }
 
-gauge-blue.gauge:before {
+.gauge-blue.gauge:before {
     border-color: #2bc5ea;
 }
