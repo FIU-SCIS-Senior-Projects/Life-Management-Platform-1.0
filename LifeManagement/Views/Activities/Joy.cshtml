@@ -43,9 +43,9 @@
 
     </div>
   
-
+    <div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveJoy()">Save</button></div>
 </div>
-<div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveJoy()">Save</button></div>
+
 
 <script>
     var joylimit = 3;
@@ -61,11 +61,11 @@
                 return;
             } else {
 
-                $("#spec-" + this.id).css('display', 'block');
+                $("#spec-" + this.id + " .cat-tiles-spec-text").css('background-color', 'aliceblue');
             }
         } else {
 
-            $("#spec-" + this.id).css('display', 'none');
+            $("#spec-" + this.id + " .cat-tiles-spec-text").css('background', 'white');
         }
 
 
