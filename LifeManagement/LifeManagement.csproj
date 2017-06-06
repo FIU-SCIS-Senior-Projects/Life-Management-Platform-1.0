@@ -352,8 +352,9 @@
     <Content Include="Views\Users\icons.cshtml" />
     <Content Include="Views\Users\widgets_index.cshtml" />
     <Content Include="Views\Shared\DashboardLayout.cshtml" />
-    <Content Include="Views\Shared\userMenu.cshtml" />
     <Content Include="Views\Shared\AdminDashBoardLayout.cshtml" />
+    <Content Include="Views\Shared\_LayoutsHead.cshtml" />
+    <Content Include="Views\Shared\_navBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

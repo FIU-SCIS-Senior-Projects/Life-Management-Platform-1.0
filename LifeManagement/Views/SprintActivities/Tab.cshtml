@@ -5,22 +5,21 @@
 }
 
 
-<div class="clearfix">
     <div class="col-md-12">
 
-        <table class="table text-center">
+        <table class="table text-left" style="padding: 0">
             <tr>
-                <td colspan="5">
+                <th colspan="5">
                     Goals: 
                     @(firstact.Sprint.Goals.Where(a => a.CategoryId == firstact.Activity.CategoryId).FirstOrDefault().Description)
-                </td>
+                </th>
             </tr>
             <tr>
-                <td>Activity</td>
-                <td>Progress</td>
-                <td>Target</td>
-                <td>Actual</td>
-                <td>Activity Score</td>
+                <th>Activity</th>
+                <th>Progress</th>
+                <th>Target</th>
+                <th>Actual</th>
+                <th>Activity Score</th>
 
             </tr>
             @foreach (var act in Model)
@@ -28,11 +27,11 @@
 
 
                 <tr>
-                    <td>
+                    <td style="width: 100px">
                         @act.Activity.Name <br/>
                         -@act.Specifics
                     </td>
-                    <td>
+                    <td style="width: 235px">
                         @{
                             var currentDay = act.Sprint.DateFrom;
 
@@ -66,12 +65,12 @@
                 </tr>
             }
             <tr>
-                <td colspan="3">Category Score</td>
-                <td colspan="2">Cycle Score</td>
-                
+                <th colspan="2">Category Score</th>
+                <th colspan="2">Cycle Score</th>
+                <th></th>
             </tr>
             <tr>
-                <td colspan="2" rowspan="3">
+                <td colspan="2">
                     <div>
                         <div id="gaugeCat-@(@firstact.Activity.Category.Name.Replace(" ",""))" class="gauge gauge-big gauge-green">
 
@@ -82,7 +81,7 @@
                         </div>
                     </div>
                 </td>
-                <td colspan="2" rowspan="3">
+                <td colspan="2">
                     <div>
                         <div id="gaugeCycle" class="gauge gauge-big gauge-green">
 
@@ -101,4 +100,3 @@
 
     </div>
    
-</div>
