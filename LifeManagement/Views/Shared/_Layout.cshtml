@@ -14,6 +14,22 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <link href="~/Content/dashboard_css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/dashboard_css/datepicker3.css" rel="stylesheet">
+    <link href="~/Content/dashboard_css/styles.css" rel="stylesheet">
+    <script src="~/Scripts/dashboard_js/lumino.glyphs.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="~/Scripts/dashboard_js/chart.min.js"></script>
+    <script src="~/Scripts/dashboard_js/chart-data.js"></script>
+    <script src="~/Scripts/dashboard_js/easypiechart.js"></script>
+    <script src="~/Scripts/dashboard_js/easypiechart-data.js"></script>
+    <script src="~/Scripts/dashboard_js/bootstrap-datepicker.js"></script>
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/lmpopup.js"></script>
 
     @if (IsSectionDefined("AddToHead"))
     {
@@ -57,42 +73,42 @@
     </div>
 </div>
 
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Managed</span>Life</a>
+                <ul class="user-menu">
+                    @{
+                        if (common.IsAuthenticated)
+                        {
+                            <li class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                                    <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
+                                    <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li >
+                                <a href="@Url.Action("Login","Users")">Login</a>
+                            </li>
+                        }
+                    }
+                  
+                </ul>
+            </div>
 
-<div class="navbar navbar-inverse ">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <img class=" logo" src="~/Imgs/logo.png"/>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-            </ul>
-            <span class="nav navbar-text navbar-right">
-                @if (common.IsAuthenticated)
-                {
-                    <text> Hello, @User.Identity.Name</text>
-                    <a href="@Url.Action("DashBoard","Users")"><img width="20" height="20" src="~/Imgs/usericon.jpg" /></a>
-                   
-                     @Html.ActionLink("Logout", "LogOut", "Users", null, null)
-                    ;
-
-                }
-                else
-                {
-                    @Html.ActionLink("Login", "Login", "Users", null, null)
-                    ;
-                }
-            </span>
-        </div>
-    </div>
-</div>
+        </div><!-- /.container-fluid -->
+    </nav>
 <div class="container-full body-content">
     @RenderBody()
     <hr/>

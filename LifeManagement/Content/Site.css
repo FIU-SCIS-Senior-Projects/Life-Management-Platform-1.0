@@ -64,21 +64,7 @@ textarea {
     
 }
 /*navigation bar color*/
-.navbar {
-       height: 20px !important;
- }
- .topbar {
-     height: 50px;
-     background: white;
- }
- .navbar-inverse {
-      background-color: white !important;
-      border: transparent !important;
-     border-bottom:1px solid black !important;
-     border-radius: 0px;
-     margin-bottom: 0;
 
-}
  /*jumbotron*/
  .jumbotron {
      background-color: slategrey !important;

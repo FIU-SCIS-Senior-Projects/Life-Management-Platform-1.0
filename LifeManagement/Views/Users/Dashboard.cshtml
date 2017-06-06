@@ -1,17 +1,5 @@
-﻿@model bool
-@{
-    ViewBag.Title = "Dashboard";
+﻿@{
+    Layout = "../Shared/DashboardLayout.cshtml";
 }
 
-<h2>Dashboard</h2>
-
-@{
-    if (Model)
-    {
-        Html.RenderAction("AdminDashboard");
-    }
-    else
-    {
-        Html.RenderAction("UserDashboard");
-    }
-}
+@{Html.RenderAction("Tabs", "SprintActivities");}
