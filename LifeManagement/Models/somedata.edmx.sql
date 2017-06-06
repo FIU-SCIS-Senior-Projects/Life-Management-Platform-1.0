@@ -61,3 +61,54 @@ INSERT INTO [dbo].[Roles]
            ([Name])
      VALUES
            ('Guest'),('User'),('Admin')
+
+		 
+GO
+
+
+USE [SeniorDB]
+GO
+
+INSERT INTO [dbo].[Users]
+           ([FirstName]
+           ,[LastName]
+           ,[Email]
+           ,[DOB]
+           ,[RoleId]
+           ,[username]
+           ,[password]
+           ,[DateCreated]
+           ,[Vision]
+           ,[LifeSuccess]
+           ,[Statement1]
+           ,[Statement2]
+           ,[Statement3])
+     VALUES
+           ('Beatriz'
+           ,'Hdez'
+           ,'bhern104@fiu.edu'
+           ,'04/02/1989'
+           ,3
+           ,'beatriz'
+           ,'beatriz'
+           ,'06/06/2017'
+           ,'my vision'
+           ,'ls'
+           ,'s1'
+           ,'s2'
+           ,'s3'),
+ ('Fernando'
+           ,'Moj'
+           ,'fmoje001@fiu.edu'
+           ,'04/02/1989'
+           ,3
+           ,'fernando'
+           ,'fernando'
+           ,'06/06/2017'
+           ,'my vision'
+           ,'ls'
+           ,'s1'
+           ,'s2'
+           ,'s3')
+
+GO
