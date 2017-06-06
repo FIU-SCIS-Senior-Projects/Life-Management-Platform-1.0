@@ -347,7 +347,6 @@
     <Content Include="Views\Activities\CreateActivity.cshtml" />
     <Content Include="Views\Sprints\Create.cshtml" />
     <Content Include="Views\Sprints\SetupSprint.cshtml" />
-    <Content Include="Views\SprintActivities\JoyTab.cshtml" />
     <Content Include="Views\SprintActivities\Tab.cshtml" />
     <Content Include="Views\SprintActivities\Tabs.cshtml" />
     <Content Include="Views\Users\icons.cshtml" />
