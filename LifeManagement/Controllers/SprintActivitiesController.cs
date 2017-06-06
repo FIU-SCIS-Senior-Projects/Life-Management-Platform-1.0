@@ -91,7 +91,142 @@ namespace LifeManagement.Controllers
 
         }
 
-      
+        /**************dashboard tabs*******************/
+
+        public PartialViewResult Tabs()
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            return PartialView(lastsprint);
+        }
+        public PartialViewResult Tab(Sprint sprint,string cat)
+        {
+            var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == cat);
+            if (joyactivity != null && joyactivity.Count() > 0)
+            {
+                return PartialView(joyactivity.ToList());
+            }
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            if (lastsprint != null && lastsprint.Id > 0)
+            {
+                var lastsprintJoyAct =
+                    lastsprint.SprintActivities.Where(a => a.Activity.Category.Name == cat);
+                if (lastsprintJoyAct != null && lastsprintJoyAct.Count() > 0)
+                    return PartialView(lastsprintJoyAct.ToList());
+
+            }
+
+            ViewBag.ErrorMsg = "Could not find joy activity";
+            return PartialView("ErrorPartial");
+
+        }
+   
+        [HttpPost]
+        public JsonResult SaveProgress(int sprintActId,int day)
+        {
+            float percentage = 0;
+            try
+            {
+
+
+                var sprintact = db.SprintActivities.Find(sprintActId);
+                if (sprintact == null)
+                    return Json(new { Percentage = percentage });
+
+                var datePerformed = sprintact.Sprint.DateFrom.AddDays(day).Date;
+
+                var existingProgress =
+                    db.Progresses.Where(a => a.SprintActivitiesId == sprintActId &&
+                    a.DatePerformed.Day == datePerformed.Day && a.DatePerformed.Month==datePerformed.Month &&
+                    a.DatePerformed.Year==datePerformed.Year);
+
+                if (existingProgress.Any())
+                {
+                    db.Progresses.RemoveRange(existingProgress);
+                }
+                else
+                {
+                    var progress = new Progress();
+                    progress.DatePerformed = datePerformed;
+                    progress.SprintActivitiesId = sprintActId;
+
+                    db.Progresses.Add(progress);
+                }
+
+                db.SaveChanges();
+                int p = db.Progresses.Where(a => a.SprintActivitiesId == sprintActId).Count();
+                percentage = p ;
+                return Json(new { Percentage = percentage});
+            }
+            catch (Exception e)
+            {
+                return Json(new { Percentage = percentage });
+            }
+        }
+        public ActionResult GetPercentages(int sprintId)
+        {
+           
+            List<PercentModel> Joy = new List<PercentModel>();
+            List<PercentModel> Passion = new List<PercentModel>();
+            List<PercentModel> Gb = new List<PercentModel>();
+
+            var sprint = db.Sprints.Find(sprintId);
+            if (sprint != null)
+            {
+                var joy = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
+                foreach (var j in joy)
+                {
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = j.Id,
+                        percentage = j.Progresses.Count 
+
+                    };
+                    Joy.Add(obj);
+                }
+                var passion = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Passion");
+                foreach (var p in passion)
+                {
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = p.Id,
+                        percentage = p.Progresses.Count 
+
+                    };
+                    Passion.Add(obj);
+                }
+                var gb = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Giving Back");
+                    foreach (var g in gb)
+                {
+                    PercentModel obj = new PercentModel()
+                    {
+                        actId = g.Id,
+                        percentage = g.Progresses.Count 
+
+                    };
+                    Gb.Add(obj);
+                }
+
+            }
+            var Percentages =
+                new
+                {
+                    Joy =Json(Joy),
+                    Passion =Json(Passion),
+                    Gb =Json(Gb)
+                };
+            return Json(new {Percentages = Percentages}, JsonRequestBehavior.AllowGet);
+         
+        }
+
         [HttpPost]
         public PartialViewResult UpdateSprint(Act[] activities,string cat)
         { var newacts = new List<SprintActivities>();

@@ -1,4 +1,5 @@
 ﻿
+
 /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
 body.loading {
@@ -64,21 +65,7 @@ textarea {
     
 }
 /*navigation bar color*/
-.navbar {
-       height: 20px !important;
- }
- .topbar {
-     height: 50px;
-     background: white;
- }
- .navbar-inverse {
-      background-color: white !important;
-      border: transparent !important;
-     border-bottom:1px solid black !important;
-     border-radius: 0px;
-     margin-bottom: 0;
 
-}
  /*jumbotron*/
  .jumbotron {
      background-color: slategrey !important;
@@ -94,21 +81,22 @@ textarea {
      background-size:100% auto;
      color: white;
  }
- .bgdiv
+ /*.bgdiv
 {
-    background-color:red;
+    
       position:absolute;
         width:100%;
-        height:1000px;
+     min-height: 600px;
+     max-height: 900px;
         z-index:-1000;
-        background: url("/Imgs/beginjourney.jpg") no-repeat center center fixed; 
+      
         opacity:0.3;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
       
-}
+}*/
  .whitetext {
      color: white;
      text-shadow: 1px 1px black;

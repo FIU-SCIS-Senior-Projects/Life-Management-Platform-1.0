@@ -9,20 +9,16 @@ Version 1.0
 body {
 	background: #f1f4f7;
 	padding-top: 50px;
-	color: #5f6468;
+	
 }
 
-p {
-	color: #777;
-}
+
 
 a, a:hover, a:focus {
 	color: #30a5ff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	color: #5f6468;
-}
+
 
 h1 {
 	font-weight: 300;

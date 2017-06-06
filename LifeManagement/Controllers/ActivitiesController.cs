@@ -65,19 +65,20 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
         [HttpPost]
-        public PartialViewResult CreateActivity(Activity activity, HttpPostedFileBase file)
+        public ActionResult CreateActivity(Activity activity, HttpPostedFileBase file)
         {
             if (file.ContentLength <= 0)
             {
                 ViewBag.ErrorMsg = "No file uploaded";
-                return PartialView(activity);
+                return PartialView("ErrorPartial");
             }
           
             if (common.saveImageBytes(activity, file))
             {
                 db.Activities.Add(activity);
+                db.SaveChanges();
                 ViewBag.Msg = "Activity Successfully saved";
-                return PartialView(activity);
+                return RedirectToAction("Index", "Dashboard");
             }
 
             ViewBag.ErrorMsg = "Error occured";
@@ -133,6 +134,12 @@ namespace LifeManagement.Controllers
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", activity.CategoryId);
             return View(activity);
+        }
+
+        public PartialViewResult EditActivity()
+        {
+
+            return PartialView();
         }
 
         // GET: Activities/Edit/5

@@ -1,17 +1,15 @@
-﻿@model bool
-@{
-    ViewBag.Title = "Dashboard";
-}
-
-<h2>Dashboard</h2>
-
-@{
-    if (Model)
+﻿@{
+    var common = new LifeManagement.Models.Common();
+    if (common.isAdmin())
     {
-        Html.RenderAction("AdminDashboard");
+        Layout = "../Shared/AdminDashBoardLayout.cshtml";
+
     }
     else
     {
-        Html.RenderAction("UserDashboard");
+        Layout = "../Shared/DashboardLayout.cshtml";
+        Html.RenderAction("Tabs", "SprintActivities");
     }
+
 }
+
