@@ -128,32 +128,7 @@ namespace LifeManagement.Controllers
             return PartialView("ErrorPartial");
 
         }
-        public ActionResult JoyTab(Sprint sprint)
-        {
-            var joyactivity = sprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
-            if (joyactivity != null && joyactivity.Count() > 0)
-            {
-                return View(joyactivity.ToList());
-            }
-
-            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-
-            var lastsprint =
-                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
-
-            if (lastsprint != null && lastsprint.Id > 0)
-            {
-                var lastsprintJoyAct =
-                    lastsprint.SprintActivities.Where(a => a.Activity.Category.Name == "Joy");
-                if (lastsprintJoyAct != null && lastsprintJoyAct.Count() > 0)
-                    return View(lastsprintJoyAct.ToList());
-              
-            }
-
-            ViewBag.ErrorMsg = "Could not find joy activity";
-            return View("Error");
-
-        }
+   
         [HttpPost]
         public JsonResult SaveProgress(int sprintActId,int day)
         {
@@ -188,7 +163,7 @@ namespace LifeManagement.Controllers
 
                 db.SaveChanges();
                 int p = db.Progresses.Where(a => a.SprintActivitiesId == sprintActId).Count();
-                percentage = p / Constants.ACTTOTAL;
+                percentage = p ;
                 return Json(new { Percentage = percentage});
             }
             catch (Exception e)
@@ -212,7 +187,7 @@ namespace LifeManagement.Controllers
                     PercentModel obj = new PercentModel()
                     {
                         actId = j.Id,
-                        percentage = j.Progresses.Count / Constants.ACTTOTAL
+                        percentage = j.Progresses.Count 
 
                     };
                     Joy.Add(obj);
@@ -223,7 +198,7 @@ namespace LifeManagement.Controllers
                     PercentModel obj = new PercentModel()
                     {
                         actId = p.Id,
-                        percentage = p.Progresses.Count / Constants.ACTTOTAL
+                        percentage = p.Progresses.Count 
 
                     };
                     Passion.Add(obj);
@@ -234,7 +209,7 @@ namespace LifeManagement.Controllers
                     PercentModel obj = new PercentModel()
                     {
                         actId = g.Id,
-                        percentage = g.Progresses.Count / Constants.ACTTOTAL
+                        percentage = g.Progresses.Count 
 
                     };
                     Gb.Add(obj);

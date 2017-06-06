@@ -5,50 +5,52 @@
 <link href="~/Content/cmGauge.css" rel="stylesheet" />
 
         <div class="col-md-12  bhoechie-tab-container">
-            <div class="col-md-3  bhoechie-tab-menu">
+            <div class="col-md-2  bhoechie-tab-menu">
                 <div class="list-group">
                     <a href="#" class="list-group-item active text-center">
-                        <h4 class="glyphicon glyphicon-plane"></h4><br />Joy
+                        <h4 class="glyphicon glyphicon-music"></h4><br />Joy
                     </a>
                     <a href="#" class="list-group-item text-center">
-                        <h4 class="glyphicon glyphicon-road"></h4><br />Passion
+                        <h4 class="glyphicon glyphicon-heart"></h4><br />Passion
                     </a>
                     <a href="#" class="list-group-item text-center">
-                        <h4 class="glyphicon glyphicon-home"></h4><br />Giving Back
+                        <h4 class="glyphicon glyphicon-backward"></h4><br />Giving Back
                     </a>
                     <a href="#" class="list-group-item text-center">
-                        <h4 class="glyphicon glyphicon-cutlery"></h4><br />Score Summary
+                        <h4 class="glyphicon glyphicon-dashboard"></h4><br />Score Summary
                     </a>
                    
                 </div>
             </div>
-            <div class="col-md-9 bhoechie-tab">
+            <div class="col-md-10 bhoechie-tab">
               
                 <div class="bhoechie-tab-content active">
-                    <center>
-                       @{Html.RenderAction("Tab",new {cat="Joy"});}
-                    </center>
+                    
+                        <center>
+                            @{Html.RenderAction("Tab", new { cat = "Joy" });}
+                        </center>
+                    
                 </div>
-               
-                <div class="bhoechie-tab-content">
-                    <center>
+               <div class="bhoechie-tab-content">
+                    
                         <center>
                             @{Html.RenderAction("Tab", new { cat = "Passion" });}
                         </center>
-                    </center>
+                    
                 </div>
-
                 <div class="bhoechie-tab-content">
-                    <center>
+                 
                         <center>
                             @{Html.RenderAction("Tab", new { cat = "Giving Back" });}
                         </center>
-                    </center>
+                    
                 </div>
                 <div class="bhoechie-tab-content">
-                    <center>
-                       here goes the summary page
-                    </center>
+                 
+                        <center>
+                            here goes the summary page
+                        </center>
+                   
                 </div>
               
             </div>
@@ -65,14 +67,14 @@
         border-radius: 4px;
         -moz-border-radius: 4px;
         border:1px solid #ddd;
-        margin-top: 20px;
-        margin-left: 2px;
+       
         -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
         -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
         background-clip: padding-box;
         opacity: 0.97;
         filter: alpha(opacity=97);
+        min-height: 500px;
     }
     div.bhoechie-tab-menu{
         padding-right: 0;
@@ -157,7 +159,7 @@
                 gb++;
 
         });
-        debugger;
+
         $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy / 36 * 100);
         $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 36 * 100);
         $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 36 * 100);
@@ -166,7 +168,8 @@
     }
     function updateDials(actiId, actScore) {
 
-        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore*100);
+        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore/12 * 100);
+         $('#actual-' + actiId).html(actScore );
     }
     function initDials(sprintid) {
         data = { sprintId: sprintid};
@@ -179,7 +182,17 @@
                 debugger;
                 for (var j in msg.Percentages.Joy.Data) {
 
-                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage)
+                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage);
+
+                }
+                for (var j in msg.Percentages.Passion.Data) {
+
+                    updateDials(msg.Percentages.Passion.Data[j].actId, msg.Percentages.Passion.Data[j].percentage);
+
+                }
+                for (var j in msg.Percentages.Gb.Data) {
+
+                    updateDials(msg.Percentages.Gb.Data[j].actId, msg.Percentages.Gb.Data[j].percentage);
 
                 }
                 updateCatDial();
