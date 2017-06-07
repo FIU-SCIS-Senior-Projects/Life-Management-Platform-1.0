@@ -362,6 +362,8 @@
     <Content Include="Views\Shared\AdminDashBoardLayout.cshtml" />
     <Content Include="Views\Shared\_LayoutsHead.cshtml" />
     <Content Include="Views\Shared\_navBar.cshtml" />
+    <Content Include="Views\Activities\CatDisplay.cshtml" />
+    <Content Include="Views\Activities\EditSelectedActivity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

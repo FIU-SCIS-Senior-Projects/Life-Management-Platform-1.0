@@ -60,6 +60,15 @@ namespace LifeManagement.Controllers
 
         }
 
+        public PartialViewResult CatDisplay(string cat)
+        {
+            var activities = db.Activities.Where(a => a.Category.Name.ToLower() == cat.ToLower());
+            if (activities.Any())
+                return PartialView(activities.ToList());
+
+            ViewBag.ErrorMsg = "Could not find any activity with the given category";
+            return PartialView("ErrorPartial");
+        }
         /****************Testing Bea******************/
         public PartialViewResult CreateActivity()
         {
@@ -145,7 +154,46 @@ namespace LifeManagement.Controllers
 
             return PartialView();
         }
+        public PartialViewResult EditSelectedActivity(int id)
+        {
+            var act = db.Activities.Find(id);
+            if (act == null)
+            {
+                ViewBag.ErrorMsg = "Could not find activity";
+                return PartialView("ErrorPartial");
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", act.CategoryId);
+            return PartialView(act);
+        }
+        [HttpPost]
+        public bool SaveEditActivity(int id,string name,int cat)
+        {
+            try
+            {
+                var act = db.Activities.Find(id);
+                if (act == null)
+                {
+                    return false;
+                }
+                act.Name = name;
+                act.CategoryId = cat;
+                var file = Request.Files[0];
+                if (common.saveImageBytes(act, file))
+                {
 
+                    act.Img = common.ResizeImageFile(act.Img, 200);
+
+
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         // GET: Activities/Edit/5
         public ActionResult Edit(int? id)
         {
