@@ -67,28 +67,27 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult CreateActivity(Activity activity, HttpPostedFileBase file)
+        public ActionResult CreateActivity(string Name, int CategoryId, HttpPostedFileBase file)
         {
-            if (file.ContentLength <= 0)
-            {
-                ViewBag.ErrorMsg = "No file uploaded";
-                return PartialView("ErrorPartial");
-            }
-          
+
+            Activity activity = new Activity();
+            activity.Name = Name;
+            activity.CategoryId = CategoryId;
+
             if (common.saveImageBytes(activity, file))
-            {
-               
-                activity.Img = common.ResizeImageFile(activity.Img, 200);
+                {
 
-                db.Activities.Add(activity);
-                db.SaveChanges();
-                ViewBag.Msg = "Activity Successfully saved";
-                return RedirectToAction("Dashboard", "Users");
+                    activity.Img = common.ResizeImageFile(activity.Img, 200);
+
+                    db.Activities.Add(activity);
+                    db.SaveChanges();
+                    ViewBag.Msg = "Activity Successfully saved";
+                    return RedirectToAction("Dashboard", "Users");
             }
 
-            ViewBag.ErrorMsg = "Error occured";
-                return PartialView("ErrorPartial");
-           
+            ViewBag.ErrorMsg = " An unexpected error has occurred, try again later";
+            return View("Error");
+
         }
 
 

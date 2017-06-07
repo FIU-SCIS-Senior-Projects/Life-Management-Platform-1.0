@@ -13,26 +13,52 @@
 <br/>
 
 <div class="clearfix form-group">
-    <div class="col-md-12 text-left">
-        <a class="btn btn-success lmmodal" modal-width="100%" url='@Url.Action("Joy","Activities")' href="#">Joy +</a>
+    <div class="col-md-4 text-left">
+        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("Joy","Activities")' href="#">Joy +</a>
     </div>
+
+    <div class="col-md-4 text-left">
+        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("Passion","Activities")' href="#">Passion +</a>
+    </div>
+
+    <div class="col-md-4 text-left">
+        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("GivingBack","Activities")' href="#">Give Back +</a>
+    </div>
+
 </div>
 
+<div class="clearfix">
+
+    <div class="col-md-2"></div>
+
+    @if (Model != null)
+            {
+                foreach (var a in Model)
+                {
+
+            <div class="cat-tiles col-md-3">
+                <label id="lbl" for="@a.Id">
+                    <div class="cat-tiles-body">
+
+                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
+                    </div>
+                </label>
+                <div style="display: block" class="cat-tiles-specifics">
+                    <label class="spec-lbl">@a.Specifics </label>
+                </div>
+                <div class="cat-tiles-footer">
+
+                    <label class="cat-tiles-lbl">@a.Activity.Name</label>
+                </div>
 
 
-<div class="clearfix form-group">
-    <div class="col-md-12 text-left">
-        <a class="btn btn-success lmmodal" modal-width="100%" url='@Url.Action("Passion","Activities")' href="#">Passion +</a>
-    </div>
+            </div>
+
+        }
+    }
+
 </div>
 
-
-
-<div class="clearfix form-group">
-    <div class="col-md-12 text-left">
-        <a class="btn btn-success lmmodal" modal-width="100%" url='@Url.Action("GivingBack","Activities")' href="#">Give Back +</a>
-    </div>
-</div>
 
 
 
