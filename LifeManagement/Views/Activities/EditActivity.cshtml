@@ -7,60 +7,165 @@
 }
 
 
+<div class="clearfix" id="torender">
 
-<h2> Click the desidered Category and select the Activity you want to edit</h2>
 
-<br/>
+    <h3 class="col-md-12"> Click the desidered Category and select the Activity you want to edit</h3>
 
-<div class="clearfix form-group">
-    <div class="col-md-4 text-left">
-        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("Joy","Activities")' href="#">Joy +</a>
-    </div>
 
-    <div class="col-md-4 text-left">
-        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("Passion","Activities")' href="#">Passion +</a>
-    </div>
-
-    <div class="col-md-4 text-left">
-        <a class="btn btn-info lmmodal" modal-width="100%" url='@Url.Action("GivingBack","Activities")' href="#">Give Back +</a>
-    </div>
-
-</div>
-
-<div class="clearfix">
-
-    <div class="col-md-2"></div>
-
-    @if (Model != null)
-            {
-                foreach (var a in Model)
-                {
-
-            <div class="cat-tiles col-md-3">
-                <label id="lbl" for="@a.Id">
-                    <div class="cat-tiles-body">
-
-                        <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Activity.Img, a.Activity.ImgMime)" />
-                    </div>
-                </label>
-                <div style="display: block" class="cat-tiles-specifics">
-                    <label class="spec-lbl">@a.Specifics </label>
-                </div>
-                <div class="cat-tiles-footer">
-
-                    <label class="cat-tiles-lbl">@a.Activity.Name</label>
-                </div>
+    <div class="col-md-12  bhoechie-tab-container">
+        <div class="col-md-2  bhoechie-tab-menu">
+            <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                    <h4 class="glyphicon glyphicon-music"></h4><br />Joy
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4 class="glyphicon glyphicon-heart"></h4><br />Passion
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4 class="glyphicon glyphicon-backward"></h4><br />Giving Back
+                </a>
 
 
             </div>
+        </div>
+        <div class="col-md-10 bhoechie-tab">
 
-        }
-    }
+            <div class="bhoechie-tab-content active">
 
+                <center>
+                    @{Html.RenderAction("CatDisplay","Activities",new {cat="Joy"});}
+                </center>
+
+            </div>
+            <div class="bhoechie-tab-content">
+
+                <center>
+                    @{Html.RenderAction("CatDisplay", "Activities", new { cat = "Passion" });}
+                </center>
+
+            </div>
+            <div class="bhoechie-tab-content">
+
+                <center>
+                    @{Html.RenderAction("CatDisplay", "Activities", new { cat = "Giving Back" });}
+                </center>
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 
+<style>
+    /*  bhoechie tab */
+    div.bhoechie-tab-container {
+        z-index: 10;
+        background-color: #ffffff;
+        padding: 0 !important;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        border: 1px solid #ddd;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        background-clip: padding-box;
+        opacity: 0.97;
+        filter: alpha(opacity=97);
+        min-height: 500px;
+    }
 
+    div.bhoechie-tab-menu {
+        padding-right: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+    }
 
+        div.bhoechie-tab-menu div.list-group {
+            margin-bottom: 0;
+        }
 
+            div.bhoechie-tab-menu div.list-group > a {
+                margin-bottom: 0;
+            }
+
+                div.bhoechie-tab-menu div.list-group > a .glyphicon,
+                div.bhoechie-tab-menu div.list-group > a .fa {
+                    color: #5A55A3;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a:first-child {
+                    border-top-right-radius: 0;
+                    -moz-border-top-right-radius: 0;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a:last-child {
+                    border-bottom-right-radius: 0;
+                    -moz-border-bottom-right-radius: 0;
+                }
+
+                div.bhoechie-tab-menu div.list-group > a.active,
+                div.bhoechie-tab-menu div.list-group > a.active .glyphicon,
+                div.bhoechie-tab-menu div.list-group > a.active .fa {
+                    background-color: #5A55A3;
+                    background-image: #5A55A3;
+                    color: #ffffff;
+                }
+
+                    div.bhoechie-tab-menu div.list-group > a.active:after {
+                        content: '';
+                        position: absolute;
+                        left: 100%;
+                        top: 50%;
+                        margin-top: -13px;
+                        border-left: 0;
+                        border-bottom: 13px solid transparent;
+                        border-top: 13px solid transparent;
+                        border-left: 10px solid #5A55A3;
+                    }
+
+    div.bhoechie-tab-content {
+        background-color: #ffffff;
+        /* border: 1px solid #eeeeee; */
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+            e.preventDefault();
+            $(this).siblings('a.active').removeClass("active");
+            $(this).addClass("active");
+            var index = $(this).index();
+            $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+            $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+        });
+    });
+
+    $('.chk-cat').on('change', function (evt) {
+        var id = this.id;
+        $.ajax({
+            url: '@Url.Action("EditSelectedActivity","Activities")',
+            type:'GET',
+            data:{id:id},
+            success:function(res) {
+                $("#torender").html(res);
+            },
+            error:function(msg) {
+                alert("error");
+            }
+        })
+
+    });
+
+ 
+
+</script>
  
