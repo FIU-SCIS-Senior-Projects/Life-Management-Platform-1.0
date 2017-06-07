@@ -1,0 +1,39 @@
+﻿@using LifeManagement.Models
+@model List<LifeManagement.Models.Activity>
+    @{
+        var common = new LifeManagement.Models.Common();
+    }
+
+<div class="clearfix" >
+    <div class="col-md-12 text-center">
+        @if (Model != null)
+        {
+            foreach (var a in Model)
+            {
+
+                <div class="cat-tiles col-sm-4 col-md-3">
+                    <label id="lbl" for="@a.Id">
+                        <div class="cat-tiles-body">
+
+                            <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
+                        </div>
+                    </label>
+                  <div class="cat-tiles-footer">
+                        <input class="cat-tiles-chk chk-cat" type="checkbox" id="@a.Id" />
+                        <label class="cat-tiles-lbl">@a.Name</label>
+                    </div>
+
+
+                </div>
+
+            }
+
+        }
+
+    </div>
+  
+  
+</div>
+
+
+
