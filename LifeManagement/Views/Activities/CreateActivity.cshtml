@@ -76,22 +76,41 @@
             return;
         }
 
-        if (($('#file')[0].files[0].size) >= 30000)       //30KB
+        if (($("#file")[0].files[0].size) >= 2097152)       //2MB
         {
-            $("#noFile").html("Image too big, please upload a pic of 30KB or less");
+            $("#noFile").html("Image too big, please upload a pic of 2MB or less");
             return;
         }
-        $.ajax({
-            url: '@Url.Action("CreateActivity", "Activities")', 
+
+        debugger;
+        var formdata = new FormData();
+
+        var fileInput = $('#file');
+        $.each($(fileInput).get(0).files, function (index, value) {
+            formdata.append(value.name, value);
+        });
+        var id = parseInt($("#Id").val());
+        var catid = parseInt($("#CategoryId").val());
+        var name = $("#Name").val();
+        debugger;
+        formdata.append("id", id);
+        formdata.append("name", name);
+        formdata.append("cat", catid);
+
+
+  $.ajax({
+            url: '@Url.Action("SaveEditActivity", "Activities")',
             type: 'POST',
-            data: { Name: $("#Name").val(), CategoryId: $("#CategoryId").val(), file: $("#file").val()},
-            success: function (res) {
+            data:formdata,
+            contentType:false,
+            cache: false,
+            processData:false,
+          success: function (res) {
                 alert("Todo cool");
             },
             error: function (msg) {
-                alert("No cool :(");
+                alert("No cool  ");
             }
-        });
     }
 </script>
 
