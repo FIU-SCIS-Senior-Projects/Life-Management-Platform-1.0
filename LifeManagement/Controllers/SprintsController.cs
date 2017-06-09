@@ -22,6 +22,12 @@ namespace LifeManagement.Controllers
             return View();
         }
 
+        public ActionResult NewSprint()
+        {
+            return View();
+        }
+
+
         // GET: Sprints/Create
         public ActionResult Create()
         {
@@ -58,8 +64,91 @@ namespace LifeManagement.Controllers
             }
         }
 
+        public ActionResult ConfigureNewSprint()
+        {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
-        public ActionResult SetupSprint()
+            var lastsprint =
+                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+            var goal1 = db.Goals.Where(a => a.CategoryId == 1 && a.SprintId == lastsprint.Id).FirstOrDefault();
+            var goal2= db.Goals.Where(a => a.CategoryId == 2 && a.SprintId == lastsprint.Id).FirstOrDefault();
+            var goal3 = db.Goals.Where(a => a.CategoryId == 3 && a.SprintId == lastsprint.Id).FirstOrDefault();
+
+            var newSprint = new Sprint();
+            newSprint.SprintGoal = lastsprint.SprintGoal;
+            newSprint.DateFrom = DateTime.Now;
+            newSprint.UserId = user.Id;
+            db.Sprints.Add(newSprint);
+            db.SaveChanges();
+
+            ViewBag.goalJoy = goal1.Description;
+            ViewBag.goalPassion = goal2.Description;
+            ViewBag.goalGB = goal3.Description;
+
+            TempData["newSprint"] = newSprint;
+            TempData.Keep("newSprint");
+
+            return View(newSprint);
+
+        }
+
+        [HttpPost]
+        public ActionResult ConfigureNewSprint( QuestionarieViewModel quest)
+        {
+            if(TempData["newSprint"] != null)
+            {
+                var sprint = TempData["newSprint"] as Sprint;
+
+                Sprint newSprint = db.Sprints.Find(sprint.Id);
+
+                if (quest.vision != newSprint.SprintGoal)
+                {
+                    newSprint.SprintGoal = quest.vision;        //Im using vision as the SprintGoal to reuse the previos QuestionnaireViewModel
+                    db.SaveChanges();
+                }
+
+            string goalJoy = quest.goal_1;
+            string goalPassion = quest.goal_2;
+            string goalGB= quest.goal_3;
+
+                if(quest.goal_1 != null)
+                { 
+                var g1 = new Goal();
+                g1.SprintId = newSprint.Id;
+                g1.Description = goalJoy;
+                g1.CategoryId = 1;
+                db.Goals.Add(g1);
+                db.SaveChanges();
+                }
+
+                if (quest.goal_2 != null)
+                {
+
+                    var g2 = new Goal();
+                    g2.SprintId = newSprint.Id;
+                    g2.Description = quest.goal_2;
+                    g2.CategoryId = 2;
+                    db.Goals.Add(g2);
+                    db.SaveChanges();
+                }
+
+                if (quest.goal_3 != null)
+                {
+                    var g3 = new Goal();
+                    g3.SprintId = newSprint.Id;
+                    g3.Description = quest.goal_3;
+                    g3.CategoryId = 3;
+                    db.Goals.Add(g3);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Dashboard", "Users");
+            }
+            ViewBag.ErrorMsg = "There was an unexpected error while configuring your productivity week, try again later";
+            return View("Error");
+        }
+
+            public ActionResult SetupSprint()
         {
             return View();
         }

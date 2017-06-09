@@ -100,6 +100,14 @@ namespace LifeManagement.Controllers
             var lastsprint =
                 db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
 
+            //betikaa is in tha house*******************************/
+            var dateLastS = lastsprint.DateFrom.AddDays(15);
+            if (dateLastS <= DateTime.Now)
+                return PartialView("~/Views/Sprints/NewSprint.cshtml");
+
+            //betikaa leaft tha house*******************************/
+
+
             return PartialView(lastsprint);
         }
         public PartialViewResult Tab(Sprint sprint,string cat)

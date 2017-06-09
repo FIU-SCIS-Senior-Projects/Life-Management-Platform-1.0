@@ -364,6 +364,8 @@
     <Content Include="Views\Shared\_navBar.cshtml" />
     <Content Include="Views\Activities\CatDisplay.cshtml" />
     <Content Include="Views\Activities\EditSelectedActivity.cshtml" />
+    <Content Include="Views\Sprints\NewSprint.cshtml" />
+    <Content Include="Views\Sprints\ConfigureNewSprint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
