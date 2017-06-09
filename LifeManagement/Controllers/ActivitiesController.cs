@@ -79,7 +79,7 @@ namespace LifeManagement.Controllers
         public ActionResult CreateActivity(string Name, int CategoryId)
         {
    
-               var file = Request.Files[0];
+            var file = Request.Files[0];
 
             Activity activity = new Activity();
             activity.Name = Name;

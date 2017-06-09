@@ -3,8 +3,11 @@
 
 
 <div class="modal-body" style="width: 500px ; position: center ; margin:0 auto">
+       <div id="responseOk">
 
-        <div class="form-horizontal">
+       </div> 
+
+        <div class="form-horizontal" id="completeForm">
             <h2 class="text-center"> Create Activity</h2>
 
             <br />
@@ -82,35 +85,37 @@
             return;
         }
 
-        debugger;
         var formdata = new FormData();
 
         var fileInput = $('#file');
         $.each($(fileInput).get(0).files, function (index, value) {
             formdata.append(value.name, value);
         });
-        var id = parseInt($("#Id").val());
-        var catid = parseInt($("#CategoryId").val());
-        var name = $("#Name").val();
-        debugger;
-        formdata.append("id", id);
-        formdata.append("name", name);
-        formdata.append("cat", catid);
 
+        var Name = $("#Name").val();
+        var CategoryId = parseInt($("#CategoryId").val());
+
+        formdata.append("Name", Name);
+        formdata.append("CategoryId", CategoryId);
+
+ 
 
   $.ajax({
-            url: '@Url.Action("SaveEditActivity", "Activities")',
+            url: '@Url.Action("CreateActivity", "Activities")',
             type: 'POST',
-            data:formdata,
-            contentType:false,
+            data: formdata,
+            contentType: false,
             cache: false,
-            processData:false,
-          success: function (res) {
-                alert("Todo cool");
+            processData: false,
+            success: function (res) {
+                $("#responseOk").html("<h2> The Activity was created successfully </h2> <button class=\"btn btn-success\" data-dismiss=\"modal\">Done</button>");
+                $("#completeForm").html('');
             },
             error: function (msg) {
-                alert("No cool  ");
+                $("#responseOk").html("<h2> Some unexpected error happened </h2> <button class=\"btn btn-danger\" data-dismiss=\"modal\">Close</button>");
+                $("#completeForm").html('');
             }
+        });
     }
 </script>
 
