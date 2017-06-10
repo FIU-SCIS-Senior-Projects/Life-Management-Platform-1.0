@@ -36,25 +36,21 @@
                 <ol class="fs-fields">
                     <li>
                         <label class="fs-field-label fs-anim-upper" for="vision" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a general goal that you want to achieve this period, or click 'Continue' to use the one from previous period.</label>
-                        <textarea style="" class="fs-anim-lower" id="vision" name="vision" >@Model.SprintGoal</textarea>
+                        <textarea style="" class="fs-anim-lower" id="vision" name="vision" required>@Model.SprintGoal</textarea>
                     </li>
                     <li>
                         <label class="fs-field-label fs-anim-upper" for="goal_1" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period that gives you joy, or click 'Continue' to use the one from previous period.</label>
-                        <textarea class="fs-anim-lower" id="goal_1" name="goal_1">@ViewBag.goalJoy</textarea>
+                        <textarea class="fs-anim-lower" id="goal_1" name="goal_1" required>@ViewBag.goalJoy</textarea>
                     </li>
 
                     <li>
                         <label class="fs-field-label fs-anim-upper" for="goal_2" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period that you are passionate about, or click 'Continue' to use the one from previous period.</label>
-                        <textarea class="fs-anim-lower" id="goal_2" name="goal_2">@ViewBag.goalPassion</textarea>
+                        <textarea class="fs-anim-lower" id="goal_2" name="goal_2" required>@ViewBag.goalPassion</textarea>
                     </li>
 
                     <li>
-                        <br />
                         <label class="fs-field-label fs-anim-upper" for="goal_3" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period to give back to others, or click 'Continue' to use the one from previous period. </label>
-                        <textarea class="fs-anim-lower" style=" font:14px " id="goal_3" name="goal_3">@ViewBag.goalGB</textarea>
-                        <br />
-                        <br />
-
+                        <textarea class="fs-anim-lower" style=" font:14px " id="goal_3" name="goal_3" required>@ViewBag.goalGB</textarea>
                     </li>
                    
                     <li>
