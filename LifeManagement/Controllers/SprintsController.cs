@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using LifeManagement.Models;
 
 namespace LifeManagement.Controllers
@@ -27,6 +28,15 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
 
+        public PartialViewResult ScoreSummary(int id)
+        {
+            var sprint = db.Sprints.Find(id);
+            if(sprint!=null)
+            return PartialView(sprint);
+
+            ViewBag.ErrorMsg = "Could not get summary";
+            return PartialView("ErrorPartial");
+        }
 
         // GET: Sprints/Create
         public ActionResult Create()
