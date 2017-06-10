@@ -1,0 +1,108 @@
+﻿@model LifeManagement.Models.Sprint
+
+<div class="clearfix">
+    <div class="col-md-12">
+        <table class="table text-center">
+            <tr>
+                <th class="text-center" colspan="2">
+                    @Model.SprintGoal
+                </th>
+               
+            </tr>
+            <tr>
+                <th class="text-center" colspan="2">
+                    Joy
+                </th>
+            </tr>
+            <tr>
+                <td>@Model.Goals.Where(a=>a.Category.Name=="Joy").FirstOrDefault().Description</td>
+                <td class="text-right">
+                   
+                    <div id="gaugeCat-Joy" class="gauge gauge-big gauge-green">
+
+                        <div class="gauge-arrow" data-percentage="40"
+                             style="transform: rotate(0deg);"></div>
+
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-center" colspan="2">
+                    Passion
+                </th>
+            </tr>
+            <tr>
+                <td>@Model.Goals.Where(a => a.Category.Name == "Passion").FirstOrDefault().Description</td>
+                <td class="text-right">
+                   
+                        <div id="gaugeCat-Passion" class="gauge gauge-big gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+
+                </td>
+            </tr>
+            <tr>
+                <th class="text-center" colspan="2">
+                    Giving Back
+                </th>
+            </tr>
+            <tr>
+                <td>@Model.Goals.Where(a => a.Category.Name == "Giving Back").FirstOrDefault().Description</td>
+                <td class="text-right">
+                   <div id="gaugeCat-GivingBack" class="gauge gauge-big gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+                </td>
+            </tr>
+           
+            <tr>
+                <th class="text-center" colspan="2">
+                    Cycle
+                </th>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="2">
+                   
+                    <div id="gaugeCycle" class="gauge gauge-big gauge-green">
+
+                        <div class="gauge-arrow" data-percentage="40"
+                             style="transform: rotate(0deg);"></div>
+
+
+                    </div>
+                  
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-right">
+                    <button onclick="shareSummary()" class="btn btn-info "> <span class="glyphicon glyphicon-share"></span> Share</button>
+                </td>
+            </tr>
+        </table>
+       
+
+    </div>
+  
+   
+    
+</div>
+
+
+
+<script>
+    function shareSummary() {
+        alert('not yet implemented');
+    }
+</script>
+ 
+
+
