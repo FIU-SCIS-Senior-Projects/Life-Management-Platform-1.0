@@ -22,9 +22,9 @@ namespace LifeManagement.Controllers
             return View();
         }
 
-        public ActionResult NewSprint()
+        public PartialViewResult NewSprint()
         {
-            return View();
+            return PartialView();
         }
 
 

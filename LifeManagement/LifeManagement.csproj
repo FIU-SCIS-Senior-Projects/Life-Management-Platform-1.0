@@ -348,7 +348,6 @@
     <Content Include="Views\SprintActivities\GivingBack.cshtml" />
     <Content Include="Views\SprintActivities\UserSetup.cshtml" />
     <Content Include="Views\Users\Dashboard.cshtml" />
-    <Content Include="Views\Users\UserDashBoard.cshtml" />
     <Content Include="Views\Users\AdminDashBoard.cshtml" />
     <Content Include="Views\Activities\CreateActivity.cshtml" />
     <Content Include="Views\Sprints\Create.cshtml" />
