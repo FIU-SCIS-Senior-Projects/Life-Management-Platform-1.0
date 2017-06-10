@@ -14,23 +14,7 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         /****************************setup joy passion giving back*********************************************************/
-        [Authorize]
-        public ActionResult UserSetup22(Sprint sprint)
-        {
-            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-
-            var lastsprint =
-                db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
-
-            if(sprint!=null && sprint.Id>0)
-                return View(sprint);
-            if (lastsprint != null && lastsprint.Id>0)
-                return View(lastsprint);
-
-            ViewBag.ErrorMsg = "This user does not have an sprint set up";
-            return View("Error");
-
-        }
+     
         [Authorize]
         public ActionResult UserSetup(Sprint sprint)
         {
@@ -101,12 +85,12 @@ namespace LifeManagement.Controllers
                 db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
 
             //betikaa is in tha house*******************************/
-            var dateLastS = lastsprint.DateFrom.AddDays(15);
+            /*var dateLastS = lastsprint.DateFrom.AddDays(15);
             if (dateLastS <= DateTime.Now)
                 return PartialView("~/Views/Sprints/NewSprint.cshtml");
 
             //betikaa leaft tha house*******************************/
-
+            
 
             return PartialView(lastsprint);
         }

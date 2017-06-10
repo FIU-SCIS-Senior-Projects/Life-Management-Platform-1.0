@@ -1,5 +1,7 @@
 ﻿@model LifeManagement.Models.Sprint
-
+@{
+    var needSprint = Model.DateFrom.AddDays(15) < DateTime.Now;
+}
 <link href="~/Content/ActCalendar.css" rel="stylesheet" />
 <script src="~/Scripts/cmGauge.js"></script>
 <link href="~/Content/cmGauge.css" rel="stylesheet" />
@@ -132,21 +134,39 @@
     }
 </style>
 <script>
+  
+
     $(document).ready(function () {
-        $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+       
+        $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
             e.preventDefault();
             $(this).siblings('a.active').removeClass("active");
             $(this).addClass("active");
             var index = $(this).index();
             $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
             $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+            initDials(@Model.Id);
+          
         });
     });
+    $(document).ready(function () { checkNeedNewSprint(); })
+    function checkNeedNewSprint() {
+        if ('@needSprint' == 'True') {
+            debugger;
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("NewSprint", "Sprints")',
+                success: function(res) {
+                    $("#myDialogContainer").html(res);
+                    $("#basicModal").modal('show');
+                },
+                error: function(msg) {
+                    alert('could not prompt for new sprint');
+                }
 
-    $(document).ready(function() {
-        initDials(@Model.Id);
-
-    });
+            });
+        }
+    }
 
     $('.gauge .gauge-arrow').cmGauge();
     function updateCatDial() {
@@ -171,7 +191,7 @@
     function updateDials(actiId, actScore) {
 
         $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore/12 * 100);
-         $('#actual-' + actiId).html(actScore );
+        $('#actual-' + actiId).html(actScore );
     }
     function initDials(sprintid) {
         data = { sprintId: sprintid};
