@@ -71,16 +71,28 @@ namespace LifeManagement.Controllers
             var lastsprint =
                 db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
 
-            var goal1 = db.Goals.Where(a => a.CategoryId == 1 && a.SprintId == lastsprint.Id).FirstOrDefault();
-            var goal2= db.Goals.Where(a => a.CategoryId == 2 && a.SprintId == lastsprint.Id).FirstOrDefault();
-            var goal3 = db.Goals.Where(a => a.CategoryId == 3 && a.SprintId == lastsprint.Id).FirstOrDefault();
-
             var newSprint = new Sprint();
             newSprint.SprintGoal = lastsprint.SprintGoal;
             newSprint.DateFrom = DateTime.Now;
             newSprint.UserId = user.Id;
             db.Sprints.Add(newSprint);
             db.SaveChanges();
+
+            var sprintActivities = lastsprint.SprintActivities;
+            
+            foreach(SprintActivities sp in sprintActivities.ToList())
+            {
+                var newsprintA = new SprintActivities();
+                newsprintA = sp;
+                newsprintA.SprintId = newSprint.Id;
+                db.SprintActivities.Add(newsprintA);
+                db.SaveChanges();
+            }
+
+
+            var goal1 = db.Goals.Where(a => a.CategoryId == 1 && a.SprintId == lastsprint.Id).FirstOrDefault();
+            var goal2 = db.Goals.Where(a => a.CategoryId == 2 && a.SprintId == lastsprint.Id).FirstOrDefault();
+            var goal3 = db.Goals.Where(a => a.CategoryId == 3 && a.SprintId == lastsprint.Id).FirstOrDefault();
 
             ViewBag.goalJoy = goal1.Description;
             ViewBag.goalPassion = goal2.Description;
