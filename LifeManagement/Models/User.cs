@@ -35,11 +35,12 @@ namespace LifeManagement.Models
         public string Statement1 { get; set; }
         public string Statement2 { get; set; }
         public string Statement3 { get; set; }
+        public byte[] Avatar { get; set; }
+        public string AvatarMime { get; set; }
     
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sprint> Sprints { get; set; }
-        public virtual Coach Coach { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoachReview> CoachReviews { get; set; }
     }
