@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/31/2017 08:54:23
+-- Date Created: 06/13/2017 18:24:23
 -- Generated from EDMX file: C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\LifeManagement\Models\EntityModel.edmx
 -- --------------------------------------------------
 
@@ -34,9 +34,6 @@ IF OBJECT_ID(N'[dbo].[FK_SprintSprintActivities]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_SprintActivitiesProgress]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Progresses] DROP CONSTRAINT [FK_SprintActivitiesProgress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CoachUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Coaches] DROP CONSTRAINT [FK_CoachUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CoachCoachReview]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CoachReviews] DROP CONSTRAINT [FK_CoachCoachReview];
@@ -112,7 +109,9 @@ CREATE TABLE [dbo].[Users] (
     [LifeSuccess] nvarchar(max)  NULL,
     [Statement1] nvarchar(max)  NULL,
     [Statement2] nvarchar(max)  NULL,
-    [Statement3] nvarchar(max)  NULL
+    [Statement3] nvarchar(max)  NULL,
+    [Avatar] varbinary(max)  NULL,
+    [AvatarMime] nvarchar(max)  NULL
 );
 GO
 
@@ -164,7 +163,13 @@ CREATE TABLE [dbo].[Coaches] (
     [ReviewScore] int  NOT NULL,
     [Biography] nvarchar(max)  NOT NULL,
     [Skills] nvarchar(max)  NOT NULL,
-    [User_Id] int  NOT NULL
+    [Username] nvarchar(20)  NOT NULL,
+    [Password] nvarchar(20)  NOT NULL,
+    [FirstName] nvarchar(20)  NOT NULL,
+    [LastName] nvarchar(20)  NOT NULL,
+    [Avatar] varbinary(max)  NULL,
+    [AvatarMime] nvarchar(max)  NULL,
+    [RoleId] int  NOT NULL
 );
 GO
 
@@ -345,21 +350,6 @@ ON [dbo].[Progresses]
     ([SprintActivitiesId]);
 GO
 
--- Creating foreign key on [User_Id] in table 'Coaches'
-ALTER TABLE [dbo].[Coaches]
-ADD CONSTRAINT [FK_CoachUser]
-    FOREIGN KEY ([User_Id])
-    REFERENCES [dbo].[Users]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CoachUser'
-CREATE INDEX [IX_FK_CoachUser]
-ON [dbo].[Coaches]
-    ([User_Id]);
-GO
-
 -- Creating foreign key on [CoachId] in table 'CoachReviews'
 ALTER TABLE [dbo].[CoachReviews]
 ADD CONSTRAINT [FK_CoachCoachReview]
@@ -418,6 +408,21 @@ GO
 CREATE INDEX [IX_FK_CategoryActivity]
 ON [dbo].[Activities]
     ([CategoryId]);
+GO
+
+-- Creating foreign key on [RoleId] in table 'Coaches'
+ALTER TABLE [dbo].[Coaches]
+ADD CONSTRAINT [FK_RoleCoach]
+    FOREIGN KEY ([RoleId])
+    REFERENCES [dbo].[Roles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RoleCoach'
+CREATE INDEX [IX_FK_RoleCoach]
+ON [dbo].[Coaches]
+    ([RoleId]);
 GO
 
 -- --------------------------------------------------
