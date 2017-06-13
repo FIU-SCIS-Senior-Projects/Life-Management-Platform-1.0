@@ -244,6 +244,7 @@
     <Content Include="Imgs\users.jpg" />
     <Content Include="Imgs\user_avatar.png" />
     <Content Include="Imgs\vision.jpg" />
+    <Content Include="Models\EntityModel-6-12-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
