@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Models;
+using System.Web.Security;
 
 namespace LifeManagement.Controllers
 {
@@ -36,6 +37,7 @@ namespace LifeManagement.Controllers
         }
 
         // GET: Coaches/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,16 +48,40 @@ namespace LifeManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ReviewScore,Biography,Skills")] Coach coach)
+        public ActionResult Create(CoachViewModel coach)
         {
             if (ModelState.IsValid)
             {
-                db.Coaches.Add(coach);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var role = db.Roles.Where(a => a.Name == Constants.ROLES.COACH).FirstOrDefault();
+
+                if (db.Coaches.Where(a => a.Username.ToLower() == coach.Username.ToLower()).Count() > 0)
+                {
+                    ViewBag.ErrorMsg = "That username is already taken, try another one";
+                    return View(coach);
+                }
+
+                if (role != null)
+                {
+
+                    var coachOb = new Coach();
+                    coachOb.FirstName = coach.FirstName;
+                    coachOb.LastName = coach.LastName;
+                    coachOb.ReviewScore = 5;    //5 by default
+                    coachOb.Biography = coach.Biography;
+                    coachOb.Skills = coach.Skills;
+                    coachOb.Username = coach.Username;
+                    coachOb.Password = coach.Password;
+               
+
+                    db.Coaches.Add(coachOb);
+                    db.SaveChanges();
+
+                    FormsAuthentication.SetAuthCookie(coachOb.Username, false);
+                    return RedirectToAction("DashBoard", "Users");
+                }
             }
 
-            return View(coach);
+            return View();
         }
 
         // GET: Coaches/Edit/5
@@ -78,7 +104,7 @@ namespace LifeManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills")] Coach coach)
+        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime")] Coach coach)
         {
             if (ModelState.IsValid)
             {
