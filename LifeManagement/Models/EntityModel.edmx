@@ -56,6 +56,10 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Activity" EntitySet="Activities" />
     </AssociationSet>
+    <AssociationSet Name="RoleCoach" Association="SeniorDBModel.Store.RoleCoach">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Coach" EntitySet="Coaches" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
     <Key>
@@ -141,6 +145,7 @@
     <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
     <Property Name="AvatarMime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CoachReviews">
     <Key>
@@ -281,6 +286,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RoleCoach">
+    <End Role="Role" Type="SeniorDBModel.Store.Roles" Multiplicity="1" />
+    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coach">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -292,6 +309,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_RoleUser" FromRole="Role" ToRole="Users" />
+          <NavigationProperty Name="Coaches" Relationship="SeniorDBModel.RoleCoach" FromRole="Role" ToRole="Coach" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -380,6 +398,10 @@
           <AssociationSet Name="FK_CategoryActivity" Association="SeniorDBModel.FK_CategoryActivity">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="RoleCoach" Association="SeniorDBModel.RoleCoach">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Coach" EntitySet="Coaches" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -515,6 +537,8 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" />
           <Property Name="Avatar" Type="Binary" Nullable="true" />
           <Property Name="AvatarMime" Type="String" Nullable="true" />
+          <NavigationProperty Name="Role" Relationship="SeniorDBModel.RoleCoach" FromRole="Coach" ToRole="Role" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CoachReview">
           <Key>
@@ -588,6 +612,18 @@
             </Principal>
             <Dependent Role="Activity">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleCoach">
+          <End Type="SeniorDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coach">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -687,6 +723,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Avatar" ColumnName="Avatar" />
           <ScalarProperty Name="AvatarMime" ColumnName="AvatarMime" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
