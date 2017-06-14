@@ -31,6 +31,7 @@ namespace LifeManagement.Models
             public static string GUEST = "Guest";
             public static string USER = "User";
             public static string ADMIN = "Admin";
+            public static string COACH = "Coach";
 
 
         }
