@@ -71,13 +71,18 @@ namespace LifeManagement.Controllers
                     coachOb.Skills = coach.Skills;
                     coachOb.Username = coach.Username;
                     coachOb.Password = coach.Password;
-               
+                    coachOb.RoleId = role.Id;
 
                     db.Coaches.Add(coachOb);
                     db.SaveChanges();
 
                     FormsAuthentication.SetAuthCookie(coachOb.Username, false);
                     return RedirectToAction("DashBoard", "Users");
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = "Authentication error!";
+                    View("Error");
                 }
             }
 
