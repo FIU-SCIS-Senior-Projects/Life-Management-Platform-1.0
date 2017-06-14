@@ -375,7 +375,6 @@
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\Index.cshtml" />
     <Content Include="Views\Coaches\Create.cshtml" />
-    <Content Include="Views\Coaches\testValidation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
