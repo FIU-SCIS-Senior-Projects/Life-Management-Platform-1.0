@@ -99,10 +99,26 @@ namespace LifeManagement.Controllers
                 db.SaveChanges();
             }
 
+            var sprintGoals = lastsprint.Goals;
+            var goal1 = new Goal();
+            var goal2 = new Goal();
+            var goal3 = new Goal();
 
-            var goal1 = db.Goals.Where(a => a.CategoryId == 1 && a.SprintId == lastsprint.Id).FirstOrDefault();
-            var goal2 = db.Goals.Where(a => a.CategoryId == 2 && a.SprintId == lastsprint.Id).FirstOrDefault();
-            var goal3 = db.Goals.Where(a => a.CategoryId == 3 && a.SprintId == lastsprint.Id).FirstOrDefault();
+            foreach (Goal g in sprintGoals.ToList())
+            {
+                var newGoal = new Goal();
+                newGoal = g;
+                newGoal.SprintId = newSprint.Id;
+                db.Goals.Add(newGoal);
+                db.SaveChanges();
+
+                switch (newGoal.CategoryId)
+                {
+                    case 1: goal1 = newGoal; break;
+                    case 2: goal2 = newGoal; break;
+                    case 3: goal3 = newGoal; break;
+                }
+            }
 
             ViewBag.goalJoy = goal1.Description;
             ViewBag.goalPassion = goal2.Description;
@@ -130,40 +146,33 @@ namespace LifeManagement.Controllers
                     db.SaveChanges();
                 }
 
+                var sprintGoals = newSprint.Goals;
+     
             string goalJoy = quest.goal_1;
             string goalPassion = quest.goal_2;
             string goalGB= quest.goal_3;
 
-                if(quest.goal_1 != null)
-                { 
-                var g1 = new Goal();
-                g1.SprintId = newSprint.Id;
-                g1.Description = goalJoy;
-                g1.CategoryId = 1;
-                db.Goals.Add(g1);
-                db.SaveChanges();
-                }
-
-                if (quest.goal_2 != null)
+                foreach (Goal g in sprintGoals.ToList())
                 {
-
-                    var g2 = new Goal();
-                    g2.SprintId = newSprint.Id;
-                    g2.Description = quest.goal_2;
-                    g2.CategoryId = 2;
-                    db.Goals.Add(g2);
+                    Goal newGoal = db.Goals.Find(g.Id);
+                    
+                    if(newGoal.CategoryId == 1 && newGoal.Description != goalJoy)
+                    { 
+                    newGoal.Description = goalJoy;
                     db.SaveChanges();
+                    }
+                    else if (newGoal.CategoryId == 2 && newGoal.Description != goalPassion)
+                    {
+                        newGoal.Description = goalPassion;
+                        db.SaveChanges();
+                    }
+                    else if (newGoal.CategoryId == 3 && newGoal.Description != goalGB)
+                    {
+                        newGoal.Description = goalGB;
+                        db.SaveChanges();
+                    }
                 }
 
-                if (quest.goal_3 != null)
-                {
-                    var g3 = new Goal();
-                    g3.SprintId = newSprint.Id;
-                    g3.Description = quest.goal_3;
-                    g3.CategoryId = 3;
-                    db.Goals.Add(g3);
-                    db.SaveChanges();
-                }
                 return RedirectToAction("Dashboard", "Users");
             }
             ViewBag.ErrorMsg = "There was an unexpected error while configuring your productivity week, try again later";
