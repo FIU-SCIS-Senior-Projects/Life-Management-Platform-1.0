@@ -68,6 +68,18 @@ namespace LifeManagement.Models
                 return false;
             }
         }
+        public bool isCoach()
+        {
+            try
+            {
+                var coach = db.Coaches.Where(a => a.Username.ToLower() == HttpContext.Current.User.Identity.Name.ToLower()).FirstOrDefault();
+                return coach.Role.Name == Constants.ROLES.COACH;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public bool IsAuthenticated
         {
          
