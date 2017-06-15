@@ -75,8 +75,7 @@ namespace LifeManagement.Controllers
 
                     db.Coaches.Add(coachOb);
                     db.SaveChanges();
-
-                    FormsAuthentication.SetAuthCookie(coachOb.Username, false);
+                
                     return RedirectToAction("DashBoard", "Users");
                 }
                 else
@@ -101,6 +100,7 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(coach);
         }
 
@@ -109,12 +109,27 @@ namespace LifeManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime")] Coach coach)
+        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime, RoleId")] Coach coach)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(coach).State = EntityState.Modified;
+
+                db.Coaches.Attach(coach);
+
+                var entry = db.Entry(coach);
+                entry.State = EntityState.Modified;
+
+                entry.Property(e => e.RoleId).IsModified = false;
+
+                try { 
                 db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewBag.ErrorMsg = "Error! There can not be empty fields";
+                    return View(coach);
+                }
+
                 return RedirectToAction("Index");
             }
             return View(coach);
