@@ -1,18 +1,23 @@
-﻿    @model LifeManagement.Models.CoachViewModel
+﻿@model LifeManagement.Models.CoachViewModel
 
-    @{
-        Layout = "../Shared/AdminDashBoardLayout.cshtml";
-    }
+@{
+    Layout = "../Shared/AdminDashBoardLayout.cshtml";
+}
 
-<div class="clearfix">
+<div class="clearfix" style="background-color: white; width: 650px; position: relative; left: 25% ; top: 20px">
 
-    <div class="col-md-offset-3 col-md-6 text-center">
+
+    <div class=" col-lg-12 ">
+        <h2 style="text-align:center">Add a Coach</h2>
+
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>Add a Coach</h4>
+                
+             
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -64,8 +69,9 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-success" />
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Create" class="btn btn-success btn-lg" /> &nbsp;
+                        @Html.ActionLink("Back to List", "Index")
                     </div>
                 </div>
             </div>
