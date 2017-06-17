@@ -14,6 +14,7 @@ namespace LifeManagement.Controllers
     public class CoachesController : Controller
     {
         private SeniorDBEntities db = new SeniorDBEntities();
+        private Common common = new Common();
 
         // GET: Coaches
         public ActionResult Index()
@@ -159,6 +160,40 @@ namespace LifeManagement.Controllers
             db.Coaches.Remove(coach);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult CoachEditProfile()
+        {
+            var coach = db.Coaches.Where(c => c.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            return PartialView(coach);
+        }
+
+        [HttpPost]
+        public ActionResult CoachEditProfile(string FirstName, string LastName, string Biography, string Skills)
+        {
+
+
+            var coach = db.Coaches.Where(c => c.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            if ( coach != null)
+            {
+                if (coach.FirstName != FirstName)  coach.FirstName = FirstName;
+                if (coach.LastName != LastName) coach.LastName = LastName;
+                if (coach.Biography != Biography) coach.Biography = Biography;
+                if (coach.Skills != Skills) coach.Skills = Skills;
+
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (common.saveImageBytesCoach(coach, file))
+                    {
+                        coach.Avatar = common.ResizeImageFile(coach.Avatar, 200);
+                    }
+                }
+
+                db.SaveChanges();
+            }
+            return View();
         }
 
         protected override void Dispose(bool disposing)
