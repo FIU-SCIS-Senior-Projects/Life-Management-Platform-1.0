@@ -104,6 +104,22 @@ namespace LifeManagement.Models
             return false;
         }
 
+
+        /*********************save image for coach***********************************************/
+
+        public bool saveImageBytesCoach(Coach coach, HttpPostedFileBase image)
+        {
+
+            if (image != null)
+            {
+                coach.AvatarMime = image.ContentType;
+                coach.Avatar = new byte[image.ContentLength];
+                image.InputStream.Read(coach.Avatar, 0, image.ContentLength);
+                return true;
+            }
+            return false;
+        }
+
         /****************************Testing reduce size to pics***************************************** */
         public byte[] ResizeImageFile(byte[] imageFile, int targetSize) // Set targetSize to 1024
         {

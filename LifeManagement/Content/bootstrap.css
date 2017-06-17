@@ -6244,6 +6244,29 @@ body.modal-open,
   position: fixed;
 }
 
+
+.coach-tabs {
+    background-color: white;
+    width: 650px;
+    margin-top: 20px !important;
+    margin: 0 auto;
+}
+
+.coach-avatar-container {
+    height: 170px;
+    width: 170px;
+
+}
+
+.coach-avatar-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 40%;
+    top: 20px;
+    border-radius: 30px;
+}
+
 @-ms-viewport {
   width: device-width;
 }

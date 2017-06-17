@@ -376,6 +376,7 @@
     <Content Include="Views\Coaches\Create.cshtml" />
     <Content Include="Views\Shared\CoachDashboardLayout.cshtml" />
     <Content Include="Views\Coaches\Edit.cshtml" />
+    <Content Include="Views\Coaches\CoachEditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
