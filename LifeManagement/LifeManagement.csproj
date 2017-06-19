@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
@@ -277,6 +278,7 @@
     <None Include="Properties\PublishProfiles\fiusp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cmGauge.js" />
+    <Content Include="Scripts\Coaches.js" />
     <Content Include="Scripts\cooltabs.js" />
     <Content Include="Scripts\dashboard_js\bootstrap-datepicker.js" />
     <Content Include="Scripts\dashboard_js\bootstrap-table.js" />
@@ -377,6 +379,8 @@
     <Content Include="Views\Shared\CoachDashboardLayout.cshtml" />
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\CoachEditProfile.cshtml" />
+    <Content Include="Views\Coaches\CoachesList.cshtml" />
+    <Content Include="Views\Coaches\SeeCoaches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
