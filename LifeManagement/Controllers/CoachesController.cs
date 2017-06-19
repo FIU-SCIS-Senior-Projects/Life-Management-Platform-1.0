@@ -55,9 +55,15 @@ namespace LifeManagement.Controllers
             {
                 var role = db.Roles.Where(a => a.Name == Constants.ROLES.COACH).FirstOrDefault();
 
+                if (db.Coaches.Where(a => a.Email.ToLower() == coach.Email.ToLower()).Count() > 0)
+                {
+                    ViewBag.DuplicateEmail = "This email address is already registered in the system.";
+                    return View(coach);
+                }
+
                 if (db.Coaches.Where(a => a.Username.ToLower() == coach.Username.ToLower()).Count() > 0)
                 {
-                    ViewBag.ErrorMsg = "That username is already taken, try another one";
+                    ViewBag.DuplicateUserName = "That username is already taken, try another one";
                     return View(coach);
                 }
 
@@ -73,6 +79,7 @@ namespace LifeManagement.Controllers
                     coachOb.Username = coach.Username;
                     coachOb.Password = coach.Password;
                     coachOb.RoleId = role.Id;
+                    coachOb.Email = coach.Email;
 
                     db.Coaches.Add(coachOb);
                     db.SaveChanges();
@@ -110,7 +117,7 @@ namespace LifeManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime, RoleId")] Coach coach)
+        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime, RoleId, Email")] Coach coach)
         {
             if (ModelState.IsValid)
             {
@@ -195,6 +202,96 @@ namespace LifeManagement.Controllers
             }
             return View();
         }
+
+
+        [AllowAnonymous]
+        public ActionResult LoginCoach()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult LoginCoach(string Username, string Password)
+        {
+            var coach = db.Coaches.Where(a => a.Username.ToLower() == Username.ToLower()).FirstOrDefault();
+
+            if (coach != null && coach.Password == Password)
+            {
+                FormsAuthentication.SetAuthCookie(coach.Username, false);
+                return RedirectToAction("DashBoard", "Users");
+            }
+            ViewBag.Error = "Invalid Credentials";
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ResetPass(string email)
+        {
+            
+            var coach = db.Coaches.Where(e => e.Email.ToLower() == email.ToLower()).FirstOrDefault();
+
+            if (coach != null)
+            {
+                string subject = "Password reset requested";
+                string message = "Dear " + coach.FirstName + ": <br/>" + "<p> You are receiving this email because you forgot your password for the Life Management system,"
+                    + " to reset your password please follow <a href= \"" + @Url.Action("PasswordRecovery", "Coaches", null, Request.Url.Scheme) + "/" + coach.Id + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
+                    + "<p> Sincerely, <br/> The Life Management Team. </p>";
+
+                Common.sendEmail(coach.Email, subject, message);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(400, "");
+            }
+
+
+            return PartialView();
+        }
+        [AllowAnonymous]
+        public ActionResult PasswordRecovery(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Coach coach = db.Coaches.Find(id);
+            if (coach == null)
+            {
+                return HttpNotFound();
+            }
+            return View(coach);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ChangePass(string newpass, string newpass_conf, int id)
+        {
+
+
+            if (newpass != newpass_conf)
+            {
+                return new HttpStatusCodeResult(400, "");
+            }
+
+            Coach coach = db.Coaches.Find(id);
+            if (coach == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (coach != null)
+            {
+                coach.Password = newpass;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("LoginCoach"); ;
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
