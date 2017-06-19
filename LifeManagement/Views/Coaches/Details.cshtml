@@ -16,12 +16,35 @@
   
             <div class=" text-center">
 
-                <h2>Details</h2>
+                <h2>Coach Details</h2>
 
                 <div>
-                    <h4>Coach</h4>
                     <hr />
                     <dl class="dl-horizontal">
+                        <dd >
+                            <div class="form-group coach-avatar-container">
+                                <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
+                            </div>
+                        </dd>
+                        <dd>
+                            <br />
+                            <hr />
+                         </dd>               
+                        
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
                         <dt>
                             @Html.DisplayNameFor(model => model.ReviewScore)
                         </dt>
@@ -62,31 +85,8 @@
                             @Html.DisplayFor(model => model.Password)
                         </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.FirstName)
-                        </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.FirstName)
-                        </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.LastName)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.LastName)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Avatar)
-                        </dt>
-
-                        <dd style="position:relative; left: 15%;">
-                            <div class="form-group coach-avatar-container">
-                                <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
-                            </div>
-                        </dd>
 
 
                     </dl>

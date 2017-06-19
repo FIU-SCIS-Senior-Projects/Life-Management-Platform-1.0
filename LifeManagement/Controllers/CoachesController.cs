@@ -187,7 +187,7 @@ namespace LifeManagement.Controllers
                     var file = Request.Files[0];
                     if (common.saveImageBytesCoach(coach, file))
                     {
-                        coach.Avatar = common.ResizeImageFile(coach.Avatar, 200);
+                        coach.Avatar = common.ResizeImageFile(coach.Avatar, 300);
                     }
                 }
 
