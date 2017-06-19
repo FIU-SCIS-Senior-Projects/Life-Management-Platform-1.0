@@ -31,6 +31,7 @@ namespace LifeManagement.Models
             public static string GUEST = "Guest";
             public static string USER = "User";
             public static string ADMIN = "Admin";
+            public static string COACH = "Coach";
 
 
         }
@@ -67,6 +68,18 @@ namespace LifeManagement.Models
                 return false;
             }
         }
+        public bool isCoach()
+        {
+            try
+            {
+                var coach = db.Coaches.Where(a => a.Username.ToLower() == HttpContext.Current.User.Identity.Name.ToLower()).FirstOrDefault();
+                return coach.Role.Name == Constants.ROLES.COACH;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public bool IsAuthenticated
         {
          
@@ -86,6 +99,22 @@ namespace LifeManagement.Models
                 s.ImgMime = image.ContentType;
                 s.Img = new byte[image.ContentLength];
                 image.InputStream.Read(s.Img, 0, image.ContentLength);
+                return true;
+            }
+            return false;
+        }
+
+
+        /*********************save image for coach***********************************************/
+
+        public bool saveImageBytesCoach(Coach coach, HttpPostedFileBase image)
+        {
+
+            if (image != null)
+            {
+                coach.AvatarMime = image.ContentType;
+                coach.Avatar = new byte[image.ContentLength];
+                image.InputStream.Read(coach.Avatar, 0, image.ContentLength);
                 return true;
             }
             return false;
