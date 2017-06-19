@@ -146,6 +146,7 @@
     <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
     <Property Name="AvatarMime" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="120" />
   </EntityType>
   <EntityType Name="CoachReviews">
     <Key>
@@ -539,6 +540,7 @@
           <Property Name="AvatarMime" Type="String" Nullable="true" />
           <NavigationProperty Name="Role" Relationship="SeniorDBModel.RoleCoach" FromRole="Coach" ToRole="Role" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="120" />
         </EntityType>
         <EntityType Name="CoachReview">
           <Key>
@@ -724,6 +726,7 @@
           <ScalarProperty Name="Avatar" ColumnName="Avatar" />
           <ScalarProperty Name="AvatarMime" ColumnName="AvatarMime" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

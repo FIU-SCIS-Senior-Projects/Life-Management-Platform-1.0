@@ -135,7 +135,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
-    <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
@@ -246,12 +245,13 @@
     <Content Include="Imgs\user_avatar.png" />
     <Content Include="Imgs\vision.jpg" />
     <Content Include="Models\EntityModel-6-12-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-6-19-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EntityModel.edmx.sql" />
+    <Content Include="Models\EntityModel-6-13-2017.edmx.sql" />
     <Content Include="Models\somedata.edmx.sql" />
     <Content Include="Models\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
