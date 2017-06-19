@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="SeniorDBModel.SprintActivities" Width="1.5" PointX="11.125" PointY="3.5" />
         <AssociationConnector Association="SeniorDBModel.SprintSprintActivities" />
         <AssociationConnector Association="SeniorDBModel.SprintActivitiesProgress" />
-        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="0.875" PointY="4" />
+        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="0.75" PointY="4.125" />
         <EntityTypeShape EntityType="SeniorDBModel.CoachReview" Width="1.5" PointX="6.375" PointY="1.25" />
         <AssociationConnector Association="SeniorDBModel.CoachCoachReview" />
         <AssociationConnector Association="SeniorDBModel.UserCoachReview" />
