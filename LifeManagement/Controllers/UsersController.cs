@@ -33,16 +33,6 @@ namespace LifeManagement.Controllers
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("DashBoard");
             }
-            else if (user == null)
-            {
-                var coach = db.Coaches.Where(a => a.Username.ToLower() == username.ToLower()).FirstOrDefault();
-
-                if(coach != null && coach.Password == password)
-                {
-                    FormsAuthentication.SetAuthCookie(coach.Username, false);
-                    return RedirectToAction("DashBoard");
-                }
-            }
 
             ViewBag.Error = "Invalid Credentials";
             return View();

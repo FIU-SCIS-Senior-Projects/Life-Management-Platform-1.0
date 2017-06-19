@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imgs\beginjourney.jpg" />
+    <Content Include="Imgs\bety_new_img\avatar_coach.jpg" />
     <Content Include="Imgs\bety_new_img\beach.jpg" />
     <Content Include="Imgs\bety_new_img\blue-landscape-1.jpg" />
     <Content Include="Imgs\bety_new_img\blueFlowers.jpg" />
@@ -377,6 +379,9 @@
     <Content Include="Views\Shared\CoachDashboardLayout.cshtml" />
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\CoachEditProfile.cshtml" />
+    <Content Include="Views\Coaches\LoginCoach.cshtml" />
+    <Content Include="Views\Coaches\PasswordRecovery.cshtml" />
+    <Content Include="Views\Coaches\ResetPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
