@@ -1,0 +1,50 @@
+﻿<script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Coaches.js"></script>
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+<div ng-app="CoachApp" class="container">
+    <br />
+    <br />
+
+    <br />
+    <div ng-controller="CoachController">
+        <div>
+
+            <div class="text-right">Search :</div>
+            <div><input type="text" placeholder="Search Coach" ng-model="searchCoach" /> </div>
+       
+    </div>
+    <table class="table">
+        <tr ng-repeat="r in Coaches | filter:searchCoach ">
+            <td>
+                <table  class="table">
+                    <tr>
+                        <td rowspan="4"><img src="{{r.AvatarStr64}}" height="60" width="60" /></td>
+                        <td>
+                            {{r.FirstName +" " + r.LastName}}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{r.Skills}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{r.Email}}</td>
+                    </tr>
+                    <tr>
+                        <td>See details</td>
+                        <td>Select Coach</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+

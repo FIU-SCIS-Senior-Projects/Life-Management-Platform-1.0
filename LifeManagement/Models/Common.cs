@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 //using System.Web.Mail;
 using System.Net.Mail;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+
 
 namespace LifeManagement.Models
 {
@@ -27,6 +31,7 @@ namespace LifeManagement.Models
             public static string GUEST = "Guest";
             public static string USER = "User";
             public static string ADMIN = "Admin";
+            public static string COACH = "Coach";
 
 
         }
@@ -63,6 +68,18 @@ namespace LifeManagement.Models
                 return false;
             }
         }
+        public bool isCoach()
+        {
+            try
+            {
+                var coach = db.Coaches.Where(a => a.Username.ToLower() == HttpContext.Current.User.Identity.Name.ToLower()).FirstOrDefault();
+                return coach.Role.Name == Constants.ROLES.COACH;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public bool IsAuthenticated
         {
          
@@ -86,22 +103,81 @@ namespace LifeManagement.Models
             }
             return false;
         }
-      /*  public bool saveImageBytes(ImageInterface s, string image)
+
+
+        /*********************save image for coach***********************************************/
+
+        public bool saveImageBytesCoach(Coach coach, HttpPostedFileBase image)
         {
 
-            if (!String.IsNullOrEmpty(image))
+            if (image != null)
             {
-                byte[] data = Convert.FromBase64String(image);
-
-                s.ImageMimeType = "PNG";
-                s.Bytes = data;
-
+                coach.AvatarMime = image.ContentType;
+                coach.Avatar = new byte[image.ContentLength];
+                image.InputStream.Read(coach.Avatar, 0, image.ContentLength);
                 return true;
             }
             return false;
         }
-        */
-        public  string SignatureImageStr64(Byte[] bytes, string mimetype)
+
+        /****************************Testing reduce size to pics***************************************** */
+        public byte[] ResizeImageFile(byte[] imageFile, int targetSize) // Set targetSize to 1024
+        {
+            using (System.Drawing.Image oldImage = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile)))
+            {
+                Size newSize = CalculateDimensions(oldImage.Size, targetSize);
+                using (Bitmap newImage = new Bitmap(newSize.Width, newSize.Height, PixelFormat.Format24bppRgb))
+                {
+                    using (Graphics canvas = Graphics.FromImage(newImage))
+                    {
+                        canvas.SmoothingMode = SmoothingMode.AntiAlias;
+                        canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        canvas.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        canvas.DrawImage(oldImage, new Rectangle(new Point(0, 0), newSize));
+                        System.IO.MemoryStream m = new System.IO.MemoryStream();
+                        newImage.Save(m, ImageFormat.Jpeg);
+                        return m.GetBuffer();
+                    }
+                }
+            }
+        }
+
+        public Size CalculateDimensions(Size oldSize, int targetSize)
+        {
+            Size newSize = new Size();
+            if (oldSize.Height > oldSize.Width)
+            {
+                newSize.Width = (int)(oldSize.Width * ((float)targetSize / (float)oldSize.Height));
+                newSize.Height = targetSize;
+            }
+            else
+            {
+                newSize.Width = targetSize;
+                newSize.Height = (int)(oldSize.Height * ((float)targetSize / (float)oldSize.Width));
+            }
+            return newSize;
+        }
+
+        /********************************End of testing************************************* */
+
+
+
+        /*  public bool saveImageBytes(ImageInterface s, string image)
+          {
+
+              if (!String.IsNullOrEmpty(image))
+              {
+                  byte[] data = Convert.FromBase64String(image);
+
+                  s.ImageMimeType = "PNG";
+                  s.Bytes = data;
+
+                  return true;
+              }
+              return false;
+          }
+          */
+        public string SignatureImageStr64(Byte[] bytes, string mimetype)
         {
             string imageSrc = "/Imgs/noimage.jpg";
 

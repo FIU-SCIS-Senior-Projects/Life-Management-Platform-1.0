@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace LifeManagement.Controllers
 {
@@ -58,6 +60,15 @@ namespace LifeManagement.Controllers
 
         }
 
+        public PartialViewResult CatDisplay(string cat)
+        {
+            var activities = db.Activities.Where(a => a.Category.Name.ToLower() == cat.ToLower());
+            if (activities.Any())
+                return PartialView(activities.ToList());
+
+            ViewBag.ErrorMsg = "Could not find any activity with the given category";
+            return PartialView("ErrorPartial");
+        }
         /****************Testing Bea******************/
         public PartialViewResult CreateActivity()
         {
@@ -65,25 +76,29 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult CreateActivity(Activity activity, HttpPostedFileBase file)
+        public ActionResult CreateActivity(string Name, int CategoryId)
         {
-            if (file.ContentLength <= 0)
-            {
-                ViewBag.ErrorMsg = "No file uploaded";
-                return PartialView("ErrorPartial");
-            }
-          
+   
+            var file = Request.Files[0];
+
+            Activity activity = new Activity();
+            activity.Name = Name;
+            activity.CategoryId = CategoryId;
+
             if (common.saveImageBytes(activity, file))
-            {
-                db.Activities.Add(activity);
-                db.SaveChanges();
-                ViewBag.Msg = "Activity Successfully saved";
-                return RedirectToAction("Index", "Dashboard");
+                {
+
+                    activity.Img = common.ResizeImageFile(activity.Img, 200);
+
+                    db.Activities.Add(activity);
+                    db.SaveChanges();
+                    ViewBag.Msg = "Activity Successfully saved";
+                    return RedirectToAction("Dashboard", "Users");
             }
 
-            ViewBag.ErrorMsg = "Error occured";
-                return PartialView("ErrorPartial");
-           
+            ViewBag.ErrorMsg = " An unexpected error has occurred, try again later";
+            return View("Error");
+
         }
 
 
@@ -141,7 +156,46 @@ namespace LifeManagement.Controllers
 
             return PartialView();
         }
+        public PartialViewResult EditSelectedActivity(int id)
+        {
+            var act = db.Activities.Find(id);
+            if (act == null)
+            {
+                ViewBag.ErrorMsg = "Could not find activity";
+                return PartialView("ErrorPartial");
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", act.CategoryId);
+            return PartialView(act);
+        }
+        [HttpPost]
+        public bool SaveEditActivity(int id,string name,int cat)
+        {
+            try
+            {
+                var act = db.Activities.Find(id);
+                if (act == null)
+                {
+                    return false;
+                }
+                act.Name = name;
+                act.CategoryId = cat;
+                var file = Request.Files[0];
+                if (common.saveImageBytes(act, file))
+                {
 
+                    act.Img = common.ResizeImageFile(act.Img, 200);
+
+
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         // GET: Activities/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -33,6 +33,7 @@ namespace LifeManagement.Controllers
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("DashBoard");
             }
+
             ViewBag.Error = "Invalid Credentials";
             return View();
         }

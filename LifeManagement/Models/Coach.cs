@@ -24,9 +24,17 @@ namespace LifeManagement.Models
         public int ReviewScore { get; set; }
         public string Biography { get; set; }
         public string Skills { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public byte[] Avatar { get; set; }
+        public string AvatarMime { get; set; }
+        public int RoleId { get; set; }
+        public string Email { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoachReview> CoachReviews { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

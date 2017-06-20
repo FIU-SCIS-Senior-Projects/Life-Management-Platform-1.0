@@ -1,0 +1,106 @@
+﻿@model LifeManagement.Models.Coach
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    var common = new LifeManagement.Models.Common();
+}
+
+@{
+    Layout = "../Shared/AdminDashBoardLayout.cshtml";
+}
+
+<div class="clearfix coach-tabs">
+  
+    <div class=" text-center">
+
+        <h2>Coach Details</h2>
+    </div>
+  
+   
+   
+    <hr />
+
+   <div class="row " style="padding-left: 25%">
+               <div class=" col-md-3" >
+                        <div class="coach-avatar-container">
+                            <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
+                        </div>
+                   </div>
+                <div class="col-md-9">
+                    <br />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ReviewScore)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ReviewScore)
+                        </dd>
+                    </dl>
+                </div> 
+       
+</div>
+
+    <hr />
+
+    <div style="word-break: break-all; word-wrap: break-word;">
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Biography)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Biography)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Skills)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Skills)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+
+        </dl>
+    </div>
+          
+    <hr />
+        <p style="padding-left:5em">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+            </p>
+
+            <hr />
+</div>

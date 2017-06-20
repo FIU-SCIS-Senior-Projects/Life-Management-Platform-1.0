@@ -1,0 +1,7 @@
+﻿.stardiv {
+    background: url('/Imgs/star.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    float: left;
+}

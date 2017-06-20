@@ -23,17 +23,17 @@
     
         <div id="sidebar-collapse" class="col-md-2 sidebar">
 
-            <div class="form-group" style="height: 100px">
-                <img src="~/Imgs/user_avatar.png" width="100" height="100" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
-
+            <div class="form-group" style="height: 230px">
+                <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
+                <p style=" position: relative; top: 40px; left: 30%"> Admin Name </p>
             </div>
 
             <ul class="nav menu">
                 <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
                 <li><a href="~/Views/Shared/Dashboard_other/widgets_index.cshtml"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Progress Summary</a></li>
-                <li><a class="lmmodal" modal-width="700px" url='@Url.Action("CreateActivity","Activities")' href="#"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Create Activity</a></li>
-                <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Tables</a></li>
-                <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
+                <li><a class="lmmodal" modal-width="600px" url='@Url.Action("CreateActivity","Activities")' href="#"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"></use></svg> Create Activity</a></li>
+                <li><a class="lmmodal" modal-width="100%" url='@Url.Action("EditActivity","Activities")' href="#"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Edit Activity</a></li>
+                <li><a  href='@Url.Action("Index","Coaches")' > <svg class="glyph stroked male user "><use xlink:href="#stroked-male-user" /></svg> Coaches </a></li>
                 <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
                 <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
                 <li class="parent ">

@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<div class="" style="margin-top:30px">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="center-block">
+                <img class="center-block" src="~/Imgs/bety_new_img/avatar_coach.jpg" />
+            </div>
+
+        </div>
+        <div class="col-md-5">
+
+            <div class="clearfix">
+                <div class="form-horizontal col-md-12">
+                    <h3 class="text-danger"> @ViewBag.Error</h3>
+                    <form method="post" action="@Url.Action("LoginCoach", "Coaches")">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Username:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" id="Username" name="Username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="password" name="Password" id="Password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-md-12 col-md-offset-4">
+                                <div class=" col-md-3">
+                                    <input type="submit" value="login" class="form-control btn btn-success" />
+                                </div>
+                                <div class="col-md-5 text-right">
+                                    <a href="#" class="lmmodal" htmlmodal="true" htmlmodalid="#resetdiv" modal-width="600px"> Forgot password? Hit here</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+<div id="resetdiv" style="display: none">
+    <div class="clearfix">
+        <div class="col-md-12" id="response_ok">
+
+        </div>
+
+        <div id="mainreset">
+            <h2 class="text-center col-md-12">Reset Password</h2>
+
+            <div class="text-center col-md-12" id="response_bad" style="color: red">
+            </div>
+
+
+            <div class="form-horizontal col-md-12">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email address:</label>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="email" id="email" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button class="btn btn-success form-control" onclick="ressetpass()">Re-set</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/lmpopup.js"></script>
+
+<script>
+    function ressetpass() {
+        $.ajax({
+            url: '@Url.Action("ResetPass", "Coaches")',
+            data: { email: $("#email").val()},
+            type: 'POST',
+            success: function (res) {
+                $("#response_ok").html(res);
+                $("#mainreset").html("")
+            },
+
+            error: function(msg) { $("#response_bad").html(" Error! This email address is not registered on the system, try another.") }
+        });
+    }
+</script>

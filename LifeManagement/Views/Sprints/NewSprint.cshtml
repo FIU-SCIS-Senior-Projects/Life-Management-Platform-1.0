@@ -1,0 +1,25 @@
+﻿<div class="clearfix">
+   
+        <h2 class="col-md-12 text-center"> It looks like your productivy week has ended!</h2>
+
+        <h4 class="col-md-12 text-center"> Click continue to configure your next period</h4>
+
+       
+        <div class="form-group">
+            <div class="col-md-offset-8 col-md-4">
+                <button class="btn btn-success form-control" onclick="redirect()">
+                    Continue
+                </button>
+            </div>
+        </div>
+
+   
+    </div>
+
+
+    <script>
+    function redirect()
+    {
+        window.location.href = '@Url.Action("ConfigureNewSprint", "Sprints")'; 
+    }
+    </script>

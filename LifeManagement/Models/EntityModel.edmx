@@ -40,10 +40,6 @@
       <End Role="SprintActivities" EntitySet="SprintActivities" />
       <End Role="Progress" EntitySet="Progresses" />
     </AssociationSet>
-    <AssociationSet Name="CoachUser" Association="SeniorDBModel.Store.CoachUser">
-      <End Role="Coach" EntitySet="Coaches" />
-      <End Role="User" EntitySet="Users" />
-    </AssociationSet>
     <AssociationSet Name="CoachCoachReview" Association="SeniorDBModel.Store.CoachCoachReview">
       <End Role="Coach" EntitySet="Coaches" />
       <End Role="CoachReview" EntitySet="CoachReviews" />
@@ -59,6 +55,10 @@
     <AssociationSet Name="FK_CategoryActivity" Association="SeniorDBModel.Store.FK_CategoryActivity">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="RoleCoach" Association="SeniorDBModel.Store.RoleCoach">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Coach" EntitySet="Coaches" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
@@ -86,6 +86,8 @@
     <Property Name="Statement1" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Statement2" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Statement3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
+    <Property Name="AvatarMime" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -137,7 +139,14 @@
     <Property Name="ReviewScore" Type="int" Nullable="false" />
     <Property Name="Biography" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Skills" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
+    <Property Name="AvatarMime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="120" />
   </EntityType>
   <EntityType Name="CoachReviews">
     <Key>
@@ -230,20 +239,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CoachUser">
-    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="*" />
-    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Coach">
-        <PropertyRef Name="User_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CoachCoachReview">
     <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="1" />
     <End Role="CoachReview" Type="SeniorDBModel.Store.CoachReviews" Multiplicity="*" />
@@ -292,6 +287,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RoleCoach">
+    <End Role="Role" Type="SeniorDBModel.Store.Roles" Multiplicity="1" />
+    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coach">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -303,6 +310,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_RoleUser" FromRole="Role" ToRole="Users" />
+          <NavigationProperty Name="Coaches" Relationship="SeniorDBModel.RoleCoach" FromRole="Role" ToRole="Coach" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -319,13 +327,14 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Role" Relationship="Self.FK_RoleUser" FromRole="Users" ToRole="Role" />
           <NavigationProperty Name="Sprints" Relationship="SeniorDBModel.UserSprint" FromRole="User" ToRole="Sprint" />
-          <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachUser" FromRole="User" ToRole="Coach" />
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.UserCoachReview" FromRole="User" ToRole="CoachReview" />
           <Property Name="Vision" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="LifeSuccess" Type="String" Nullable="true" MaxLength="Max" />
           <Property Name="Statement1" Type="String" Nullable="true" MaxLength="Max" />
           <Property Name="Statement2" Type="String" Nullable="true" MaxLength="Max" />
           <Property Name="Statement3" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Avatar" Type="Binary" Nullable="true" />
+          <Property Name="AvatarMime" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -373,10 +382,6 @@
             <End Role="Progress" EntitySet="Progresses" />
           </AssociationSet>
           <EntitySet Name="Coaches" EntityType="SeniorDBModel.Coach" />
-          <AssociationSet Name="CoachUser" Association="SeniorDBModel.CoachUser">
-            <End Role="Coach" EntitySet="Coaches" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <EntitySet Name="CoachReviews" EntityType="SeniorDBModel.CoachReview" />
           <AssociationSet Name="CoachCoachReview" Association="SeniorDBModel.CoachCoachReview">
             <End Role="Coach" EntitySet="Coaches" />
@@ -394,6 +399,10 @@
           <AssociationSet Name="FK_CategoryActivity" Association="SeniorDBModel.FK_CategoryActivity">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="RoleCoach" Association="SeniorDBModel.RoleCoach">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Coach" EntitySet="Coaches" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -519,18 +528,20 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="User" Relationship="SeniorDBModel.CoachUser" FromRole="Coach" ToRole="User" />
           <Property Name="ReviewScore" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CoachReviews" Relationship="SeniorDBModel.CoachCoachReview" FromRole="Coach" ToRole="CoachReview" />
           <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Skills" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Avatar" Type="Binary" Nullable="true" />
+          <Property Name="AvatarMime" Type="String" Nullable="true" />
+          <NavigationProperty Name="Role" Relationship="SeniorDBModel.RoleCoach" FromRole="Coach" ToRole="Role" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="120" />
         </EntityType>
-        <Association Name="CoachUser">
-          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="0..1" />
-          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" >
-            <OnDelete Action="Cascade" />
-          </End>
-        </Association>
         <EntityType Name="CoachReview">
           <Key>
             <PropertyRef Name="Id" />
@@ -606,6 +617,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="RoleCoach">
+          <End Type="SeniorDBModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coach">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -637,6 +660,8 @@
           <ScalarProperty Name="Statement1" ColumnName="Statement1" />
           <ScalarProperty Name="Statement2" ColumnName="Statement2" />
           <ScalarProperty Name="Statement3" ColumnName="Statement3" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="AvatarMime" ColumnName="AvatarMime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -694,6 +719,14 @@
           <ScalarProperty Name="ReviewScore" ColumnName="ReviewScore" />
           <ScalarProperty Name="Biography" ColumnName="Biography" />
           <ScalarProperty Name="Skills" ColumnName="Skills" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="AvatarMime" ColumnName="AvatarMime" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -718,14 +751,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CoachUser" TypeName="SeniorDBModel.CoachUser" StoreEntitySet="Coaches">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="User_Id" />
-      </EndProperty>
-      <EndProperty Name="Coach">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
