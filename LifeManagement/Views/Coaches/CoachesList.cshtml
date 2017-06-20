@@ -1,21 +1,37 @@
-﻿
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="~/Scripts/Coaches.js"></script>
+﻿<script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Coaches.js"></script>
+
 
 <div ng-app="CoachApp" class="container">
     <br />
     <br />
-    <input type="text" placeholder="Search Coach" ng-model="searchCoach" />
+   
     <br />
     <div ng-controller="CoachController">
-        <table class="table">
-            <tr ng-repeat="r in coaches | filter : searchCoach">
-                <td>{{r.Name}}</td>
-                <td>{{r.Email}}</td>
-                <td>
-                    {{r.LastName}}
-                </td>
+      <table class="table">
+            <tr>
+                <td class="text-right">Search :</td>
+                <td colspan="5"><input type="text" placeholder="Search Coach" ng-model="searchCoach" /></td>
             </tr>
+          <tr>
+              <td></td>
+              <th>Score</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Skills</th>
+              <th>Email</th>
+              <td></td>
+          </tr>
+          <tr ng-repeat="r in Coaches | filter:searchCoach ">
+              <td><img src="{{r.AvatarStr64}}" height="60" width="60"/></td>
+              <td>{{r.ReviewScore}}</td>
+              <td>{{r.FirstName}}</td>
+              <td>{{r.LastName}}</td>
+              <td>{{r.Skills}}</td>
+              <td>{{r.Email}}</td>
+
+          </tr>
         </table>
-    </div>
+
+</div>
 </div>
