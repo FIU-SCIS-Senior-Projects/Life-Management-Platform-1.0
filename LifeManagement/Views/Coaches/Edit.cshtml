@@ -21,7 +21,7 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.Id)
 
-                <h3 class="text-danger" style="text-align:center"> @ViewBag.ErrorMsg</h3>
+                <h4 style="text-align:center; color: red; font-weight: bold"> @ViewBag.ErrorMsg</h4>
                 <div class="form-group">
                     @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">

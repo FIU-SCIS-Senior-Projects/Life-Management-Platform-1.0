@@ -1156,6 +1156,8 @@
     <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\SeeCoaches.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Coaches\CoachDetailsPage.cshtml" />
+    <Content Include="Views\Coaches\ProfilePic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
