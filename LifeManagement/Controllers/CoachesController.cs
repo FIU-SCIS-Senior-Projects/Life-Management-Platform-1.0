@@ -15,7 +15,38 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         private Common common = new Common();
+        /**************working with coaches fernando******************/
+        public JsonResult GetCoaches()
+        {
+            var coaches = db.Coaches;
+            List<CoachListVM> result = new List<CoachListVM>();
+            foreach (var a in coaches)
+            {
+                var newcoach = new CoachListVM()
+                {
+                    AvatarStr64 = common.SignatureImageStr64(a.Avatar, a.AvatarMime),
 
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    Skills = a.Skills,
+                    ReviewScore = a.ReviewScore
+                };
+                result.Add(newcoach);
+            }
+           
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult CoachesList()
+        {
+            return PartialView();
+        }
+
+        public ActionResult SeeCoaches()
+        {
+            return View();
+        }
+       /********************************************************/
         // GET: Coaches
         public ActionResult Index()
         {
@@ -83,7 +114,7 @@ namespace LifeManagement.Controllers
 
                     db.Coaches.Add(coachOb);
                     db.SaveChanges();
-                
+
                     return RedirectToAction("DashBoard", "Users");
                 }
                 else
@@ -108,7 +139,7 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(coach);
         }
 
@@ -131,10 +162,19 @@ namespace LifeManagement.Controllers
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
                 if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
+<<<<<<< HEAD
                 try { 
                 db.SaveChanges();
                     }
                 catch { 
+=======
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+>>>>>>> acd91cde8b7928dcf9a8536739414d664900e0bc
                     ViewBag.ErrorMsg = "Error! There can not be empty fields";
                     return View(coachData);
                 }
@@ -183,9 +223,9 @@ namespace LifeManagement.Controllers
 
             var coach = db.Coaches.Where(c => c.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
-            if ( coach != null)
+            if (coach != null)
             {
-                if (coach.FirstName != FirstName)  coach.FirstName = FirstName;
+                if (coach.FirstName != FirstName) coach.FirstName = FirstName;
                 if (coach.LastName != LastName) coach.LastName = LastName;
                 if (coach.Biography != Biography) coach.Biography = Biography;
                 if (coach.Skills != Skills) coach.Skills = Skills;
@@ -230,7 +270,7 @@ namespace LifeManagement.Controllers
         [AllowAnonymous]
         public ActionResult ResetPass(string email)
         {
-            
+
             var coach = db.Coaches.Where(e => e.Email.ToLower() == email.ToLower()).FirstOrDefault();
 
             if (coach != null)

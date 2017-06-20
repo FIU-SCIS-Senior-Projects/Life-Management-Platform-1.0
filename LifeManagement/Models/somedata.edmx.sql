@@ -70,3 +70,48 @@ SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [DOB], [RoleId], [username], [password], [DateCreated], [Vision], [LifeSuccess], [Statement1], [Statement2], [Statement3]) VALUES (1, N'Beatriz', N'Hdez', N'bhern104@fiu.edu', CAST(0x00007F5600000000 AS DateTime), 3, N'beatriz', N'beatriz', CAST(0x0000A78A00000000 AS DateTime), N'my vision', N'ls', N's1', N's2', N's3')
 INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [DOB], [RoleId], [username], [password], [DateCreated], [Vision], [LifeSuccess], [Statement1], [Statement2], [Statement3]) VALUES (2, N'Fernando', N'Moj', N'fmoje001@fiu.edu', CAST(0x00007F5600000000 AS DateTime), 3, N'fernando', N'fernando', CAST(0x0000A78A00000000 AS DateTime), N'my vision', N'ls', N's1', N's2', N's3')
 SET IDENTITY_INSERT [dbo].[Users] OFF
+
+GO
+SET IDENTITY_INSERT [dbo].Coaches ON 
+INSERT INTO [dbo].[Coaches]
+           ([ReviewScore]
+           ,[Biography]
+           ,[Skills]
+           ,[Username]
+           ,[Password]
+           ,[FirstName]
+           ,[LastName]
+            ,[RoleId]
+           ,[Email])
+     VALUES
+           (5
+           ,'I was born in my birthplace'
+           ,'el animal en to'
+           ,'coach1'
+           ,'coach1'
+           ,'coach1'
+           ,'coach1 last name'
+           ,4
+           ,'coach1@lm.com'),
+		    (4
+           ,'I was born in my birthplace'
+           ,'el animal en casi to'
+           ,'coach2'
+           ,'coach2'
+           ,'coach2'
+           ,'coach2 last name'
+           ,4
+           ,'coach2@lm.com'),
+		    (3
+           ,'I was born in my birthplace'
+           ,'el animal en casi na'
+           ,'coach3'
+           ,'coach3'
+           ,'coach3'
+           ,'coach3 last name'
+           ,4
+           ,'coach3@lm.com')
+
+GO
+SET IDENTITY_INSERT [dbo].Coaches OFF 
+
