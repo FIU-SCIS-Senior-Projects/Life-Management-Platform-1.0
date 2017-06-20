@@ -6247,7 +6247,9 @@ body.modal-open,
 
 .coach-tabs {
     background-color: white;
-    width: 650px;
+    width: 800px;
+    height: auto;
+    padding-right: 25px;
     margin-top: 20px !important;
     margin: 0 auto;
 }
@@ -6255,16 +6257,27 @@ body.modal-open,
 .coach-avatar-container {
     height: 170px;
     width: 170px;
+    margin-left: 10%;
 
 }
 
 .coach-avatar-img {
     width: 100%;
     height: 100%;
-    position: relative;
-    left: 40%;
     top: 20px;
     border-radius: 30px;
+}
+
+/* Testtt dd dt*/
+dt, dd {
+    margin-bottom: 10px;
+    text-align: left !important;
+}
+
+dt {
+    width: auto!important;
+    text-align: left!important;
+    padding-left: 50px !important;
 }
 
 @-ms-viewport {

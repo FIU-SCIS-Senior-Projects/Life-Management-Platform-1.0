@@ -116,31 +116,32 @@ namespace LifeManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReviewScore,Biography,Skills,Username,Password,FirstName,LastName,Avatar,AvatarMime, RoleId, Email")] Coach coach)
+        public ActionResult Edit( Coach coachData)
         {
             if (ModelState.IsValid)
             {
 
-                db.Coaches.Attach(coach);
+                var coach = db.Coaches.Find(coachData.Id);
 
-                var entry = db.Entry(coach);
-                entry.State = EntityState.Modified;
-
-                entry.Property(e => e.RoleId).IsModified = false;
+                if(coach != null) { 
+                if (coach.FirstName != coachData.FirstName) coach.FirstName = coachData.FirstName;
+                if (coach.LastName != coachData.LastName) coach.LastName = coachData.LastName;
+                if (coach.Biography != coachData.Biography) coach.Biography = coachData.Biography;
+                if (coach.Skills != coachData.Skills) coach.Skills = coachData.Skills;
+                if (coach.Username != coachData.Username) coach.Username = coachData.Username;
+                if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
                 try { 
                 db.SaveChanges();
-                }
-                catch (Exception e)
-                {
+                    }
+                catch { 
                     ViewBag.ErrorMsg = "Error! There can not be empty fields";
-                    return View(coach);
+                    return View(coachData);
                 }
-
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
-            return View(coach);
+            return View(coachData);
         }
 
         // GET: Coaches/Delete/5
