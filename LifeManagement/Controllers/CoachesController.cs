@@ -349,7 +349,13 @@ namespace LifeManagement.Controllers
             return RedirectToAction("LoginCoach"); ;
         }
 
+        public PartialViewResult ProfilePic()
+        {
+            var coach = db.Coaches.Where(c => c.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
+            return PartialView(coach);
+
+        }
 
         protected override void Dispose(bool disposing)
         {
