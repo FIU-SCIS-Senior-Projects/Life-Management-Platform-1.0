@@ -15,7 +15,38 @@ namespace LifeManagement.Controllers
     {
         private SeniorDBEntities db = new SeniorDBEntities();
         private Common common = new Common();
+        /**************working with coaches fernando******************/
+        public JsonResult GetCoaches()
+        {
+            var coaches = db.Coaches;
+            List<CoachListVM> result = new List<CoachListVM>();
+            foreach (var a in coaches)
+            {
+                var newcoach = new CoachListVM()
+                {
+                    AvatarStr64 = common.SignatureImageStr64(a.Avatar, a.AvatarMime),
 
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    Skills = a.Skills,
+                    ReviewScore = a.ReviewScore
+                };
+                result.Add(newcoach);
+            }
+           
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult CoachesList()
+        {
+            return PartialView();
+        }
+
+        public ActionResult SeeCoaches()
+        {
+            return View();
+        }
+       /********************************************************/
         // GET: Coaches
         public ActionResult Index()
         {
