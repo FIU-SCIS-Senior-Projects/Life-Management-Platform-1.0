@@ -1,37 +1,48 @@
 ﻿<script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/Coaches.js"></script>
-
+<link href="~/Content/coaches.css" rel="stylesheet" />
 
 <div ng-app="CoachApp" class="container">
-    <br />
-    <br />
-   
-    <br />
-    <div ng-controller="CoachController">
-      <table class="table">
-            <tr>
-                <td class="text-right">Search :</td>
-                <td colspan="5"><input type="text" placeholder="Search Coach" ng-model="searchCoach" /></td>
-            </tr>
-          <tr>
-              <td></td>
-              <th>Score</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Skills</th>
-              <th>Email</th>
-              <td></td>
-          </tr>
-          <tr ng-repeat="r in Coaches | filter:searchCoach ">
-              <td><img src="{{r.AvatarStr64}}" height="60" width="60"/></td>
-              <td>{{r.ReviewScore}}</td>
-              <td>{{r.FirstName}}</td>
-              <td>{{r.LastName}}</td>
-              <td>{{r.Skills}}</td>
-              <td>{{r.Email}}</td>
+    <div ng-controller="CoachController" class="clearfix">
+        <div class="col-md-12">
+           <input type="text" class="form-control col-md-4" placeholder="Search Coach" ng-model="searchCoach"/>
+       </div>
+        <div class="col-md-12">
+            <table class="table">
+                <tr ng-repeat="r in Coaches | filter:searchCoach ">
+                    <td>
+                        <table class="table">
+                            <tr>
+                                <td class="coachimgtd" rowspan="5"><img class="coachimg" src="{{r.AvatarStr64}}" /></td>
+                                <td class="tdbordered">
+                                    {{r.FirstName +" " + r.LastName}}
 
-          </tr>
-        </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{r.Skills}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{r.Email}}</td>
+                            </tr>
+                            <tr>
 
+                                <td>Details | Select Coach</td>
+                            </tr>
+                            <tr><td colspan="2"><hr /></td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    
+    </div>
 </div>
-</div>
+
+

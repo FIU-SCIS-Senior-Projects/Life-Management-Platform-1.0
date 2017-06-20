@@ -185,6 +185,7 @@ namespace LifeManagement.Controllers
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
                 if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
+<<<<<<< HEAD
                 try
                 {
                     db.SaveChanges();
@@ -193,6 +194,17 @@ namespace LifeManagement.Controllers
                 {
                     ViewBag.ErrorMsg = "Error! FirstName, LastName, Password, and UserName must have at most 20 characters, \n " +
                             "please check your changes and try again.";
+=======
+
+                try { 
+                db.SaveChanges();
+                    }
+              
+                catch (Exception e)
+                {
+
+                    ViewBag.ErrorMsg = "Error! There can not be empty fields";
+>>>>>>> 15a07f52030d97e1f3f4ab4f72b42af86bd79602
                     return View(coachData);
                 }
                     return RedirectToAction("Index");
