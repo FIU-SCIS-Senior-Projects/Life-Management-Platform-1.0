@@ -68,6 +68,21 @@ namespace LifeManagement.Controllers
             return View(coach);
         }
 
+        // This is the page Users see
+        public ActionResult CoachDetailsPage(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Coach coach = db.Coaches.Find(id);
+            if (coach == null)
+            {
+                return HttpNotFound();
+            }
+            return View(coach);
+        }
+
         // GET: Coaches/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
@@ -147,11 +162,19 @@ namespace LifeManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit( Coach coachData)
         {
-            if (ModelState.IsValid)
+            if (coachData.FirstName == null || coachData.LastName == null || coachData.Biography == null
+                       || coachData.Skills == null || coachData.Username == null
+                       || coachData.Password == null)
             {
+                ViewBag.ErrorMsg = "Error! There can not be empty fields";
+                return View(coachData);
+            }
 
+                if (ModelState.IsValid)
+            {
                 var coach = db.Coaches.Find(coachData.Id);
 
                 if(coach != null) { 
@@ -162,20 +185,14 @@ namespace LifeManagement.Controllers
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
                 if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
-<<<<<<< HEAD
-                try { 
-                db.SaveChanges();
-                    }
-                catch { 
-=======
                 try
                 {
                     db.SaveChanges();
                 }
                 catch (Exception e)
                 {
->>>>>>> acd91cde8b7928dcf9a8536739414d664900e0bc
-                    ViewBag.ErrorMsg = "Error! There can not be empty fields";
+                    ViewBag.ErrorMsg = "Error! FirstName, LastName, Password, and UserName must have at most 20 characters, \n " +
+                            "please check your changes and try again.";
                     return View(coachData);
                 }
                     return RedirectToAction("Index");
