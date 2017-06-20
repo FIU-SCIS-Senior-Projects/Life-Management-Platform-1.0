@@ -1,37 +1,50 @@
 ﻿<script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/Coaches.js"></script>
-
+<link href="~/Content/coaches.css" rel="stylesheet" />
 
 <div ng-app="CoachApp" class="container">
     <br />
     <br />
-   
+
     <br />
     <div ng-controller="CoachController">
-      <table class="table">
-            <tr>
-                <td class="text-right">Search :</td>
-                <td colspan="5"><input type="text" placeholder="Search Coach" ng-model="searchCoach" /></td>
-            </tr>
-          <tr>
-              <td></td>
-              <th>Score</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Skills</th>
-              <th>Email</th>
-              <td></td>
-          </tr>
-          <tr ng-repeat="r in Coaches | filter:searchCoach ">
-              <td><img src="{{r.AvatarStr64}}" height="60" width="60"/></td>
-              <td>{{r.ReviewScore}}</td>
-              <td>{{r.FirstName}}</td>
-              <td>{{r.LastName}}</td>
-              <td>{{r.Skills}}</td>
-              <td>{{r.Email}}</td>
+        <div>
 
-          </tr>
-        </table>
+            <div class="text-right">Search :</div>
+            <div><input type="text" placeholder="Search Coach" ng-model="searchCoach" /> </div>
+       
+    </div>
+    <table class="table">
+        <tr ng-repeat="r in Coaches | filter:searchCoach ">
+            <td>
+                <table  class="table">
+                    <tr>
+                        <td rowspan="4"><img src="{{r.AvatarStr64}}" height="60" width="60" /></td>
+                        <td>
+                            {{r.FirstName +" " + r.LastName}}
 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{r.Skills}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{r.Email}}</td>
+                    </tr>
+                    <tr>
+                        <td>See details</td>
+                        <td>Select Coach</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>
-</div>
+
+

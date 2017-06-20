@@ -1,12 +1,13 @@
 ﻿var CoachApp = angular.module('CoachApp', []);
-CoachApp.filter('array', function () {
-    return function (items,selector) {
-        var filtered = [];
-        angular.forEach(items, function (item) {
-            if(item.FirstName.includes(selector))
-                filtered.push(item);
-        });
-        return filtered;
+CoachApp.filter('range', function () {
+    return function(input, total) {
+        total = parseInt(total);
+
+        for (var i=0; i<total; i++) {
+            input.push(i);
+        }
+
+        return input;
     };
 });
 CoachApp.controller('CoachController', function ($scope, CoachService) {
