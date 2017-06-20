@@ -162,19 +162,14 @@ namespace LifeManagement.Controllers
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
                 if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
-<<<<<<< HEAD
+
                 try { 
                 db.SaveChanges();
                     }
-                catch { 
-=======
-                try
-                {
-                    db.SaveChanges();
-                }
+              
                 catch (Exception e)
                 {
->>>>>>> acd91cde8b7928dcf9a8536739414d664900e0bc
+
                     ViewBag.ErrorMsg = "Error! There can not be empty fields";
                     return View(coachData);
                 }
