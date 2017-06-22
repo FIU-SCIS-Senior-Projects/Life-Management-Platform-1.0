@@ -1,0 +1,28 @@
+﻿
+    /* change border radius for the tab , apply corners on top*/
+
+  .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+   .tab-content {
+    
+       height: 500px;
+       overflow: auto;
+        padding: 0;
+        background: azure
+    }
+
+    #chatsection {
+        background: white;
+        color: blue;
+        height: 93%;
+    }
+    .tab-pane {
+         height: 100%;
+    }
+    .chatcontainer {
+        padding: 0;
+        margin: 0;
+                height:100%;   
+    }

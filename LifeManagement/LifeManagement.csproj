@@ -137,6 +137,7 @@
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ForumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SprintActivitiesController.cs" />
     <Compile Include="Controllers\SprintsController.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CatTiles.css" />
+    <Content Include="Content\chat.css" />
     <Content Include="Content\cmGauge.css" />
     <Content Include="Content\coaches.css" />
     <Content Include="Content\cooltabs.css" />
@@ -1176,6 +1178,10 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Coaches\CoachDetailsPage.cshtml" />
     <Content Include="Views\Coaches\ProfilePic.cshtml" />
+    <Content Include="Views\Forums\SeeChat.cshtml" />
+    <Content Include="Views\Forums\ChatForums.cshtml" />
+    <Content Include="Views\Forums\ForumConversations.cshtml" />
+    <Content Include="Views\Forums\CoachesSection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
