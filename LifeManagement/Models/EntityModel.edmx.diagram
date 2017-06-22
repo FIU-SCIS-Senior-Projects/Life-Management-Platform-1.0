@@ -31,8 +31,10 @@
         <AssociationConnector Association="SeniorDBModel.ForumConversation" />
         <EntityTypeShape EntityType="SeniorDBModel.ForumFile" Width="1.5" PointX="7.5" PointY="17.625" />
         <AssociationConnector Association="SeniorDBModel.ForumForumFile" />
-        <AssociationConnector Association="SeniorDBModel.UserForum" />
+        <EntityTypeShape EntityType="SeniorDBModel.Appointment" Width="1.5" PointX="0.75" PointY="14" />
+        <AssociationConnector Association="SeniorDBModel.UserAppointment" />
         <AssociationConnector Association="SeniorDBModel.CoachForum" />
+        <AssociationConnector Association="SeniorDBModel.UserForum" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

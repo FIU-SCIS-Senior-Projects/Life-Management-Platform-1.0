@@ -72,7 +72,8 @@ INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [DOB], [RoleId], [
 SET IDENTITY_INSERT [dbo].[Users] OFF
 
 
-SET IDENTITY_INSERT [dbo].Coaches ON 
+
+
 INSERT INTO [dbo].[Coaches]
            ([ReviewScore]
            ,[Biography]
@@ -113,5 +114,4 @@ INSERT INTO [dbo].[Coaches]
            ,'coach3@lm.com')
 
 GO
-SET IDENTITY_INSERT [dbo].Coaches OFF 
 

@@ -12,25 +12,25 @@ namespace LifeManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Forum
+    public partial class Appointment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Forum()
+        public Appointment()
         {
-            this.Conversations = new HashSet<Conversation>();
-            this.ForumFiles = new HashSet<ForumFile>();
+            this.allDay = true;
         }
     
         public int Id { get; set; }
-        public System.DateTime ForumDate { get; set; }
-        public int CoachId { get; set; }
+        public System.DateTime start { get; set; }
+        public string title { get; set; }
+        public System.DateTime end { get; set; }
+        public string url { get; set; }
+        public bool allDay { get; set; }
+        public string textColor { get; set; }
+        public string backgroundColor { get; set; }
         public int UserId { get; set; }
+        public string Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Conversation> Conversations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ForumFile> ForumFiles { get; set; }
-        public virtual Coach Coach { get; set; }
         public virtual User User { get; set; }
     }
 }
