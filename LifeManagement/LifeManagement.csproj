@@ -147,6 +147,9 @@
     <Compile Include="Models\Activity.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
@@ -260,6 +263,7 @@
     <Content Include="Imgs\vision.jpg" />
     <Content Include="Models\EntityModel-6-12-2017.edmx.sql" />
     <Content Include="Models\EntityModel-6-19-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-6-22-2017-2.edmx.sql" />
     <Content Include="Models\EntityModel-6-22-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
