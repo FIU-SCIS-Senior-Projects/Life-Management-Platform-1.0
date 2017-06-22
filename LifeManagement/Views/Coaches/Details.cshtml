@@ -12,6 +12,10 @@
     Layout = "../Shared/AdminDashBoardLayout.cshtml";
 }
 
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/Coaches.js"></script>
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
 <div class="clearfix coach-tabs">
   
     <div class=" text-center">
@@ -23,7 +27,7 @@
    
     <hr />
 
-   <div class="row " style="padding-left: 25%">
+   <div class="row " style="padding-left: 25% ; padding-bottom: 5% ; padding-top: 5%">
                <div class=" col-md-3" >
                         <div class="coach-avatar-container">
                             <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
@@ -36,7 +40,7 @@
                             @Html.DisplayNameFor(model => model.FirstName)
                         </dt>
                         <dd>
-                            @Html.DisplayFor(model => model.FirstName)
+                                @Html.DisplayFor(model => model.FirstName)
                         </dd>
                         <dt>
                             @Html.DisplayNameFor(model => model.LastName)
@@ -49,7 +53,11 @@
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.ReviewScore)
+                            <div ng-app="CoachApp">
+                                <div ng-controller="CoachController">
+                                    <div class="stardiv ng-scope" ng-repeat="n in [] | range:@Model.ReviewScore"> </div>
+                                </div>
+                            </div>
                         </dd>
                     </dl>
                 </div> 
@@ -57,7 +65,7 @@
 </div>
 
     <hr />
-
+    <br />
     <div style="word-break: break-all; word-wrap: break-word;">
 
         <dl class="dl-horizontal">
@@ -94,12 +102,13 @@
             </dd>
 
         </dl>
-    </div>
-          
+    </div>        
     <hr />
         <p style="padding-left:5em">
+            <br />
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
             @Html.ActionLink("Back to List", "Index")
+            <br />
             </p>
 
             <hr />

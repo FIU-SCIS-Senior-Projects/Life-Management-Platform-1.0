@@ -1,0 +1,25 @@
+﻿@model LifeManagement.Models.Coach
+
+@{
+    var common = new LifeManagement.Models.Common();
+}
+
+
+<div class="form-group" style="height: 230px">
+    @{
+        if (Model == null)
+        {
+            <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
+            <p style=" position: relative; top: 40px; left: 30%"> Coach: @User.Identity.Name </p>
+        }
+
+        else
+        {
+            <div class="coach-avatar-container" style="position:relative; left: 20px; top: 20px">
+                <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
+            </div>
+            <p style=" position: relative; top: 40px; left: 20%"> <strong> @Model.FirstName @Model.LastName </strong></p>
+        }
+
+    }
+</div>
