@@ -35,5 +35,8 @@ namespace LifeManagement.Models
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<CoachReview> CoachReviews { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
+        public virtual DbSet<Forum> Forum { get; set; }
+        public virtual DbSet<Conversation> Conversations { get; set; }
+        public virtual DbSet<ForumFile> ForumFiles { get; set; }
     }
 }

@@ -159,6 +159,9 @@
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\Conversation.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +176,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Forum.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ForumFile.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Goal.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
@@ -251,12 +260,14 @@
     <Content Include="Imgs\vision.jpg" />
     <Content Include="Models\EntityModel-6-12-2017.edmx.sql" />
     <Content Include="Models\EntityModel-6-19-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-6-22-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\EntityModel-6-13-2017.edmx.sql" />
+    <Content Include="Models\EntityModel.edmx.sql" />
     <Content Include="Models\somedata.edmx.sql" />
     <Content Include="Models\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

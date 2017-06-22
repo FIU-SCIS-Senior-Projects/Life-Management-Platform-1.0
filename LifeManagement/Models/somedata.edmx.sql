@@ -71,7 +71,7 @@ INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [DOB], [RoleId], [
 INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [DOB], [RoleId], [username], [password], [DateCreated], [Vision], [LifeSuccess], [Statement1], [Statement2], [Statement3]) VALUES (2, N'Fernando', N'Moj', N'fmoje001@fiu.edu', CAST(0x00007F5600000000 AS DateTime), 3, N'fernando', N'fernando', CAST(0x0000A78A00000000 AS DateTime), N'my vision', N'ls', N's1', N's2', N's3')
 SET IDENTITY_INSERT [dbo].[Users] OFF
 
-GO
+
 SET IDENTITY_INSERT [dbo].Coaches ON 
 INSERT INTO [dbo].[Coaches]
            ([ReviewScore]
