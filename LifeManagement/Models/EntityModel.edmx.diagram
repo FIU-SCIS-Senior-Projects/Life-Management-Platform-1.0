@@ -9,17 +9,17 @@
         <EntityTypeShape EntityType="SeniorDBModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <AssociationConnector Association="SeniorDBModel.FK_RoleUser" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SeniorDBModel.Category" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="SeniorDBModel.Goal" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="SeniorDBModel.Goal" Width="1.5" PointX="5.125" PointY="7.75" />
         <AssociationConnector Association="SeniorDBModel.CategoryGoal" />
         <EntityTypeShape EntityType="SeniorDBModel.Sprint" Width="1.5" PointX="5.25" PointY="10.5" />
         <AssociationConnector Association="SeniorDBModel.SprintGoal" />
         <AssociationConnector Association="SeniorDBModel.UserSprint" />
-        <EntityTypeShape EntityType="SeniorDBModel.Progress" Width="1.5" PointX="9.75" PointY="10.875" />
+        <EntityTypeShape EntityType="SeniorDBModel.Progress" Width="1.5" PointX="8.75" PointY="11.875" />
         <EntityTypeShape EntityType="SeniorDBModel.SprintActivities" Width="1.5" PointX="7.5" PointY="10.5" />
         <AssociationConnector Association="SeniorDBModel.SprintSprintActivities" />
         <AssociationConnector Association="SeniorDBModel.SprintActivitiesProgress" />
-        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="3" PointY="12" />
-        <EntityTypeShape EntityType="SeniorDBModel.CoachReview" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="SeniorDBModel.Coach" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SeniorDBModel.CoachReview" Width="1.5" PointX="10.75" PointY="5.875" />
         <AssociationConnector Association="SeniorDBModel.CoachCoachReview" />
         <AssociationConnector Association="SeniorDBModel.UserCoachReview" />
         <EntityTypeShape EntityType="SeniorDBModel.Activity" Width="1.5" PointX="5.25" PointY="17.5" />
