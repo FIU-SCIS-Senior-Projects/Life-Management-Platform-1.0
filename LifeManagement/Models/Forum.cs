@@ -12,32 +12,25 @@ namespace LifeManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Coach
+    public partial class Forum
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coach()
+        public Forum()
         {
-            this.CoachReviews = new HashSet<CoachReview>();
-            this.Fora = new HashSet<Forum>();
+            this.Conversations = new HashSet<Conversation>();
+            this.ForumFiles = new HashSet<ForumFile>();
         }
     
         public int Id { get; set; }
-        public int ReviewScore { get; set; }
-        public string Biography { get; set; }
-        public string Skills { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public byte[] Avatar { get; set; }
-        public string AvatarMime { get; set; }
-        public int RoleId { get; set; }
-        public string Email { get; set; }
+        public System.DateTime ForumDate { get; set; }
+        public int UserId { get; set; }
+        public int CoachId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoachReview> CoachReviews { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual ICollection<Conversation> Conversations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Forum> Fora { get; set; }
+        public virtual ICollection<ForumFile> ForumFiles { get; set; }
+        public virtual User User { get; set; }
+        public virtual Coach Coach { get; set; }
     }
 }
