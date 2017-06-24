@@ -69,18 +69,18 @@ namespace LifeManagement.Controllers
         }
 
         // This is the page Users see
-        public ActionResult CoachDetailsPage(int? id)
+        public PartialViewResult CoachDetailsPage(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return PartialView("ErrorPartial");
             }
             Coach coach = db.Coaches.Find(id);
             if (coach == null)
             {
-                return HttpNotFound();
+                return PartialView("ErrorPartial");
             }
-            return View(coach);
+            return PartialView(coach);
         }
 
         // GET: Coaches/Create
