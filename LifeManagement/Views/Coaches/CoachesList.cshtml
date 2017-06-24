@@ -1,5 +1,6 @@
 ﻿<script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/Coaches.js"></script>
+<script src="~/Scripts/lmpopup.js"></script>
 <link href="~/Content/coaches.css" rel="stylesheet" />
 
 <div ng-app="CoachApp" class="container">
@@ -33,7 +34,7 @@
                             </tr>
                             <tr>
 
-                                <td>Details | Select Coach</td>
+                                <td> @Html.ActionLink("Details", "CoachDetailsPage", "Coaches")| Select Coach</td>
                             </tr>
                             <tr><td colspan="2"><hr /></td></tr>
                         </table>
