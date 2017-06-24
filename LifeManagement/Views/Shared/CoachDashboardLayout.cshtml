@@ -7,7 +7,7 @@
 <head>
      @RenderSection("scripts", required: false)
     @{ Html.RenderPartial("_LayoutsHead"); }
-
+    <script src="~/Scripts/userdashboard.js"></script>
 </head>
 <body>
     @if (IsSectionDefined("bgdiv"))
@@ -32,10 +32,9 @@
                 <li class="active"><a href = "index.html" ><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
                 <li><a href = "~/Views/Shared/Dashboard_other/widgets_index.cshtml" ><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Progress Summary</a></li>
                 <li><a class="lmmodal" modal-width="700px" url='@Url.Action("CoachEditProfile","Coaches")' href="#"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Edit profile</a></li>
-                <li><a href = "charts.html" ><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
-                <li><a href = "panels.html" ><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
-                <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
-                <li class="parent ">
+       
+                    <li><a href="#" onclick="renderDiv('@Url.Action("Chat", "Forums")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Chat</a></li>
+                    <li class="parent ">
                     <a href="#">
                         <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
                     </a>
@@ -63,24 +62,11 @@
 
         </div>
 
-        <div class="col-md-10 col-md-offset-2  main">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div>
-                        @RenderBody()
-                        <hr />
-                        <footer>
-                            <p>&copy; @DateTime.Now.Year - managedLife</p>
-                        </footer>
-                    </div>
+    <div id="usersection" class="col-md-10 col-md-offset-2  main" style="margin-top: 20px; max-height: 900px;overflow: auto">
 
-
-
-                </div>
-            </div>
-
-        </div>	<!--/.main-->
+        @RenderBody()
+    </div>	<!--/.main-->
    
    
 </body>
