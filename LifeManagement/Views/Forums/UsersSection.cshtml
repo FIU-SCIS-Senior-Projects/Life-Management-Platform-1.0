@@ -4,7 +4,7 @@
     var common = new LifeManagement.Models.Common();
 }
 
-   
+
 <div class="clearfix">
 
     @foreach (var item in Model)
@@ -12,9 +12,9 @@
         <div class="col-md-12 coachlinediv">
 
             <div class="coachimgdiv">
-                <img class="coachimg" src="@common.SignatureImageStr64(item.User.Avatar, item.User.AvatarMime)" />
+                <img class="coachimg" src="@common.SignatureImageStr64(item.Coach.Avatar, item.Coach.AvatarMime)" />
             </div>
-            @item.User.FirstName
+            @item.Coach.FirstName
 
         </div>
     </a>
@@ -28,5 +28,6 @@
 
 
 
-    
+
+
 

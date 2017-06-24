@@ -1,28 +1,114 @@
 ﻿
     /* change border radius for the tab , apply corners on top*/
 
-  .nav-pills > li > a {
-        border-radius: 4px 4px 0 0;
-    }
+  
 
    .tab-content {
-    
-       height: 500px;
-       overflow: auto;
-        padding: 0;
-        background: azure
+    overflow: auto;
+        padding: 0px;
+      
     }
 
     #chatsection {
-        background: white;
+        background: whitesmoke;
         color: blue;
-        height: 93%;
+         height:100%;
+        padding: 15px;
+     overflow: auto
     }
     .tab-pane {
-         height: 100%;
+        height:100%;
     }
     .chatcontainer {
-        padding: 0;
-        margin: 0;
-                height:100%;   
+       
+                height:100%;
+        background: white;
+        padding: 0
     }
+
+    .coachescontainer {
+      
+         height:100%;
+       background: cadetblue;
+    }
+    #coachessection {
+         
+    }
+    #allcontainer {
+          height: 500px;
+    }
+  .nav {
+      margin: 0;
+      padding: 0;
+  }
+  .col-md-12, .col-md-3 {
+      padding: 0;
+
+  }
+  .coachimgdiv {
+      height: 100%;
+      width: 80px;
+      float: left;
+       margin-right: 5px;
+  }
+  .coachlinediv {
+      height: 80px;
+    
+       background: whitesmoke;
+   
+      line-height: 80px;
+  }
+  .coachimg {
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+     
+
+  }
+  .coachlink-active {
+        background: white;
+  }
+
+  .search-coach {
+      background: black !important;
+      color:white;
+
+  }
+  #convossection {
+      height: 435px;
+     
+     
+     
+  }
+ 
+  #msginput {
+      height: 33px;
+  }
+  .CoachMsg {
+      color: green;
+      background: aliceblue;
+  }
+  .UserMsg {
+      color: gray;
+      background: white;
+    
+  }
+  .convoline {
+      background: white;
+      margin-bottom: 5px;
+      border-radius: 10px;
+
+  }
+  .convotitle {
+      background: aliceblue;
+      color: black;
+        border-radius: 10px;
+  }
+  .convomsg {
+      margin-bottom: 3px;
+      min-height: 30px;
+      border-radius: 5px;
+  }
+  li {
+          list-style: none;
+  }

@@ -20,32 +20,75 @@ namespace LifeManagement.Controllers
             return View();
         }
 
-        public PartialViewResult ChatForums()
+        public PartialViewResult Chat()
         {
-            var user = db.Users.Where(a=>a.username.ToLower()== User.Identity.Name.ToLower()).FirstOrDefault();
-            if (user == null)
-            {
-                ViewBag.ErrorMsg = "Invalid user";
-                return PartialView("ErrorPartial");
-            }
-            var forums = db.Forums.Where(a => a.UserId == user.Id);
+            
+            return PartialView(common.isCoach());
+        }
+        public PartialViewResult CoachesSection()
+        {
+            IEnumerable<Forum> forums;
+         
+          
+                var coach = db.Coaches.Where(a => a.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+                if (coach == null)
+                {
+                    ViewBag.ErrorMsg = "Invalid user";
+                    return PartialView("ErrorPartial");
+                }
+                 forums = db.Forums.Where(a => a.CoachId == coach.Id);
+            
+         
             return PartialView(forums);
         }
-        public PartialViewResult CoachesSection(int forumid)
+        public PartialViewResult UsersSection()
         {
-            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-            if (user == null)
-            {
-                ViewBag.ErrorMsg = "Invalid user";
-                return PartialView("ErrorPartial");
-            }
-            var forums = db.Forums.Where(a => a.UserId == user.Id);
+            IEnumerable<Forum> forums;
+          
+                var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+                if (user == null)
+                {
+                    ViewBag.ErrorMsg = "Invalid user";
+                    return PartialView("ErrorPartial");
+                }
+                forums = db.Forums.Where(a => a.UserId == user.Id);
+           
             return PartialView(forums);
         }
-        public PartialViewResult ForumConversations(int forumid)
+
+        public PartialViewResult ConvosSection(int forumid)
         {
-           var convos = db.Conversations.Where(a => a.ForumId == forumid);
+            var isCoach = common.isCoach();
+            var senderid = -1;
+            if (isCoach)
+            {
+                var coach = db.Coaches.Where(a => a.Username == User.Identity.Name).FirstOrDefault();
+                if (coach != null)
+                {
+                    isCoach = true;
+                    senderid = coach.Id;
+                }
+            }
+            else
+            {
+                var user = db.Users.Where(a => a.username == User.Identity.Name).FirstOrDefault();
+                if (user != null)
+                {
+                    senderid = user.Id;
+                }
+
+            }
+
+            ViewBag.SenderId = senderid;
+            ViewBag.isCoach = isCoach;
+
+            var convos = db.Conversations.Where(a => a.ForumId == forumid);
             return PartialView(convos);
+        }
+        public PartialViewResult FilesSection(int forumid)
+        {
+            var files = db.ForumFiles.Where(a => a.ForumId == forumid);
+            return PartialView(files);
         }
     }
 }
