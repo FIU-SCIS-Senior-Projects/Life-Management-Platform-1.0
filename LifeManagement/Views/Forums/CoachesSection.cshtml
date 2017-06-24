@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LifeManagement.Models.Forum>
+
+@{
+    var common = new LifeManagement.Models.Common();
+}
+
+   
+<div class="clearfix">
+
+    @foreach (var item in Model)
+    {  <a href="#" class="coachlink" forumid="@item.Id">
+        <div class="col-md-12 coachlinediv">
+
+            <div class="coachimgdiv">
+                <img class="coachimg" src="@common.SignatureImageStr64(item.User.Avatar, item.User.AvatarMime)" />
+            </div>
+            @item.User.FirstName
+
+        </div>
+    </a>
+    }
+
+
+    <input type="hidden" id="forumid" />
+</div>
+
+
+
+
+
+    
+
