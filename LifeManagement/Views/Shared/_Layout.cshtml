@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @RenderSection("scripts", required: false)
+  
     @{ Html.RenderPartial("_LayoutsHead"); }
 
     @if (IsSectionDefined("AddToHead"))
@@ -11,7 +11,7 @@
     }
 
     @RenderSection("AddToHeadAnotherWay", required: false)
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+ 
 </head>
 <body>
     

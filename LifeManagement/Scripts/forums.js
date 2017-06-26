@@ -2,7 +2,8 @@
 $(document).ready(function() {
     coachLinksSetup();
     sendMsgBtnSetup();
-})
+    setpopups();
+});
 
 function sendMsgBtnSetup() {
     $("#sendmessage").click(function() {
@@ -46,4 +47,9 @@ function coachLinksSetup() {
          }
 
 
-     
+     function seeCoaches() {
+         $("#coaches-div").toggleClass("show-coaches");
+         $(this).text(function (i, text) {
+             return text === "Show Coaches" ? "Hide Coaches" : "Show Coaches";
+         })
+     }
