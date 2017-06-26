@@ -1,16 +1,13 @@
 ﻿@model bool
-<script src="~/Scripts/bootstrap.js"></script>
-<link href="~/Content/chat.css" rel="stylesheet" />
-<script src="~/Scripts/forums.js"></script>
 
-<div class="container">
+<link href="~/Content/chat.css" rel="stylesheet" />
+
+
     <div class="clearfix" id="allcontainer">
 
         <div class="col-md-3 coachescontainer" >
 
-            <div class="col-md-12">
-                <input class="col-md-12 form-control search-coach" placeholder="Search Coach" type="text" />
-            </div>
+            
             <div class="col-md-12" id="coachessection">
                 @{
                     if (Model)
@@ -29,36 +26,42 @@
         </div>
         <div class="col-md-9 chatcontainer">
            
-                <ul class="nav nav-pills">
-                    <li>
-                        <a href="#1b" data-toggle="tab">Chat</a>
-                    </li>
-                    <li>
-                        <a href="#2b" data-toggle="tab">Files</a>
-                    </li>
-
-                </ul>
+            <ul class="nav nav-pills">
+              
+                <li>
+                    <a href="#1b" data-toggle="tab">Chat</a>
+                </li>
+                <li>
+                    <a href="#2b" data-toggle="tab">Files</a>
+                </li>
+                <li>
+                    <a href="#coachestab" data-toggle="tab">Coaches</a>
+                </li>
+            </ul>
            
-                <div class="tab-content clearfix">
-                    <div class="tab-pane" id="1b">
-                        <div id="convossection">
-                          
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="2b">
-                        <div id="filessection">
-                            files
-                        </div>
+            <div class="tab-content clearfix">
+                <div class="tab-pane" id="coachestab">
+                    <div id="coachessection">
+                        @{Html.RenderAction("CoachesList", "Coaches");}
                     </div>
                 </div>
+                <div class="tab-pane" id="1b">
+                    <div id="convossection">
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="2b">
+                    <div id="filessection">
+                        files
+                    </div>
+                </div>
+            </div>
 
 
         </div>
-    </div>
-</div>
 
 
+        </div>
 
 
-
-
+        <script src="~/Scripts/forums.js"></script>

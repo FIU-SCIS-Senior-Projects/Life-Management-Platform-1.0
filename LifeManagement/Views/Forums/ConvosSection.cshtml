@@ -8,15 +8,15 @@
 
 <div id="chatsection" class="col-md-12">
  
-    <div class="clearfix">
+    
         <ul id="discussion">
 
 
             @foreach (var item in Model)
             {
-            <li>
+            <li class="convoli">
                 
-                    <div class="convomsg col-md-12  @(@item.isCoach?" CoachMsg":" UserMsg")">
+                    <div class="convomsg   @(@item.isCoach?" CoachMsg":" UserMsg")">
                         @(@item.isCoach?"Coach: ":"User: ")@item.Message
                     </div>
                
@@ -24,7 +24,7 @@
             }
         </ul>
 
-    </div>
+    
 
 </div>
 <div class="col-md-12">

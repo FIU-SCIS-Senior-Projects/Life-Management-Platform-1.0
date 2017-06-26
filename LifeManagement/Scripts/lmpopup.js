@@ -1,5 +1,7 @@
-﻿
-$(document).ready(setpopups);
+﻿$(window).load(function () {
+    setpopups();
+});
+
 
 function setpopups() {
 
