@@ -1,0 +1,8 @@
+﻿@model int
+<div class="clearfix">
+    <div class="col-md-12 file-viewer">
+        <iframe width="800" height="800" src="@Url.Action("GetFile","Attachments",new {id=Model})"></iframe>
+    </div>
+
+</div>
+

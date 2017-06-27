@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ForumsController.cs" />
@@ -454,6 +455,7 @@
     <Content Include="Views\Coaches\CoachesChatList.cshtml" />
     <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\DashBoard.cshtml" />
+    <Content Include="Views\Attachments\FileViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
