@@ -451,6 +451,7 @@
     <Content Include="Views\Forums\FilesSection.cshtml" />
     <Content Include="Views\Forums\UsersSection.cshtml" />
     <Content Include="Views\Shared\coachesmodal.cshtml" />
+    <Content Include="Views\Coaches\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
