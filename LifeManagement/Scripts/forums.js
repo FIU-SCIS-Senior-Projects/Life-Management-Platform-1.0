@@ -1,12 +1,12 @@
 ﻿
 $(document).ready(function() {
-    setupAllUp();
+     setCoachLinks();
 });
 
 function setupAllUp() {
     coachLinksSetup();
     sendMsgBtnSetup();
-    setCoachLinks();
+  
   
 }
 function sendMsgBtnSetup() {
@@ -87,16 +87,22 @@ function setCoachLinks() {
 
 }
 
-function renderConvosSection(forumid) {
+function renderConvosSection(forumid) { 
+    debugger;
     var data = { forumid: forumid };
     renderChatDiv("/Forums/ConvosSection", data, "#convossection");
 }
 
 function renderCoachesSection() {
+   
   renderChatDiv("/Forums/ConversationUsers", null, "#coachessection");
    
          }
 
+function refreshFiles() {
+    var forumid = $("#forumid").val();
+    renderFileSection(forumid);
+}
 function renderFileSection(forumid) {
     var data = { forumid: forumid };
     renderChatDiv("/Forums/FilesSection", data, "#filessection");

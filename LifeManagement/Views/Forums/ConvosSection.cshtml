@@ -32,14 +32,6 @@
  </div>
 
 
-
-
-
-
-
-
-
-
 <!--Script references. -->
 <!--Reference the SignalR library. -->
 <script src="/Scripts/jquery.signalR-2.2.2.js"></script>
@@ -76,8 +68,8 @@
         $.connection.hub.start().done(function () {
 
             $('#message').keyup(function (e) {
-                if(e.keyCode == 13)
-                {
+                if(e.keyCode == 13) {
+                  
                      // Call the Send method on the hub.
                 chat.server.send(forumid, $('#message').val(),@ViewBag.SenderId,'@ViewBag.isCoach');
                 // Clear text box and reset focus for next comment.
