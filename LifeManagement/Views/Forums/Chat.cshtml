@@ -6,13 +6,11 @@
     <div class="clearfix" id="allcontainer">
 
         <div class="col-md-3 coachescontainer" >
-
+            <div class="convosheader">Current Conversations</div>
             
             <div class="col-md-12" id="coachessection">
                 @{
-
                         Html.RenderAction("ConversationUsers");
-                   
                 }
             </div>
 
@@ -35,16 +33,20 @@
             <div class="tab-content clearfix">
                
                 <div class="tab-pane" id="1b">
+                 
                     <div id="convossection">
 
                     </div>
                 </div>
-                <div class="tab-pane" id="2b">
-                    <div id="filessection">
-                        files
+                <div class="tab-pane clearfix" id="2b">
+                    
+                    <button class="btn btn-info col-md-12" onclick="refreshFiles()">Refresh</button>
+                    <div class="col-md-12" id="filessection">
+
                     </div>
                 </div>
                 <div class="tab-pane" id="coachestab">
+                   
                     <div id="coachessection">
                         @{Html.RenderAction("CoachesChatList", "Coaches");}
                     </div>
