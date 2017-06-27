@@ -1,0 +1,69 @@
+﻿
+@model List<LifeManagement.Models.Coach>
+    @{
+        var common = new LifeManagement.Models.Common();
+    }
+<link href="~/Content/coaches.css" rel="stylesheet" />
+    <div>
+      
+        <div class="col-md-12">
+            <table class="table">
+                @{
+                    foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a class="coach-link" coachid="@m.Id" href="#">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="coachimgtd" rowspan="5"><img class="coachimg" src="@common.SignatureImageStr64(m.Avatar,m.AvatarMime)" /></td>
+                                            <td class="tdbordered">
+                                              @(@m.FirstName+" "+m.LastName)
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @{
+                                                    for (int i = 0; i < m.ReviewScore; i++)
+                                                    {
+                                                        <div class="stardiv">
+                                                        </div>
+                                                    }
+                                                }
+                                              
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@m.Skills</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@m.Email</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="lmmodal" modal-with="600px" href="#" url="/Coaches/CoachDetailsPage/{{r.CoachId}}">Details</a></td>
+
+                                        </tr>
+                                        <tr><td colspan="2"><hr /></td></tr>
+                                    </table>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+          
+            </table>
+        </div>
+    
+    </div>
+</div>
+
+
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+
+<script>
+    $(document).ready(function() {
+        setupAllUp();
+    });
+</script>

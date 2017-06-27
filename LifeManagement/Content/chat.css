@@ -31,7 +31,8 @@
       
          height:100%;
        background: white;
-       border-right: 1px solid beige
+        border-right: 1px solid beige;
+        overflow: auto
     }
     #coachessection {
          
@@ -68,6 +69,20 @@
       border-radius: 10px;
      
 
+  }
+  .coach-link {
+      text-decoration: none;
+  }
+  .coach-link:hover {
+   
+       text-decoration: none;
+  }
+   .coach-link:hover table {
+          background: aliceblue;
+   }
+  .coach-link:visited {
+      text-decoration: none;
+    
   }
   .coachlink-active {
         background: dodgerblue;
