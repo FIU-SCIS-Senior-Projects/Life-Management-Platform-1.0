@@ -1,54 +1,37 @@
 ﻿
-    /* change border radius for the tab , apply corners on top*/
+/*******************all page***************/
+   #allcontainer {
+          height: 500px;
+        border-radius: 10px;
+    }
+     .col-md-12, .col-md-3 {
+      padding: 0;
 
-  
+  }
+
+  /************************chat tabs***********/
 
    .tab-content {
    
         padding: 0px;
       
     }
-
-    #chatsection {
-        background: whitesmoke;
-        color: blue;
-         height:100%;
-        padding: 5px;
-     overflow: auto
-    }
-    .tab-pane {
+     .tab-pane {
         height:100%;
     }
-    .chatcontainer {
-       
-                height:100%;
-        background: whitesmoke;
-        padding: 0;
-        max-width: 600px;
-    }
-
-    .coachescontainer {
+       .nav {
+      margin: 0;
+      padding: 0;
+  }
+   /************conversation users panel************/
+     .coachescontainer {
       
          height:100%;
        background: white;
         border-right: 1px solid beige;
         overflow: auto
     }
-    #coachessection {
-         
-    }
-    #allcontainer {
-          height: 500px;
-        border-radius: 10px;
-    }
-  .nav {
-      margin: 0;
-      padding: 0;
-  }
-  .col-md-12, .col-md-3 {
-      padding: 0;
-
-  }
+     
   .coachimgdiv {
       height: 100%;
       width: 60px;
@@ -63,6 +46,7 @@
       line-height: 60px;
       margin-bottom: 10px;
   }
+  
   .coachlinediv:hover {
       background: aliceblue;
   }
@@ -73,37 +57,17 @@
      
 
   }
-  .coach-link {
-      text-decoration: none;
-  }
-  .coach-link:hover {
-   
-       text-decoration: none;
-  }
-   .coach-link:hover table {
-          background: aliceblue;
-   }
-  .coach-link:visited {
-      text-decoration: none;
-    
-  }
-  .coachlink-active {
+    .coachlink-active {
         background: #30a5ff;
       color: white;
       font-size: medium;
       font-weight: bolder;
   }
- 
-  
+      
   #searhcoach-div {
       border-bottom: 1px solid beige;
   }
-  #convossection {
-      height: 433px;
-     
-     
-     
-  }
+  
  .convosheader {
      background: #30a5ff;
      padding: 5px;
@@ -113,19 +77,25 @@
      font-weight: bolder;
      font-size: large;
  }
-  #msginput {
-      height: 33px;
-  }
-  .CoachMsg {
-      color: green;
-      background: aliceblue;
-  }
-  .UserMsg {
-      color: gray;
-      background: white;
-    
-  }
-  .convoline {
+   /*********messages panel*********/
+  #chatsection {
+        background: whitesmoke;
+        color: blue;
+         height:100%;
+        padding: 5px;
+     overflow: auto
+    }
+    .chatcontainer {
+       
+                height:100%;
+        background: whitesmoke;
+        padding: 0;
+        max-width: 600px;
+    }
+     #convossection {
+      height: 433px;
+     }
+      .convoline {
       background: white;
       margin-bottom: 5px;
       border-radius: 10px;
@@ -150,13 +120,86 @@
  #discussion {
      padding: 0
  }
-
- #coaches-div {
+  
+  #msginput {
+      height: 33px;
+  }
+  .CoachMsg {
+      color: green;
+      background: aliceblue;
+  }
+  .UserMsg {
+      color: gray;
+      background: white;
+    
+  }
+ 
+   /******************coaches panel********/
+   
+  .coach-link {
+      text-decoration: none;
+  }
+  .coach-link:hover {
+   
+       text-decoration: none;
+  }
+   .coach-link:hover table {
+          background: aliceblue;
+   }
+  .coach-link:visited {
+      text-decoration: none;
+    
+  }
+   #coaches-div {
      display: none;
      position: fixed;
      z-index: 100;
 
  }
+   
  .show-coaches {
       display: block !important;
  }
+   /****************files panel***********/
+  #filessection {
+        background: whitesmoke;
+        color: blue;
+        height: 433px;
+        padding: 0px;
+  }
+   .all-files-div {
+            height:100%;
+        background: whitesmoke;
+        padding: 5px;
+        max-width: 600px;
+       overflow: auto;
+  }
+  .file-anchor {
+       min-height: 25px;
+      background: azure;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 5px;
+  }
+  .file-div {
+     
+
+  }
+  .file-viewer {
+      
+  }
+  #attachment {
+      float: left;
+  }
+  .upload-div {
+      background: aliceblue;
+      text-align: center;
+  }
+ 
+ 
+
+
+ 
+
+
+
