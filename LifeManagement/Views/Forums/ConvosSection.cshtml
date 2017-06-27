@@ -48,25 +48,25 @@
 <!--Add script to update the page and send messages.-->
 <script>
     $(function () {
-        
+      
         var forumid = $('#forumid').val();
         // Declare a proxy to reference the hub.
         var chat = $.connection.chatHub;
         $.connection.hub.qs = 'forumid=' + forumid;
         // Create a function that the hub can call to broadcast messages.
         chat.client.broadcastMessage = function (name, message) {
+          
             // Html encode display name and message.
             var html = '<li><div class="convomsg col-md-12"> ' +
                 name +
                 ": " +
                 message +
                 '</div></li>';
-            debugger;
-
-            // Add the message to the page.
+          // Add the message to the page.
             $('#discussion').append(html);
             var d = $('#chatsection');
             d.scrollTop(d.prop("scrollHeight"));
+         
         };
 
 
