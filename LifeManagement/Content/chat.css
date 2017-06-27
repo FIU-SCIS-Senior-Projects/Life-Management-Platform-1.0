@@ -63,6 +63,9 @@
       line-height: 60px;
       margin-bottom: 10px;
   }
+  .coachlinediv:hover {
+      background: aliceblue;
+  }
   .coachimg {
       height: 100%;
       width: 100%;
@@ -85,17 +88,13 @@
     
   }
   .coachlink-active {
-        background: dodgerblue;
+        background: #30a5ff;
       color: white;
       font-size: medium;
       font-weight: bolder;
   }
-
-  .search-coach {
-    
-    
-
-  }
+ 
+  
   #searhcoach-div {
       border-bottom: 1px solid beige;
   }
@@ -105,7 +104,15 @@
      
      
   }
- 
+ .convosheader {
+     background: #30a5ff;
+     padding: 5px;
+     text-align: center;
+     margin-bottom: 5px;
+     color: white;
+     font-weight: bolder;
+     font-size: large;
+ }
   #msginput {
       height: 33px;
   }

@@ -6,7 +6,7 @@
     <div class="clearfix" id="allcontainer">
 
         <div class="col-md-3 coachescontainer" >
-
+            <div class="convosheader">Current Conversations</div>
             
             <div class="col-md-12" id="coachessection">
                 @{
@@ -35,6 +35,7 @@
             <div class="tab-content clearfix">
                
                 <div class="tab-pane" id="1b">
+                 
                     <div id="convossection">
 
                     </div>
@@ -45,6 +46,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="coachestab">
+                   
                     <div id="coachessection">
                         @{Html.RenderAction("CoachesChatList", "Coaches");}
                     </div>
