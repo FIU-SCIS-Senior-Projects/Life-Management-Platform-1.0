@@ -276,12 +276,16 @@ namespace LifeManagement.Controllers
             if (coach != null && coach.Password == Password)
             {
                 FormsAuthentication.SetAuthCookie(coach.Username, false);
-                return RedirectToAction("DashBoard", "Users");
+                return RedirectToAction("Dashboard");
             }
             ViewBag.Error = "Invalid Credentials";
             return View();
         }
 
+        public ActionResult DashBoard()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]
