@@ -370,6 +370,37 @@ namespace LifeManagement.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SavePic(int id)
+        {
+            TempData["idSprint"] = id;
+            TempData.Keep("idSprint");
+             return View();
+        }
+
+        public ActionResult SelectCoach(int id)
+        {
+            if(TempData["idSprint"] != null)
+            {
+                int sprintId = (int)TempData["idSprint"];
+
+                var sprint = db.Sprints.Find(sprintId);
+                var coach = db.Coaches.Find(id);
+                var user = db.Users.Where(u => u.Id == sprint.UserId).FirstOrDefault();
+
+                if (coach != null)
+                {
+                    string subject = "User " + user.FirstName + " " + user.LastName + " has shared his/her score summary with you!";
+                    string message = "Dear " + coach.FirstName + ": <br/>" + "<p> You are receiving this email because user " + user.FirstName + " " + user.LastName + " wants you to review his/her performance. <br/>"
+                        + " To see his/her scores, please follow <a href= \"" + @Url.Action("ScoreSummaryCoaches", "Sprints", null, Request.Url.Scheme) + "/" + sprint.Id + "\">this link. </a>  </p> <br/>"
+                        + "<p> Best, <br/> The Life Management Team. </p>";
+
+                    Common.sendEmail(coach.Email, subject, message);
+                }
+            }
+            return RedirectToAction("Dashboard", "Users");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

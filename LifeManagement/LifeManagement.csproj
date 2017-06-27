@@ -311,6 +311,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bety_scripts\classie.js" />
     <Content Include="Scripts\bety_scripts\fullscreenForm.js" />
+    <Content Include="Scripts\bety_scripts\html2canvas.js" />
+    <Content Include="Scripts\bety_scripts\html2canvas.svg.js" />
     <Content Include="Scripts\bety_scripts\modernizr.custom.js" />
     <Content Include="Scripts\bety_scripts\selectFx.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -454,6 +456,9 @@
     <Content Include="Views\Coaches\CoachesChatList.cshtml" />
     <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\DashBoard.cshtml" />
+    <Content Include="Views\Coaches\SavePic.cshtml" />
+    <Content Include="Views\Coaches\SelectCoach.cshtml" />
+    <Content Include="Views\Sprints\ScoreSummaryCoaches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
