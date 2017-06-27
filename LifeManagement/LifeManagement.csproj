@@ -453,6 +453,7 @@
     <Content Include="Views\Shared\coachesmodal.cshtml" />
     <Content Include="Views\Coaches\CoachesChatList.cshtml" />
     <Content Include="Views\Coaches\CoachesList.cshtml" />
+    <Content Include="Views\Coaches\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
