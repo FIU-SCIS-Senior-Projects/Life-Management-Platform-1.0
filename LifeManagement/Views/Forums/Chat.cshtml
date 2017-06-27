@@ -1,8 +1,8 @@
-﻿@model bool
+﻿
 
 <link href="~/Content/chat.css" rel="stylesheet" />
 
-
+<script src="~/Scripts/forums.js"></script>
     <div class="clearfix" id="allcontainer">
 
         <div class="col-md-3 coachescontainer" >
@@ -10,16 +10,9 @@
             
             <div class="col-md-12" id="coachessection">
                 @{
-                    if (Model)
-                    {
 
-                        Html.RenderAction("CoachesSection");
-                    }
-                    else
-                    {
-                        Html.RenderAction("UsersSection");
-
-                    }
+                        Html.RenderAction("ConversationUsers");
+                   
                 }
             </div>
 
@@ -40,11 +33,7 @@
             </ul>
            
             <div class="tab-content clearfix">
-                <div class="tab-pane" id="coachestab">
-                    <div id="coachessection">
-                        @{Html.RenderAction("CoachesList", "Coaches");}
-                    </div>
-                </div>
+               
                 <div class="tab-pane" id="1b">
                     <div id="convossection">
 
@@ -53,6 +42,11 @@
                 <div class="tab-pane" id="2b">
                     <div id="filessection">
                         files
+                    </div>
+                </div>
+                <div class="tab-pane" id="coachestab">
+                    <div id="coachessection">
+                        @{Html.RenderAction("CoachesChatList", "Coaches");}
                     </div>
                 </div>
             </div>
@@ -64,4 +58,4 @@
         </div>
 
 
-        <script src="~/Scripts/forums.js"></script>
+    

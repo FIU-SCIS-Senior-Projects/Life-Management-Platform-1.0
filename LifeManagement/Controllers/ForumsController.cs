@@ -23,7 +23,16 @@ namespace LifeManagement.Controllers
         public PartialViewResult Chat()
         {
             
-            return PartialView(common.isCoach());
+            return PartialView();
+        }
+
+        public PartialViewResult ConversationUsers()
+        {
+            if (common.isCoach())
+            {
+                return CoachesSection();
+            }
+            return UsersSection();
         }
         public PartialViewResult CoachesSection()
         {
@@ -39,7 +48,7 @@ namespace LifeManagement.Controllers
                  forums = db.Forums.Where(a => a.CoachId == coach.Id);
             
          
-            return PartialView(forums);
+            return PartialView("CoachesSection",forums);
         }
         public PartialViewResult UsersSection()
         {
@@ -53,7 +62,7 @@ namespace LifeManagement.Controllers
                 }
                 forums = db.Forums.Where(a => a.UserId == user.Id);
            
-            return PartialView(forums);
+            return PartialView("UsersSection",forums);
         }
 
         public PartialViewResult ConvosSection(int forumid)
@@ -89,6 +98,29 @@ namespace LifeManagement.Controllers
         {
             var files = db.ForumFiles.Where(a => a.ForumId == forumid);
             return PartialView(files);
+        }
+
+
+        [HttpPost]
+        public bool Create(int coachid)
+        {
+            if (!common.isCoach())
+            {
+                var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+                if (user != null)
+                {
+                    db.Forums.Add(new Forum()
+                    {
+                        CoachId = coachid,
+                        UserId = user.Id,
+                        ForumDate = DateTime.Now
+                    });
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            return false;
         }
     }
 }
