@@ -1,7 +1,7 @@
 ﻿@model LifeManagement.Models.Sprint
 
 <div class="clearfix">
-    <div class="col-md-12">
+    <div class="col-md-12" id="tableForPic">
         <table class="table text-center">
             <tr>
                 <th class="text-center" colspan="2">
@@ -15,7 +15,7 @@
                 </th>
             </tr>
             <tr>
-                <td>@Model.Goals.Where(a=>a.Category.Name=="Joy").FirstOrDefault().Description</td>
+                <td>@Model.Goals.Where(a => a.Category.Name == "Joy").FirstOrDefault().Description</td>
                 <td class="text-right">
                    
                     <div id="gaugeCat-Joy" class="gauge gauge-big gauge-green">
@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td colspan="2" class="text-right">
-                    <button onclick="shareSummary()" class="btn btn-info "> <span class="glyphicon glyphicon-share"></span> Share</button>
+                    <button onclick="shareSummary()" class="btn btn-primary "> <span class="glyphicon glyphicon-share"></span> Share</button>
                 </td>
             </tr>
         </table>
@@ -96,11 +96,20 @@
     
 </div>
 
-
-
 <script>
     function shareSummary() {
-        alert('not yet implemented');
+               $.ajax({
+                    url: '@Url.Action("SavePic", "Coaches")',
+                    type: 'POST',
+                    data: {id: @Model.Id},
+                    success: function (res) {
+                        alert("Success");
+                        window.location = '@Url.Action("SeeCoaches", "Coaches", null, Request.Url.Scheme)';
+                    },
+                    error: function () {
+                        alert("Fucked UP");
+                    }
+                });
     }
 </script>
  
