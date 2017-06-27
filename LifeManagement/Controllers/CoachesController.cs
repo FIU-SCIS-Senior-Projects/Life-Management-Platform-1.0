@@ -24,8 +24,8 @@ namespace LifeManagement.Controllers
             {
                 var newcoach = new CoachListVM()
                 {
+                    CoachId = a.Id,
                     AvatarStr64 = common.SignatureImageStr64(a.Avatar, a.AvatarMime),
-
                     FirstName = a.FirstName,
                     LastName = a.LastName,
                     Skills = a.Skills,
@@ -37,11 +37,20 @@ namespace LifeManagement.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult CoachesList()
+        public PartialViewResult CoachesListAngular()
         {
             return PartialView();
         }
-
+        public PartialViewResult CoachesChatList()
+        {
+            var coaches = db.Coaches.ToList();
+            return PartialView(coaches);
+        }
+        public PartialViewResult CoachesList()
+        {
+            var coaches = db.Coaches.ToList();
+            return PartialView(coaches);
+        }
         public ActionResult SeeCoaches()
         {
             return View();

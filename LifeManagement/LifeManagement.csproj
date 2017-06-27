@@ -440,7 +440,7 @@
     <Content Include="Views\Coaches\LoginCoach.cshtml" />
     <Content Include="Views\Coaches\PasswordRecovery.cshtml" />
     <Content Include="Views\Coaches\ResetPass.cshtml" />
-    <Content Include="Views\Coaches\CoachesList.cshtml" />
+    <Content Include="Views\Coaches\CoachesListAngular.cshtml" />
     <Content Include="Views\Coaches\SeeCoaches.cshtml" />
     <Content Include="Views\Coaches\CoachDetailsPage.cshtml" />
     <Content Include="Views\Coaches\ProfilePic.cshtml" />
@@ -451,6 +451,8 @@
     <Content Include="Views\Forums\FilesSection.cshtml" />
     <Content Include="Views\Forums\UsersSection.cshtml" />
     <Content Include="Views\Shared\coachesmodal.cshtml" />
+    <Content Include="Views\Coaches\CoachesChatList.cshtml" />
+    <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>

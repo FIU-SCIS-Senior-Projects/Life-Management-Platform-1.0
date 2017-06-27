@@ -1,52 +1,65 @@
 ﻿
+@model List<LifeManagement.Models.Coach>
+@{
+    var common = new LifeManagement.Models.Common();
+}
+<link href="~/Content/coaches.css" rel="stylesheet" />
+<div>
 
+    <div class="col-md-12">
+        <table class="table">
+            @{
+                foreach (var m in Model)
+                {
+                    <tr>
+                        <td>
+                            
+                                <table class="table">
+                                    <tr>
+                                        <td class="coachimgtd" rowspan="5"><img class="coachimg" src="@common.SignatureImageStr64(m.Avatar,m.AvatarMime)" /></td>
+                                        <td class="tdbordered">
+                                            @(@m.FirstName + " " + m.LastName)
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @{
+                                                for (int i = 0; i < m.ReviewScore; i++)
+                                                {
+                                                    <div class="stardiv">
+                                                    </div>
+                                                }
+                                            }
 
-<div ng-app="CoachApp" >
-    <div ng-controller="CoachController">
-        <div class="col-md-12">
-           <input type="text" class="form-control col-md-4" placeholder="Search Coach" ng-model="searchCoach"/>
-       </div>
-        <div class="col-md-12">
-            <table class="table">
-                <tr ng-repeat="r in Coaches | filter:searchCoach ">
-                    <td>
-                        <table class="table">
-                            <tr>
-                                <td class="coachimgtd" rowspan="5"><img class="coachimg" src="{{r.AvatarStr64}}" /></td>
-                                <td class="tdbordered">
-                                    {{r.FirstName +" " + r.LastName}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>@m.Skills</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@m.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="lmmodal" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a></td>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{{r.Skills}}</td>
-                            </tr>
-                            <tr>
-                                <td>{{r.Email}}</td>
-                            </tr>
-                            <tr>
+                                    </tr>
+                                    <tr><td colspan="2"><hr /></td></tr>
+                                </table>
+                            
+                        </td>
+                    </tr>
+                                                }
+            }
 
-                                <td>Details | Select Coach</td>
-                            </tr>
-                            <tr><td colspan="2"><hr /></td></tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    
+        </table>
     </div>
+
 </div>
+
 
 
 <link href="~/Content/coaches.css" rel="stylesheet" />
 
 
-<script src="~/Scripts/Coaches.js"></script>
+<script src="~/Scripts/lmpopup.js"></script>
