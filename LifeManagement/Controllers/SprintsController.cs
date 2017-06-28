@@ -38,6 +38,16 @@ namespace LifeManagement.Controllers
             return PartialView("ErrorPartial");
         }
 
+        public ActionResult ScoreSummaryCoaches(int id)
+        {
+            var sprint = db.Sprints.Find(id);
+            if (sprint != null)
+                return View(sprint);
+
+            ViewBag.ErrorMsg = "Could not get summary";
+            return View("Error");
+        }
+
         // GET: Sprints/Create
         public ActionResult Create()
         {

@@ -9,75 +9,79 @@
 }
 
 
-<div class="container">
-<div class="clearfix coach-tabs" style="width: 700px!important">
 
-    <div class="col-md-12 text-center">
+<div class=" modal-body" style="width: 100%">
 
-        <h2>Coach Details</h2>
-    </div>
+            <h2 class=" text-center">Coach Details</h2>
 
-    <hr />
-</div>
 
-<div class="clearfix " style="padding-left: 15%; padding-bottom: 5% ; padding-top: 5%">
-    <div class=" col-md-3">
-        <div class="coach-avatar-container">
-            <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
-        </div>
-    </div>
-    <div class="col-md-9" style="padding-left: 7% ">
-        <br />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.ReviewScore)
-            </dt>
-
-            <dd>
-                <div ng-app="CoachApp">
-                    <div ng-controller="CoachController">
-                        <div class="stardiv ng-scope" ng-repeat="n in [] | range:@Model.ReviewScore"> </div>
-                    </div>
+        <hr />
+        <div class="row" style=" padding-bottom: 5% ; padding-top: 5%">
+            <div class=" col-md-3">
+                <div class="coach-avatar-container">
+                    <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Avatar, Model.AvatarMime)">
                 </div>
-            </dd>
-        </dl>
-    </div>
-</div>
+            </div>
+            <div class="col-md-9" style="padding-left: 7% ">
+                <br />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ReviewScore)
+                    </dt>
+
+                    <dd>
+                        @{
+                            for (int i = 0; i < Model.ReviewScore; i++)
+                            {
+                                <div class="stardiv">
+                                </div>
+                            }
+                        }
+                        
+                    </dd>
+                </dl>
+            </div>
+        </div>
 
     <hr />
 
     <div style="word-break: break-all; word-wrap: break-word;">
-   <br />
-            <dl class="dl-horizontal">
+        <br />
+        <dl class="dl-horizontal">
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Biography)
-                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Biography)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Biography)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Skills)
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Biography)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Skills)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Skills)
-                </dd>
-            </dl>
-        </div>
+            <dd>
+                @Html.DisplayFor(model => model.Skills)
+            </dd>
+        </dl>
+    </div>
 
 
 </div>
+
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+<script src="~/Scripts/Coaches.js"></script>
+<script src="~/Scripts/lmpopup.js"></script>
