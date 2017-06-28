@@ -1,50 +1,67 @@
-﻿<script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/Coaches.js"></script>
+﻿
+@model List<LifeManagement.Models.Coach>
+@{
+    var common = new LifeManagement.Models.Common();
+}
 <link href="~/Content/coaches.css" rel="stylesheet" />
+<div>
 
-<div ng-app="CoachApp" class="container">
-    <br />
-    <br />
+    <div class="col-md-12">
+        <table class="table">
+            @{
+                foreach (var m in Model)
+                {
+                    <tr>
+                        <td>
+                            
+                                <table class="table">
+                                    <tr>
+                                        <td class="coachimgtd" rowspan="5"><img class="coachimg" src="@common.SignatureImageStr64(m.Avatar, m.AvatarMime)" /></td>
+                                        <td class="tdbordered">
+                                            @(@m.FirstName + " " + m.LastName)
 
-    <br />
-    <div ng-controller="CoachController">
-        <div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @{
+                                                for (int i = 0; i < m.ReviewScore; i++)
+                                                {
+                                                    <div class="stardiv">
+                                                    </div>
+                                                }
+                                            }
 
-            <div class="text-right">Search :</div>
-            <div><input type="text" placeholder="Search Coach" ng-model="searchCoach" /> </div>
-       
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>@m.Skills</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@m.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a> |
+                                            <a href="/Coaches/SelectCoach/@m.Id">Select</a></td>
+
+                                    </tr>
+
+                                    <tr><td colspan="2"><hr /></td></tr>
+                                </table>
+                            
+                        </td>
+                    </tr>
+                                                }
+            }
+
+        </table>
     </div>
-    <table class="table">
-        <tr ng-repeat="r in Coaches | filter:searchCoach ">
-            <td>
-                <table  class="table">
-                    <tr>
-                        <td rowspan="4"><img src="{{r.AvatarStr64}}" height="60" width="60" /></td>
-                        <td>
-                            {{r.FirstName +" " + r.LastName}}
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{r.Skills}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{r.Email}}</td>
-                    </tr>
-                    <tr>
-                        <td>See details</td>
-                        <td>Select Coach</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
 </div>
 
 
+
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/lmpopup.js"></script>

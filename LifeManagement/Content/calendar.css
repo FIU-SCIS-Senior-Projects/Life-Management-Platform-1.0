@@ -1,0 +1,17 @@
+﻿#formsection {
+    background: white;
+    height: 100%;
+    padding: 5px;
+}
+#calendar-section {
+    background: #30a5ff;
+     height: 100%;
+    overflow: auto;
+}
+.all-calendar-cont > .clearfix {
+     height: 100% ;
+}
+.all-calendar-cont {
+    height: 650px;
+    margin-top: 5px;
+}

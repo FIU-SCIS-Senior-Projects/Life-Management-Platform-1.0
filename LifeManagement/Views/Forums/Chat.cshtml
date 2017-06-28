@@ -1,0 +1,63 @@
+﻿
+
+<link href="~/Content/chat.css" rel="stylesheet" />
+
+<script src="~/Scripts/forums.js"></script>
+    <div class="clearfix" id="allcontainer">
+
+        <div class="col-md-3 coachescontainer" >
+            <div class="convosheader">Current Conversations</div>
+            
+            <div class="col-md-12" id="coachessection">
+                @{
+                        Html.RenderAction("ConversationUsers");
+                }
+            </div>
+
+        </div>
+        <div class="col-md-9 chatcontainer">
+           
+            <ul class="nav nav-pills">
+              
+                <li>
+                    <a href="#1b" data-toggle="tab">Chat</a>
+                </li>
+                <li>
+                    <a href="#2b" data-toggle="tab">Files</a>
+                </li>
+                <li>
+                    <a href="#coachestab" data-toggle="tab">Coaches</a>
+                </li>
+            </ul>
+           
+            <div class="tab-content clearfix">
+               
+                <div class="tab-pane" id="1b">
+                 
+                    <div id="convossection">
+
+                    </div>
+                </div>
+                <div class="tab-pane clearfix" id="2b">
+                    
+                    <button class="btn btn-info col-md-12" onclick="refreshFiles()">Refresh</button>
+                    <div class="col-md-12" id="filessection">
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="coachestab">
+                   
+                    <div id="coachessection">
+                        @{Html.RenderAction("CoachesChatList", "Coaches");}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        </div>
+
+
+    

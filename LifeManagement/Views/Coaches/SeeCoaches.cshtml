@@ -1,8 +1,13 @@
 ﻿
+
 @{
     ViewBag.Title = "SeeCoaches";
 }
 
-<h2>SeeCoaches</h2>
+@{
+    Layout = "../Shared/DashboardLayout.cshtml";
+}
 
-@{Html.RenderPartial("CoachesList");}
+<h3>Available Coaches</h3>
+
+@{Html.RenderAction("CoachesList");}

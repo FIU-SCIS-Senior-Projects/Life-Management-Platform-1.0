@@ -74,7 +74,6 @@
     $(document).ready(function () { checkNeedNewSprint(); })
     function checkNeedNewSprint() {
         if ('@needSprint' == 'True') {
-            debugger;
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("NewSprint", "Sprints")',
@@ -123,7 +122,6 @@
             data: data,
 
             success: function (msg) {
-                debugger;
                 for (var j in msg.Percentages.Joy.Data) {
 
                     updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage);

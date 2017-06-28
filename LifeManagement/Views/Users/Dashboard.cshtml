@@ -5,14 +5,13 @@
         Layout = "../Shared/AdminDashBoardLayout.cshtml";
 
     }
-    else if (common.isCoach())
-    {
-        Layout = "../Shared/CoachDashboardLayout.cshtml";
-    }
     else
     {
         Layout = "../Shared/DashboardLayout.cshtml";
-        Html.RenderAction("Tabs", "SprintActivities");
+       
+            Html.RenderAction("Tabs", "SprintActivities");
+        
+      
     }
 
 }

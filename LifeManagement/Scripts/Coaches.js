@@ -14,12 +14,16 @@ CoachApp.controller('CoachController', function ($scope, CoachService) {
    
    
     getCoaches();
+    setpopups();
+
     function getCoaches() {
         CoachService.getCoaches()
             .then(function(coaches) {
                 $scope.Coaches = coaches.data;
               
             });
+       
+    
     }
 });
  
@@ -32,3 +36,4 @@ CoachApp.factory('CoachService', ['$http', function ($http) {
     return CoachService;
  
 }]);
+

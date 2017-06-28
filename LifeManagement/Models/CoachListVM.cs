@@ -9,7 +9,7 @@ namespace LifeManagement.Models
 {
     public class CoachListVM
     {
-       
+       public int CoachId { get; set; }
         public string AvatarStr64{ get; set; }
 
         [DisplayName("First Name")]

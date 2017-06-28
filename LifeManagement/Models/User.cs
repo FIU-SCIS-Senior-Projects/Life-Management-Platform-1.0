@@ -19,6 +19,8 @@ namespace LifeManagement.Models
         {
             this.Sprints = new HashSet<Sprint>();
             this.CoachReviews = new HashSet<CoachReview>();
+            this.Appointments = new HashSet<Appointment>();
+            this.Forums = new HashSet<Forum>();
         }
     
         public int Id { get; set; }
@@ -43,5 +45,9 @@ namespace LifeManagement.Models
         public virtual ICollection<Sprint> Sprints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoachReview> CoachReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forum> Forums { get; set; }
     }
 }

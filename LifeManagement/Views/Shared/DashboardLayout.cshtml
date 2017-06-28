@@ -1,12 +1,20 @@
-﻿@{
-    var common = new LifeManagement.Models.Common();
-}
+﻿
 <!DOCTYPE html>
 <html>
 <head>
-     @RenderSection("scripts", required: false)
+  
     @{ Html.RenderPartial("_LayoutsHead"); }
 
+    @if (IsSectionDefined("AddToHead"))
+    {
+        @RenderSection("AddToHead", required: false)
+    }
+
+    @RenderSection("AddToHeadAnotherWay", required: false)
+   
+  
+    <script src="~/Scripts/userdashboard.js"></script>
+ 
 </head>
 <body>
     @if (IsSectionDefined("bgdiv"))
@@ -20,68 +28,35 @@
         </bgdiv>
     }
     @{ Html.RenderPartial("_navBar"); }
-    
+   
+    <div class="clearfix">
+
+
+
         <div id="sidebar-collapse" class="col-md-2 sidebar">
 
             <div class="form-group" style="height: 230px">
                 <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
-                <p style=" position: relative; top: 40px; left: 30%"> User Name </p>
+                <p style=" position relative; top 40px; left 30%"> User Name </p>
             </div>
 
             <ul class="nav menu">
-                <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-                <li><a href="~/Views/Shared/Dashboard_other/widgets_index.cshtml"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Progress Summary</a></li>
+                <li><a href="#" onclick="renderDiv('@Url.Action("Tabs", "SprintActivities")',null)"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Progress Summary</a></li>
                 <li><a class="lmmodal" modal-width="600px" url='@Url.Action("Create","Sprints")' href="#"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Setup new Productivity Week</a></li>
-                <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
-                <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
-                <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
-                <li class="parent ">
-                    <a href="#">
-                        <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
-                    </a>
-                    <ul class="children collapse" id="sub-item-1">
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 1
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 2
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 3
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="presentation" class="divider"></li>
+                <li><a href="#" onclick="renderDiv('@Url.Action("Chat", "Forums")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Chat</a></li>
+                <li><a href="#" onclick="renderDiv('@Url.Action("SeeCalendar", "Appointments")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Appointments</a></li>
+
+                
 
             </ul>
 
         </div>
 
-        <div class="col-md-10 col-md-offset-2  main">
+        <div id="usersection" class="col-md-10 col-md-offset-2  main" style="margin-top: 20px; max-height: 900px;overflow: auto">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div>
-                        @RenderBody()
-                        <hr />
-                        <footer>
-                            <p>&copy; @DateTime.Now.Year - managedLife</p>
-                        </footer>
-                    </div>
-
-
-
-                </div>
-            </div>
-
+            @RenderBody()
         </div>	<!--/.main-->
-   
-   
+    </div>
 </body>
+
 </html>

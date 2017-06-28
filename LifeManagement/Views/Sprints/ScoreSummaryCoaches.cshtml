@@ -1,0 +1,168 @@
+﻿@model LifeManagement.Models.Sprint
+
+<script src="~/Scripts/cooltabs.js"></script>
+<link href="~/Content/cooltabs.css" rel="stylesheet" />
+<link href="~/Content/ActCalendar.css" rel="stylesheet" />
+<script src="~/Scripts/cmGauge.js"></script>
+<link href="~/Content/cmGauge.css" rel="stylesheet" />
+
+
+    <div class="container" style="padding-top : 5%">
+        <div class="clearfix">
+            <div class="col-md-12" id="tableForPic">
+                <table class="table text-center">
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            @Model.SprintGoal
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            Joy
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>@Model.Goals.Where(a => a.Category.Name == "Joy").FirstOrDefault().Description</td>
+                        <td class="text-right">
+
+
+
+                            <div id="gaugeCat-Joy" class="gauge gauge-big gauge-green">
+
+                                <div class="gauge-arrow" data-percentage="40"
+                                     style="transform: rotate(0deg);"></div>
+
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            Passion
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>@Model.Goals.Where(a => a.Category.Name == "Passion").FirstOrDefault().Description</td>
+                        <td class="text-right">
+
+                            <div id="gaugeCat-Passion" class="gauge gauge-big gauge-green">
+
+                                <div class="gauge-arrow" data-percentage="40"
+                                     style="transform: rotate(0deg);"></div>
+
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            Giving Back
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>@Model.Goals.Where(a => a.Category.Name == "Giving Back").FirstOrDefault().Description</td>
+                        <td class="text-right">
+                            <div id="gaugeCat-GivingBack" class="gauge gauge-big gauge-green">
+
+                                <div class="gauge-arrow" data-percentage="40"
+                                     style="transform: rotate(0deg);"></div>
+
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            Cycle
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="text-center" colspan="2">
+
+                            <div id="gaugeCycle" class="gauge gauge-big gauge-green">
+
+                                <div class="gauge-arrow" data-percentage="40"
+                                     style="transform: rotate(0deg);"></div>
+
+
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    $('.gauge .gauge-arrow').cmGauge();
+    function updateCatDial() {
+        var joy = 0, passion = 0, gb = 0;
+        $('.caldaydiv.activeDay').each(function () {
+            var cat = $(this).attr('cat');
+            if (cat == "Joy")
+                joy++;
+            if (cat == "Passion")
+                passion++;
+            if (cat == "Giving Back")
+                gb++;
+
+        });
+
+        $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy / 36 * 100);
+        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 36 * 100);
+        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 36 * 100);
+        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', (joy + passion + gb) / 36 * 100);
+    }
+
+    function updateDials(actiId, actScore) {
+
+        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore / 12 * 100);
+        $('#actual-' + actiId).html(actScore);
+    }
+
+    function initDials() {
+        data = { sprintId: @Model.Id};
+        $.ajax({
+            url: '@Url.Action("GetPercentages", "SprintActivities")',
+            type: 'GET',
+            data: data,
+
+            success: function (msg) {
+                for (var j in msg.Percentages.Joy.Data) {
+
+                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage);
+
+                }
+                for (var j in msg.Percentages.Passion.Data) {
+
+                    updateDials(msg.Percentages.Passion.Data[j].actId, msg.Percentages.Passion.Data[j].percentage);
+
+                }
+                for (var j in msg.Percentages.Gb.Data) {
+
+                    updateDials(msg.Percentages.Gb.Data[j].actId, msg.Percentages.Gb.Data[j].percentage);
+
+                }
+                updateCatDial();
+
+            },
+            error: function(res) {
+                alert('error');
+            }
+        });
+    }
+
+
+    </script>

@@ -24,8 +24,8 @@ namespace LifeManagement.Controllers
             {
                 var newcoach = new CoachListVM()
                 {
+                    CoachId = a.Id,
                     AvatarStr64 = common.SignatureImageStr64(a.Avatar, a.AvatarMime),
-
                     FirstName = a.FirstName,
                     LastName = a.LastName,
                     Skills = a.Skills,
@@ -37,11 +37,20 @@ namespace LifeManagement.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult CoachesList()
+        public PartialViewResult CoachesListAngular()
         {
             return PartialView();
         }
-
+        public PartialViewResult CoachesChatList()
+        {
+            var coaches = db.Coaches.ToList();
+            return PartialView(coaches);
+        }
+        public PartialViewResult CoachesList()
+        {
+            var coaches = db.Coaches.ToList();
+            return PartialView(coaches);
+        }
         public ActionResult SeeCoaches()
         {
             return View();
@@ -66,6 +75,21 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
             return View(coach);
+        }
+
+        // This is the page Users see
+        public PartialViewResult CoachDetailsPage(int? id)
+        {
+            if (id == null)
+            {
+                return PartialView("ErrorPartial");
+            }
+            Coach coach = db.Coaches.Find(id);
+            if (coach == null)
+            {
+                return PartialView("ErrorPartial");
+            }
+            return PartialView(coach);
         }
 
         // GET: Coaches/Create
@@ -147,11 +171,19 @@ namespace LifeManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit( Coach coachData)
         {
-            if (ModelState.IsValid)
+            if (coachData.FirstName == null || coachData.LastName == null || coachData.Biography == null
+                       || coachData.Skills == null || coachData.Username == null
+                       || coachData.Password == null)
             {
+                ViewBag.ErrorMsg = "Error! There can not be empty fields";
+                return View(coachData);
+            }
 
+                if (ModelState.IsValid)
+            {
                 var coach = db.Coaches.Find(coachData.Id);
 
                 if(coach != null) { 
@@ -162,15 +194,14 @@ namespace LifeManagement.Controllers
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
                 if (coach.Password != coachData.Password) coach.Password = coachData.Password;
 
-
-                try { 
-                db.SaveChanges();
-                    }
-              
+                try
+                {
+                    db.SaveChanges();
+                }
                 catch (Exception e)
                 {
-
-                    ViewBag.ErrorMsg = "Error! There can not be empty fields";
+                    ViewBag.ErrorMsg = "Error! FirstName, LastName, Password, and UserName must have at most 20 characters, \n " +
+                            "please check your changes and try again.";
                     return View(coachData);
                 }
                     return RedirectToAction("Index");
@@ -254,12 +285,16 @@ namespace LifeManagement.Controllers
             if (coach != null && coach.Password == Password)
             {
                 FormsAuthentication.SetAuthCookie(coach.Username, false);
-                return RedirectToAction("DashBoard", "Users");
+                return RedirectToAction("Dashboard");
             }
             ViewBag.Error = "Invalid Credentials";
             return View();
         }
 
+        public ActionResult DashBoard()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]
@@ -327,7 +362,44 @@ namespace LifeManagement.Controllers
             return RedirectToAction("LoginCoach"); ;
         }
 
+        public PartialViewResult ProfilePic()
+        {
+            var coach = db.Coaches.Where(c => c.Username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
 
+            return PartialView(coach);
+
+        }
+
+        [HttpPost]
+        public ActionResult SavePic(int id)
+        {
+            TempData["idSprint"] = id;
+            TempData.Keep("idSprint");
+             return View();
+        }
+
+        public ActionResult SelectCoach(int id)
+        {
+            if(TempData["idSprint"] != null)
+            {
+                int sprintId = (int)TempData["idSprint"];
+
+                var sprint = db.Sprints.Find(sprintId);
+                var coach = db.Coaches.Find(id);
+                var user = db.Users.Where(u => u.Id == sprint.UserId).FirstOrDefault();
+
+                if (coach != null)
+                {
+                    string subject = "User " + user.FirstName + " " + user.LastName + " has shared his/her score summary with you!";
+                    string message = "Dear " + coach.FirstName + ": <br/>" + "<p> You are receiving this email because user " + user.FirstName + " " + user.LastName + " wants you to review his/her performance. <br/>"
+                        + " To see his/her scores, please follow <a href= \"" + @Url.Action("ScoreSummaryCoaches", "Sprints", null, Request.Url.Scheme) + "/" + sprint.Id + "\">this link. </a>  </p> <br/>"
+                        + "<p> Best, <br/> The Life Management Team. </p>";
+
+                    Common.sendEmail(coach.Email, subject, message);
+                }
+            }
+            return RedirectToAction("Dashboard", "Users");
+        }
 
         protected override void Dispose(bool disposing)
         {

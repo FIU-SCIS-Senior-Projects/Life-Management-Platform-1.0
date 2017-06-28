@@ -1,0 +1,68 @@
+﻿<link rel='stylesheet' href='~/Content/Calendar/fullcalendar.css' />
+<script src='~/Scripts/Calendar/lib/moment.min.js'></script>
+<script src='~/Scripts/Calendar/fullcalendar.js'></script>
+<script src="~/Scripts/qTip/jquery.qtip.min.js"></script>
+<link href="~/Scripts/qTip/jquery.qtip.min.css" rel="stylesheet" />
+<script>
+    $(document).ready(
+        function() {
+            $("#calendar").fullCalendar({
+                header: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: "month,agendaWeek,agendaDay"
+                },
+                eventSources: [
+                    {
+                        url: '@Url.Action("GetAppointments","Appointments")'
+
+                    }
+                ],
+                eventRender: function(eventdata, element) {
+
+                    $(element).qtip({ // Grab some elements to apply the tooltip to
+                        content: {
+                            text: function(event, api) {
+
+                                $.ajax({
+                                        url: "/Appointments/Details/",
+                                        type: "GET",
+                                        data: { id: eventdata.apptId }
+                                    })
+                                    .then(function(content) {
+                                            // Set the tooltip content upon successful retrieval
+                                            api.set('content.text', content);
+                                        },
+                                        function(xhr, status, error) {
+                                            // Upon failure... set the tooltip content to the status and error value
+                                            api.set('content.text', status + ': ' + error);
+                                        });
+
+                                return 'Loading...'; // Set some initial text
+                            }
+                        },
+                        hide: {
+                            fixed: true,
+                            delay: 500
+                        },
+                        style: { classes: 'qtipstyles' }
+                    });
+
+                }
+
+            });
+            
+        });
+
+
+</script>
+<style>
+    .qtipstyles {
+        background: darkseagreen;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+    <div id="calendar" class="col-md-12">
+
+    </div>

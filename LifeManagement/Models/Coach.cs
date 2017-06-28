@@ -18,6 +18,7 @@ namespace LifeManagement.Models
         public Coach()
         {
             this.CoachReviews = new HashSet<CoachReview>();
+            this.Forums = new HashSet<Forum>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace LifeManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoachReview> CoachReviews { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forum> Forums { get; set; }
     }
 }

@@ -16,6 +16,10 @@
     <EntitySet Name="Coaches" EntityType="SeniorDBModel.Store.Coaches" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoachReviews" EntityType="SeniorDBModel.Store.CoachReviews" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Activities" EntityType="SeniorDBModel.Store.Activities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Forums" EntityType="SeniorDBModel.Store.Forums" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Conversations" EntityType="SeniorDBModel.Store.Conversations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ForumFiles" EntityType="SeniorDBModel.Store.ForumFiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appointments" EntityType="SeniorDBModel.Store.Appointments" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_RoleUser" Association="SeniorDBModel.Store.FK_RoleUser">
       <End Role="Role" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
@@ -59,6 +63,26 @@
     <AssociationSet Name="RoleCoach" Association="SeniorDBModel.Store.RoleCoach">
       <End Role="Role" EntitySet="Roles" />
       <End Role="Coach" EntitySet="Coaches" />
+    </AssociationSet>
+    <AssociationSet Name="ForumConversation" Association="SeniorDBModel.Store.ForumConversation">
+      <End Role="Forum" EntitySet="Forums" />
+      <End Role="Conversation" EntitySet="Conversations" />
+    </AssociationSet>
+    <AssociationSet Name="ForumForumFile" Association="SeniorDBModel.Store.ForumForumFile">
+      <End Role="Forum" EntitySet="Forums" />
+      <End Role="ForumFile" EntitySet="ForumFiles" />
+    </AssociationSet>
+    <AssociationSet Name="UserAppointment" Association="SeniorDBModel.Store.UserAppointment">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="CoachForum" Association="SeniorDBModel.Store.CoachForum">
+      <End Role="Coach" EntitySet="Coaches" />
+      <End Role="Forum" EntitySet="Forums" />
+    </AssociationSet>
+    <AssociationSet Name="UserForum" Association="SeniorDBModel.Store.UserForum">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Forum" EntitySet="Forums" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
@@ -166,6 +190,50 @@
     <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="Img" Type="varbinary(max)" Nullable="false" />
     <Property Name="ImgMime" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Forums">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ForumDate" Type="datetime" Nullable="false" />
+    <Property Name="CoachId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Conversations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MsgDate" Type="datetime" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ForumId" Type="int" Nullable="false" />
+    <Property Name="SenderID" Type="int" Nullable="false" />
+    <Property Name="isCoach" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="ForumFiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ForumId" Type="int" Nullable="false" />
+    <Property Name="FileBytes" Type="varbinary(max)" Nullable="true" />
+    <Property Name="MimeType" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Appointments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="start" Type="datetime" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="url" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="allDay" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="textColor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="backgroundColor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_RoleUser">
     <End Role="Role" Type="SeniorDBModel.Store.Roles" Multiplicity="1" />
@@ -299,6 +367,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ForumConversation">
+    <End Role="Forum" Type="SeniorDBModel.Store.Forums" Multiplicity="1" />
+    <End Role="Conversation" Type="SeniorDBModel.Store.Conversations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forum">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Conversation">
+        <PropertyRef Name="ForumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ForumForumFile">
+    <End Role="Forum" Type="SeniorDBModel.Store.Forums" Multiplicity="1" />
+    <End Role="ForumFile" Type="SeniorDBModel.Store.ForumFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forum">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ForumFile">
+        <PropertyRef Name="ForumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAppointment">
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Appointment" Type="SeniorDBModel.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoachForum">
+    <End Role="Coach" Type="SeniorDBModel.Store.Coaches" Multiplicity="1" />
+    <End Role="Forum" Type="SeniorDBModel.Store.Forums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coach">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Forum">
+        <PropertyRef Name="CoachId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserForum">
+    <End Role="User" Type="SeniorDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Forum" Type="SeniorDBModel.Store.Forums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Forum">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -335,6 +463,8 @@
           <Property Name="Statement3" Type="String" Nullable="true" MaxLength="Max" />
           <Property Name="Avatar" Type="Binary" Nullable="true" />
           <Property Name="AvatarMime" Type="String" Nullable="true" />
+          <NavigationProperty Name="Appointments" Relationship="SeniorDBModel.UserAppointment" FromRole="User" ToRole="Appointment" />
+          <NavigationProperty Name="Forums" Relationship="SeniorDBModel.UserForum" FromRole="User" ToRole="Forum" />
         </EntityType>
         <Association Name="FK_RoleUser">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -403,6 +533,30 @@
           <AssociationSet Name="RoleCoach" Association="SeniorDBModel.RoleCoach">
             <End Role="Role" EntitySet="Roles" />
             <End Role="Coach" EntitySet="Coaches" />
+          </AssociationSet>
+          <EntitySet Name="Forums" EntityType="SeniorDBModel.Forum" />
+          <EntitySet Name="Conversations" EntityType="SeniorDBModel.Conversation" />
+          <AssociationSet Name="ForumConversation" Association="SeniorDBModel.ForumConversation">
+            <End Role="Forum" EntitySet="Forums" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <EntitySet Name="ForumFiles" EntityType="SeniorDBModel.ForumFile" />
+          <AssociationSet Name="ForumForumFile" Association="SeniorDBModel.ForumForumFile">
+            <End Role="Forum" EntitySet="Forums" />
+            <End Role="ForumFile" EntitySet="ForumFiles" />
+          </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="SeniorDBModel.Appointment" />
+          <AssociationSet Name="UserAppointment" Association="SeniorDBModel.UserAppointment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="CoachForum" Association="SeniorDBModel.CoachForum">
+            <End Role="Coach" EntitySet="Coaches" />
+            <End Role="Forum" EntitySet="Forums" />
+          </AssociationSet>
+          <AssociationSet Name="UserForum" Association="SeniorDBModel.UserForum">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Forum" EntitySet="Forums" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -541,6 +695,7 @@
           <NavigationProperty Name="Role" Relationship="SeniorDBModel.RoleCoach" FromRole="Coach" ToRole="Role" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="true" MaxLength="120" />
+          <NavigationProperty Name="Forums" Relationship="SeniorDBModel.CoachForum" FromRole="Coach" ToRole="Forum" />
         </EntityType>
         <EntityType Name="CoachReview">
           <Key>
@@ -626,6 +781,117 @@
             </Principal>
             <Dependent Role="Coach">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Forum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Conversations" Relationship="SeniorDBModel.ForumConversation" FromRole="Forum" ToRole="Conversation" />
+          <NavigationProperty Name="ForumFiles" Relationship="SeniorDBModel.ForumForumFile" FromRole="Forum" ToRole="ForumFile" />
+          <Property Name="ForumDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Coach" Relationship="SeniorDBModel.CoachForum" FromRole="Forum" ToRole="Coach" />
+          <Property Name="CoachId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="SeniorDBModel.UserForum" FromRole="Forum" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conversation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MsgDate" Type="DateTime" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="Forum" Relationship="SeniorDBModel.ForumConversation" FromRole="Conversation" ToRole="Forum" />
+          <Property Name="ForumId" Type="Int32" Nullable="false" />
+          <Property Name="SenderID" Type="Int32" Nullable="false" />
+          <Property Name="isCoach" Type="Boolean" Nullable="false" DefaultValue="false" />
+        </EntityType>
+        <Association Name="ForumConversation">
+          <End Type="SeniorDBModel.Forum" Role="Forum" Multiplicity="1" />
+          <End Type="SeniorDBModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ForumFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Forum" Relationship="SeniorDBModel.ForumForumFile" FromRole="ForumFile" ToRole="Forum" />
+          <Property Name="ForumId" Type="Int32" Nullable="false" />
+          <Property Name="FileBytes" Type="Binary" Nullable="true" />
+          <Property Name="MimeType" Type="String" Nullable="true" MaxLength="100" />
+        </EntityType>
+        <Association Name="ForumForumFile">
+          <End Type="SeniorDBModel.Forum" Role="Forum" Multiplicity="1" />
+          <End Type="SeniorDBModel.ForumFile" Role="ForumFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForumFile">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start" Type="DateTime" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <Property Name="end" Type="DateTime" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="true" />
+          <Property Name="allDay" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="textColor" Type="String" Nullable="true" />
+          <Property Name="backgroundColor" Type="String" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="SeniorDBModel.UserAppointment" FromRole="Appointment" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+        </EntityType>
+        <Association Name="UserAppointment">
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SeniorDBModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CoachForum">
+          <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="1" />
+          <End Type="SeniorDBModel.Forum" Role="Forum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forum">
+              <PropertyRef Name="CoachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserForum">
+          <End Type="SeniorDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SeniorDBModel.Forum" Role="Forum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forum">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -748,6 +1014,54 @@
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="Img" ColumnName="Img" />
           <ScalarProperty Name="ImgMime" ColumnName="ImgMime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Forums">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Forum)">
+        <MappingFragment StoreEntitySet="Forums">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ForumDate" ColumnName="ForumDate" />
+          <ScalarProperty Name="CoachId" ColumnName="CoachId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conversations">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Conversation)">
+        <MappingFragment StoreEntitySet="Conversations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MsgDate" ColumnName="MsgDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ForumId" ColumnName="ForumId" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="isCoach" ColumnName="isCoach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumFiles">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.ForumFile)">
+        <MappingFragment StoreEntitySet="ForumFiles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ForumId" ColumnName="ForumId" />
+          <ScalarProperty Name="FileBytes" ColumnName="FileBytes" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="IsTypeOf(SeniorDBModel.Appointment)">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="start" ColumnName="start" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="end" ColumnName="end" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="allDay" ColumnName="allDay" />
+          <ScalarProperty Name="textColor" ColumnName="textColor" />
+          <ScalarProperty Name="backgroundColor" ColumnName="backgroundColor" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

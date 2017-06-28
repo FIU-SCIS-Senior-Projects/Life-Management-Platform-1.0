@@ -1,0 +1,55 @@
+﻿
+
+
+
+<div ng-app="CoachApp" >
+    <div ng-controller="CoachController">
+        <div class="col-md-12">
+           <input type="text" class="form-control col-md-4" placeholder="Search Coach" ng-model="searchCoach"/>
+       </div>
+        <div class="col-md-12">
+            <table class="table">
+                <tr ng-repeat="r in Coaches | filter:searchCoach ">
+                    <td >
+                     
+                            <table class="table">
+                                <tr>
+                                    <td class="coachimgtd" rowspan="5"><img class="coachimg" src="{{r.AvatarStr64}}" /></td>
+                                    <td class="tdbordered">
+                                        {{r.FirstName +" " + r.LastName}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="stardiv" ng-repeat="n in [] | range:r.ReviewScore">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{r.Skills}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{r.Email}}</td>
+                                </tr>
+                                <tr>
+
+                                    <td><a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/{{r.CoachId}}"> Details</a> | Select Coach</td>
+                                </tr>
+                                <tr><td colspan="2"><hr /></td></tr>
+                            </table>
+                       
+                    </td>
+                </tr>
+            </table>
+        </div>
+    
+    </div>
+</div>
+
+
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/Coaches.js"></script>
+<script src="~/Scripts/lmpopup.js"></script>
