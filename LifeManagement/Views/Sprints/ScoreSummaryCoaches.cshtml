@@ -7,8 +7,9 @@
 <link href="~/Content/cmGauge.css" rel="stylesheet" />
 
 
-    <div class="container" style="padding-top : 5%">
+    <div class="container">
         <div class="clearfix">
+            <h2 > User: <strong style="color: #4c9be0"> @ViewBag.NameUser </strong></h2>
             <div class="col-md-12" id="tableForPic">
                 <table class="table text-center">
                     <tr>
@@ -30,7 +31,7 @@
 
                             <div id="gaugeCat-Joy" class="gauge gauge-big gauge-green">
 
-                                <div class="gauge-arrow" data-percentage="40"
+                                <div class="gauge-arrow" data-percentage="0"
                                      style="transform: rotate(0deg);"></div>
 
 
@@ -48,7 +49,7 @@
 
                             <div id="gaugeCat-Passion" class="gauge gauge-big gauge-green">
 
-                                <div class="gauge-arrow" data-percentage="40"
+                                <div class="gauge-arrow" data-percentage="0"
                                      style="transform: rotate(0deg);"></div>
 
 
@@ -66,7 +67,7 @@
                         <td class="text-right">
                             <div id="gaugeCat-GivingBack" class="gauge gauge-big gauge-green">
 
-                                <div class="gauge-arrow" data-percentage="40"
+                                <div class="gauge-arrow" data-percentage="0"
                                      style="transform: rotate(0deg);"></div>
 
 
@@ -84,7 +85,7 @@
 
                             <div id="gaugeCycle" class="gauge gauge-big gauge-green">
 
-                                <div class="gauge-arrow" data-percentage="40"
+                                <div class="gauge-arrow" data-percentage="0"
                                      style="transform: rotate(0deg);"></div>
 
 
@@ -105,32 +106,18 @@
 
 
     <script>
+        $(document).ready(function () {
+           initDials();
+    });
 
     $('.gauge .gauge-arrow').cmGauge();
-    function updateCatDial() {
-        var joy = 0, passion = 0, gb = 0;
-        $('.caldaydiv.activeDay').each(function () {
-            var cat = $(this).attr('cat');
-            if (cat == "Joy")
-                joy++;
-            if (cat == "Passion")
-                passion++;
-            if (cat == "Giving Back")
-                gb++;
-
-        });
-
+    function updateCatDial(joy, passion, gb) {
         $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy / 36 * 100);
-        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 36 * 100);
-        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 36 * 100);
-        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', (joy + passion + gb) / 36 * 100);
+        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 24 * 100);
+        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 24 * 100);
+        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', ((((joy / 36) + (passion / 24) + (gb / 24)) * 100) / 3));
     }
-
-    function updateDials(actiId, actScore) {
-
-        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore / 12 * 100);
-        $('#actual-' + actiId).html(actScore);
-    }
+        
 
     function initDials() {
         data = { sprintId: @Model.Id};
@@ -138,24 +125,26 @@
             url: '@Url.Action("GetPercentages", "SprintActivities")',
             type: 'GET',
             data: data,
-
             success: function (msg) {
+                var joyCount = 0;
+                var passionCount = 0;
+                var GbCount = 0;
+
                 for (var j in msg.Percentages.Joy.Data) {
 
-                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage);
+                    joyCount += msg.Percentages.Joy.Data[j].percentage;
 
                 }
                 for (var j in msg.Percentages.Passion.Data) {
-
-                    updateDials(msg.Percentages.Passion.Data[j].actId, msg.Percentages.Passion.Data[j].percentage);
+                    passionCount += msg.Percentages.Passion.Data[j].percentage;
 
                 }
                 for (var j in msg.Percentages.Gb.Data) {
-
-                    updateDials(msg.Percentages.Gb.Data[j].actId, msg.Percentages.Gb.Data[j].percentage);
+                    GbCount += msg.Percentages.Gb.Data[j].percentage;
 
                 }
-                updateCatDial();
+
+                updateCatDial(joyCount, passionCount, GbCount);
 
             },
             error: function(res) {

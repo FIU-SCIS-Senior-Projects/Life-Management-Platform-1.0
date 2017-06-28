@@ -41,8 +41,17 @@ namespace LifeManagement.Controllers
         public ActionResult ScoreSummaryCoaches(int id)
         {
             var sprint = db.Sprints.Find(id);
-            if (sprint != null)
+           
+            if (sprint != null) {
+                var user = db.Users.Find(sprint.UserId);
+
+                if (user != null)
+                {
+                    ViewBag.NameUser = user.FirstName + " " + user.LastName;
+                }
                 return View(sprint);
+
+            }
 
             ViewBag.ErrorMsg = "Could not get summary";
             return View("Error");
