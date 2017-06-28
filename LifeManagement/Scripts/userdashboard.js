@@ -6,6 +6,7 @@
         type: 'GET',
         success: function(res) {
             $("#usersection").html(res);
+            
         },
         error: function(msg) {
             $("#usersection").html(msg);
