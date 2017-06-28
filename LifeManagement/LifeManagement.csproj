@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -177,6 +178,7 @@
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Authorization.cs" />
+    <Compile Include="Models\CalendarModel.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -249,6 +251,11 @@
     <Content Include="Content\bety_css\normalize.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\calendar.css" />
+    <Content Include="Content\Calendar\fullcalendar.css" />
+    <Content Include="Content\Calendar\fullcalendar.min.css" />
+    <Content Include="Content\Calendar\fullcalendar.print.css" />
+    <Content Include="Content\Calendar\fullcalendar.print.min.css" />
     <Content Include="Content\CatTiles.css" />
     <Content Include="Content\chat.css" />
     <Content Include="Content\cmGauge.css" />
@@ -327,6 +334,9 @@
     <Content Include="Content\dashboard_css\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\fiusp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fiusp - Web Deploy.pubxml" />
+    <Content Include="Scripts\Calendar\fullcalendar.js" />
+    <Content Include="Scripts\Calendar\fullcalendar.min.js" />
+    <Content Include="Scripts\Calendar\lib\moment.min.js" />
     <Content Include="Scripts\chatboxManager.js" />
     <Content Include="Scripts\chatboxManager.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -360,6 +370,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lmpopup.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\qTip\jquery.qtip.css" />
+    <Content Include="Scripts\qTip\jquery.qtip.js" />
+    <Content Include="Scripts\qTip\jquery.qtip.min.css" />
+    <Content Include="Scripts\qTip\jquery.qtip.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
@@ -456,6 +470,11 @@
     <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\DashBoard.cshtml" />
     <Content Include="Views\Attachments\FileViewer.cshtml" />
+    <Content Include="Views\Appointments\Calendar.cshtml" />
+    <Content Include="Views\Appointments\Details.cshtml" />
+    <Content Include="Views\Appointments\SeeCalendar.cshtml" />
+    <Content Include="Views\Appointments\UserCalendar.cshtml" />
+    <Content Include="Scripts\qTip\jquery.qtip.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
