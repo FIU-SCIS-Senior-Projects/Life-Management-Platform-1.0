@@ -99,15 +99,14 @@
 <script>
     function shareSummary() {
                $.ajax({
-                    url: '@Url.Action("SavePic", "Coaches")',
+                    url: '@Url.Action("ShareProgress", "Coaches")',
                     type: 'POST',
                     data: {id: @Model.Id},
                     success: function (res) {
-                        alert("Success");
-                        window.location = '@Url.Action("SeeCoaches", "Coaches", null, Request.Url.Scheme)';
+                        window.location = '@Url.Action("SeeCoachesUsers", "Coaches", null, Request.Url.Scheme)';
                     },
                     error: function () {
-                        alert("Fucked UP");
+                        alert("Error sharing, try again later.");
                     }
                 });
     }

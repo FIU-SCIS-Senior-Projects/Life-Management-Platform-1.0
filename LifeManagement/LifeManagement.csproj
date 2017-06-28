@@ -458,9 +458,11 @@
     <Content Include="Views\Coaches\CoachesList.cshtml" />
     <Content Include="Views\Coaches\DashBoard.cshtml" />
     <Content Include="Views\Attachments\FileViewer.cshtml" />
-    <Content Include="Views\Coaches\SavePic.cshtml" />
+    <Content Include="Views\Coaches\ShareProgress.cshtml" />
     <Content Include="Views\Coaches\SelectCoach.cshtml" />
     <Content Include="Views\Sprints\ScoreSummaryCoaches.cshtml" />
+    <Content Include="Views\Coaches\SeeCoachesUsers.cshtml" />
+    <Content Include="Views\Coaches\CoachesListUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
