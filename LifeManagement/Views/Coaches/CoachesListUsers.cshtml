@@ -4,9 +4,7 @@
     var common = new LifeManagement.Models.Common();
 }
 <link href="~/Content/coaches.css" rel="stylesheet" />
-<div>
 
-    <div class="col-md-12">
         <table class="table">
             @{
                 foreach (var m in Model)
@@ -55,13 +53,13 @@
             }
 
         </table>
-    </div>
-
-</div>
 
 
 
 <link href="~/Content/coaches.css" rel="stylesheet" />
 
-
-<script src="~/Scripts/lmpopup.js"></script>
+<script>
+    $(document).ready(function () {
+        setpopups();
+    })
+</script>
