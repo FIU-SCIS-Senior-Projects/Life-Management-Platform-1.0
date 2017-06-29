@@ -482,6 +482,7 @@
     <Content Include="Views\Appointments\SeeCalendar.cshtml" />
     <Content Include="Views\Appointments\UserCalendar.cshtml" />
     <Content Include="Scripts\qTip\jquery.qtip.min.js.map" />
+    <Content Include="Views\Users\ProfilePic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
