@@ -179,7 +179,7 @@ namespace LifeManagement.Models
           */
         public string SignatureImageStr64(Byte[] bytes, string mimetype)
         {
-            string imageSrc = "/Imgs/noimage.jpg";
+            string imageSrc = "/Img/noimage.jpg";
 
             if (bytes != null && !String.IsNullOrEmpty(mimetype))
             {

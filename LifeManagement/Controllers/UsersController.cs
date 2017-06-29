@@ -401,6 +401,15 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index");
         }
 
+        public PartialViewResult ProfilePic()
+        {
+            var user = db.Users.Where(c => c.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+            return PartialView(user);
+
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
