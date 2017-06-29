@@ -36,8 +36,7 @@
         <div id="sidebar-collapse" class="col-md-2 sidebar">
 
             <div class="form-group" style="height: 230px">
-                <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
-                <p style=" position relative; top 40px; left 30%"> User Name </p>
+                @{Html.RenderAction("ProfilePic", "Users");}
             </div>
 
             <ul class="nav menu">
@@ -45,6 +44,7 @@
                 <li><a class="lmmodal" modal-width="600px" url='@Url.Action("Create","Sprints")' href="#"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Setup new Productivity Week</a></li>
                 <li><a href="#" onclick="renderDiv('@Url.Action("Chat", "Forums")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Chat</a></li>
                 <li><a href="#" onclick="renderDiv('@Url.Action("SeeCalendar", "Appointments")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Appointments</a></li>
+                <li><a href="#" onclick="renderDiv('@Url.Action("SeeCoachesUsers", "Coaches")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Coaches</a></li>
 
                 
 

@@ -104,9 +104,9 @@
         });
 
         $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy / 36 * 100);
-        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 36 * 100);
-        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 36 * 100);
-        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', (joy+passion+gb) / 36 * 100);
+        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 24 * 100);
+        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 24 * 100);
+        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', ((((joy / 36) + (passion / 24) + (gb/ 24)) * 100) / 3));
 
     }
     function updateDials(actiId, actScore) {

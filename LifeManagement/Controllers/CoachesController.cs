@@ -55,8 +55,9 @@ namespace LifeManagement.Controllers
         {
             return View();
         }
-       /********************************************************/
+        /********************************************************/
         // GET: Coaches
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Coaches.ToList());
@@ -371,14 +372,14 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult SavePic(int id)
+        public ActionResult ShareProgress(int id)
         {
             TempData["idSprint"] = id;
             TempData.Keep("idSprint");
              return View();
         }
 
-        public ActionResult SelectCoach(int id)
+        public PartialViewResult SelectCoach(int id)
         {
             if(TempData["idSprint"] != null)
             {
@@ -398,7 +399,21 @@ namespace LifeManagement.Controllers
                     Common.sendEmail(coach.Email, subject, message);
                 }
             }
-            return RedirectToAction("Dashboard", "Users");
+            return PartialView();
+        }
+
+        public PartialViewResult SeeCoachesUsers()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult CoachesListUsers(string filter)
+        {
+            
+            if(String.IsNullOrEmpty(filter))
+                return PartialView(db.Coaches.ToList());
+
+            return PartialView(db.Coaches.Where(a=>a.Email.Contains(filter) || a.FirstName.Contains(filter)||a.LastName.Contains(filter)||a.Skills.Contains(filter)).ToList());
         }
 
         protected override void Dispose(bool disposing)

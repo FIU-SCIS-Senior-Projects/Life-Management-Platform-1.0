@@ -4,10 +4,32 @@
     ViewBag.Title = "SeeCoaches";
 }
 
-@{
-    Layout = "../Shared/DashboardLayout.cshtml";
-}
-
 <h3>Available Coaches</h3>
 
-@{Html.RenderAction("CoachesList");}
+
+
+    <div class="col-md-12 text-right">
+
+        <input id="filter" class="input-sm"  type="text" />
+        <button class="btn btn-sm btn-default" onclick="search()"><span class="glyphicon glyphicon-search"></span> </button>
+
+    </div>
+
+
+
+<div class="col-md-12" id="coachessection">
+    @{Html.RenderAction("CoachesList");}
+</div>
+
+<script>
+    function search() {
+        $.ajax({
+            url: "@Url.Action("CoachesListUsers")",
+            type:"GET",
+            data:{"filter":$("#filter").val()},
+            success:function(res) {
+                $("#coachessection").html(res);
+            }
+        })
+    }
+</script>
