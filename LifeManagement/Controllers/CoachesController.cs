@@ -402,15 +402,18 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
 
-        public ActionResult SeeCoachesUsers()
+        public PartialViewResult SeeCoachesUsers()
         {
-            return View();
+            return PartialView();
         }
 
-        public PartialViewResult CoachesListUsers()
+        public PartialViewResult CoachesListUsers(string filter)
         {
-            var coaches = db.Coaches.ToList();
-            return PartialView(coaches);
+            
+            if(String.IsNullOrEmpty(filter))
+                return PartialView(db.Coaches.ToList());
+
+            return PartialView(db.Coaches.Where(a=>a.Email.Contains(filter) || a.FirstName.Contains(filter)||a.LastName.Contains(filter)||a.Skills.Contains(filter)).ToList());
         }
 
         protected override void Dispose(bool disposing)

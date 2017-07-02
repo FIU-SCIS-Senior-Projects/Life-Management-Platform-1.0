@@ -98,12 +98,14 @@
 
 <script>
     function shareSummary() {
+
                $.ajax({
                     url: '@Url.Action("ShareProgress", "Coaches")',
                     type: 'POST',
                     data: {id: @Model.Id},
-                    success: function (res) {
-                        window.location = '@Url.Action("SeeCoachesUsers", "Coaches", null, Request.Url.Scheme)';
+                   success: function (res) {
+                       renderDiv('@Url.Action("SeeCoachesUsers", "Coaches")', null);
+                       
                     },
                     error: function () {
                         alert("Error sharing, try again later.");
