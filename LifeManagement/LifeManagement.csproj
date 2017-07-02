@@ -237,6 +237,8 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CoachViewModel.cs" />
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignaR.cs" />
@@ -414,7 +416,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\ErrorPartial.cshtml" />
@@ -493,6 +494,7 @@
     <Content Include="Views\Coaches\CoachReviews.cshtml" />
     <Content Include="Views\Coaches\ReviewsList.cshtml" />
     <Content Include="Views\Coaches\WriteReview.cshtml" />
+    <Content Include="Views\Users\UserEditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
