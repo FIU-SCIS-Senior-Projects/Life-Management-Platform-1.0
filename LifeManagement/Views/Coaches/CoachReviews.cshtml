@@ -15,3 +15,8 @@
 <div id="reviews-section" class="">
     @{Html.RenderAction("ReviewsList", new { id = Model.Id });}
 </div>
+<script>
+    $(document).ready(function() {
+        setpopups();
+    })
+</script>

@@ -181,7 +181,7 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Approved" Type="bit" Nullable="true" DefaultValue="false" />
-    <Property Name="DateApproved" Type="datetime" StoreGeneratedPattern="Identity" Nullable="true" />
+    <Property Name="DateApproved" Type="datetime" Nullable="true" />
     <Property Name="ApprovedBy" Type="int" Nullable="true" />
     <Property Name="Score" Type="int" Nullable="true" />
   </EntityType>
@@ -716,7 +716,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Approved" Type="Boolean" Nullable="true" DefaultValue="false" />
-          <Property Name="DateApproved" Type="DateTime" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateApproved" Type="DateTime" Nullable="true" annotation:StoreGeneratedPattern="None" />
           <Property Name="ApprovedBy" Type="Int32" Nullable="true" />
           <Property Name="Score" Type="Int32" Nullable="true" />
         </EntityType>
