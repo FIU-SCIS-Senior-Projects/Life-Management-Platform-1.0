@@ -162,6 +162,7 @@
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
+    <Compile Include="Controllers\CoachReviewsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ForumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -237,7 +238,6 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-   
     <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,6 +308,7 @@
     <Content Include="Models\EntityModel-6-22-2017-2.edmx.sql" />
     <Content Include="Models\EntityModel-6-22-2017.edmx.sql" />
     <Content Include="Models\EntityModel-6-30-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-7-2-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
@@ -495,6 +496,9 @@
     <Content Include="Views\Coaches\ReviewsList.cshtml" />
     <Content Include="Views\Coaches\WriteReview.cshtml" />
     <Content Include="Views\Users\UserEditProfile.cshtml" />
+    <Content Include="Views\CoachReviews\Revise.cshtml" />
+    <Content Include="Views\CoachReviews\PendingList.cshtml" />
+    <Content Include="Views\CoachReviews\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
