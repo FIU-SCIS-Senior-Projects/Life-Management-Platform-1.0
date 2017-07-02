@@ -180,6 +180,10 @@
     <Property Name="CoachId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Approved" Type="bit" Nullable="true" DefaultValue="false" />
+    <Property Name="DateApproved" Type="datetime" StoreGeneratedPattern="Identity" Nullable="true" />
+    <Property Name="ApprovedBy" Type="int" Nullable="true" />
+    <Property Name="Score" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Activities">
     <Key>
@@ -190,6 +194,10 @@
     <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="Img" Type="varbinary(max)" Nullable="false" />
     <Property Name="ImgMime" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="CreatorId" Type="int" Nullable="true" DefaultValue="-1" />
+    <Property Name="Approved" Type="bit" Nullable="true" DefaultValue="false" />
+    <Property Name="DateApproved" Type="datetime" Nullable="true" />
+    <Property Name="ApprovedBy" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Forums">
     <Key>
@@ -707,6 +715,10 @@
           <NavigationProperty Name="User" Relationship="SeniorDBModel.UserCoachReview" FromRole="CoachReview" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Approved" Type="Boolean" Nullable="true" DefaultValue="false" />
+          <Property Name="DateApproved" Type="DateTime" Nullable="true" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApprovedBy" Type="Int32" Nullable="true" />
+          <Property Name="Score" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="CoachCoachReview">
           <End Type="SeniorDBModel.Coach" Role="Coach" Multiplicity="1" />
@@ -745,6 +757,10 @@
           <Property Name="ImgMime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SprintActivities" Relationship="SeniorDBModel.FK_ActivitySprintActivities" FromRole="Activity" ToRole="SprintActivities" />
           <NavigationProperty Name="Category" Relationship="SeniorDBModel.FK_CategoryActivity" FromRole="Activity" ToRole="Category" />
+          <Property Name="CreatorId" Type="Int32" Nullable="true" DefaultValue="-1" />
+          <Property Name="Approved" Type="Boolean" Nullable="true" DefaultValue="false" />
+          <Property Name="DateApproved" Type="DateTime" Nullable="true" />
+          <Property Name="ApprovedBy" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="FK_ActivitySprintActivities">
           <End Type="SeniorDBModel.Activity" Role="Activity" Multiplicity="1" />
@@ -1003,6 +1019,10 @@
           <ScalarProperty Name="CoachId" ColumnName="CoachId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1014,6 +1034,10 @@
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="Img" ColumnName="Img" />
           <ScalarProperty Name="ImgMime" ColumnName="ImgMime" />
+          <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

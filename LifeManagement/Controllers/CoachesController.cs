@@ -55,7 +55,77 @@ namespace LifeManagement.Controllers
         {
             return View();
         }
-        /********************************************************/
+        /*********************coach reviews***********************************/
+
+        public ActionResult SeeReviews(int id)
+        {
+            return View(id);
+        }
+
+        public PartialViewResult CoachReviews(int id)
+        {
+            var coach = db.Coaches.Find(id);
+            if (coach == null)
+            {
+                ViewBag.ErrorMsg = "Invalid coach";
+                return  PartialView("ErrorPartial");
+            }
+            return PartialView(coach);
+        }
+        public PartialViewResult ReviewsList(int id)
+        {
+            var reviews = db.CoachReviews.Where(a=>a.CoachId==id && a.Approved==true);
+            if (!reviews.Any())
+            {
+                ViewBag.NoReviews = "There are no reviews yet";
+
+            }
+            return PartialView(reviews.ToList());
+        }
+     
+        public PartialViewResult WriteReview(int id)
+        {
+            return PartialView(id);
+        }
+   
+        [HttpPost]
+        public string SaveReview(int coachid, string review, int score)
+        {
+            if (String.IsNullOrEmpty(review))
+            {
+                Response.StatusCode = 500;
+                return "Review cannot be empty";
+            }
+
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                Response.StatusCode = 500;
+                return "Need to be a user";
+            }
+              
+           
+            var coach = db.Coaches.Find(coachid);
+            if (coach == null)
+            {
+                Response.StatusCode = 500;
+                return "Invalid coach";
+            }
+                
+            
+            coach.CoachReviews.Add(new CoachReview()
+            {
+                Review = review,
+                Score = score,
+                UserId = user.Id
+                
+            });
+            db.SaveChanges();
+            return "Review saved successfully";
+
+
+        }
+        /*********************************************************************/
         // GET: Coaches
         [Authorize(Roles = "Admin")]
         public ActionResult Index()

@@ -1,0 +1,17 @@
+﻿
+@model LifeManagement.Models.Coach
+    @{
+        LifeManagement.Models.Common common = new LifeManagement.Models.Common();
+    }
+<link href="~/Content/Reviews.css" rel="stylesheet" />
+<script src="~/Scripts/reviews.js"></script>
+<div id="details-section" class="review-div col-md-12">
+    @{Html.RenderAction("CoachDetailsPage", new { id = Model.Id });}
+</div>
+<div class="text-center" style="background: white; padding: 10px; margin-bottom: 20px; display: @(@common.IsAuthenticated?"block":"none")">
+    <a class="lmmodal btn btn-sm btn-info" modal-width="600px" url="@Url.Action("WriteReview","Coaches",new {id=Model.Id})">Write Review</a>
+
+</div>
+<div id="reviews-section" class="">
+    @{Html.RenderAction("ReviewsList", new { id = Model.Id });}
+</div>
