@@ -120,6 +120,21 @@ namespace LifeManagement.Models
             return false;
         }
 
+        /*********************save image for user***********************************************/
+
+        public bool saveImageBytesUser(User user, HttpPostedFileBase image)
+        {
+
+            if (image != null)
+            {
+                user.AvatarMime = image.ContentType;
+                user.Avatar = new byte[image.ContentLength];
+                image.InputStream.Read(user.Avatar, 0, image.ContentLength);
+                return true;
+            }
+            return false;
+        }
+
         /****************************Testing reduce size to pics***************************************** */
         public byte[] ResizeImageFile(byte[] imageFile, int targetSize) // Set targetSize to 1024
         {
