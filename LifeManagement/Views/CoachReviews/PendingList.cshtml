@@ -1,0 +1,28 @@
+﻿
+@model List<LifeManagement.Models.CoachReview>
+    @{
+        LifeManagement.Models.Common common = new LifeManagement.Models.Common();
+    }
+<link href="~/Content/coaches.css" rel="stylesheet" />
+<link href="~/Content/Reviews.css" rel="stylesheet" />
+@foreach (var m in Model)
+{
+    <div class="review-div lmmodal" modal-width="600px" url="@Url.Action("Details","CoachReviews",new {id=m.Id})">
+        <div  style="float:left ">
+            <img class="user-image" src="@common.SignatureImageStr64(m.User.Avatar,m.User.AvatarMime)"/>
+
+            @(@"User: " + m.User.FirstName + " " + m.User.LastName + " reviewed Coach: " + m.Coach.FirstName + " " + m.Coach.LastName + " with score: ")
+        </div>
+        <div>
+            @for (int i = 0; i < m.Score; i++)
+            {
+                <div class="stardiv"></div>
+            }
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function() {
+        setpopups();
+    })
+</script>

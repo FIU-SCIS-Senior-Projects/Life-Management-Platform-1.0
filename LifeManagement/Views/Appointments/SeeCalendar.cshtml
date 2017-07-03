@@ -6,11 +6,12 @@
 <div class="container all-calendar-cont">
     <div class="clearfix">
 
-        <div id="calendar-section" class="col-md-9">
+        <div id="calendar-section" class="col-md-8 calendar-section">
             @{Html.RenderAction("Calendar", "Appointments");}
 
         </div>
-        <div id="formsection" class="col-md-3">
+      
+        <div id="formsection" class="col-md-3 form-show">
             <div class="form-horizontal">
                 <div id="errors" class="alert-danger col-md-12"></div>
                 <div class="form-group">
@@ -50,11 +51,27 @@
                 </div>
             </div>
         </div>
-
+        <div class="hider">
+            <div class="hide-cal">
+                <a  href="#" id="hidelink" onclick="hidecal()"><<</a>
+            </div>
+        </div>
     </div>
 </div>
 
+<script>
+    function hidecal() {
+        $('#formsection').toggleClass("form-hide", "form-show");
+        $('#calendar-section').toggleClass("calendar-expanded");
+        $('.hider').toggleClass("hider-hide");
 
+        if ($("#hidelink").text() == ">>")
+            $("#hidelink").text("<<");
+        else
+            $("#hidelink").text(">>");
+
+    }
+</script>
 
 
 

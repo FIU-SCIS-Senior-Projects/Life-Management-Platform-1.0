@@ -1,0 +1,61 @@
+﻿@model LifeManagement.Models.CoachReview
+@{
+    LifeManagement.Models.Common common = new LifeManagement.Models.Common();
+}
+<link href="~/Content/Reviews.css" rel="stylesheet" />
+
+<div class="review-div clearfix">
+    <div id="approveerrors" class="text-danger"></div>
+    <div class="col-md-12 text-center">
+        <img class="user-image" src="@common.SignatureImageStr64(Model.Coach.Avatar, Model.Coach.AvatarMime)"/>
+
+    </div>
+
+    <div class="stars-div col-md-12">
+        @{
+            for (int i = 0; i < Model.Score; i++)
+            {
+                <div class="stardiv">
+                </div>
+            }}
+    </div>
+    <div class="author-div col-md-12">
+        Author: @Model.User.FirstName <br/>
+
+    </div>
+    <div class="review-text col-md-12">
+        @Model.Review
+    </div>
+    <div class="col-md-12 text-center">
+        <button class="btn btn-sm btn-success" onclick="revise(true)">Approve</button>
+        <button class="btn btn-sm btn-danger" onclick="revise(false)">Reject</button>
+    </div>
+</div>
+
+
+               
+<script>
+    function revise(isApproved) {
+        var data= {
+            id:@Model.Id,
+            isApproved:isApproved
+        }
+        $.ajax({
+            url: '@Url.Action("CompleteReview","CoachReviews")',
+            type: 'POST',
+            data: data,
+            success: function(msg) {
+                $("#pending-list").html(msg);
+                $("#basicModal").modal('hide');
+            },
+            error: function(res) {
+                $("#approveerrors").html("Could not complete review")
+            }
+        });
+    }
+</script>
+<style>
+    .review-div {
+        max-height: 1000px !important;
+    }
+</style>

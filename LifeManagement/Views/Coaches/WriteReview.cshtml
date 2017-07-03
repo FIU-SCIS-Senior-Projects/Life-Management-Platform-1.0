@@ -1,0 +1,81 @@
+﻿@model int
+    <div class="clearfix">
+        <div class="form-horizontal">
+            <div class="col-md-12 text-warning" id="errors"></div>
+            <div class="form-group">
+                <label class="score-question control-label col-md-8"> How many stars would you give this coach?</label>
+                <div class="score-div col-md-4">
+                    <ul class="list-inline stars-list">
+                        <li class="score-li stardiv" score="1"></li>
+                        <li class="score-li stardiv" score="2"></li>
+                        <li class="score-li stardiv" score="3"></li>
+                        <li class="score-li stardiv" score="4"></li>
+                        <li class="score-li stardiv" score="5"></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <textarea class="form-control " id="review" rows="4" placeholder="write your review"></textarea>
+
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <button onclick="saveReview()" class="btn btn-sm btn-info">Send for approval</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var coachscore = 5;
+    $(document).ready(function() {
+
+        setStars();
+    })
+
+
+    function setStars() {
+        $('.score-li').click(function() {
+            var score = $(this).attr("score");
+            coachscore = score;
+
+            $('.score-li').each(function() {
+                var thisscore = $(this).attr("score");
+                if (thisscore <= score) {
+                    $(this).addClass("stardiv");
+                    $(this).removeClass("stardiv-clear");
+                } else {
+                    $(this).addClass("stardiv-clear");
+                    $(this).removeClass("stardiv");
+                }
+            });
+        })
+    }
+
+    function saveReview() {
+        var data = {
+            review: $("#review").val(),
+            coachid: @Model,
+            score: coachscore
+        }
+        $.ajax({
+            url:'@Url.Action("SaveReview","Coaches")',
+            data:data,
+            type:'POST',
+            success:function(res) {
+                $("#basicModal").modal('hide');
+            },
+            error:function(msg) {
+                
+                $("#errors").html("Error: need to write a review");
+
+            }
+        })
+    }
+
+
+</script>

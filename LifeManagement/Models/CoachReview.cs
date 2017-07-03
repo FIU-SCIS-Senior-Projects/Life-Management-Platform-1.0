@@ -14,10 +14,20 @@ namespace LifeManagement.Models
     
     public partial class CoachReview
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CoachReview()
+        {
+            this.Approved = false;
+        }
+    
         public int Id { get; set; }
         public int CoachId { get; set; }
         public int UserId { get; set; }
         public string Review { get; set; }
+        public Nullable<bool> Approved { get; set; }
+        public Nullable<System.DateTime> DateApproved { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
+        public Nullable<int> Score { get; set; }
     
         public virtual Coach Coach { get; set; }
         public virtual User User { get; set; }

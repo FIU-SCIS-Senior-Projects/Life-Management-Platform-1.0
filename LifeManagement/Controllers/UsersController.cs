@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
         {
             var user = db.Users.Where(a=>a.username.ToLower() == username.ToLower()).FirstOrDefault();
           
-            if (user!=null && user.password == password)
+            if (user!=null && user.password == Security.HashSHA1(password))
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("DashBoard");
@@ -106,7 +106,7 @@ namespace LifeManagement.Controllers
 
             if (user != null)
             {
-                user.password = newpass;
+                user.password = Security.HashSHA1(newpass);
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
@@ -135,6 +135,7 @@ namespace LifeManagement.Controllers
                var role = db.Roles.Where(a => a.Name == Constants.ROLES.GUEST).FirstOrDefault();
                 if (role != null)
                 {
+                    
                     string result = CreateUser(user, role);
 
                     if (result == Constants.MSGS.SUCCESS)
@@ -194,7 +195,7 @@ namespace LifeManagement.Controllers
             newuser.DOB = fromuser.DOB;
             newuser.Email = fromuser.Email;
             newuser.username = fromuser.username;
-            newuser.password = fromuser.password;
+            newuser.password =Security.HashSHA1(fromuser.password);
             newuser.Vision = "";
             newuser.LifeSuccess = "";
             newuser.Statement1 = "";
@@ -407,6 +408,61 @@ namespace LifeManagement.Controllers
 
             return PartialView(user);
 
+        }
+
+
+        public PartialViewResult UserEditProfile()
+        {
+            var user = db.Users.Where(c => c.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            var userModel = new UserProfileViewModel();
+            userModel.Id = user.Id;
+            userModel.FirstName = user.FirstName;
+            userModel.LastName = user.LastName;
+            userModel.Vision = user.Vision;
+            userModel.LifeSuccess = user.LifeSuccess;
+            userModel.password = user.password;
+            userModel.Statement1 = user.Statement1;
+            userModel.Statement2 = user.Statement2;
+            userModel.Statement3 = user.Statement3;
+
+            return PartialView(userModel);
+        }
+
+        [HttpPost]
+        public ActionResult UserEditProfile(UserProfileViewModel usermodel)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                var file = usermodel.Files[0];
+                var user = db.Users.Where(c => c.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+
+                if (user != null)
+                {
+                    if (user.FirstName != usermodel.FirstName) user.FirstName = usermodel.FirstName;
+                    if (user.LastName != usermodel.LastName) user.LastName = usermodel.LastName;
+                    if (user.Vision != usermodel.Vision) user.Vision = usermodel.Vision;
+                    if (user.LifeSuccess != usermodel.LifeSuccess) user.LifeSuccess = usermodel.LifeSuccess;
+                    if (user.Statement1 != usermodel.Statement1) user.Statement1 = usermodel.Statement1;
+                    if (user.Statement2 != usermodel.Statement2) user.Statement2 = usermodel.Statement2;
+                    if (user.Statement3 != usermodel.Statement3) user.Statement3 = usermodel.Statement3;
+
+
+
+                    if (file != null)
+                    {
+                        
+                        if (common.saveImageBytesUser(user, file))
+                        {
+                            user.Avatar = common.ResizeImageFile(user.Avatar, 300);
+                        }
+                    }
+
+                    db.SaveChanges();
+                }
+               return RedirectToAction("Dashboard");
+            }
+            return View(usermodel);
         }
 
 

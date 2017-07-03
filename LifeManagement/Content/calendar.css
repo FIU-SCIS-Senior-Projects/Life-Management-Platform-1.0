@@ -8,10 +8,39 @@
      height: 100%;
     overflow: auto;
 }
+.calendar-expanded {
+   width: 95% !important;
+}
 .all-calendar-cont > .clearfix {
      height: 100% ;
 }
 .all-calendar-cont {
     height: 650px;
     margin-top: 5px;
+}
+
+.form-show {
+    display: block;
+}
+.form-hide {
+    display: none;
+}
+.hide-cal {
+       width: 15px;
+    height: 20px;
+   color: blue;
+   
+    margin-top: 300px;
+    font-weight: bold;
+    border-radius: 10px;
+   
+}
+.hider{
+    background: white;
+       float: left;
+    height: 100%;
+      
+}
+.hider-hide {
+    background: transparent;
 }

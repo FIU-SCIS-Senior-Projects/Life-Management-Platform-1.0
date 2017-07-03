@@ -17,6 +17,8 @@ namespace LifeManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Activity()
         {
+            this.CreatorId = -1;
+            this.Approved = false;
             this.SprintActivities = new HashSet<SprintActivities>();
         }
     
@@ -25,6 +27,10 @@ namespace LifeManagement.Models
         public int CategoryId { get; set; }
         public byte[] Img { get; set; }
         public string ImgMime { get; set; }
+        public Nullable<int> CreatorId { get; set; }
+        public Nullable<bool> Approved { get; set; }
+        public Nullable<System.DateTime> DateApproved { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SprintActivities> SprintActivities { get; set; }

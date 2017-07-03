@@ -1,0 +1,24 @@
+﻿@model List<LifeManagement.Models.CoachReview>
+
+<div class="clearfix">
+    @foreach (var m in Model)
+    {
+        <div class="review-div col-md-12">
+            <div class="stars-div">
+                @{
+                    for (int i = 0; i < m.Score; i++)
+                    {
+                        <div class="stardiv">
+                        </div>
+                    }}
+            </div>
+            <div class="author-div col-md-12">
+                Author: @m.User.FirstName <br />
+                Date Posted: @m.DateApproved.Value.ToShortDateString()
+            </div>
+            <div class="review-text col-md-12">
+                @m.Review
+            </div>
+        </div>
+                    }
+</div>
