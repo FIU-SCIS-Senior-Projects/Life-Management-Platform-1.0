@@ -391,7 +391,6 @@
     <Content Include="Scripts\userdashboard.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\Activities\GivingBack.cshtml" />
@@ -498,6 +497,9 @@
     <Content Include="Views\CoachReviews\Revise.cshtml" />
     <Content Include="Views\CoachReviews\PendingList.cshtml" />
     <Content Include="Views\CoachReviews\Details.cshtml" />
+    <Content Include="Views\Activities\PendingList.cshtml" />
+    <Content Include="Views\Activities\Revise.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

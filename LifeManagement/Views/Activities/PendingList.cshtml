@@ -1,0 +1,26 @@
+﻿
+@model List<LifeManagement.Models.Activity>
+    @{
+        LifeManagement.Models.Common common = new LifeManagement.Models.Common();
+    }
+<link href="~/Content/coaches.css" rel="stylesheet" />
+<link href="~/Content/Reviews.css" rel="stylesheet" />
+<link href="~/Content/CatTiles.css" rel="stylesheet" />
+
+@foreach (var m in Model)
+{
+    <div class="review-div lmmodal" modal-width="600px" url="@Url.Action("Details","Activities",new {id=m.Id})">
+        <div  style="float:left ">
+            <img class="user-image" src="@common.SignatureImageStr64(m.Img,m.ImgMime)"/>
+
+        </div>
+        <div>
+            @(@m.Category.Name+": "+ m.Name)
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function() {
+        setpopups();
+    })
+</script>
