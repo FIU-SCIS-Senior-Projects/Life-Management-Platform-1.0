@@ -7,10 +7,29 @@ using System.Net.Mail;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-
+using System.Text;
 
 namespace LifeManagement.Models
 {
+    public class Security
+    {
+        public static string HashSHA1(string value)
+        {
+            var sha1 = System.Security.Cryptography.SHA1.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(value);
+            var hash = sha1.ComputeHash(inputBytes);
+
+            var sb = new StringBuilder();
+            for (var i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            var res = sb.ToString();
+            if (res.Length > 20)
+                res = res.Substring(0, 20);
+            return res;
+        }
+    }
     public class PercentModel
     {
        public int actId { get; set; }

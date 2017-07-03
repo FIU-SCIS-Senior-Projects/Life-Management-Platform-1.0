@@ -16,9 +16,63 @@ namespace LifeManagement.Controllers
     {
         private Common common = new Common();
         private SeniorDBEntities db = new SeniorDBEntities();
+        /*******************approve user activities******************/
+        public PartialViewResult Revise()
+        {
+            return PartialView();
+        }
+        [Authorize(Roles = "Admin")]
+        public PartialViewResult PendingList()
+        {
+            var pending = db.Activities.Where(a => a.ApprovedBy == null);
+            if (pending.Any())
+                return PartialView("PendingList", pending.ToList());
+
+            ViewBag.ErrorMsg = "No pending reviews";
+            return PartialView("ErrorPartial");
+
+        }
+
+        public PartialViewResult Details(int id)
+        {
+            var review = db.Activities.Find(id);
+            if (review == null)
+            {
+                ViewBag.ErrorMsg = "Invalid review";
+                return PartialView("ErrorPartial");
+            }
+            return PartialView(review);
+        }
+
+        public PartialViewResult CompleteReview(int id, bool isApproved)
+        {
+            var admin = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower() && a.Role.Name == "Admin").FirstOrDefault();
+            if (admin == null)
+            {
+                ViewBag.ErrorMsg = "Cannot approve or reject. Not an admin";
+                return PartialView("ErrorPartial");
+            }
+            var act = db.Activities.Find(id);
+            if (act == null)
+            {
+                ViewBag.ErrorMsg = "Invalid review";
+                return PartialView("ErrorPartial");
+            }
+            db.Entry(act).State = EntityState.Modified;
+
+            act.Approved = isApproved;
+            act.DateApproved = DateTime.Now;
+            act.ApprovedBy = admin.Id;
+            db.SaveChanges();
+
+          
+            return PendingList();
+
+
+        }
         /***************************customs************************/
 
-    
+
         public PartialViewResult Joy()
         {
             var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
