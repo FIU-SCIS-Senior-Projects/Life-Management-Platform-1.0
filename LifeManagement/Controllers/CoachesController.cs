@@ -203,7 +203,7 @@ namespace LifeManagement.Controllers
                     coachOb.Biography = coach.Biography;
                     coachOb.Skills = coach.Skills;
                     coachOb.Username = coach.Username;
-                    coachOb.Password = coach.Password;
+                    coachOb.Password = Security.HashSHA1(coach.Password);
                     coachOb.RoleId = role.Id;
                     coachOb.Email = coach.Email;
 
@@ -353,7 +353,7 @@ namespace LifeManagement.Controllers
         {
             var coach = db.Coaches.Where(a => a.Username.ToLower() == Username.ToLower()).FirstOrDefault();
 
-            if (coach != null && coach.Password == Password)
+            if (coach != null && coach.Password == Security.HashSHA1(Password))
             {
                 FormsAuthentication.SetAuthCookie(coach.Username, false);
                 return RedirectToAction("Dashboard");
@@ -426,7 +426,7 @@ namespace LifeManagement.Controllers
 
             if (coach != null)
             {
-                coach.Password = newpass;
+                coach.Password = Security.HashSHA1(newpass);
                 db.SaveChanges();
             }
 
