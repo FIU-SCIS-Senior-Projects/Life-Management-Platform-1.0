@@ -17,12 +17,20 @@ namespace LifeManagement.Controllers
         private Common common = new Common();
         private SeniorDBEntities db = new SeniorDBEntities();
         /***************************customs************************/
+
+    
         public PartialViewResult Joy()
         {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                ViewBag.ErrorMsg = "Invalid user";
+                return PartialView("ErrorPartial");
+            }
             try
             {
-                var activities = db.Activities.Where(a => a.Category.Name == "Joy").ToList();
-                return PartialView(activities);
+                var activities = db.Activities.Where(a => a.Category.Name == "Joy" && (a.Approved==true || a.CreatorId==user.Id)).ToList();
+                return PartialView("Joy",activities);
             }
             catch (Exception e)
             {
@@ -33,10 +41,16 @@ namespace LifeManagement.Controllers
         }
         public PartialViewResult Passion()
         {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                ViewBag.ErrorMsg = "Invalid user";
+                return PartialView("ErrorPartial");
+            }
             try
             {
-                var activities = db.Activities.Where(a => a.Category.Name == "Passion").ToList();
-                return PartialView(activities);
+                var activities = db.Activities.Where(a => a.Category.Name == "Passion" && (a.Approved == true || a.CreatorId == user.Id)).ToList();
+                return PartialView("Passion",activities);
             }
             catch (Exception e)
             {
@@ -47,10 +61,16 @@ namespace LifeManagement.Controllers
         }
         public PartialViewResult GivingBack()
         {
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
+            {
+                ViewBag.ErrorMsg = "Invalid user";
+                return PartialView("ErrorPartial");
+            }
             try
             {
-                var activities = db.Activities.Where(a => a.Category.Name == "Giving Back").ToList();
-                return PartialView(activities);
+                var activities = db.Activities.Where(a => a.Category.Name == "Giving Back" && (a.Approved == true || a.CreatorId == user.Id)).ToList();
+                return PartialView("GivingBack",activities);
             }
             catch (Exception e)
             {
@@ -105,51 +125,55 @@ namespace LifeManagement.Controllers
 
         /*********************system generated**********************/
         // GET: Activities
-        public ActionResult Index()
-        {
-            var activities = db.Activities.Include(a => a.Category);
-            return View(activities.ToList());
-        }
-
-        // GET: Activities/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Activity activity = db.Activities.Find(id);
-            if (activity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(activity);
-        }
-
+      
+    
         // GET: Activities/Create
-        public ActionResult Create()
-        {
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            return View();
-        }
-
-        // POST: Activities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CategoryId,Img,ImgMime")] Activity activity)
+        public PartialViewResult Create(string name, string category)
         {
-            if (ModelState.IsValid)
+            var user = db.Users.Where(a => a.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if (user == null)
             {
+                ViewBag.ErrorMsg = "Invalid user";
+                return PartialView("ErrorPartial");
+            }
+            var cat = db.Categories.Where(a => a.Name.ToLower() == category.ToLower()).FirstOrDefault();
+            if (cat == null)
+            {
+                ViewBag.ErrorMsg = "Invalid category";
+                return PartialView("ErrorPartial");
+            }
+
+            var file = Request.Files[0];
+
+            Activity activity = new Activity();
+            activity.Name = name;
+            activity.CategoryId = cat.Id;
+            activity.Approved = null;
+            activity.CreatorId = user.Id;
+        
+
+            if (common.saveImageBytes(activity, file))
+            {
+
+                activity.Img = common.ResizeImageFile(activity.Img, 200);
+
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (cat.Name == "Joy")
+                    return Joy();
+                if (cat.Name == "Passion")
+                    return Passion();
+
+                return GivingBack();
+
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", activity.CategoryId);
-            return View(activity);
+            ViewBag.ErrorMsg = " An unexpected error has occurred, try again later";
+            return PartialView("ErrorPartial");
         }
+
+      
 
         public PartialViewResult EditActivity()
         {

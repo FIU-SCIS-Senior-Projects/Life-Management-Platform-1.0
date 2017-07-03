@@ -1,4 +1,15 @@
-﻿label {
+﻿#addform {
+    background: whitesmoke;
+    color: black;
+
+}
+.show-form {
+    display: block !important;
+}
+.form-hide {
+    display:none;
+}
+label {
     margin: 0px;
 }
 .cat-tiles:hover {
