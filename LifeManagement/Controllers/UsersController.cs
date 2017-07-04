@@ -479,25 +479,7 @@ namespace LifeManagement.Controllers
             return View("Error");
         }
 
-        public ActionResult ShareTabsLink(int sprintActId, int tab)
-        {
-            var sprintAct = db.SprintActivities.Find(sprintActId);
 
-
-            if (sprintAct != null)
-            {
-                int sId = db.Sprints.Find(sprintAct.SprintId).Id;
-                var list = db.SprintActivities.Where(a => a.Sprint.Id == sId && a.Activity.CategoryId == tab);
-
-                if (list != null && list.Count() > 0)
-                {
-                    return View(list.ToList());
-                }
-                return View();
-            }
-            ViewBag.ErrorMsg = "Error sharing tabs";
-            return View("Error");
-        }
 
         protected override void Dispose(bool disposing)
         {

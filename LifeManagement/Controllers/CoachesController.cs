@@ -482,7 +482,7 @@ namespace LifeManagement.Controllers
                 {
                     string subject = "User " + user.FirstName + " " + user.LastName + " has shared his/her performance with you!";
                     string message = "Dear " + coach.FirstName + ": <br/>" + "<p> You are receiving this email because user <strong>" + user.FirstName + " " + user.LastName + " </strong>wants you to review his/her performance. <br/>"
-                        + " To see his/her scores, please follow <a href= \"" + @Url.Action("ShareTabsLink", "Users", null, Request.Url.Scheme) + "?sprintActId=" + sprintActId + "&tab=" + tabId + "\">this link. </a>  </p> <br/>"
+                        + " To see his/her scores, please follow <a href= \"" + @Url.Action("ShareTabsLink", "Coaches", null, Request.Url.Scheme) + "?sprintActId=" + sprintActId + "&tab=" + tabId + "\">this link. </a>  </p> <br/>"
                         + "<p> Best, <br/> The Life Management Team. </p>";
 
                     Common.sendEmail(coach.Email, subject, message);
@@ -505,6 +505,27 @@ namespace LifeManagement.Controllers
                 return PartialView(db.Coaches.ToList());
 
             return PartialView(db.Coaches.Where(a=>a.Email.Contains(filter) || a.FirstName.Contains(filter)||a.LastName.Contains(filter)||a.Skills.Contains(filter)).ToList());
+        }
+
+        [Authorize(Roles = "Coach")]
+        public ActionResult ShareTabsLink(int sprintActId, int tab)
+        {
+            var sprintAct = db.SprintActivities.Find(sprintActId);
+
+
+            if (sprintAct != null)
+            {
+                int sId = db.Sprints.Find(sprintAct.SprintId).Id;
+                var list = db.SprintActivities.Where(a => a.Sprint.Id == sId && a.Activity.CategoryId == tab);
+
+                if (list != null && list.Count() > 0)
+                {
+                    return View(list.ToList());
+                }
+                return View();
+            }
+            ViewBag.ErrorMsg = "Error sharing tabs";
+            return View("Error");
         }
 
         protected override void Dispose(bool disposing)

@@ -68,6 +68,20 @@
 <script>
     $(document).ready(function () {
         initDials(@Model.Id);
+
+        var cat = $(this).attr('cat');
+        if (cat == "Joy"){
+            alert("Joy");
+            return;
+        }
+        if (cat == "Passion"){
+            alert("Joy");
+            return;
+        }
+        if (cat == "Giving Back"){
+            alert("Joy");
+            return;
+        }
     });
     $(document).ready(function () { checkNeedNewSprint(); })
     function checkNeedNewSprint() {
