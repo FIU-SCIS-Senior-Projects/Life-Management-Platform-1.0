@@ -271,6 +271,7 @@
     <Content Include="Content\dashboard_css\datepicker.css" />
     <Content Include="Content\dashboard_css\datepicker3.css" />
     <Content Include="Content\dashboard_css\styles.css" />
+    <Content Include="Content\Quiz.css" />
     <Content Include="Content\Reviews.css" />
     <Content Include="Content\WrtieReview.css" />
     <Content Include="favicon.ico" />
@@ -384,6 +385,7 @@
     <Content Include="Scripts\qTip\jquery.qtip.js" />
     <Content Include="Scripts\qTip\jquery.qtip.min.css" />
     <Content Include="Scripts\qTip\jquery.qtip.min.js" />
+    <Content Include="Scripts\Quiz.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\reviews.js" />
@@ -500,6 +502,8 @@
     <Content Include="Views\Activities\PendingList.cshtml" />
     <Content Include="Views\Activities\Revise.cshtml" />
     <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Home\Quiz.cshtml" />
+    <Content Include="Views\Home\QuizResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
