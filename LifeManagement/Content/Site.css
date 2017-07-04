@@ -118,3 +118,11 @@ textarea {
     left: 8%;
     width: 80%;
 }
+
+.quiz-div {
+
+    font-weight: bold;
+  
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
