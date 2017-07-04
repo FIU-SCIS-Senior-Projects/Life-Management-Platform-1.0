@@ -308,29 +308,38 @@ namespace LifeManagement.Controllers
         }
 
         // GET: Activities/Delete/5
-        public ActionResult Delete(int? id)
+        public PartialViewResult Delete()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Activity activity = db.Activities.Find(id);
-            if (activity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(activity);
+            return PartialView();
         }
 
         // POST: Activities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public bool DeleteConfirmed(int id)
         {
-            Activity activity = db.Activities.Find(id);
-            db.Activities.Remove(activity);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Activity activity = db.Activities.Find(id);
+                db.Activities.Remove(activity);
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+        public ActionResult DeleteSelectedActivity(int id)
+        {
+            var act = db.Activities.Find(id);
+            if (act == null)
+            {
+                ViewBag.ErrorMsg = "Could not find activity";
+                return PartialView("ErrorPartial");
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", act.CategoryId);
+            return PartialView(act);
         }
 
         protected override void Dispose(bool disposing)
