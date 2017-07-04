@@ -71,13 +71,54 @@ namespace LifeManagement.Controllers
             {
                 // TODO: Add insert logic here
                 var user = (db.Users.Where(a => a.username.ToLower() == (User.Identity.Name).ToLower()).FirstOrDefault());
-                if(user != null)
+                var lastsprint = db.Sprints.Where(a => a.UserId == user.Id).OrderByDescending(a => a.DateFrom).FirstOrDefault();
+
+                if (user != null)
                 {
                     newSprint.UserId = user.Id;
                     db.Sprints.Add(newSprint);
                     db.SaveChanges();
-                    ViewBag.newSprint = newSprint;
-                    return View("SetupSprint");
+
+                    var sprintActivities = lastsprint.SprintActivities;
+
+                    foreach (SprintActivities sp in sprintActivities.ToList())
+                    {
+                        var newsprintA = new SprintActivities();
+                        newsprintA = sp;
+                        newsprintA.SprintId = newSprint.Id;
+                        db.SprintActivities.Add(newsprintA);
+                        db.SaveChanges();
+                    }
+
+                    var sprintGoals = lastsprint.Goals;
+                    var goal1 = new Goal();
+                    var goal2 = new Goal();
+                    var goal3 = new Goal();
+
+                    foreach (Goal g in sprintGoals.ToList())
+                    {
+                        var newGoal = new Goal();
+                        newGoal = g;
+                        newGoal.SprintId = newSprint.Id;
+                        db.Goals.Add(newGoal);
+                        db.SaveChanges();
+
+                        switch (newGoal.CategoryId)
+                        {
+                            case 1: goal1 = newGoal; break;
+                            case 2: goal2 = newGoal; break;
+                            case 3: goal3 = newGoal; break;
+                        }
+                    }
+
+                    ViewBag.goalJoy = goal1.Description;
+                    ViewBag.goalPassion = goal2.Description;
+                    ViewBag.goalGB = goal3.Description;
+
+                    TempData["newSprint"] = newSprint;
+                    TempData.Keep("newSprint");
+
+                    return View("ConfigureNewSprint", newSprint);
                 }
                 else
                 {

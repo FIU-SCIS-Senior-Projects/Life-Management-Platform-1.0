@@ -24,8 +24,7 @@
         <div id="sidebar-collapse" class="col-md-2 sidebar">
 
             <div class="form-group" style="height: 230px">
-                <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
-                <p style=" position: relative; top: 40px; left: 30%"> Admin Name </p>
+                @{Html.RenderAction("ProfilePic", "Users");}
             </div>
 
             <ul class="nav menu">
