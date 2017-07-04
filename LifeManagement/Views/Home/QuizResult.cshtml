@@ -1,0 +1,35 @@
+﻿@model int
+@{
+    ViewBag.Title = "QuizResult";
+}
+<div class="clearfix jumbotron">
+   
+    <div class="text-info alert-info col-md-12 text-center quiz-div">
+        Your Score: @Model
+    </div>
+    <hr/>
+    <div class="text-primary col-md-12 text-center quiz-div">
+        Interpreting your score:
+    </div>
+
+
+<div class="text-danger alert-danger col-md-12 quiz-div">
+    Under 30
+    Life Coaching is not for you right now.
+
+</div>
+<div class="text-warning alert-warning col-md-12 quiz-div">
+    31 to 60
+    Life Coaching could help you to look at your life from a different viewpoint as well as help you develop a plan to change what it is that you would like to change. However, if you decide to work with a life coach now, you should decide and commit that you will take the necessary action for your benefit, or you will not make lasting life-changing improvements.
+
+
+</div>
+<div class="text-success alert-success col-md-12 quiz-div">
+  
+    Over 60
+    Congratulations! You are ready for a Life Coach! You are willing to do whatever it takes to create the life you deserve and desire. Please take a moment to contact us right now for a FREE introductory coaching session to find out what coaching can do for you. This one click can change your life forever.
+
+
+</div>
+
+</div>

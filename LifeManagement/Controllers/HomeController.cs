@@ -36,6 +36,15 @@ namespace LifeManagement.Controllers
             return View();
         }
 
+        public ActionResult Quiz()
+        {
+            return View();
+        }
+        public ActionResult QuizResult(int quiztotal)
+        {
+
+            return View(quiztotal);
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

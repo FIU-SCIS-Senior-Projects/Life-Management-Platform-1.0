@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewBag.Title = "Quiz";
+}
+@section AddToHead{
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/component.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-skin-boxes.css" />
+    <script src="~/Scripts/bety_scripts/modernizr.custom.js"></script>
+<link href="~/Content/Quiz.css" rel="stylesheet" />
+<script src="~/Scripts/Quiz.js"></script>
+}
+
+
+<h2>Quiz</h2>
+
+<div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; ">
+
+    <div class="container" style="background: url('/Imgs/butterfly.jpg') no-repeat; background-size: 100%;">
+        <div class="fs-form-wrap" id="fs-form-wrap">
+            <div class="fs-title">
+                <br />
+                <h3 style=" color #00b359; "> See if you need a life coach</h3>
+                <h4 style=" color #00b359; "> Select your level of agreement for each statement</h4>
+            </div>
+
+            <form id="myform" class="fs-form fs-form-full" action="/Home/QuizResult" autocomplete="off">
+                <ol class="fs-fields">
+
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to create more balance in my life.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="1" value="1">1</li>
+                                    <li class="answer-li answer" question="1" value="2">2</li>
+                                    <li class="answer-li answer" question="1" value="3">3</li>
+                                    <li class="answer-li answer" question="1"value="4">4</li>
+                                    <li class="answer-li answer" question="1" value="5">5</li>
+                                    <li class="answer-li answer" question="1" value="6">6</li>
+                                    <li class="answer-li answer" question="1" value="7">7</li>
+                                    <li class="answer-li answer" question="1" value="8">8</li>
+                                    <li class="answer-li answer" question="1" value="9">9</li>
+                                    <li class="answer-li answer" question="1" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to improve my personal or business relationships.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="2" value="1">1</li>
+                                    <li class="answer-li answer" question="2" value="2">2</li>
+                                    <li class="answer-li answer" question="2" value="3">3</li>
+                                    <li class="answer-li answer" question="2" value="4">4</li>
+                                    <li class="answer-li answer" question="2" value="5">5</li>
+                                    <li class="answer-li answer" question="2" value="6">6</li>
+                                    <li class="answer-li answer" question="2" value="7">7</li>
+                                    <li class="answer-li answer" question="2" value="8">8</li>
+                                    <li class="answer-li answer" question="2" value="9">9</li>
+                                    <li class="answer-li answer" question="2" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to create more balance in my life.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="3" value="1">1</li>
+                                    <li class="answer-li answer" question="3" value="2">2</li>
+                                    <li class="answer-li answer" question="3" value="3">3</li>
+                                    <li class="answer-li answer" question="3" value="4">4</li>
+                                    <li class="answer-li answer" question="3" value="5">5</li>
+                                    <li class="answer-li answer" question="3" value="6">6</li>
+                                    <li class="answer-li answer" question="3" value="7">7</li>
+                                    <li class="answer-li answer" question="3" value="8">8</li>
+                                    <li class="answer-li answer" question="3" value="9">9</li>
+                                    <li class="answer-li answer" question="3" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+               
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to make real and positive changes in my life.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="3" value="1">1</li>
+                                    <li class="answer-li answer" question="3" value="2">2</li>
+                                    <li class="answer-li answer" question="3" value="3">3</li>
+                                    <li class="answer-li answer" question="3" value="4">4</li>
+                                    <li class="answer-li answer" question="3" value="5">5</li>
+                                    <li class="answer-li answer" question="3" value="6">6</li>
+                                    <li class="answer-li answer" question="3" value="7">7</li>
+                                    <li class="answer-li answer" question="3" value="8">8</li>
+                                    <li class="answer-li answer" question="3" value="9">9</li>
+                                    <li class="answer-li answer" question="3" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to find and live my life's purpose.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="4" value="1">1</li>
+                                    <li class="answer-li answer" question="4" value="2">2</li>
+                                    <li class="answer-li answer" question="4" value="3">3</li>
+                                    <li class="answer-li answer" question="4" value="4">4</li>
+                                    <li class="answer-li answer" question="4" value="5">5</li>
+                                    <li class="answer-li answer" question="4" value="6">6</li>
+                                    <li class="answer-li answer" question="4" value="7">7</li>
+                                    <li class="answer-li answer" question="4" value="8">8</li>
+                                    <li class="answer-li answer" question="4" value="9">9</li>
+                                    <li class="answer-li answer" question="4" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready and willing to overcome self-limiting beliefs and behavior.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="5" value="1">1</li>
+                                    <li class="answer-li answer" question="5" value="2">2</li>
+                                    <li class="answer-li answer" question="5" value="3">3</li>
+                                    <li class="answer-li answer" question="5" value="4">4</li>
+                                    <li class="answer-li answer" question="5" value="5">5</li>
+                                    <li class="answer-li answer" question="5" value="6">6</li>
+                                    <li class="answer-li answer" question="5" value="7">7</li>
+                                    <li class="answer-li answer" question="5" value="8">8</li>
+                                    <li class="answer-li answer" question="5" value="9">9</li>
+                                    <li class="answer-li answer" question="5" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to create plans and take action to achieve my goals.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="6" value="1">1</li>
+                                    <li class="answer-li answer" question="6" value="2">2</li>
+                                    <li class="answer-li answer" question="6" value="3">3</li>
+                                    <li class="answer-li answer" question="6" value="4">4</li>
+                                    <li class="answer-li answer" question="6" value="5">5</li>
+                                    <li class="answer-li answer" question="6" value="6">6</li>
+                                    <li class="answer-li answer" question="6" value="7">7</li>
+                                    <li class="answer-li answer" question="6" value="8">8</li>
+                                    <li class="answer-li answer" question="6" value="9">9</li>
+                                    <li class="answer-li answer" question="6" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to achieve a sense of fulfillment at work and in my life.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="7" value="1">1</li>
+                                    <li class="answer-li answer" question="7" value="2">2</li>
+                                    <li class="answer-li answer" question="7" value="3">3</li>
+                                    <li class="answer-li answer" question="7" value="4">4</li>
+                                    <li class="answer-li answer" question="7" value="5">5</li>
+                                    <li class="answer-li answer" question="7" value="6">6</li>
+                                    <li class="answer-li answer" question="7" value="7">7</li>
+                                    <li class="answer-li answer" question="7" value="8">8</li>
+                                    <li class="answer-li answer" question="7" value="9">9</li>
+                                    <li class="answer-li answer" question="7" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready for more fun and enjoyment in my life.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="8" value="1">1</li>
+                                    <li class="answer-li answer" question="8" value="2">2</li>
+                                    <li class="answer-li answer" question="8" value="3">3</li>
+                                    <li class="answer-li answer" question="8" value="4">4</li>
+                                    <li class="answer-li answer" question="8" value="5">5</li>
+                                    <li class="answer-li answer" question="8" value="6">6</li>
+                                    <li class="answer-li answer" question="8" value="7">7</li>
+                                    <li class="answer-li answer" question="8" value="8">8</li>
+                                    <li class="answer-li answer" question="8" value="9">9</li>
+                                    <li class="answer-li answer" question="8" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                <li>
+                    <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                        <label class="fs-field-label fs-anim-upper">I am ready to create more balance in my life.</label>
+
+                        <div class="fs-anim-lower fs-anim-upper activities-div">
+                            <ul class="list-inline">
+                                <li class="answer-li answer" question="9" value="1">1</li>
+                                <li class="answer-li answer" question="9" value="2">2</li>
+                                <li class="answer-li answer" question="9" value="3">3</li>
+                                <li class="answer-li answer" question="9" value="4">4</li>
+                                <li class="answer-li answer" question="9" value="5">5</li>
+                                <li class="answer-li answer" question="9" value="6">6</li>
+                                <li class="answer-li answer" question="9" value="7">7</li>
+                                <li class="answer-li answer" question="9" value="8">8</li>
+                                <li class="answer-li answer" question="9" value="9">9</li>
+                                <li class="answer-li answer" question="9" value="10">10</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I'd like to work less and make more money.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="10" value="1">1</li>
+                                    <li class="answer-li answer" question="10" value="2">2</li>
+                                    <li class="answer-li answer" question="10" value="3">3</li>
+                                    <li class="answer-li answer" question="10" value="4">4</li>
+                                    <li class="answer-li answer" question="10" value="5">5</li>
+                                    <li class="answer-li answer" question="10" value="6">6</li>
+                                    <li class="answer-li answer" question="10" value="7">7</li>
+                                    <li class="answer-li answer" question="10" value="8">8</li>
+                                    <li class="answer-li answer" question="10" value="9">9</li>
+                                    <li class="answer-li answer" question="10" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I can benefit from someone who will help me to stay on track.</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="9" value="1">1</li>
+                                    <li class="answer-li answer" question="9" value="2">2</li>
+                                    <li class="answer-li answer" question="9" value="3">3</li>
+                                    <li class="answer-li answer" question="9" value="4">4</li>
+                                    <li class="answer-li answer" question="9" value="5">5</li>
+                                    <li class="answer-li answer" question="9" value="6">6</li>
+                                    <li class="answer-li answer" question="9" value="7">7</li>
+                                    <li class="answer-li answer" question="9" value="8">8</li>
+                                    <li class="answer-li answer" question="9" value="9">9</li>
+                                    <li class="answer-li answer" question="9" value="10">10</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+
+
+                </ol><!-- /fs-fields -->
+            <button onclick="seeResult()" class = "fs-submit btn btn-success">See Result</button>
+            <input type="hidden" value="0" name="quiztotal" id="quiztotal" />
+              </form><!-- /fs-form -->
+        </div><!-- /fs-form-wrap -->
+    </div>  <!-- /container -->
+</div>
+
+<script src="~/Scripts/bety_scripts/classie.js"></script>
+<!--     <script src="~/Scripts/bety_scripts/selectFx.js"></script>   -->
+<script src="~/Scripts/bety_scripts/fullscreenForm.js"></script>
+<script>
+                (function () {
+                    var formWrap = document.getElementById('fs-form-wrap');
+
+                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                        new SelectFx(el, {
+                            stickyPlaceholder: false,
+                            onChange: function (val) {
+                                document.querySelector('span.cs-placeholder').style.backgroundColor = val;
+                            }
+                      });
+                    });
+
+                    new FForm(formWrap, {
+                        onReview: function () {
+                            classie.add(document.body, 'overview'); // for demo purposes only
+                        }
+                    });
+                })();
+</script>
+
+
