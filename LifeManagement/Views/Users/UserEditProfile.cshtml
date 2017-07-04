@@ -1,5 +1,6 @@
 ﻿@model LifeManagement.Models.UserProfileViewModel
 
+
 @using (Html.BeginForm("UserEditProfile", "Users",FormMethod.Post, new { encType = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -8,7 +9,7 @@
 
     </div>
     <div class="form-horizontal" id="completeForm">
-        <h4>User</h4>
+        <h4 class="text-center">Edit Profile</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -108,14 +109,11 @@
 
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-primary form-control" data-dismiss="modal">Cancel</button>
+                        <a href="@Url.Action("Dashboard", "Users")" class="btn btn-primary form-control">Cancel</a>
                     </div>
                 </div>
             </div>
         </div>
 }
-
-
-
 
 

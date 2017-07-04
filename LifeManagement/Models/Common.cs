@@ -69,11 +69,15 @@ namespace LifeManagement.Models
     {
         private SeniorDBEntities db = new SeniorDBEntities();
 
+
         private const string SMTPSERVER = "smtp.gmail.com";
         private const int SMTPPORT = 587;
         private const string EmailAddress = "manage.life.team@gmail.com";
         private const string Pass = "052017befer";
         /*********************usr functionalitites**********************/
+
+
+        public int currentTab { get; set; } = 1;
 
         public bool isAdmin()
         {
