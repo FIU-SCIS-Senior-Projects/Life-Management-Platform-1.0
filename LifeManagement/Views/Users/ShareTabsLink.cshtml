@@ -1,0 +1,169 @@
+﻿
+@model List<LifeManagement.Models.SprintActivities>
+@{
+
+    var firstact = Model[0];
+    var common = new LifeManagement.Models.Common();
+}
+
+<script src="~/Scripts/cooltabs.js"></script>
+<link href="~/Content/cooltabs.css" rel="stylesheet" />
+<link href="~/Content/ActCalendar.css" rel="stylesheet" />
+<script src="~/Scripts/cmGauge.js"></script>
+<link href="~/Content/cmGauge.css" rel="stylesheet" />
+<div class="col-md-12">
+
+    <table class="table text-left" style="padding: 0">
+        <tr>
+            <th colspan="5">
+                Goals:
+                @(firstact.Sprint.Goals.Where(a => a.CategoryId == firstact.Activity.CategoryId).FirstOrDefault().Description)
+            </th>
+        </tr>
+        <tr>
+            <th>Activity</th>
+            <th>Progress</th>
+            <th>Target</th>
+            <th>Actual</th>
+            <th>Activity Score</th>
+
+        </tr>
+        @foreach (var act in Model)
+            {
+
+
+            <tr>
+                <td style="width: 100px">
+                    @act.Activity.Name <br />
+                    -@act.Specifics
+                </td>
+                <td style="width: 235px">
+                    @{
+                        var currentDay = act.Sprint.DateFrom;
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            <a class="callink" href="#" onclick="saveProgress(@act.Id, @i)">
+                                <div id="@(@act.Id + "-" + i)" actid="@act.Id" cat="@act.Activity.Category.Name" class='caldaydiv @(@act.Progresses.Where(a => a.DatePerformed.Day == currentDay.Day &&
+                                                                                                                                                                   a.DatePerformed.Month == currentDay.Month &&
+                                                                                                                                                                   a.DatePerformed.Year == currentDay.Year).Count() > 0 ? "activeDay" : "")'>
+                                    @currentDay.Day
+                                </div>
+                            </a>
+                            currentDay = currentDay.AddDays(1);
+                        }
+                    }
+                </td>
+                <td>12</td>
+                <td><span id="actual-@(@act.Id)"></span></td>
+                <td>
+                    <div>
+                        <div id="gaugeAct-@(@act.Id)" class="gauge gauge-small gauge-green">
+
+                            <div class="gauge-arrow" data-percentage="40"
+                                 style="transform: rotate(0deg);"></div>
+
+
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+                        }
+        <tr>
+            <th colspan="2">Category Score</th>
+            <th colspan="2">Cycle Score</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    <div id="gaugeCat-@(@firstact.Activity.Category.Name.Replace(" ",""))" class="gauge gauge-big gauge-green">
+
+                        <div class="gauge-arrow" data-percentage="40"
+                             style="transform: rotate(0deg);"></div>
+
+
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div>
+                    <div id="gaugeCycle" class="gauge gauge-big gauge-green">
+
+                        <div class="gauge-arrow" data-percentage="40"
+                             style="transform: rotate(0deg);"></div>
+
+
+                    </div>
+                </div>
+            </td>
+            <td></td>
+
+        </tr>
+
+    </table>
+
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        initDials(@Model[0].Sprint.Id);
+    });
+    $('.gauge .gauge-arrow').cmGauge();
+    function updateCatDial(joy, passion, gb) {
+        $('#gaugeCat-Joy .gauge-arrow').trigger('updateGauge', joy / 36 * 100);
+        $('#gaugeCat-Passion .gauge-arrow').trigger('updateGauge', passion / 24 * 100);
+        $('#gaugeCat-GivingBack .gauge-arrow').trigger('updateGauge', gb / 24 * 100);
+        $('#gaugeCycle .gauge-arrow').trigger('updateGauge', ((((joy / 36) + (passion / 24) + (gb/ 24)) * 100) / 3));
+
+    }
+    function updateDials(actiId, actScore) {
+
+        $('#gaugeAct-' + actiId + ' .gauge-arrow').trigger('updateGauge', actScore/12 * 100);
+        $('#actual-' + actiId).html(actScore );
+    }
+    function initDials(sprintid) {
+        data = { sprintId: sprintid};
+        $.ajax({
+            url: '@Url.Action("GetPercentages", "SprintActivities")',
+            type: 'GET',
+            data: data,
+
+            success: function (msg) {
+                var joyCount = 0;
+                var passionCount = 0;
+                var GbCount = 0;
+
+                for (var j in msg.Percentages.Joy.Data) {
+
+                    updateDials(msg.Percentages.Joy.Data[j].actId, msg.Percentages.Joy.Data[j].percentage);
+                    joyCount += msg.Percentages.Joy.Data[j].percentage;
+
+                }
+                for (var j in msg.Percentages.Passion.Data) {
+
+                    updateDials(msg.Percentages.Passion.Data[j].actId, msg.Percentages.Passion.Data[j].percentage);
+                    passionCount += msg.Percentages.Passion.Data[j].percentage;
+
+                }
+                for (var j in msg.Percentages.Gb.Data) {
+
+                    updateDials(msg.Percentages.Gb.Data[j].actId, msg.Percentages.Gb.Data[j].percentage);
+                    GbCount += msg.Percentages.Gb.Data[j].percentage;
+
+                }
+                updateCatDial(joyCount, passionCount, GbCount);
+
+            },
+            error: function(res) {
+                alert('error');
+            }
+        });
+    }
+
+</script>
+
+

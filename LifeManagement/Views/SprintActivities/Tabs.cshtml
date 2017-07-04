@@ -1,6 +1,7 @@
 ﻿@model LifeManagement.Models.Sprint
 @{
     var needSprint = Model.DateFrom.AddDays(15) < DateTime.Now;
+    var common = new LifeManagement.Models.Common();
 }
 <script src="~/Scripts/cooltabs.js"></script>
 <link href="~/Content/cooltabs.css" rel="stylesheet" />
@@ -13,13 +14,13 @@
 <div class="col-md-12  bhoechie-tab-container">
             <div class="col-md-2  bhoechie-tab-menu">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active text-center">
+                    <a href="#" class="list-group-item active text-center" id="JoyTab">
                         <h4 class="glyphicon glyphicon-music"></h4><br />Joy
                     </a>
-                    <a href="#" class="list-group-item text-center">
+                    <a href="#" class="list-group-item text-center" id ="PassionTab">
                         <h4 class="glyphicon glyphicon-heart"></h4><br />Passion
                     </a>
-                    <a href="#" class="list-group-item text-center">
+                    <a href="#" class="list-group-item text-center" id ="GbTab">
                         <h4 class="glyphicon glyphicon-backward"></h4><br />Giving Back
                     </a>
                     <a href="#" class="list-group-item text-center">
@@ -65,11 +66,8 @@
 
 
 <script>
-
-
     $(document).ready(function () {
-           initDials(@Model.Id);
-       
+        initDials(@Model.Id);
     });
     $(document).ready(function () { checkNeedNewSprint(); })
     function checkNeedNewSprint() {
@@ -88,7 +86,6 @@
             });
         }
     }
-
     $('.gauge .gauge-arrow').cmGauge();
     function updateCatDial() {
         var joy=0, passion=0, gb=0;
@@ -167,6 +164,5 @@
             }
         })
     }
-
 
 </script>

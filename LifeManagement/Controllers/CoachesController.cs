@@ -399,6 +399,27 @@ namespace LifeManagement.Controllers
                     Common.sendEmail(coach.Email, subject, message);
                 }
             }
+
+            else if(TempData["sprintActId"] != null && TempData["tabId"] != null)
+            {
+                int sprintActId = (int)TempData["sprintActId"];
+                int tabId = (int)TempData["tabId"];
+
+                var coach = db.Coaches.Find(id);
+                var sprintAct = db.SprintActivities.Find(sprintActId);
+                var user = sprintAct.Sprint.User;
+                if (coach != null)
+                {
+                    string subject = "User " + user.FirstName + " " + user.LastName + " has shared his/her performance with you!";
+                    string message = "Dear " + coach.FirstName + ": <br/>" + "<p> You are receiving this email because user <strong>" + user.FirstName + " " + user.LastName + " </strong>wants you to review his/her performance. <br/>"
+                        + " To see his/her scores, please follow <a href= \"" + @Url.Action("ShareTabsLink", "Users", null, Request.Url.Scheme) + "?sprintActId=" + sprintActId + "&tab=" + tabId + "\">this link. </a>  </p> <br/>"
+                        + "<p> Best, <br/> The Life Management Team. </p>";
+
+                    Common.sendEmail(coach.Email, subject, message);
+                }
+
+            }
+
             return PartialView();
         }
 

@@ -484,6 +484,9 @@
     <Content Include="Scripts\qTip\jquery.qtip.min.js.map" />
     <Content Include="Views\Users\ProfilePic.cshtml" />
     <Content Include="Views\Users\UserEditProfile.cshtml" />
+    <Content Include="Views\Users\ShareTabsLink.cshtml" />
+    <Content Include="Views\SprintActivities\ShareTabs.cshtml" />
+    <Content Include="Views\Users\ShareTabs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
