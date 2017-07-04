@@ -40,8 +40,10 @@
                                         <td>@m.Email</td>
                                     </tr>
                                     <tr>
-                                        <td><a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a>
-                                        </td>
+                                        <td>
+                                            <a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a>
+                                            <a href="@Url.Action("SeeReviews","Coaches",new {id=m.Id})">Reviews</a>
+                                         </td>
 
                                     </tr>
 

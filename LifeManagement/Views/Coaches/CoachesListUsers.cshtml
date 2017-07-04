@@ -40,7 +40,10 @@
                                     </tr>
                                     <tr>
                                         <td><a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a> |
-                                            <a class="lmmodal" modal-width="500px" href="#" url="/Coaches/SelectCoach/@m.Id">Select</a></td>
+                                            <a class="lmmodal" modal-width="500px" href="#" url="/Coaches/SelectCoach/@m.Id">Select </a> |
+                                            <a href="#" onclick="renderDiv('@Url.Action("CoachReviews","Coaches",new {id=m.Id})',{id:@m.Id})">Reviews</a>    
+                                        
+                                        </td>
 
                                     </tr>
 

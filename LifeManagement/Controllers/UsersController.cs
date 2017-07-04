@@ -28,7 +28,7 @@ namespace LifeManagement.Controllers
         {
             var user = db.Users.Where(a=>a.username.ToLower() == username.ToLower()).FirstOrDefault();
           
-            if (user!=null && user.password == password)
+            if (user!=null && user.password == Security.HashSHA1(password))
             {
                 FormsAuthentication.SetAuthCookie(user.username, false);
                 return RedirectToAction("DashBoard");
@@ -106,7 +106,7 @@ namespace LifeManagement.Controllers
 
             if (user != null)
             {
-                user.password = newpass;
+                user.password = Security.HashSHA1(newpass);
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
@@ -135,6 +135,7 @@ namespace LifeManagement.Controllers
                var role = db.Roles.Where(a => a.Name == Constants.ROLES.GUEST).FirstOrDefault();
                 if (role != null)
                 {
+                    
                     string result = CreateUser(user, role);
 
                     if (result == Constants.MSGS.SUCCESS)
@@ -194,7 +195,7 @@ namespace LifeManagement.Controllers
             newuser.DOB = fromuser.DOB;
             newuser.Email = fromuser.Email;
             newuser.username = fromuser.username;
-            newuser.password = fromuser.password;
+            newuser.password =Security.HashSHA1(fromuser.password);
             newuser.Vision = "";
             newuser.LifeSuccess = "";
             newuser.Statement1 = "";

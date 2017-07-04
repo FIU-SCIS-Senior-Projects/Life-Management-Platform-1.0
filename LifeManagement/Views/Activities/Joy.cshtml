@@ -1,5 +1,7 @@
-﻿@using LifeManagement.Models
-@model List<LifeManagement.Models.Activity>
+﻿<div id="actdiv">
+
+
+    @model List<LifeManagement.Models.Activity>
     @{
         var common = new LifeManagement.Models.Common();
     }
@@ -8,90 +10,179 @@
 
 
 
-<div id="joyerror" class="text-danger" style="display: none"><h4>Need to select three activities</h4></div>
+    <div id="joyerror" class="text-danger" style="display: none"><h4>Need to select three activities</h4></div>
 
 
-<div class="clearfix" >
-    <h4 class="col-md-12 text-center" style="color:white">Select three activities that give you joy</h4>
-    <div class="col-md-12 text-center">
-        @if (Model != null)
-        {
-            foreach (var a in Model)
+    <div class="clearfix">
+        <h4 class="col-md-12 text-center" style="color:white">Select three activities that give you joy</h4>
+        <div class="col-md-12 text-center">
+            @if (Model != null)
             {
+                foreach (var a in Model)
+                {
 
-                <div class="cat-tiles col-sm-4 col-md-3">
-                    <label id="lbl" for="@a.Id">
-                        <div class="cat-tiles-body">
+                    <div class="cat-tiles col-sm-4 col-md-3">
+                        <label id="lbl" for="@a.Id">
+                            <div class="cat-tiles-body">
 
-                            <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
+                                <img class="cat-tiles-img" src="@common.SignatureImageStr64(a.Img, a.ImgMime)" />
+                            </div>
+                        </label>
+                        <div class="cat-tiles-specifics" id="spec-@a.Id">
+                            <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
                         </div>
-                    </label>
-                    <div class="cat-tiles-specifics" id="spec-@a.Id">
-                        <textarea placeholder="Specify activities" class="cat-tiles-spec-text" rows="1"></textarea>
-                    </div>
-                    <div class="cat-tiles-footer">
-                        <input class="cat-tiles-chk chk-joy" type="checkbox" id="@a.Id" />
-                        <label class="cat-tiles-lbl">@a.Name</label>
-                    </div>
+                        <div class="cat-tiles-footer">
+                            <input class="cat-tiles-chk chk-joy" type="checkbox" id="@a.Id" />
+                            <label class="cat-tiles-lbl">@a.Name</label>
+                        </div>
 
 
+                    </div>
+
+                }
+
+            }
+
+        </div>
+        <div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveJoy()">Save</button></div>
+        <div class="col-md-12">
+            <button class="btn btn-sm btn-info" onclick="showform()">Cant find activity?</button>
+        </div>
+        <div class="form-horizontal col-md-4 col-md-offset-4 form-hide" id="addform">
+            <div id="uploaderrors" class="text-danger">
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="text" id="name" class="form-control" />
                 </div>
 
-            }
+            </div>
 
-        }
+            <div class="form-group">
+                <label class="control-label col-md-4">Upload Image:</label>
+                <div class="col-md-8">
+                    <input type="file" name="file" id="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-4">
+                    <button onclick="validate()" class="btn btn-success form-control">Create</button>
+                </div>
+            </div>
 
+
+
+        </div>
+   
     </div>
-  
-    <div class="col-md-12 text-right"><button class="btn btn-success" onclick="saveJoy()">Save</button></div>
-</div>
 
 
-<script>
-    var joylimit = 3;
+    <script>
+        var joylimit = 3;
 
-    $('.chk-joy').on('change', function (evt) {
-        var isInsert = this.checked;
+        $('.chk-joy').on('change', function (evt) {
+            var isInsert = this.checked;
 
-        if (isInsert) {
-            var l = $('.chk-joy:checkbox:checked').length;
+            if (isInsert) {
+                var l = $('.chk-joy:checkbox:checked').length;
 
-            if (l >= joylimit + 1) {
-                this.checked = false;
-                return;
+                if (l >= joylimit + 1) {
+                    this.checked = false;
+                    return;
+                } else {
+
+                    $("#spec-" + this.id + " .cat-tiles-spec-text").css('background-color', 'aliceblue');
+                }
             } else {
 
-                $("#spec-" + this.id + " .cat-tiles-spec-text").css('background-color', 'aliceblue');
+                $("#spec-" + this.id + " .cat-tiles-spec-text").css('background', 'white');
             }
-        } else {
 
-            $("#spec-" + this.id + " .cat-tiles-spec-text").css('background', 'white');
+
+
+
+        });
+
+        function saveJoy() {
+
+            var l = $('.chk-joy:checkbox:checked').length;
+            if (l != joylimit) {
+                $("#joyerror").show(200);
+                return;
+            } else {
+                submitAll('joy');
+
+
+
+                $("#basicModal").modal("hide");
+
+
+
+
+            }
+
+        }
+
+    </script>
+    <script>
+        function showform() {
+            $("#addform").toggle();
+        }
+        function validate() {
+
+            if ($("#name").val() == "") {
+                $("#uploaderrors").html("Please enter a name for the activity");
+                return;
+            }
+
+            if ($("#file").val() == "") {
+                $("#uploaderrors").html("Upload a file to continue");
+                return;
+            }
+
+            if (($("#file")[0].files[0].size) >= 2097152)       //2MB
+            {
+                $("#uploaderrors").html("Image too big, please upload a pic of 2MB or less");
+                return;
+            }
+
+            var formdata = new FormData();
+
+            var fileInput = $('#file');
+            $.each($(fileInput).get(0).files, function (index, value) {
+                formdata.append(value.name, value);
+            });
+            debugger;
+            var name = $("#name").val();
+
+
+            formdata.append("name", name);
+            formdata.append("category", "Joy");
+
+
+
+            $.ajax({
+                url: '@Url.Action("Create", "Activities")',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (res) {
+                    $("#actdiv").html(res);
+                    showform();
+                },
+                error: function (msg) {
+                    $("#uploaderrors").html("Some unexpected error happened");
+
+                }
+            });
         }
 
 
 
-
-    });
-
-    function saveJoy() {
-
-        var l = $('.chk-joy:checkbox:checked').length;
-        if (l != joylimit) {
-            $("#joyerror").show(200);
-            return;
-        } else {
-            submitAll('joy');
-
-          
-          
-            $("#basicModal").modal("hide");
-           
+    </script>
 
 
-        
-        }
-
-    }
-  
-</script>
-
+</div>

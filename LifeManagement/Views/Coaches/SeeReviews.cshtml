@@ -1,0 +1,8 @@
+﻿@model int
+@{
+    ViewBag.Title = "SeeReviews";
+}
+
+<div>
+    @{Html.RenderAction("CoachReviews", new { id = Model });}
+</div>

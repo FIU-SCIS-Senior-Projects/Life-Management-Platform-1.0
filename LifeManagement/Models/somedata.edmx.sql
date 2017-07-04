@@ -82,6 +82,42 @@ INSERT [dbo].[Coaches] ([Id], [ReviewScore], [Biography], [Skills], [Username], 
 GO
 SET IDENTITY_INSERT [dbo].[Coaches] OFF
 
+USE [SeniorDB]
+GO
+
+INSERT INTO [dbo].[CoachReviews]
+           ([CoachId]
+           ,[UserId]
+           ,[Review]
+           ,[Approved]
+           ,[DateApproved]
+           ,[ApprovedBy]
+           ,[Score])
+     VALUES
+           (1
+           ,1
+           ,'this guy is so good this guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so good'
+           ,1
+           ,'06/30/2017'
+           ,1
+           ,5),
+		     (1
+           ,1
+           ,'this guy is so bad this guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so badthis guy is so bad '
+           ,1
+           ,'06/01/2017'
+           ,1
+           ,2),
+		     (2
+           ,1
+           ,'this guy is so good this guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so goodthis guy is so good'
+           ,1
+           ,'06/30/2017'
+           ,1
+           ,5)
+GO
+
+
 
 
 

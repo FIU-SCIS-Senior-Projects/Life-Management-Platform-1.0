@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LifeManagement.Models;
 
 namespace LifeManagement.Controllers
 {
     public class HomeController : Controller
     {
+        private SeniorDBEntities db = new SeniorDBEntities();
+        private void EncriptAll()
+        {
+            foreach (var u in db.Users)
+            {
+                u.password = Security.HashSHA1(u.password);
+
+            }
+            foreach (var u in db.Coaches)
+            {
+                u.Password = Security.HashSHA1(u.Password);
+
+            }
+            db.SaveChanges();
+        }
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
         [Authorize(Roles="Owners")]
         public ActionResult About()

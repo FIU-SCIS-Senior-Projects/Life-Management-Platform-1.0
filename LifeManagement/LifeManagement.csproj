@@ -162,6 +162,7 @@
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
+    <Compile Include="Controllers\CoachReviewsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ForumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,8 +223,6 @@
     <Compile Include="Models\Progress.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SprintViewModel.cs" />
-    <Compile Include="Models\QuestionarieViewModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -233,10 +232,12 @@
     <Compile Include="Models\SprintActivities.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SprintViewModel.cs" />
+    <Compile Include="Models\QuestionarieViewModel.cs" />
+    <Compile Include="Models\CoachViewModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CoachViewModel.cs" />
     <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -270,6 +271,8 @@
     <Content Include="Content\dashboard_css\datepicker.css" />
     <Content Include="Content\dashboard_css\datepicker3.css" />
     <Content Include="Content\dashboard_css\styles.css" />
+    <Content Include="Content\Reviews.css" />
+    <Content Include="Content\WrtieReview.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -293,7 +296,9 @@
     <Content Include="Imgs\meditation.jpg" />
     <Content Include="Imgs\noimage.jpg" />
     <Content Include="Imgs\plant.jpg" />
+    <Content Include="Imgs\star-clear.png" />
     <Content Include="Imgs\star.png" />
+    <Content Include="Imgs\star3.png" />
     <Content Include="Imgs\usericon.jpg" />
     <Content Include="Imgs\users.jpg" />
     <Content Include="Imgs\user_avatar.png" />
@@ -302,6 +307,8 @@
     <Content Include="Models\EntityModel-6-19-2017.edmx.sql" />
     <Content Include="Models\EntityModel-6-22-2017-2.edmx.sql" />
     <Content Include="Models\EntityModel-6-22-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-6-30-2017.edmx.sql" />
+    <Content Include="Models\EntityModel-7-2-2017.edmx.sql" />
     <Content Include="Models\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
@@ -379,12 +386,11 @@
     <Content Include="Scripts\qTip\jquery.qtip.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\reviews.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\userdashboard.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Activities\Create.cshtml" />
     <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\Activities\GivingBack.cshtml" />
@@ -483,7 +489,17 @@
     <Content Include="Views\Appointments\UserCalendar.cshtml" />
     <Content Include="Scripts\qTip\jquery.qtip.min.js.map" />
     <Content Include="Views\Users\ProfilePic.cshtml" />
+    <Content Include="Views\Coaches\SeeReviews.cshtml" />
+    <Content Include="Views\Coaches\CoachReviews.cshtml" />
+    <Content Include="Views\Coaches\ReviewsList.cshtml" />
+    <Content Include="Views\Coaches\WriteReview.cshtml" />
     <Content Include="Views\Users\UserEditProfile.cshtml" />
+    <Content Include="Views\CoachReviews\Revise.cshtml" />
+    <Content Include="Views\CoachReviews\PendingList.cshtml" />
+    <Content Include="Views\CoachReviews\Details.cshtml" />
+    <Content Include="Views\Activities\PendingList.cshtml" />
+    <Content Include="Views\Activities\Revise.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Users\ShareTabsLink.cshtml" />
     <Content Include="Views\SprintActivities\ShareTabs.cshtml" />
     <Content Include="Views\Users\ShareTabs.cshtml" />
