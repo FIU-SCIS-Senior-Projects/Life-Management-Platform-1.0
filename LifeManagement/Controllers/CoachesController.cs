@@ -263,7 +263,7 @@ namespace LifeManagement.Controllers
                 if (coach.Biography != coachData.Biography) coach.Biography = coachData.Biography;
                 if (coach.Skills != coachData.Skills) coach.Skills = coachData.Skills;
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
-                if (coach.Password != coachData.Password) coach.Password = coachData.Password;
+                if (coach.Password != coachData.Password) coach.Password = Security.HashSHA1(coachData.Password);
 
                 try
                 {
@@ -507,7 +507,7 @@ namespace LifeManagement.Controllers
             return PartialView(db.Coaches.Where(a=>a.Email.Contains(filter) || a.FirstName.Contains(filter)||a.LastName.Contains(filter)||a.Skills.Contains(filter)).ToList());
         }
 
-        [Authorize(Roles = "Coach")]
+        [AllowAnonymous]
         public ActionResult ShareTabsLink(int sprintActId, int tab)
         {
             var sprintAct = db.SprintActivities.Find(sprintActId);

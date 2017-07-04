@@ -1,0 +1,44 @@
+﻿@model LifeManagement.Models.Role
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = "../Shared/AdminDashBoardLayout.cshtml";
+}
+
+<link href="~/Content/coaches.css" rel="stylesheet" />
+
+<div class="clearfix coach-tabs">
+
+    <div class=" text-center">
+
+        <h2>Role Details</h2>
+    </div>
+  
+
+    <div>
+ 
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+        </dl>
+    </div>
+    <hr />
+    <p style="padding-left:5em">
+        <br />
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+        <br />
+    </p>
+
+    <hr />
+    </div>

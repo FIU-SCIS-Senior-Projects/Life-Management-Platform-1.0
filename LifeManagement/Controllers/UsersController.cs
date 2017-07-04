@@ -323,6 +323,7 @@ namespace LifeManagement.Controllers
 
         /**************system generated*********************************************/
         // GET: Users
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var users = db.Users.Include(u => u.Role);
