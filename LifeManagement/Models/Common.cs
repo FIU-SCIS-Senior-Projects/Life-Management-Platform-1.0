@@ -76,9 +76,6 @@ namespace LifeManagement.Models
         private const string Pass = "052017befer";
         /*********************usr functionalitites**********************/
 
-
-        public int currentTab { get; set; } = 1;
-
         public bool isAdmin()
         {
             try

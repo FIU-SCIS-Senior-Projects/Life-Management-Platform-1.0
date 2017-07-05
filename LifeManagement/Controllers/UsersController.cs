@@ -419,6 +419,7 @@ namespace LifeManagement.Controllers
             userModel.Id = user.Id;
             userModel.FirstName = user.FirstName;
             userModel.LastName = user.LastName;
+            userModel.Email = user.Email;
             userModel.Vision = user.Vision;
             userModel.LifeSuccess = user.LifeSuccess;
             userModel.password = user.password;
@@ -448,7 +449,15 @@ namespace LifeManagement.Controllers
                     if (user.Statement2 != usermodel.Statement2) user.Statement2 = usermodel.Statement2;
                     if (user.Statement3 != usermodel.Statement3) user.Statement3 = usermodel.Statement3;
 
+                    if (user.Email != usermodel.Email)
+                    {
 
+                        if (db.Users.Where(a => a.Email.ToLower() == usermodel.Email.ToLower()).Count() > 0) { 
+                        ViewBag.DuplicateEmail = "The email you enter is already being used for another user, try another one";
+                        return View(usermodel);
+                        }
+                        user.Email = usermodel.Email;
+                    }
 
                     if (file != null)
                     {
@@ -467,9 +476,17 @@ namespace LifeManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShareTabs(int sprintActId, int tab)
+        public ActionResult ShareTabs(int sprintActId)
         {
-            if( sprintActId >= 1 && tab >= 1) { 
+            int tab = 1;
+
+            if(TempData["CurrentTab"] != null)
+            {
+                tab = (int)TempData["CurrentTab"];
+            }
+            
+
+            if ( sprintActId >= 1 && tab >= 1) { 
             TempData["sprintActId"] = sprintActId;
             TempData["tabId"] = tab;
             TempData.Keep("activityList");
@@ -480,7 +497,21 @@ namespace LifeManagement.Controllers
             return View("Error");
         }
 
-
+        [HttpPost]
+        public bool SaveTab(string tabId)
+        {
+            if (tabId != null)
+            {
+                switch (tabId)
+                {
+                    case "JoyTab": TempData["CurrentTab"] = 1; TempData.Keep("CurrentTab"); break;
+                    case "PassionTab": TempData["CurrentTab"] = 2; TempData.Keep("CurrentTab"); break;
+                    case "GbTab": TempData["CurrentTab"] = 3; TempData.Keep("CurrentTab"); break;   
+                }
+                return true;
+            }
+            return false;    
+        }
 
         protected override void Dispose(bool disposing)
         {
