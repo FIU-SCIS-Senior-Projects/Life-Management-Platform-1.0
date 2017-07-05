@@ -451,7 +451,8 @@ namespace LifeManagement.Controllers
 
         public PartialViewResult SelectCoach(int id)
         {
-            if(TempData["idSprint"] != null)
+            //share score
+            if (TempData["idSprint"] != null)
             {
                 int sprintId = (int)TempData["idSprint"];
 
@@ -468,8 +469,10 @@ namespace LifeManagement.Controllers
 
                     Common.sendEmail(coach.Email, subject, message);
                 }
+                TempData.Remove("idSprint");
             }
 
+            //Share tabs
             else if(TempData["sprintActId"] != null && TempData["tabId"] != null)
             {
                 
@@ -488,6 +491,8 @@ namespace LifeManagement.Controllers
 
                     Common.sendEmail(coach.Email, subject, message);
                 }
+                TempData.Remove("sprintActId");
+                TempData.Remove("tabId");
 
             }
 
@@ -516,11 +521,12 @@ namespace LifeManagement.Controllers
 
             if (sprintAct != null)
             {
-                int sId = db.Sprints.Find(sprintAct.SprintId).Id;
-                var list = db.SprintActivities.Where(a => a.Sprint.Id == sId && a.Activity.CategoryId == tab);
+                Sprint sId = db.Sprints.Find(sprintAct.SprintId);
+                var list = db.SprintActivities.Where(a => a.Sprint.Id == sId.Id && a.Activity.CategoryId == tab);
 
                 if (list != null && list.Count() > 0)
                 {
+                    ViewBag.NameUser = sId.User.FirstName + " " + sId.User.LastName;
                     return View(list.ToList());
                 }
                 return View();
