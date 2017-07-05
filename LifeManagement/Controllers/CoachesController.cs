@@ -472,6 +472,7 @@ namespace LifeManagement.Controllers
 
             else if(TempData["sprintActId"] != null && TempData["tabId"] != null)
             {
+                
                 int sprintActId = (int)TempData["sprintActId"];
                 int tabId = (int)TempData["tabId"];
 

@@ -1,7 +1,6 @@
 ﻿@model LifeManagement.Models.Sprint
 @{
     var needSprint = Model.DateFrom.AddDays(15) < DateTime.Now;
-    var common = new LifeManagement.Models.Common();
 }
 <script src="~/Scripts/cooltabs.js"></script>
 <link href="~/Content/cooltabs.css" rel="stylesheet" />
@@ -68,20 +67,6 @@
 <script>
     $(document).ready(function () {
         initDials(@Model.Id);
-
-        var cat = $(this).attr('cat');
-        if (cat == "Joy"){
-            alert("Joy");
-            return;
-        }
-        if (cat == "Passion"){
-            alert("Joy");
-            return;
-        }
-        if (cat == "Giving Back"){
-            alert("Joy");
-            return;
-        }
     });
     $(document).ready(function () { checkNeedNewSprint(); })
     function checkNeedNewSprint() {
@@ -100,6 +85,16 @@
             });
         }
     }
+
+    $('.list-group-item').on("click", function () {
+        var tab = this.id;
+        $.ajax({
+            url: '@Url.Action("SaveTab", "Users")',
+            type: 'POST',
+            data: { tabId: tab }
+        });
+    });
+
     $('.gauge .gauge-arrow').cmGauge();
     function updateCatDial() {
         var joy=0, passion=0, gb=0;

@@ -34,6 +34,11 @@ namespace LifeManagement.Models
         public string password { get; set; }
 
         [Required]
+        [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required]
         [DisplayName("Your vision")]
         public string Vision { get; set; }
 

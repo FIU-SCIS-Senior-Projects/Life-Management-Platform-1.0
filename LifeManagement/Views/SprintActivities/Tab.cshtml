@@ -115,7 +115,7 @@
     function shareTab() {
                  $.ajax({
                    url: '@Url.Action("ShareTabs", "Users")',
-                   data: { sprintActId: @Model[0].Id , tab: @common.currentTab},
+                   data: { sprintActId: @Model[0].Id},
                    type: 'POST',
                    success: function (res) {
                        renderDiv('@Url.Action("SeeCoachesUsers", "Coaches")', null);
