@@ -247,7 +247,7 @@ namespace LifeManagement.Controllers
         {
             if (coachData.FirstName == null || coachData.LastName == null || coachData.Biography == null
                        || coachData.Skills == null || coachData.Username == null
-                       || coachData.Password == null)
+                       || coachData.Email == null)
             {
                 ViewBag.ErrorMsg = "Error! There can not be empty fields";
                 return View(coachData);
@@ -263,9 +263,20 @@ namespace LifeManagement.Controllers
                 if (coach.Biography != coachData.Biography) coach.Biography = coachData.Biography;
                 if (coach.Skills != coachData.Skills) coach.Skills = coachData.Skills;
                 if (coach.Username != coachData.Username) coach.Username = coachData.Username;
-                if (coach.Password != coachData.Password) coach.Password = Security.HashSHA1(coachData.Password);
+            
+                    if (coach.Email != coachData.Email)
+                    {
 
-                try
+                        if (db.Coaches.Where(a => a.Email.ToLower() == coachData.Email.ToLower()).Count() > 0)
+                        {
+                            ViewBag.DuplicateEmail = "The email you enter is already being used for another coach, try another one";
+                            return View(coachData);
+                        }
+                        coach.Email = coachData.Email;
+                    }
+
+
+                    try
                 {
                     db.SaveChanges();
                 }
