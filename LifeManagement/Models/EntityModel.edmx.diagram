@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="SeniorDBModel.CoachReview" Width="1.5" PointX="3.625" PointY="3.25" />
         <AssociationConnector Association="SeniorDBModel.CoachCoachReview" />
         <AssociationConnector Association="SeniorDBModel.UserCoachReview" />
-        <EntityTypeShape EntityType="SeniorDBModel.Activity" Width="1.5" PointX="7.625" PointY="3" />
+        <EntityTypeShape EntityType="SeniorDBModel.Activity" Width="1.5" PointX="8.625" PointY="2.875" />
         <AssociationConnector Association="SeniorDBModel.FK_ActivitySprintActivities" />
         <AssociationConnector Association="SeniorDBModel.FK_CategoryActivity" />
         <AssociationConnector Association="SeniorDBModel.RoleCoach" />
