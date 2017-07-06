@@ -14,16 +14,14 @@
 }
 
 
-<h2>Quiz</h2>
+<div class="modal-body" style="width: 1200px ; height: 707px; position: absolute; margin:0 auto!important ; padding: 0!important">
 
-<div class="modal-body" style="width: 1200px ; height: 750px; position: absolute; top: 30px ; ">
-
-    <div class="container" style="background: url('/Imgs/butterfly.jpg') no-repeat; background-size: 100%;">
+    <div class="container" style="background: url('/Imgs/butterfly.jpg') no-repeat; background-size: 100%; padding: 0">
         <div class="fs-form-wrap" id="fs-form-wrap">
             <div class="fs-title">
                 <br />
-                <h3 style=" color #00b359; "> See if you need a life coach</h3>
-                <h4 style=" color #00b359; "> Select your level of agreement for each statement</h4>
+                <h3 style=" color: #000000; font-weight: bold; "> See if you need a life coach</h3>
+                <h4 style=" color: #000000; font-weight: bold; "> Select your level of agreement for each statement</h4>
             </div>
 
             <form id="myform" class="fs-form fs-form-full" action="/Home/QuizResult" autocomplete="off">
@@ -38,7 +36,7 @@
                                     <li class="answer-li answer" question="1" value="1">1</li>
                                     <li class="answer-li answer" question="1" value="2">2</li>
                                     <li class="answer-li answer" question="1" value="3">3</li>
-                                    <li class="answer-li answer" question="1"value="4">4</li>
+                                    <li class="answer-li answer" question="1" value="4">4</li>
                                     <li class="answer-li answer" question="1" value="5">5</li>
                                     <li class="answer-li answer" question="1" value="6">6</li>
                                     <li class="answer-li answer" question="1" value="7">7</li>
@@ -92,7 +90,7 @@
                         </div>
 
                     </li>
-               
+
                     <li>
                         <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
                             <label class="fs-field-label fs-anim-upper">I am ready to make real and positive changes in my life.</label>
@@ -219,27 +217,27 @@
                         </div>
 
                     </li>
-                <li>
-                    <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
-                        <label class="fs-field-label fs-anim-upper">I am ready to create more balance in my life.</label>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper">I am ready to create more balance in my life.</label>
 
-                        <div class="fs-anim-lower fs-anim-upper activities-div">
-                            <ul class="list-inline">
-                                <li class="answer-li answer" question="9" value="1">1</li>
-                                <li class="answer-li answer" question="9" value="2">2</li>
-                                <li class="answer-li answer" question="9" value="3">3</li>
-                                <li class="answer-li answer" question="9" value="4">4</li>
-                                <li class="answer-li answer" question="9" value="5">5</li>
-                                <li class="answer-li answer" question="9" value="6">6</li>
-                                <li class="answer-li answer" question="9" value="7">7</li>
-                                <li class="answer-li answer" question="9" value="8">8</li>
-                                <li class="answer-li answer" question="9" value="9">9</li>
-                                <li class="answer-li answer" question="9" value="10">10</li>
-                            </ul>
+                            <div class="fs-anim-lower fs-anim-upper activities-div">
+                                <ul class="list-inline">
+                                    <li class="answer-li answer" question="9" value="1">1</li>
+                                    <li class="answer-li answer" question="9" value="2">2</li>
+                                    <li class="answer-li answer" question="9" value="3">3</li>
+                                    <li class="answer-li answer" question="9" value="4">4</li>
+                                    <li class="answer-li answer" question="9" value="5">5</li>
+                                    <li class="answer-li answer" question="9" value="6">6</li>
+                                    <li class="answer-li answer" question="9" value="7">7</li>
+                                    <li class="answer-li answer" question="9" value="8">8</li>
+                                    <li class="answer-li answer" question="9" value="9">9</li>
+                                    <li class="answer-li answer" question="9" value="10">10</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
-                </li>
+                    </li>
                     <li>
                         <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
                             <label class="fs-field-label fs-anim-upper">I'd like to work less and make more money.</label>
@@ -285,9 +283,9 @@
 
 
                 </ol><!-- /fs-fields -->
-            <button onclick="seeResult()" class = "fs-submit btn btn-success">See Result</button>
-            <input type="hidden" value="0" name="quiztotal" id="quiztotal" />
-              </form><!-- /fs-form -->
+                <button onclick="seeResult()" class="fs-submit btn btn-success">See Result</button>
+                <input type="hidden" value="0" name="quiztotal" id="quiztotal" />
+            </form><!-- /fs-form -->
         </div><!-- /fs-form-wrap -->
     </div>  <!-- /container -->
 </div>

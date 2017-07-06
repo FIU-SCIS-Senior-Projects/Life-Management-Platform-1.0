@@ -1,12 +1,13 @@
 ﻿<script src="~/Scripts/CatTiles.js"></script>
 <link href="~/Content/CatTiles.css" rel="stylesheet" />
 
+@model LifeManagement.Models.Sprint
 
 @{
     Layout = "~/Views/Shared/_layout_for_questionarie.cshtml";
 }
 
-@model LifeManagement.Models.Sprint
+
 
 @section AddToHead{
     <link rel="stylesheet" type="text/css" href="~/Content/bety_css/normalize.css" />
@@ -19,11 +20,12 @@
 
 
 
-<div class="modal-body" style="width: 1200px ; height: 730px; position: absolute; top: 35px ; margin:0 auto ; ">
-    <div class="container" style="background: url('/Imgs/bety_new_img/wave.jpg') no-repeat; background-size: 100%;">
+<div class="modal-body" style="width: 1200px ; height: 707px; position: absolute; margin:0 auto!important ; padding: 0!important">
+
+    <div class="container" style="background: url('/Imgs/bety_new_img/wave.jpg') no-repeat; background-size: 100% 100%;  padding: 0!important">
         <div class="fs-form-wrap" id="fs-form-wrap">
             <div class="fs-title">
-                
+
                 <h1 style="font-weight: bold"> Productivity week setup </h1>
                 <br />
                 <div style=" width: 1050px ; height: 50px; font-size: 14px ; position: absolute; left: 50px">
@@ -52,7 +54,7 @@
                         <label class="fs-field-label fs-anim-upper" for="goal_3" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period to give back to others, or click 'Continue' to use the one from previous period. </label>
                         <textarea class="fs-anim-lower" style=" font:14px " id="goal_3" name="goal_3" required>@ViewBag.goalGB</textarea>
                     </li>
-                   
+
                     <li>
                         <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
                             <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 3 activities that give you joy">What gives you joy?</label>
