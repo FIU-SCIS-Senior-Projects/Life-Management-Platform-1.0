@@ -547,7 +547,7 @@ button.fs-continue,
 	overflow: hidden;
 	color: rgba(0,0,0,0.4);
 	margin: 40px;
-	width: 2em;
+	width: 3em;
 	font-weight: 700;
 	font-size: 2em;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -661,11 +661,12 @@ button.fs-continue {
 	color: #232529;
 }
 
+/*Button continue this is*/
 button.fs-continue {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	margin: 0 40px 60px 0;
+	margin: 0 40px 20px 0;
 	font-size: 1.25em;
 }
 
