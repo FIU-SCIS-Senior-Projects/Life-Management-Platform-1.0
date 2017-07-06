@@ -506,7 +506,6 @@
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Home\Quiz.cshtml" />
     <Content Include="Views\Home\QuizResult.cshtml" />
-    <Content Include="Views\Users\ShareTabsLink.cshtml" />
     <Content Include="Views\Coaches\ShareTabsLink.cshtml" />
     <Content Include="Views\SprintActivities\ShareTabs.cshtml" />
     <Content Include="Views\Users\ShareTabs.cshtml" />
