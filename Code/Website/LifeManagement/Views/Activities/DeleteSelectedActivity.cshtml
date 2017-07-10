@@ -1,0 +1,75 @@
+﻿@model LifeManagement.Models.Activity
+
+@{
+    var common = new LifeManagement.Models.Common();
+}
+
+<div id="finalresp">
+    
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Img)
+            </dt>
+
+            <dd>
+                <div class="coach-avatar-container">
+                    <img class=" coach-avatar-img " src="@common.SignatureImageStr64(Model.Img, Model.ImgMime)">
+                </div>
+            </dd>
+        </dl>
+
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-4">
+                <div class="col-md-4">
+                    <button onclick="validate()" class="btn btn-success form-control">Delete</button>
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+
+
+
+
+
+<script>
+    function validate() {
+        $.ajax({
+            url: '@Url.Action("DeleteConfirmed", "Activities")',
+            type: 'POST',
+            data: {id: @Model.Id},
+            success: function (res) {
+                $("#finalresp").html("<h2> The activity was deleted successfully </h2> <button class=\"btn btn-success\" data-dismiss=\"modal\">Done</button>");
+             },
+            error: function (msg) {
+                alert("Error");
+            }
+        });
+    }
+</script>
+
+
+

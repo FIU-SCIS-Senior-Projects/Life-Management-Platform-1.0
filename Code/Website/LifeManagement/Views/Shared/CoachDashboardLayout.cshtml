@@ -1,0 +1,74 @@
+﻿@{
+    var common = new LifeManagement.Models.Common();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @Styles.Render("~/Content/css")
+     @RenderSection("scripts", required: false)
+    @{ Html.RenderPartial("_LayoutsHead"); }
+    <script src="~/Scripts/userdashboard.js"></script>
+</head>
+<body>
+    @if (IsSectionDefined("bgdiv"))
+    {
+        @RenderSection("bgdiv");
+    }
+    else
+    {
+        <bgdiv>
+            <div class="bgdiv"></div>
+        </bgdiv>
+    }
+    @{ Html.RenderPartial("_navBar"); }
+    
+        <div id="sidebar-collapse" class="col-md-2 sidebar">
+
+            <div class="form-group" style="height: 230px">
+                @{Html.RenderAction("ProfilePic", "Coaches");}
+            </div >
+
+                <ul class="nav menu">
+                <li class="active"><a href = "index.html" ><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+                <li><a href = "~/Views/Shared/Dashboard_other/widgets_index.cshtml" ><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Progress Summary</a></li>
+                <li><a class="lmmodal" modal-width="700px" url='@Url.Action("CoachEditProfile","Coaches")' href="#"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Edit profile</a></li>
+       
+                    <li><a href="#" onclick="renderDiv('@Url.Action("Chat", "Forums")',null)"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Chat</a></li>
+                    <li class="parent ">
+                    <a href="#">
+                        <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
+                    </a>
+                    <ul class="children collapse" id="sub-item-1">
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 1
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 2
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 3
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="divider"></li>
+
+            </ul>
+
+        </div>
+
+
+    <div id="usersection" class="col-md-10 col-md-offset-2  main" style="margin-top: 20px; max-height: 900px;overflow: auto">
+
+        @RenderBody()
+    </div>	<!--/.main-->
+   
+   
+</body>
+</html>

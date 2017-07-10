@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LifeManagement.Models.ForumFile>
+
+
+<div class="clearfix all-files-div">
+    @{
+
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+
+            <a class="lmmodal col-md-12 file-anchor" href="#" modal-width="800px;" url="@Url.Action("FileViewer", "Attachments", new {id = item.Id})">
+                <div class="file-div">Attachment @i </div>
+            </a>
+
+        }
+    }
+
+</div>
+<div class="col-md-12 upload-div">
+  <input id="attachment" type="file"/><button class="btn btn-info" onclick="saveFile()">Upload</button>
+</div>
+<script>
+    $(document).ready(function() {
+        setpopups();
+    })
+</script>

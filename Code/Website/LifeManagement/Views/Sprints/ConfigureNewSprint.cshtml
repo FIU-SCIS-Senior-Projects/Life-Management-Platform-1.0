@@ -1,0 +1,204 @@
+﻿<script src="~/Scripts/CatTiles.js"></script>
+<link href="~/Content/CatTiles.css" rel="stylesheet" />
+
+@model LifeManagement.Models.Sprint
+
+@{
+    Layout = "~/Views/Shared/_layout_for_questionarie.cshtml";
+}
+
+
+
+@section AddToHead{
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/component.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bety_css/cs-skin-boxes.css" />
+    <script src="~/Scripts/bety_scripts/modernizr.custom.js"></script>
+}
+
+
+
+<div class="modal-body" style="width: 1200px ; height: 680px; position: absolute; margin:0 auto!important ; padding: 0!important">
+
+    <div class="container" style="background: url('/Imgs/bety_new_img/wave.jpg') no-repeat; background-size: 100% 100%;  padding: 0!important">
+        <div class="fs-form-wrap" id="fs-form-wrap">
+            <div class="fs-title">
+
+                <h1 style="font-weight: bold"> Productivity week setup </h1>
+                <br />
+                <div style=" width: 1050px ; height: 50px; font-size: 14px ; position: absolute; left: 50px">
+                    <h1 style=" color: black; font-weight: bold">Note: <br />   Click continue if you want to keep the settings of your last productivity week. </h1>
+                </div>
+            </div>
+
+
+            <form id="myform" class="fs-form fs-form-full" autocomplete="off" action="@Url.Action("ConfigureNewSprint", "Sprints")" method="post">
+                <ol class="fs-fields">
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="vision" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a general goal that you want to achieve this period, or click 'Continue' to use the one from previous period.</label>
+                        <textarea style="" class="fs-anim-lower" id="vision" name="vision" required>@Model.SprintGoal</textarea>
+                    </li>
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="goal_1" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period that gives you joy, or click 'Continue' to use the one from previous period.</label>
+                        <textarea class="fs-anim-lower" id="goal_1" name="goal_1" required>@ViewBag.goalJoy</textarea>
+                    </li>
+
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="goal_2" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period that you are passionate about, or click 'Continue' to use the one from previous period.</label>
+                        <textarea class="fs-anim-lower" id="goal_2" name="goal_2" required>@ViewBag.goalPassion</textarea>
+                    </li>
+
+                    <li>
+                        <label class="fs-field-label fs-anim-upper" for="goal_3" style="color: black ; font-weight: 800" data-info="Goals - are broad open ended statements to achieve your vision. They describe what you want to achieve through your efforts."> Enter a goal for this period to give back to others, or click 'Continue' to use the one from previous period. </label>
+                        <textarea class="fs-anim-lower" style=" font:14px " id="goal_3" name="goal_3" required>@ViewBag.goalGB</textarea>
+                    </li>
+
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: cadetblue">
+                            <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 3 activities that give you joy">What gives you joy?</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div" id="joytab">
+                                @{Html.RenderAction("Joy", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffb3b3">
+                            <label class="fs-field-label fs-anim-upper" style=" font-weight: 800" data-info="Select upto 2 activities that you are really passionate about">What are you passionate about?</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div" id="passiontab">
+                                @{Html.RenderAction("Passion", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <div class="cycle-tab fs-anim-lower fs-anim-upper" style="background-color: #ffa366">
+
+                            <label class="fs-field-label fs-anim-upper" for="vision" style=" font-weight: 800" data-info="Select upto 2 activities that give you a sense of fulfilment from giving back or helping others">How would you give back to society?</label>
+
+                            <div class="fs-anim-lower fs-anim-upper activities-div" id="gbtab">
+                                @{Html.RenderAction("GivingBack", "SprintActivities", new { id = Model.Id });}
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ol><!-- /fs-fields -->
+
+                <button class="fs-submit" type="submit">Send answers</button>
+            </form><!-- /fs-form -->
+        </div><!-- /fs-form-wrap -->
+        <!-- Related demos -->
+    </div> <!-- /container -->
+</div>
+
+<script src="~/Scripts/bety_scripts/classie.js"></script>
+<!--     <script src="~/Scripts/bety_scripts/selectFx.js"></script>   -->
+<script src="~/Scripts/bety_scripts/fullscreenForm.js"></script>
+<script>
+                (function () {
+                    var formWrap = document.getElementById('fs-form-wrap');
+
+                    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
+                        new SelectFx(el, {
+                            stickyPlaceholder: false,
+                            onChange: function (val) {
+                                document.querySelector('span.cs-placeholder').style.backgroundColor = val;
+                            }
+                      });
+                    });
+
+                    new FForm(formWrap, {
+                        onReview: function () {
+                            classie.add(document.body, 'overview'); // for demo purposes only
+                        }
+                    });
+                })();
+</script>
+
+<script>
+
+
+    function submitAll(cat) {
+
+       var activities=[];debugger;
+        $('.cat-tiles-chk:checkbox:checked').each(function() {
+            var id = $(this).attr('id');
+            var s = $('#spec-' + id + ' :input').val();
+            s = (s == null || s=='' ? "Not specified" : s);
+            var act = {
+                activityId: parseInt(id),
+                sprintId: parseInt(@Model.Id),
+                spec:s
+            }
+
+            activities.push(act);
+
+        });
+
+        updateSprintActivity(activities,cat);
+
+
+    }
+   function updateSprintActivity(activities,cat) {
+       debugger;
+
+       var tabid="#joytab";
+       if (cat == 'passion')
+           tabid = "#passiontab";
+       if (cat == 'gb')
+           tabid = "#gbtab";
+
+        $.ajax({
+            url: '@Url.Action("UpdateSprint","SprintActivities")',
+            type: 'POST',
+
+            data:{ 'activities': activities,cat:cat } ,
+            success:function(res) {
+
+               $(tabid).html(res);
+            },
+            error:function(msg) {
+                $(tabid).html('<h4>Could not get data from server </h4>');
+            }
+        })
+
+    }
+
+    function renderCardBlock(url, tabid) {
+        debugger;
+        var sprintid = @Model.Id;
+        $('.nav-link').css('background-color', 'transparent');
+        $(tabid).css('background-color', '#eeeeee');
+
+        var data = { id: sprintid };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'GET',
+            success:function(res) {
+                $('#cardblock').html(res);
+
+            },
+            error: function (msg) {
+                $('#cardblock').html('<h4>Could not get data from server </h4>');
+            }
+        })
+    }
+
+
+    $(document).on({
+        ajaxStart: function () { $("#cardblock").addClass("loading"); },
+        ajaxStop: function () { $("#cardblock").removeClass("loading");  }
+    });
+
+
+
+</script>

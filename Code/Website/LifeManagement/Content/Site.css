@@ -1,0 +1,128 @@
+﻿
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+.loading .waitmodal {
+    display: block;
+}
+
+.waitmodal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+   
+    width: 100%;
+    
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+   
+}
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+.rotator-image {
+    height: 500px;
+    width: 100%;
+}
+
+/*body with*/
+.container-full {
+  margin: 0 auto;
+  width: 80%;
+    padding: 0;
+     
+    
+}
+/*navigation bar color*/
+
+ /*jumbotron*/
+ .jumbotron {
+     background-color: slategrey !important;
+     color: coral;
+     margin-bottom: 0;
+   
+ }
+ .logo {
+     height: 40px;
+ }
+ /*div background image*/
+ .imagediv {
+     background-size:100% auto;
+     color: white;
+ }
+ /*.bgdiv
+{
+    
+      position:absolute;
+        width:100%;
+     min-height: 600px;
+     max-height: 900px;
+        z-index:-1000;
+      
+        opacity:0.3;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      
+}*/
+ .whitetext {
+     color: white;
+     text-shadow: 1px 1px black;
+ }
+
+
+ .cycle-tab {
+     
+     text-align: center;
+     height:340px;
+     padding-top: 10px;
+     border-radius: 25px;
+     opacity: 0.9;
+ }
+
+.activities-div {
+    position: absolute;
+    top: 60px;
+    left: 8%;
+    width: 80%;
+}
+
+.quiz-div {
+
+    font-weight: bold;
+  
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

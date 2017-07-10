@@ -1,0 +1,83 @@
+﻿<script src="~/Scripts/lmpopup.js"></script>
+<link href="~/Content/CatTiles.css" rel="stylesheet" />
+<script src="~/Scripts/cooltabs.js"></script>
+<link href="~/Content/cooltabs.css" rel="stylesheet" />
+
+@{
+    var common = new LifeManagement.Models.Common();
+}
+
+<div class="clearfix" id="torender" >
+
+
+    <h3 class="col-md-12"> Click the desired Category and select the Activity you want to delete</h3>
+
+
+    <div class="col-md-12  bhoechie-tab-container">
+        <div class="col-md-2  bhoechie-tab-menu">
+            <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                    <h4 class="glyphicon glyphicon-music"></h4><br />Joy
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4 class="glyphicon glyphicon-heart"></h4><br />Passion
+                </a>
+                <a href="#" class="list-group-item text-center">
+                    <h4 class="glyphicon glyphicon-backward"></h4><br />Giving Back
+                </a>
+
+
+            </div>
+        </div>
+        <div class="col-md-10 bhoechie-tab">
+
+            <div class="bhoechie-tab-content active">
+
+                <center>
+                    @{Html.RenderAction("CatDisplay", "Activities", new { cat = "Joy" });}
+                </center>
+
+            </div>
+            <div class="bhoechie-tab-content">
+
+                <center>
+                    @{Html.RenderAction("CatDisplay", "Activities", new { cat = "Passion" });}
+                </center>
+
+            </div>
+            <div class="bhoechie-tab-content">
+
+                <center>
+                    @{Html.RenderAction("CatDisplay", "Activities", new { cat = "Giving Back" });}
+                </center>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    $('.chk-cat').on('change', function (evt) {
+        var id = this.id;
+        $.ajax({
+            url: '@Url.Action("DeleteSelectedActivity","Activities")',
+            type:'GET',
+            data:{id:id},
+            success:function(res) {
+                $("#torender").html(res);
+            },
+            error:function(msg) {
+                alert("error");
+            }
+        })
+
+    });
+
+
+
+</script>

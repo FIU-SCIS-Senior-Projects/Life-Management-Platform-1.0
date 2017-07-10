@@ -1,0 +1,63 @@
+﻿.stardiv {
+    background: url('/Imgs/star.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.stardiv-clear {
+    background: url('/Imgs/star-clear.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.no-border{
+    border: 0px !important;
+     padding: 1px !important;
+}
+
+.coach-table {
+    margin: 0px !important;
+}
+.coachimgtd {
+    width:80px;
+    height: 80px;
+    padding: 3px !important;
+    
+}
+.coachimg {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.tdbordered {
+     border: 1px !important;
+    font-weight: bold;
+
+}
+hr {
+    margin: 0px !important;
+}
+
+.coach-tabs {
+    background-color: white;
+    width: 800px;
+    height: auto;
+    padding-right: 25px;
+    margin-top: 20px !important;
+    margin: 0 auto;
+}
+
+.coach-avatar-container {
+    height: 170px;
+    width: 170px;
+    margin-left: 10%;
+}
+
+.coach-avatar-img {
+    width: 100%;
+    height: 100%;
+    top: 20px;
+    border-radius: 30px;
+}
