@@ -132,7 +132,7 @@ namespace LifeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-               var role = db.Roles.Where(a => a.Name == Constants.ROLES.GUEST).FirstOrDefault();
+               var role = db.Roles.Where(a => a.Name == Constants.ROLES.USER).FirstOrDefault();
                 if (role != null)
                 {
                     
@@ -398,8 +398,46 @@ namespace LifeManagement.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
+            var sprints = user.Sprints.ToList();
+
+            try { 
+            foreach (Sprint s in sprints){
+                db.Goals.RemoveRange(db.Goals.Where(g => g.SprintId == s.Id));
+
+                var sprintAct = db.SprintActivities.Where(sa => sa.SprintId == s.Id).ToList();
+
+                foreach(SprintActivities sA in sprintAct)
+                {
+                    db.Progresses.RemoveRange(db.Progresses.Where(p => p.SprintActivitiesId == sA.Id));                    
+                }
+                db.SaveChanges();
+                db.SprintActivities.RemoveRange(sprintAct);
+                db.SaveChanges();
+                db.Sprints.Remove(s);
+                db.SaveChanges();
+            }
+            db.CoachReviews.RemoveRange(db.CoachReviews.Where(r => r.UserId == user.Id));
+            db.Appointments.RemoveRange(db.Appointments.Where(r => r.UserId == user.Id));
+            db.Conversations.RemoveRange(db.Conversations.Where(r => r.SenderID == user.Id));
+            db.SaveChanges();
+
+            var forums = db.Forums.Where(r => r.UserId == user.Id).ToList();
+
+            foreach( Forum f in forums)
+                {
+                    db.ForumFiles.RemoveRange(db.ForumFiles.Where(ff=> ff.ForumId == f.Id));
+                    db.Forums.Remove(f);
+                }
+
+            db.SaveChanges();
             db.Users.Remove(user);
             db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                ViewBag.ErrorMsg = "Error deleting that user, resolve dependencies before attempting to delete this user";
+                return View("Error");
+            }
             return RedirectToAction("Index");
         }
 
@@ -511,6 +549,44 @@ namespace LifeManagement.Controllers
                 return true;
             }
             return false;    
+        }
+
+        public PartialViewResult InviteApp()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult InviteApp(string email)
+        {
+
+            var user = db.Users.Where(u => u.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
+            if(IsValidEmail(email)) { 
+            string subject = "Invitation to join The Life Management System";
+            string message = "Hi there! : <br/> <p> You are receiving this email because your friend <strong>"+ user.FirstName + " " + user.LastName +
+                    "</strong> wants you to join the Life Management system. <br/>" + " To become a member of our community, please follow <a href= \"" + @Url.Action("CreateAccount", "Users", null, Request.Url.Scheme) + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
+                    + "<p> Sincerely, <br/> The Life Management Team. </p>";
+
+                Common.sendEmail(email, subject, message);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(400, "");
+            }
+            return PartialView();
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         protected override void Dispose(bool disposing)
