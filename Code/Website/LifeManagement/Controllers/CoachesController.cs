@@ -515,6 +515,20 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
 
+        public PartialViewResult SeeCoachesNoSelect()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult CoachesListGuest(string filter)
+        {
+
+            if (String.IsNullOrEmpty(filter))
+                return PartialView("CoachesList", db.Coaches.ToList());
+
+            return PartialView("CoachesList", db.Coaches.Where(a => a.Email.Contains(filter) || a.FirstName.Contains(filter) || a.LastName.Contains(filter) || a.Skills.Contains(filter)).ToList());
+        }
+
         public PartialViewResult CoachesListUsers(string filter)
         {
             
@@ -522,6 +536,15 @@ namespace LifeManagement.Controllers
                 return PartialView(db.Coaches.ToList());
 
             return PartialView(db.Coaches.Where(a=>a.Email.Contains(filter) || a.FirstName.Contains(filter)||a.LastName.Contains(filter)||a.Skills.Contains(filter)).ToList());
+        }
+
+        public PartialViewResult CoachesListNoSelect(string filter)
+        {
+
+            if (String.IsNullOrEmpty(filter))
+                return PartialView(db.Coaches.ToList());
+
+            return PartialView(db.Coaches.Where(a => a.Email.Contains(filter) || a.FirstName.Contains(filter) || a.LastName.Contains(filter) || a.Skills.Contains(filter)).ToList());
         }
 
         [AllowAnonymous]

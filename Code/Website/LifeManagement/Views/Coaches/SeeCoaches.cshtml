@@ -24,7 +24,7 @@
 <script>
     function search() {
         $.ajax({
-            url: "@Url.Action("CoachesListUsers")",
+            url: "@Url.Action("CoachesListGuest")",
             type:"GET",
             data:{"filter":$("#filter").val()},
             success:function(res) {

@@ -643,12 +643,12 @@ button.fs-continue,
 /* Continue button and submit button */
 button.fs-submit,
 button.fs-continue {
-    background: #232529;
+    background: rgba(0,0,0,0.8);
     color: #fff;
     border-radius: 40px;
-    font-weight: 800;
+    font-weight: 900;
     padding: 0.6em 1.5em;
-    border: 5px solid #232529;
+    border: 5px solid rgba(0,0,0,0.8);
 }
 
 .fs-form-overview .fs-submit,
