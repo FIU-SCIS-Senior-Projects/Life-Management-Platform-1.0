@@ -28,6 +28,11 @@ namespace LifeManagement.Controllers
             return PartialView();
         }
 
+        public PartialViewResult StartNewSprint()
+        {
+            return PartialView();
+        }
+
         public PartialViewResult ScoreSummary(int id)
         {
             var sprint = db.Sprints.Find(id);
@@ -200,7 +205,7 @@ namespace LifeManagement.Controllers
 
                 Sprint newSprint = db.Sprints.Find(sprint.Id);
 
-                if (quest.vision != newSprint.SprintGoal)
+                if (quest.vision != newSprint.SprintGoal && quest.vision != null)
                 {
                     newSprint.SprintGoal = quest.vision;        //Im using vision as the SprintGoal to reuse the previos QuestionnaireViewModel
                     db.SaveChanges();
@@ -216,17 +221,17 @@ namespace LifeManagement.Controllers
                 {
                     Goal newGoal = db.Goals.Find(g.Id);
                     
-                    if(newGoal.CategoryId == 1 && newGoal.Description != goalJoy)
+                    if(newGoal.CategoryId == 1 && newGoal.Description != goalJoy && goalJoy != null)
                     { 
                     newGoal.Description = goalJoy;
                     db.SaveChanges();
                     }
-                    else if (newGoal.CategoryId == 2 && newGoal.Description != goalPassion)
+                    else if (newGoal.CategoryId == 2 && newGoal.Description != goalPassion && goalPassion != null)
                     {
                         newGoal.Description = goalPassion;
                         db.SaveChanges();
                     }
-                    else if (newGoal.CategoryId == 3 && newGoal.Description != goalGB)
+                    else if (newGoal.CategoryId == 3 && newGoal.Description != goalGB && goalGB != null)
                     {
                         newGoal.Description = goalGB;
                         db.SaveChanges();
