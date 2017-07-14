@@ -41,7 +41,7 @@
                                     </tr>
                                     <tr class="no-border">
                                         <td class="no-border">
-                                            <a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a>
+                                            <a class="lmmodal" modal-width="700px" href="#" url="/Coaches/CoachDetailsPage/@m.Id">Details</a> |
                                             <a href="@Url.Action("SeeReviews","Coaches",new {id=m.Id})">Reviews</a>
                                          </td>
 
@@ -63,4 +63,8 @@
 <link href="~/Content/coaches.css" rel="stylesheet" />
 
 
-<script src="~/Scripts/lmpopup.js"></script>
+<script>
+    $(document).ready(function () {
+        setpopups();
+    })
+</script>

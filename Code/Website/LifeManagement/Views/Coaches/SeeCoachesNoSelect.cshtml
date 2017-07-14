@@ -1,0 +1,27 @@
+﻿
+
+<h3>Here you can see all coaches in the system and may review them if desired.</h3>
+<div class="col-md-12 text-right">
+
+    <input id="filter" class="input-sm" type="text" />
+    <button class="btn btn-sm btn-default" onclick="search()"><span class="glyphicon glyphicon-search"></span> </button>
+
+</div>
+
+<div class="col-md-12" id="coachessection">
+    @{Html.RenderAction("CoachesListNoSelect");}
+</div>
+
+<script>
+    function search() {
+        $.ajax({
+            url: "@Url.Action("CoachesListNoSelect")",
+            type:"GET",
+            data:{"filter":$("#filter").val()},
+            success:function(res) {
+                $("#coachessection").html(res);
+            }
+        })
+    }
+
+</script>

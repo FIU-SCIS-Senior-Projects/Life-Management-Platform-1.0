@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\LifeManagement\Models\EntityModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\fher\Source\Repos\Life-Management-Platform-1.0\Code\Website\LifeManagement\Models\EntityModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

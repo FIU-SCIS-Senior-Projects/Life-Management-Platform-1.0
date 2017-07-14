@@ -1,0 +1,50 @@
+﻿
+
+<div class="clearfix">
+    <div class="col-md-12" id="response_ok">
+
+    </div>
+
+    <div id="mainreset">
+        <h2 class="text-center col-md-12">Invite friends to the system</h2>
+
+        <div class="text-center col-md-12" id="response_bad" style="color: red">
+        </div>
+
+        <div class="form-horizontal col-md-12">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Email address:</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="email" name="email" id="email" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-8 col-md-4">
+                    <button class="btn btn-success form-control" onclick="sendInvite()">Invite</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/lmpopup.js"></script>
+
+<script>
+    function sendInvite() {
+        var emailEntered = $("#email").val();
+
+        $.ajax({
+            url: '@Url.Action("InviteApp", "Users")',
+            data: { email: emailEntered},
+            type: 'POST',
+            success: function (res) {
+                $("#response_ok").html("<h2> Your invitation was sent successfully </h2> <button class=\"btn btn-success\" data-dismiss=\"modal\">Done</button>");
+                $("#mainreset").html('');
+            },
+
+            error: function(msg) { $("#response_bad").html(" Error! This is not a valid email address, please try again.") }
+        });
+    }
+</script>

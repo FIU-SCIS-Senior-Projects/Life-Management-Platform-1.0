@@ -546,7 +546,7 @@ button.fs-continue,
 	right: 0;
 	overflow: hidden;
 	color: rgba(0,0,0,0.4);
-	margin: 40px;
+	margin: 50px;
 	width: 3em;
 	font-weight: 700;
 	font-size: 2em;
@@ -643,11 +643,12 @@ button.fs-continue,
 /* Continue button and submit button */
 button.fs-submit,
 button.fs-continue {
-	padding: 0.6em 1.5em;
-	border: 3px solid #232529;
-	border-radius: 40px;
-	font-weight: 700;
-	color: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    border-radius: 40px;
+    font-weight: 900;
+    padding: 0.6em 1.5em;
+    border: 5px solid rgba(0,0,0,0.8);
 }
 
 .fs-form-overview .fs-submit,
@@ -658,7 +659,7 @@ button.fs-continue {
 
 .fs-form-overview .fs-submit {
 	border-color: #232529;
-	color: #232529;
+	color: #fff;
 }
 
 /*Button continue this is*/
@@ -666,15 +667,15 @@ button.fs-continue {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	margin: 0 40px 25px 0;
+	margin: 0 50px 25px 0;
 	font-size: 1.25em;
 }
 
 button.fs-submit:hover,
 button.fs-submit:focus,
 button.fs-continue:hover {
-	background: #232529;
-	color: #fff;
+    background: #D2D4D6;
+    color: black;
 }
 
 .fs-continue::after {

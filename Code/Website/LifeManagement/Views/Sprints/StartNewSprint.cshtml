@@ -1,0 +1,31 @@
+﻿<div class="clearfix">
+   
+    <h2 class="col-md-12 text-center"> Start a new productivity period! </h2>
+    <hr />
+    <p> <strong>If this productivity chart does not match your current goals, you can always start a new one.</strong></p>
+    <p class="text-danger"> *Please Note, that by clicking continue you will lose access to this productivity chart</p>  
+    <br />
+    <h4 class="col-md-12 text-left"> <strong>Click continue to configure your next period</strong></h4>
+    
+       
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-4">
+                <button class="btn btn-success form-control" onclick="redirect()">
+                    Continue
+                </button>
+                </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary form-control" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+   
+    </div>
+
+
+    <script>
+    function redirect()
+    {
+        window.location.href = '@Url.Action("ConfigureNewSprint", "Sprints")'; 
+    }
+    </script>
