@@ -26,6 +26,7 @@ namespace LifeManagement.Controllers
         }
         public ActionResult Index()
         {
+           
            return View();
         }
         [Authorize(Roles="Owners")]

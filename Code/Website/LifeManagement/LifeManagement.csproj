@@ -363,6 +363,7 @@
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Properties\PublishProfiles\lmsp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\lmsp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cmGauge.js" />
     <Content Include="Scripts\Coaches.js" />
