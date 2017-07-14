@@ -79,7 +79,7 @@
 
 <script>
     function validate() {
- 
+
         if ($("#FirstName").val() == "") {
             $("#EmptyName").html("Your first Name can't be empty");
             return;
@@ -97,14 +97,13 @@
             return;
         }
 
-        if ($("#file").val() != "") 
+        if ($("#file").val() != "") {
+            if (($("#file")[0].files[0].size) >= 2097152)       //2MB
             {
-             if (($("#file")[0].files[0].size) >= 2097152)       //2MB
-                {
-                 $("#noFile").html("Image too big, please upload a pic of 2MB or less");
-                 return;
-                  }
-             }
+                $("#noFile").html("Image too big, please upload a pic of 2MB or less");
+                return;
+            }
+        }
 
         var formdata = new FormData();
 
@@ -125,7 +124,7 @@
         formdata.append("Skills", Skills);
 
 
-  $.ajax({
+        $.ajax({
             url: '@Url.Action("CoachEditProfile", "Coaches")',
             type: 'POST',
             data: formdata,
@@ -133,7 +132,7 @@
             cache: false,
             processData: false,
             success: function (res) {
-                $("#responseOk").html("<h2> Your profile was updated successfully </h2> <button class=\"btn btn-success\" data-dismiss=\"modal\">Done</button>");
+                $("#responseOk").html("<h2> Your profile was updated successfully </h2> <button class=\"btn btn-success\" onclick=\" window.location = '@Url.Action("DashBoard", "Coaches", null, Request.Url.Scheme)';\">Done</button>");
                 $("#completeForm").html('');
             },
             error: function (msg) {
