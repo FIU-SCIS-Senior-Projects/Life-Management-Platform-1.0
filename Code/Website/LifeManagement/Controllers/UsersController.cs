@@ -213,6 +213,11 @@ namespace LifeManagement.Controllers
         /**************dashboards*******************************/
         public ActionResult Dashboard()
         {
+            if (common.isCoach())
+            {
+                return RedirectToAction("DashBoard", "Coaches");
+            }
+
             return View(common.isAdmin());
         }
 
@@ -561,7 +566,7 @@ namespace LifeManagement.Controllers
         {
 
             var user = db.Users.Where(u => u.username.ToLower() == User.Identity.Name.ToLower()).FirstOrDefault();
-            if(IsValidEmail(email)) { 
+            if(common.IsValidEmail(email)) { 
             string subject = "Invitation to join The Life Management System";
             string message = "Hi there! : <br/> <p> You are receiving this email because your friend <strong>"+ user.FirstName + " " + user.LastName +
                     "</strong> wants you to join the Life Management system. <br/>" + " To become a member of our community, please follow <a href= \"" + @Url.Action("CreateAccount", "Users", null, Request.Url.Scheme) + "\">this link </a> and fill out the corresponding fields. </p> <br/>"
@@ -574,19 +579,6 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(400, "");
             }
             return PartialView();
-        }
-
-        public bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         protected override void Dispose(bool disposing)

@@ -7,10 +7,10 @@
 
 <div class="form-group" style="height: 230px">
     @{
-        if (Model == null)
+        if (Model.Avatar == null)
         {
-            <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 30px; top: 20px">
-            <p style=" position: relative; top: 40px; left: 30%"> Coach: @User.Identity.Name </p>
+            <img src="~/Imgs/user_avatar.png" width="150" height="150" alt="User Avatar" style="position:relative; left: 20%; top: 20px">
+            <p style=" position: relative; top: 40px; text-align:center"><strong> @Model.FirstName @Model.LastName </strong></p>
         }
 
         else

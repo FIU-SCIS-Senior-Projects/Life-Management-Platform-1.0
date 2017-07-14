@@ -262,8 +262,17 @@ namespace LifeManagement.Controllers
                 if (coach.LastName != coachData.LastName) coach.LastName = coachData.LastName;
                 if (coach.Biography != coachData.Biography) coach.Biography = coachData.Biography;
                 if (coach.Skills != coachData.Skills) coach.Skills = coachData.Skills;
-                if (coach.Username != coachData.Username) coach.Username = coachData.Username;
-            
+
+                if (coach.Username != coachData.Username) {
+
+                        if (db.Coaches.Where(a => a.Username.ToLower() == coachData.Username.ToLower()).Count() > 0)
+                        {
+                            ViewBag.DuplicateUserName = "The username you enter is already being used for another coach, try another one";
+                            return View(coachData);
+                        }
+                        coach.Username = coachData.Username;
+                    }
+
                     if (coach.Email != coachData.Email)
                     {
 
@@ -313,6 +322,21 @@ namespace LifeManagement.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Coach coach = db.Coaches.Find(id);
+            db.CoachReviews.RemoveRange(db.CoachReviews.Where(r => r.CoachId == coach.Id));
+            db.SaveChanges();
+
+            var forums = db.Forums.Where(r => r.CoachId == coach.Id).ToList();
+
+            foreach (Forum f in forums)
+            {
+                db.ForumFiles.RemoveRange(db.ForumFiles.Where(ff => ff.ForumId == f.Id));
+                db.Conversations.RemoveRange(db.Conversations.Where(c => c.ForumId == f.Id));
+                db.SaveChanges();
+                db.Forums.Remove(f);
+            }
+
+            db.SaveChanges();
+
             db.Coaches.Remove(coach);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -352,7 +376,6 @@ namespace LifeManagement.Controllers
             return View();
         }
 
-
         [AllowAnonymous]
         public ActionResult LoginCoach()
         {
@@ -367,7 +390,7 @@ namespace LifeManagement.Controllers
             if (coach != null && coach.Password == Security.HashSHA1(Password))
             {
                 FormsAuthentication.SetAuthCookie(coach.Username, false);
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("DashBoard");
             }
             ViewBag.Error = "Invalid Credentials";
             return View();
