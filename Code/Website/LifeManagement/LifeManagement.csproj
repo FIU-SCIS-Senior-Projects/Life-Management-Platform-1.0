@@ -535,6 +535,7 @@
     <Content Include="Views\Coaches\SeeCoachesNoSelect.cshtml" />
     <Content Include="Views\Coaches\CoachesListNoSelect.cshtml" />
     <Content Include="Views\Sprints\StartNewSprint.cshtml" />
+    <Content Include="Views\Home\Videos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

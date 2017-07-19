@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="@Url.Action("Index","Home")"><span>Managed</span>Life</a>
-            <ul class="user-menu">
+            <ul class="user-menu list-inline">
 
 
                 @{
@@ -38,12 +38,15 @@
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @User.Identity.Name <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                @{ if (common.isCoach()) { 
-                                         <li><a class="lmmodal" modal-width="700px" url='@Url.Action("CoachEditProfile","Coaches")' href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                                @{
+                                    if (common.isCoach())
+                                    {
+                                        <li><a class="lmmodal" modal-width="700px" url='@Url.Action("CoachEditProfile", "Coaches")' href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
                                     }
-                                    else { 
+                                    else
+                                    {
 
-                                        <li><a class="lmmodal" modal-width="700px" url='@Url.Action("UserEditProfile","Users")' href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                                        <li><a class="lmmodal" modal-width="700px" url='@Url.Action("UserEditProfile", "Users")' href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
                                     }
                                 }
                                 <li><a href="@Url.Action("Dashboard", "Users")"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Dashboard</a></li>
@@ -54,14 +57,22 @@
                     else
                     {
                         <li>
-                            <a  href="@Url.Action("Quiz", "Home")">Take a quiz | </a> &nbsp;
-
+                            <a href="@Url.Action("Quiz", "Home")">Take a quiz | </a> &nbsp;
+                        </li>
+                        <li>
                             <a style="color: #4c9be0" href="@Url.Action("SeeCoaches", "Coaches")">Life Coaches | </a> &nbsp;
+                        </li>
+                        <li>
                             <a href="@Url.Action("Login", "Users")">User Login | </a> &nbsp;
-                            <a style="color: #4c9be0" href="@Url.Action("LoginCoach", "Coaches")"> Coach Login </a>
+                        </li>
+                        <li>
+                            <a style="color: #4c9be0" href="@Url.Action("LoginCoach", "Coaches")"> Coach Login |</a>
+                        </li>
+                        <li>
+                            <a  href="@Url.Action("Videos", "Home")"> Videos </a>
                         </li>
 
-                    }
+                                    }
                 }
 
             </ul>
