@@ -110,6 +110,21 @@ namespace LifeManagement.Models
                        HttpContext.Current.User.Identity.IsAuthenticated;
             }
         }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
         /***********************images processing******************************************/
         public bool saveImageBytes(Activity s, HttpPostedFileBase image)
         {

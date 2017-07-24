@@ -26,6 +26,7 @@ namespace LifeManagement.Controllers
         }
         public ActionResult Index()
         {
+           
            return View();
         }
         [Authorize(Roles="Owners")]
@@ -48,6 +49,13 @@ namespace LifeManagement.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Videos()
+        {
+            
 
             return View();
         }
